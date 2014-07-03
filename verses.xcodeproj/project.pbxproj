@@ -19,6 +19,7 @@
 		B7F4E8B21965E43A00466BA7 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B7F4E89A1965E43A00466BA7 /* UIKit.framework */; };
 		B7F4E8BA1965E43A00466BA7 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = B7F4E8B81965E43A00466BA7 /* InfoPlist.strings */; };
 		B7F4E8BC1965E43A00466BA7 /* versesTests.m in Sources */ = {isa = PBXBuildFile; fileRef = B7F4E8BB1965E43A00466BA7 /* versesTests.m */; };
+		B7F4E8C61965E72300466BA7 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B7F4E8C51965E72300466BA7 /* Main.storyboard */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -48,6 +49,7 @@
 		B7F4E8B71965E43A00466BA7 /* versesTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "versesTests-Info.plist"; sourceTree = "<group>"; };
 		B7F4E8B91965E43A00466BA7 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		B7F4E8BB1965E43A00466BA7 /* versesTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = versesTests.m; sourceTree = "<group>"; };
+		B7F4E8C51965E72300466BA7 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -109,6 +111,7 @@
 			children = (
 				B7F4E8A51965E43A00466BA7 /* AppDelegate.h */,
 				B7F4E8A61965E43A00466BA7 /* AppDelegate.m */,
+				B7F4E8C51965E72300466BA7 /* Main.storyboard */,
 				B7F4E8A81965E43A00466BA7 /* Images.xcassets */,
 				B7F4E89D1965E43A00466BA7 /* Supporting Files */,
 			);
@@ -219,6 +222,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B7F4E8C61965E72300466BA7 /* Main.storyboard in Resources */,
 				B7F4E8A11965E43A00466BA7 /* InfoPlist.strings in Resources */,
 				B7F4E8A91965E43A00466BA7 /* Images.xcassets in Resources */,
 			);
