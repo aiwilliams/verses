@@ -4,16 +4,16 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3733"/>
     </dependencies>
     <scenes>
-        <!--Table View Controller - Verses-->
+        <!--Verses Table View Controller - Verses-->
         <scene sceneID="8uY-GI-t8J">
             <objects>
-                <tableViewController id="0we-K4-nUa" sceneMemberID="viewController">
+                <tableViewController id="0we-K4-nUa" customClass="VersesTableViewController" sceneMemberID="viewController">
                     <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="HAh-hj-38z">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
-                            <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="ch6-DN-Hc8">
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="verseCell" id="ch6-DN-Hc8">
                                 <rect key="frame" x="0.0" y="86" width="320" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="ch6-DN-Hc8" id="89j-5T-74b">
@@ -39,10 +39,10 @@
             </objects>
             <point key="canvasLocation" x="-14" y="12"/>
         </scene>
-        <!--View Controller - Add Verse-->
+        <!--Add Verse View Controller - Add Verse-->
         <scene sceneID="Eai-Jp-dbv">
             <objects>
-                <viewController id="von-ug-doM" sceneMemberID="viewController">
+                <viewController id="von-ug-doM" customClass="AddVerseViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="T94-XJ-pWg"/>
                         <viewControllerLayoutGuide type="bottom" id="hW5-5r-WQn"/>
@@ -66,11 +66,20 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Add Verse" id="Zf8-ge-Z3C">
-                        <barButtonItem key="leftBarButtonItem" title="Cancel" id="8yt-z5-19v"/>
-                        <barButtonItem key="rightBarButtonItem" systemItem="done" id="ltt-Fl-ycp"/>
+                        <barButtonItem key="leftBarButtonItem" title="Cancel" id="8yt-z5-19v">
+                            <connections>
+                                <segue destination="kws-Rs-X28" kind="unwind" unwindAction="unwindToList:" id="3US-yc-oGx"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" systemItem="done" id="ltt-Fl-ycp">
+                            <connections>
+                                <segue destination="kws-Rs-X28" kind="unwind" unwindAction="unwindToList:" id="bJL-4M-dEi"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Fkr-Mc-qQn" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <exit id="kws-Rs-X28" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
             <point key="canvasLocation" x="1116" y="4"/>
         </scene>

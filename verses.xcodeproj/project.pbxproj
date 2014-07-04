@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		B78096E519664FED0004D560 /* AddVerseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B78096E419664FED0004D560 /* AddVerseViewController.m */; };
+		B78096E8196650D30004D560 /* VersesTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B78096E7196650D30004D560 /* VersesTableViewController.m */; };
 		B7F4E8971965E43A00466BA7 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B7F4E8961965E43900466BA7 /* Foundation.framework */; };
 		B7F4E8991965E43A00466BA7 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B7F4E8981965E43A00466BA7 /* CoreGraphics.framework */; };
 		B7F4E89B1965E43A00466BA7 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B7F4E89A1965E43A00466BA7 /* UIKit.framework */; };
@@ -33,6 +35,10 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		B78096E319664FED0004D560 /* AddVerseViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddVerseViewController.h; sourceTree = "<group>"; };
+		B78096E419664FED0004D560 /* AddVerseViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddVerseViewController.m; sourceTree = "<group>"; };
+		B78096E6196650D30004D560 /* VersesTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VersesTableViewController.h; sourceTree = "<group>"; };
+		B78096E7196650D30004D560 /* VersesTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VersesTableViewController.m; sourceTree = "<group>"; };
 		B7F4E8931965E43900466BA7 /* verses.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = verses.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B7F4E8961965E43900466BA7 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		B7F4E8981965E43A00466BA7 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -112,6 +118,10 @@
 				B7F4E8A51965E43A00466BA7 /* AppDelegate.h */,
 				B7F4E8A61965E43A00466BA7 /* AppDelegate.m */,
 				B7F4E8C51965E72300466BA7 /* Main.storyboard */,
+				B78096E6196650D30004D560 /* VersesTableViewController.h */,
+				B78096E7196650D30004D560 /* VersesTableViewController.m */,
+				B78096E319664FED0004D560 /* AddVerseViewController.h */,
+				B78096E419664FED0004D560 /* AddVerseViewController.m */,
 				B7F4E8A81965E43A00466BA7 /* Images.xcassets */,
 				B7F4E89D1965E43A00466BA7 /* Supporting Files */,
 			);
@@ -243,6 +253,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B78096E519664FED0004D560 /* AddVerseViewController.m in Sources */,
+				B78096E8196650D30004D560 /* VersesTableViewController.m in Sources */,
 				B7F4E8A71965E43A00466BA7 /* AppDelegate.m in Sources */,
 				B7F4E8A31965E43A00466BA7 /* main.m in Sources */,
 			);
@@ -441,6 +453,7 @@
 				B7F4E8C11965E43A00466BA7 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		B7F4E8C21965E43A00466BA7 /* Build configuration list for PBXNativeTarget "versesTests" */ = {
 			isa = XCConfigurationList;
@@ -449,6 +462,7 @@
 				B7F4E8C41965E43A00466BA7 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
