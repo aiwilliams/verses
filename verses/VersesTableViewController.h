@@ -8,7 +8,9 @@
 
 #import <UIKit/UIKit.h>
 
-@interface VersesTableViewController : UITableViewController
+@interface VersesTableViewController : UITableViewController <NSFetchedResultsControllerDelegate>
+
+@property (nonatomic, strong) NSManagedObjectContext *userManagedObjectContext;
 
 - (IBAction)unwindToList:(UIStoryboardSegue *)segue;
 

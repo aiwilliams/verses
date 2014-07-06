@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		B78096E519664FED0004D560 /* AddVerseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B78096E419664FED0004D560 /* AddVerseViewController.m */; };
 		B78096E8196650D30004D560 /* VersesTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B78096E7196650D30004D560 /* VersesTableViewController.m */; };
+		B78096EB1967028C0004D560 /* UserData.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = B78096E91967028C0004D560 /* UserData.xcdatamodeld */; };
+		B796F907196889880057C7D5 /* BiblePassage.m in Sources */ = {isa = PBXBuildFile; fileRef = B796F906196889880057C7D5 /* BiblePassage.m */; };
 		B7F4E8971965E43A00466BA7 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B7F4E8961965E43900466BA7 /* Foundation.framework */; };
 		B7F4E8991965E43A00466BA7 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B7F4E8981965E43A00466BA7 /* CoreGraphics.framework */; };
 		B7F4E89B1965E43A00466BA7 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B7F4E89A1965E43A00466BA7 /* UIKit.framework */; };
@@ -39,6 +41,9 @@
 		B78096E419664FED0004D560 /* AddVerseViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddVerseViewController.m; sourceTree = "<group>"; };
 		B78096E6196650D30004D560 /* VersesTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VersesTableViewController.h; sourceTree = "<group>"; };
 		B78096E7196650D30004D560 /* VersesTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VersesTableViewController.m; sourceTree = "<group>"; };
+		B78096EA1967028C0004D560 /* UserData.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = UserData.xcdatamodel; sourceTree = "<group>"; };
+		B796F905196889880057C7D5 /* BiblePassage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BiblePassage.h; sourceTree = "<group>"; };
+		B796F906196889880057C7D5 /* BiblePassage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BiblePassage.m; sourceTree = "<group>"; };
 		B7F4E8931965E43900466BA7 /* verses.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = verses.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B7F4E8961965E43900466BA7 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		B7F4E8981965E43A00466BA7 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -120,8 +125,11 @@
 				B7F4E8C51965E72300466BA7 /* Main.storyboard */,
 				B78096E6196650D30004D560 /* VersesTableViewController.h */,
 				B78096E7196650D30004D560 /* VersesTableViewController.m */,
+				B78096E91967028C0004D560 /* UserData.xcdatamodeld */,
 				B78096E319664FED0004D560 /* AddVerseViewController.h */,
 				B78096E419664FED0004D560 /* AddVerseViewController.m */,
+				B796F905196889880057C7D5 /* BiblePassage.h */,
+				B796F906196889880057C7D5 /* BiblePassage.m */,
 				B7F4E8A81965E43A00466BA7 /* Images.xcassets */,
 				B7F4E89D1965E43A00466BA7 /* Supporting Files */,
 			);
@@ -255,6 +263,8 @@
 			files = (
 				B78096E519664FED0004D560 /* AddVerseViewController.m in Sources */,
 				B78096E8196650D30004D560 /* VersesTableViewController.m in Sources */,
+				B78096EB1967028C0004D560 /* UserData.xcdatamodeld in Sources */,
+				B796F907196889880057C7D5 /* BiblePassage.m in Sources */,
 				B7F4E8A71965E43A00466BA7 /* AppDelegate.m in Sources */,
 				B7F4E8A31965E43A00466BA7 /* main.m in Sources */,
 			);
@@ -465,6 +475,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		B78096E91967028C0004D560 /* UserData.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				B78096EA1967028C0004D560 /* UserData.xcdatamodel */,
+			);
+			currentVersion = B78096EA1967028C0004D560 /* UserData.xcdatamodel */;
+			path = UserData.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = B7F4E88B1965E43900466BA7 /* Project object */;
 }

@@ -7,43 +7,27 @@
 //
 
 #import "AddVerseViewController.h"
+#import "BiblePassage.h"
 
 @interface AddVerseViewController ()
+
+@property (weak, nonatomic) IBOutlet UITextField *passageTextField;
+@property (weak, nonatomic) IBOutlet UIBarButtonItem *doneButton;
 
 @end
 
 @implementation AddVerseViewController
 
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
-{
-    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
-    if (self) {
-        // Custom initialization
-    }
-    return self;
-}
-
-- (void)viewDidLoad
-{
-    [super viewDidLoad];
-    // Do any additional setup after loading the view.
-}
-
-- (void)didReceiveMemoryWarning
-{
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
-
-/*
 #pragma mark - Navigation
 
-// In a storyboard-based application, you will often want to do a little preparation before navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+  if (sender != self.doneButton) return;
+  
+  if (self.passageTextField.text.length > 0) {
+    NSString *passage = self.passageTextField.text;
+    if ([BiblePassage isValidPassage:passage])
+      self.biblePassage = passage;
+  }
 }
-*/
-
 @end

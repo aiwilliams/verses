@@ -6,8 +6,8 @@
 //  Copyright (c) 2014 The Williams Family. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
-
 @interface AddVerseViewController : UIViewController
+
+@property NSString *biblePassage;
 
 @end
