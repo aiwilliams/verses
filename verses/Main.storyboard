@@ -66,6 +66,10 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
+                            <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" hidesWhenStopped="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="E9d-u5-wnK">
+                                <rect key="frame" x="150" y="274" width="20" height="20"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </activityIndicatorView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
@@ -82,13 +86,15 @@
                         </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" systemItem="done" id="ltt-Fl-ycp">
                             <connections>
-                                <segue destination="kws-Rs-X28" kind="unwind" unwindAction="unwindToList:" id="bJL-4M-dEi"/>
+                                <action selector="addVerse:" destination="von-ug-doM" id="ll0-On-q1h"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="activityIndicator" destination="E9d-u5-wnK" id="Em2-jN-Ory"/>
                         <outlet property="doneButton" destination="ltt-Fl-ycp" id="fEk-Vj-GcW"/>
                         <outlet property="passageTextField" destination="UUe-y9-8Px" id="eGH-h3-D0Z"/>
+                        <segue destination="kws-Rs-X28" kind="unwind" identifier="addVerseDoneSegue" unwindAction="unwindToList:" id="tq2-XC-JrG"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Fkr-Mc-qQn" userLabel="First Responder" sceneMemberID="firstResponder"/>

@@ -8,9 +8,6 @@
 
 @interface BiblePassage : NSManagedObject
 
-+ (BOOL)isValidPassage:(NSString *)passage;
-
-// https://api.biblia.com will be a source
 @property (nonatomic, strong) NSString *passage;
 
 @end
