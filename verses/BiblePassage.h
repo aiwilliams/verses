@@ -10,14 +10,7 @@
 
 + (BOOL)isValidPassage:(NSString *)passage;
 
+// https://api.biblia.com will be a source
 @property (nonatomic, strong) NSString *passage;
-
-//@property (readonly) NSString *bookName;
-//@property (readonly) NSString *beginBookName;
-//@property (readonly) NSString *endBookName;
-//
-//@property (readonly) NSString *verseNumber;
-//@property (readonly) NSString *beginVerseNumber;
-//@property (readonly) NSString *endVerseNumber;
 
 @end
