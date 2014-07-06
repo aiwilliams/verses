@@ -21,7 +21,7 @@
 
 @implementation AddVerseViewController
 
-- (void)parsePassage:(NSString *)passage withCompletion:(void (^)(id))completion {
+- (void)parsePassage:(NSString *)passage completion:(void (^)(id))completion {
   NSString *URLString = @"http://api.biblia.com/v1/bible/parse";
   NSDictionary *parameters = @{@"passage": passage, @"key": @"fd37d8f28e95d3be8cb4fbc37e15e18e"};
   
@@ -43,14 +43,18 @@
   if (self.passageTextField.text.length > 0) {
     [self.activityIndicator startAnimating];
     NSString *passage = self.passageTextField.text;
-    [self parsePassage:passage withCompletion:^(NSDictionary *responseJSON) {
-      if (responseJSON != nil) {
-        NSString *normalizedPassage = [responseJSON valueForKey:@"passage"];
-        self.biblePassage = normalizedPassage;
-        [self performSegueWithIdentifier:@"addVerseDoneSegue" sender:sender];
-      }
+    [self parsePassage:passage completion:^(NSDictionary *responseJSON) {
       [self.activityIndicator stopAnimating];
+      if (responseJSON == nil) return;
+
+      NSString *normalizedPassage = [responseJSON valueForKey:@"passage"];
+      if ([normalizedPassage length] == 0) return;
+
+      self.biblePassage = normalizedPassage;
+      [self performSegueWithIdentifier:@"addVerseDoneSegue" sender:sender];
     }];
+  } else {
+    [self performSegueWithIdentifier:@"addVerseDoneSegue" sender:sender];
   }
 }
 
