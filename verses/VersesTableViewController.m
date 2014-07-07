@@ -19,6 +19,8 @@
 @synthesize fetchedResultsController=_fetchedResultsController;
 
 -(void)viewDidLoad {
+  self.tableView.allowsMultipleSelectionDuringEditing = NO;
+  
   NSError *error;
   if (![[self fetchedResultsController] performFetch:&error]) {
     NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
@@ -59,19 +61,9 @@
     case NSFetchedResultsChangeInsert:
       [tableView insertRowsAtIndexPaths:@[newIndexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
       break;
-  }
-}
-
-- (void)controller:(NSFetchedResultsController *)controller didChangeSection:(id <NSFetchedResultsSectionInfo>)sectionInfo atIndex:(NSUInteger)sectionIndex forChangeType:(NSFetchedResultsChangeType)type
-{
-  switch(type) {
-      
-    case NSFetchedResultsChangeInsert:
-      [self.tableView insertSections:[NSIndexSet indexSetWithIndex:sectionIndex] withRowAnimation:UITableViewRowAnimationAutomatic];
-      break;
       
     case NSFetchedResultsChangeDelete:
-      [self.tableView deleteSections:[NSIndexSet indexSetWithIndex:sectionIndex] withRowAnimation:UITableViewRowAnimationAutomatic];
+      [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
       break;
   }
 }
@@ -97,6 +89,16 @@
   UILabel *titleLabel = (UILabel *)[cell viewWithTag:0];
   titleLabel.text = passage.passage;
   return cell;
+}
+
+-(void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
+  if (editingStyle == UITableViewCellEditingStyleDelete) {
+    BiblePassage *passage = [self.fetchedResultsController objectAtIndexPath:indexPath];
+    [self.userManagedObjectContext deleteObject:passage];
+
+    NSError *error;
+    [self.userManagedObjectContext save:&error];
+  }
 }
 
 #pragma mark - Navigation
