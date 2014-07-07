@@ -14,7 +14,6 @@
 @interface AddVerseViewController ()
 
 @property (weak, nonatomic) IBOutlet UITextField *passageTextField;
-@property (weak, nonatomic) IBOutlet UIBarButtonItem *doneButton;
 @property (weak, nonatomic) IBOutlet UIActivityIndicatorView *activityIndicator;
 
 @end

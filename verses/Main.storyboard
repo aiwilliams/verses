@@ -13,15 +13,15 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
-                            <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="verseCell" textLabel="pvj-YR-ZmT" style="IBUITableViewCellStyleDefault" id="ch6-DN-Hc8">
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="verseCell" textLabel="pvj-YR-ZmT" style="IBUITableViewCellStyleDefault" id="ch6-DN-Hc8">
                                 <rect key="frame" x="0.0" y="86" width="320" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="ch6-DN-Hc8" id="89j-5T-74b">
-                                    <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="287" height="43"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="1 John 3:16" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="pvj-YR-ZmT">
-                                            <rect key="frame" x="15" y="0.0" width="290" height="43"/>
+                                            <rect key="frame" x="15" y="0.0" width="270" height="43"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                             <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
@@ -43,10 +43,61 @@
                             </connections>
                         </barButtonItem>
                     </navigationItem>
+                    <connections>
+                        <segue destination="Gid-GW-v2c" kind="push" identifier="verseDetail" id="KdY-A8-H6e"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="R44-mY-6bH" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-14" y="12"/>
+        </scene>
+        <!--Verse Detail Table View Controller - Verse Detail-->
+        <scene sceneID="h1Y-sF-fxe">
+            <objects>
+                <tableViewController id="Gid-GW-v2c" customClass="VerseDetailTableViewController" sceneMemberID="viewController">
+                    <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="m4F-tC-TZF">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <sections>
+                            <tableViewSection id="ZYz-br-VRy">
+                                <cells>
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="passageCell" rowHeight="258" id="5U2-2l-xi9">
+                                        <rect key="frame" x="0.0" y="64" width="320" height="258"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" tableViewCell="5U2-2l-xi9" id="c7P-x1-pUk">
+                                            <rect key="frame" x="0.0" y="0.0" width="320" height="257"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" editable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Izr-Qb-88C">
+                                                    <rect key="frame" x="0.0" y="0.0" width="320" height="183"/>
+                                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                                    <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                    <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                                </textView>
+                                            </subviews>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </cells>
+                            </tableViewSection>
+                        </sections>
+                        <connections>
+                            <outlet property="dataSource" destination="Gid-GW-v2c" id="aFs-5I-BEq"/>
+                            <outlet property="delegate" destination="Gid-GW-v2c" id="L9g-x4-bQo"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" title="Verse Detail" id="c4I-wV-VlX">
+                        <barButtonItem key="backBarButtonItem" title="Done" id="gn5-Xs-pWA"/>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="navigationItem" destination="c4I-wV-VlX" id="GU2-qK-7un"/>
+                    </connections>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="xKl-vv-KEE" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="518" y="812"/>
         </scene>
         <!--Add Verse View Controller - Add Verse-->
         <scene sceneID="Eai-Jp-dbv">
@@ -92,7 +143,6 @@
                     </navigationItem>
                     <connections>
                         <outlet property="activityIndicator" destination="E9d-u5-wnK" id="Em2-jN-Ory"/>
-                        <outlet property="doneButton" destination="ltt-Fl-ycp" id="fEk-Vj-GcW"/>
                         <outlet property="passageTextField" destination="UUe-y9-8Px" id="eGH-h3-D0Z"/>
                         <segue destination="kws-Rs-X28" kind="unwind" identifier="addVerseDoneSegue" unwindAction="unwindToList:" id="tq2-XC-JrG"/>
                     </connections>

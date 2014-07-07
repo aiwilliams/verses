@@ -8,10 +8,12 @@
 
 #import "VersesTableViewController.h"
 #import "AddVerseViewController.h"
+#import "VerseDetailTableViewController.h"
 #import "BiblePassage.h"
 
 @interface VersesTableViewController ()
 @property (nonatomic, strong) NSFetchedResultsController *fetchedResultsController;
+@property (nonatomic, strong) NSIndexPath *disclosingRowIndexPath;
 @end
 
 @implementation VersesTableViewController
@@ -100,6 +102,10 @@
     [self.userManagedObjectContext save:&error];
   }
 }
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+  self.disclosingRowIndexPath = indexPath;
+  [self performSegueWithIdentifier:@"verseDetail" sender:self];
+}
 
 #pragma mark - Navigation
 
@@ -112,6 +118,14 @@
     
     NSError *error;
     [self.userManagedObjectContext save:&error];
+  }
+}
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+  if ([segue.identifier isEqualToString:@"verseDetail"]) {
+    VerseDetailTableViewController *detailController = [segue destinationViewController];
+    detailController.biblePassage = [self.fetchedResultsController objectAtIndexPath:self.disclosingRowIndexPath];
   }
 }
 
