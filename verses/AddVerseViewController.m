@@ -20,6 +20,14 @@
 
 @implementation AddVerseViewController
 
+- (void)viewWillAppear:(BOOL)animated {
+  [self.passageTextField becomeFirstResponder];
+}
+
+- (void)viewWillDisappear:(BOOL)animated {
+  [self.passageTextField resignFirstResponder];
+}
+
 - (void)parsePassage:(NSString *)passage completion:(void (^)(id))completion {
   NSString *URLString = @"http://api.biblia.com/v1/bible/parse";
   NSDictionary *parameters = @{@"passage": passage, @"key": @"fd37d8f28e95d3be8cb4fbc37e15e18e"};
