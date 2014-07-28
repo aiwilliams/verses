@@ -6,8 +6,12 @@
 //  Copyright (c) 2014 The Williams Family. All rights reserved.
 //
 
+@class BibliaAPI;
+@class BiblePassage;
+
 @interface AddVerseViewController : UIViewController
 
-@property NSString *biblePassage;
+@property (nonatomic, retain) BibliaAPI *bibleAPI;
+@property (nonatomic, retain) BiblePassage *biblePassage;
 
 @end

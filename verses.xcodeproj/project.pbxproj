@@ -11,7 +11,7 @@
 		B78096E519664FED0004D560 /* AddVerseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B78096E419664FED0004D560 /* AddVerseViewController.m */; };
 		B78096E8196650D30004D560 /* VersesTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B78096E7196650D30004D560 /* VersesTableViewController.m */; };
 		B78096EB1967028C0004D560 /* UserData.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = B78096E91967028C0004D560 /* UserData.xcdatamodeld */; };
-		B796F907196889880057C7D5 /* BiblePassage.m in Sources */ = {isa = PBXBuildFile; fileRef = B796F906196889880057C7D5 /* BiblePassage.m */; };
+		B7C75E951983E77500DC2877 /* BiblePassage.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7C75E941983E77500DC2877 /* BiblePassage.swift */; };
 		B7E06A65196A4CDE008C2873 /* VerseDetailTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B7E06A64196A4CDE008C2873 /* VerseDetailTableViewController.m */; };
 		B7F4E8971965E43A00466BA7 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B7F4E8961965E43900466BA7 /* Foundation.framework */; };
 		B7F4E8991965E43A00466BA7 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B7F4E8981965E43A00466BA7 /* CoreGraphics.framework */; };
@@ -44,8 +44,8 @@
 		B78096E6196650D30004D560 /* VersesTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VersesTableViewController.h; sourceTree = "<group>"; };
 		B78096E7196650D30004D560 /* VersesTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VersesTableViewController.m; sourceTree = "<group>"; };
 		B78096EA1967028C0004D560 /* UserData.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = UserData.xcdatamodel; sourceTree = "<group>"; };
-		B796F905196889880057C7D5 /* BiblePassage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BiblePassage.h; sourceTree = "<group>"; };
-		B796F906196889880057C7D5 /* BiblePassage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BiblePassage.m; sourceTree = "<group>"; };
+		B7C75E931983E77500DC2877 /* verses-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "verses-Bridging-Header.h"; sourceTree = "<group>"; };
+		B7C75E941983E77500DC2877 /* BiblePassage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BiblePassage.swift; sourceTree = "<group>"; };
 		B7E06A63196A4CDE008C2873 /* VerseDetailTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VerseDetailTableViewController.h; sourceTree = "<group>"; };
 		B7E06A64196A4CDE008C2873 /* VerseDetailTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VerseDetailTableViewController.m; sourceTree = "<group>"; };
 		B7F4E8931965E43900466BA7 /* verses.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = verses.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -134,15 +134,15 @@
 				B7F4E8C51965E72300466BA7 /* Main.storyboard */,
 				B78096E6196650D30004D560 /* VersesTableViewController.h */,
 				B78096E7196650D30004D560 /* VersesTableViewController.m */,
+				B7C75E941983E77500DC2877 /* BiblePassage.swift */,
 				B7E06A63196A4CDE008C2873 /* VerseDetailTableViewController.h */,
 				B7E06A64196A4CDE008C2873 /* VerseDetailTableViewController.m */,
 				B78096E91967028C0004D560 /* UserData.xcdatamodeld */,
 				B78096E319664FED0004D560 /* AddVerseViewController.h */,
 				B78096E419664FED0004D560 /* AddVerseViewController.m */,
-				B796F905196889880057C7D5 /* BiblePassage.h */,
-				B796F906196889880057C7D5 /* BiblePassage.m */,
 				B7F4E8A81965E43A00466BA7 /* Images.xcassets */,
 				B7F4E89D1965E43A00466BA7 /* Supporting Files */,
+				B7C75E931983E77500DC2877 /* verses-Bridging-Header.h */,
 			);
 			path = verses;
 			sourceTree = "<group>";
@@ -310,10 +310,10 @@
 				B78096E519664FED0004D560 /* AddVerseViewController.m in Sources */,
 				B78096E8196650D30004D560 /* VersesTableViewController.m in Sources */,
 				B78096EB1967028C0004D560 /* UserData.xcdatamodeld in Sources */,
-				B796F907196889880057C7D5 /* BiblePassage.m in Sources */,
 				B7E06A65196A4CDE008C2873 /* VerseDetailTableViewController.m in Sources */,
 				B7F4E8A71965E43A00466BA7 /* AppDelegate.m in Sources */,
 				B7F4E8A31965E43A00466BA7 /* main.m in Sources */,
+				B7C75E951983E77500DC2877 /* BiblePassage.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -431,10 +431,15 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CLANG_ENABLE_MODULES = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "verses/verses-Prefix.pch";
 				INFOPLIST_FILE = "verses/verses-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "verses/verses-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -445,10 +450,14 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CLANG_ENABLE_MODULES = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "verses/verses-Prefix.pch";
 				INFOPLIST_FILE = "verses/verses-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "verses/verses-Bridging-Header.h";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;

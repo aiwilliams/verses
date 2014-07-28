@@ -9,7 +9,8 @@
 #import "VersesTableViewController.h"
 #import "AddVerseViewController.h"
 #import "VerseDetailTableViewController.h"
-#import "BiblePassage.h"
+
+#import "verses-Swift.h"
 
 @interface VersesTableViewController ()
 @property (nonatomic, strong) NSFetchedResultsController *fetchedResultsController;
@@ -67,6 +68,10 @@
     case NSFetchedResultsChangeDelete:
       [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
       break;
+    case NSFetchedResultsChangeMove:
+      break;
+    case NSFetchedResultsChangeUpdate:
+      break;
   }
 }
 
@@ -109,20 +114,17 @@
 
 #pragma mark - Navigation
 
-- (IBAction)unwindToList:(UIStoryboardSegue *)segue
-{
-  AddVerseViewController *addController = [segue sourceViewController];
-  if (addController.biblePassage != nil) {
-    BiblePassage *passage = (BiblePassage *)[NSEntityDescription insertNewObjectForEntityForName:@"BiblePassage" inManagedObjectContext:self.userManagedObjectContext];
-    [passage setValue:addController.biblePassage forKey:@"passage"];
-    
-    NSError *error;
-    [self.userManagedObjectContext save:&error];
-  }
+-(IBAction)unwindToList:(UIStoryboardSegue *)segue {
+  
 }
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
+  if ([segue.identifier isEqualToString:@"addVerse"]) {
+    AddVerseViewController *addVerseController = [segue destinationViewController];
+    addVerseController.bibleAPI = [[BibliaAPI alloc] initWithMoc:self.userManagedObjectContext];
+  }
+  
   if ([segue.identifier isEqualToString:@"verseDetail"]) {
     VerseDetailTableViewController *detailController = [segue destinationViewController];
     detailController.biblePassage = [self.fetchedResultsController objectAtIndexPath:self.disclosingRowIndexPath];

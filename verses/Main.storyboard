@@ -1,20 +1,19 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6185.7" systemVersion="13D65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="oGH-L2-jKw">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6185.11" systemVersion="13E28" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="oGH-L2-jKw">
     <dependencies>
-        <deployment defaultVersion="1808" identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6181.2"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6190.4"/>
     </dependencies>
     <scenes>
         <!--Verses-->
         <scene sceneID="8uY-GI-t8J">
             <objects>
                 <tableViewController id="0we-K4-nUa" customClass="VersesTableViewController" sceneMemberID="viewController">
-                    <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" ambiguous="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="HAh-hj-38z">
+                    <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="HAh-hj-38z">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
-                            <tableViewCell contentMode="scaleToFill" ambiguous="YES" selectionStyle="default" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="verseCell" textLabel="pvj-YR-ZmT" style="IBUITableViewCellStyleDefault" id="ch6-DN-Hc8">
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="verseCell" textLabel="pvj-YR-ZmT" style="IBUITableViewCellStyleDefault" id="ch6-DN-Hc8">
                                 <rect key="frame" x="0.0" y="86" width="320" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="ch6-DN-Hc8" id="89j-5T-74b">
@@ -40,7 +39,7 @@
                     <navigationItem key="navigationItem" title="Verses" id="t3q-gQ-Qcj">
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="8ec-QT-qq5">
                             <connections>
-                                <segue destination="pzn-KC-tSZ" kind="modal" id="p44-AZ-wUX"/>
+                                <segue destination="von-ug-doM" kind="push" identifier="addVerse" id="Izu-1x-yKc"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -56,14 +55,14 @@
         <scene sceneID="h1Y-sF-fxe">
             <objects>
                 <tableViewController id="Gid-GW-v2c" customClass="VerseDetailTableViewController" sceneMemberID="viewController">
-                    <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" ambiguous="YES" alwaysBounceVertical="YES" dataMode="static" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="10" id="m4F-tC-TZF">
+                    <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="10" id="m4F-tC-TZF">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                         <sections>
                             <tableViewSection headerTitle="NKJV" id="ZYz-br-VRy">
                                 <cells>
-                                    <tableViewCell contentMode="scaleToFill" ambiguous="YES" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="passageCell" rowHeight="44" id="5U2-2l-xi9">
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="passageCell" rowHeight="44" id="5U2-2l-xi9">
                                         <rect key="frame" x="0.0" y="64" width="320" height="258"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" tableViewCell="5U2-2l-xi9" id="c7P-x1-pUk">
@@ -89,7 +88,7 @@
                             </tableViewSection>
                             <tableViewSection headerTitle="Progress" id="5XH-cl-ezT">
                                 <cells>
-                                    <tableViewCell contentMode="scaleToFill" ambiguous="YES" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="passageCell" textLabel="2wU-TL-VaN" rowHeight="202" style="IBUITableViewCellStyleDefault" id="nPb-vk-cEm">
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="passageCell" textLabel="2wU-TL-VaN" rowHeight="202" style="IBUITableViewCellStyleDefault" id="nPb-vk-cEm">
                                         <rect key="frame" x="0.0" y="64" width="320" height="258"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" tableViewCell="nPb-vk-cEm" id="W69-wo-iBU">
@@ -160,7 +159,7 @@
                     <navigationItem key="navigationItem" title="Add Verse" id="Zf8-ge-Z3C">
                         <barButtonItem key="leftBarButtonItem" title="Cancel" id="8yt-z5-19v">
                             <connections>
-                                <segue destination="kws-Rs-X28" kind="unwind" unwindAction="unwindToList:" id="3US-yc-oGx"/>
+                                <segue destination="kws-Rs-X28" kind="unwind" identifier="unwindAddVerse" unwindAction="unwindToList:" id="SBp-GV-f1p"/>
                             </connections>
                         </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" systemItem="done" id="ltt-Fl-ycp">
@@ -172,13 +171,12 @@
                     <connections>
                         <outlet property="activityIndicator" destination="E9d-u5-wnK" id="Em2-jN-Ory"/>
                         <outlet property="passageTextField" destination="UUe-y9-8Px" id="eGH-h3-D0Z"/>
-                        <segue destination="kws-Rs-X28" kind="unwind" identifier="addVerseDoneSegue" unwindAction="unwindToList:" id="tq2-XC-JrG"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Fkr-Mc-qQn" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <exit id="kws-Rs-X28" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="1116" y="4"/>
+            <point key="canvasLocation" x="480" y="12"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="Q1d-Vp-8Z7">
@@ -197,24 +195,6 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="e6t-k5-xZ1" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-540" y="12"/>
-        </scene>
-        <!--Navigation Controller-->
-        <scene sceneID="vPQ-bU-3YK">
-            <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="pzn-KC-tSZ" sceneMemberID="viewController">
-                    <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="hey-vF-4rP">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                    </navigationBar>
-                    <nil name="viewControllers"/>
-                    <connections>
-                        <segue destination="von-ug-doM" kind="relationship" relationship="rootViewController" id="Uof-tu-7aw"/>
-                    </connections>
-                </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="dwQ-Uz-yNo" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="590" y="4"/>
         </scene>
     </scenes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">

@@ -6,7 +6,7 @@
 //  Copyright (c) 2014 The Williams Family. All rights reserved.
 //
 
-#import "BiblePassage.h"
+@class BiblePassage;
 
 @interface VerseDetailTableViewController : UITableViewController
 @property (nonatomic, strong) BiblePassage *biblePassage;

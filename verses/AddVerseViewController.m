@@ -7,9 +7,8 @@
 //
 
 #import "AddVerseViewController.h"
-#import "BiblePassage.h"
-#import <AFURLRequestSerialization.h>
-#import <AFHTTPRequestOperation.h>
+
+#import "verses-Swift.h"
 
 @interface AddVerseViewController ()
 
@@ -28,40 +27,19 @@
   [self.passageTextField resignFirstResponder];
 }
 
-- (void)parsePassage:(NSString *)passage completion:(void (^)(id))completion {
-  NSString *URLString = @"http://api.biblia.com/v1/bible/parse";
-  NSDictionary *parameters = @{@"passage": passage, @"key": @"fd37d8f28e95d3be8cb4fbc37e15e18e"};
-  
-  NSURLRequest *request = [[AFHTTPRequestSerializer serializer] requestWithMethod:@"GET" URLString:URLString parameters:parameters error:nil];
-  
-  AFHTTPRequestOperation *op = [[AFHTTPRequestOperation alloc] initWithRequest:request];
-  op.responseSerializer = [AFJSONResponseSerializer serializer];
-  [op setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
-    NSLog(@"JSON: %@", responseObject);
-    completion(responseObject);
-  } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-    NSLog(@"Error: %@", error);
-    completion(nil);
-  }];
-  [[NSOperationQueue mainQueue] addOperation:op];
-}
-
 - (IBAction)addVerse:(id)sender {
   if (self.passageTextField.text.length > 0) {
     [self.activityIndicator startAnimating];
     NSString *passage = self.passageTextField.text;
-    [self parsePassage:passage completion:^(NSDictionary *responseJSON) {
+    [self.bibleAPI loadPassage:passage completion:^(BiblePassage *biblePassage) {
       [self.activityIndicator stopAnimating];
-      if (responseJSON == nil) return;
+      if (biblePassage == nil) return;
 
-      NSString *normalizedPassage = [responseJSON valueForKey:@"passage"];
-      if ([normalizedPassage length] == 0) return;
-
-      self.biblePassage = normalizedPassage;
-      [self performSegueWithIdentifier:@"addVerseDoneSegue" sender:sender];
+      self.biblePassage = biblePassage;
+      [self performSegueWithIdentifier:@"unwindAddVerse" sender:sender];
     }];
   } else {
-    [self performSegueWithIdentifier:@"addVerseDoneSegue" sender:sender];
+    [self performSegueWithIdentifier:@"unwindAddVerse" sender:sender];
   }
 }
 
