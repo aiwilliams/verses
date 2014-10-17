@@ -22,13 +22,13 @@
 @synthesize fetchedResultsController=_fetchedResultsController;
 
 -(void)viewDidLoad {
-  self.tableView.allowsMultipleSelectionDuringEditing = NO;
-  
-  NSError *error;
-  if (![[self fetchedResultsController] performFetch:&error]) {
-    NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
-    abort();
-  }
+    self.tableView.allowsMultipleSelectionDuringEditing = NO;
+    
+    NSError *error;
+    if (![[self fetchedResultsController] performFetch:&error]) {
+      NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
+      abort();
+    }
 }
 
 #pragma mark - Fetched results controller

@@ -29,53 +29,53 @@ class BibliaAPI : NSObject {
     requestManager.responseSerializer = AFJSONResponseSerializer()
   }
 
-  func parsePassage(passage: String, completion: (String?) -> (Void)) {
+  func parsePassage(passage: String, completion: (String) -> (Void), failure: (String) -> (Void)) {
     let parameters = ["passage": passage, "key": apiKey]
     requestManager.GET(parseUrl, parameters: parameters,
       success: { (operation: AFHTTPRequestOperation!,responseObject: AnyObject!) in
-        completion(responseObject.valueForKey("passage") as? NSString)
+        let passage = responseObject.valueForKey("passage") as NSString
+        if passage == "" {
+            failure("That's not a valid verse! Try again.")
+        } else {
+            completion(passage)
+        }
       },
       failure: { (operation: AFHTTPRequestOperation!,error: NSError!) in
-        completion(nil)
+        failure("Sorry! I have failed you :/")
       }
     )
   }
 
-  func loadContentOfPassage(passage: String, completion: (String?) -> (Void)) {
+  func loadContentOfPassage(passage: String, completion: (String) -> (Void), failure: (String) -> (Void)) {
     let parameters = ["passage": passage, "key": apiKey]
     requestManager.GET(contentUrl, parameters: parameters,
       success: { (operation: AFHTTPRequestOperation!,responseObject: AnyObject!) in
-        completion(responseObject.valueForKey("text") as? NSString)
+        completion(responseObject.valueForKey("text") as NSString)
       },
       failure: { (operation: AFHTTPRequestOperation!,error: NSError!) in
-        completion(nil)
+        failure("Sorry! I have failed you :/")
       }
     )
   }
 
-  // Loads the passage. If it cannot be parsed or it's content loaded, the BiblePassage will be nil.
-  func loadPassage(passage: String, completion: (BiblePassage?) -> (Void) ) {
-    parsePassage(passage, completion: { (normalizedPassage: String?) in
-      if let nonblankPassage = normalizedPassage {
-        self.loadContentOfPassage(nonblankPassage, completion: { (content) in
-          let biblePassage = NSEntityDescription.insertNewObjectForEntityForName("BiblePassage", inManagedObjectContext: self.managedObjectContext) as BiblePassage
-          if let nonblankContent = content {
+  func loadPassage(passage: String, completion: (BiblePassage) -> (Void), failure: (String) -> (Void) ) {
+    parsePassage(passage,
+      completion: { (normalizedPassage: String) in
+        self.loadContentOfPassage(normalizedPassage,
+          completion: { (content) in
+            let biblePassage = NSEntityDescription.insertNewObjectForEntityForName("BiblePassage", inManagedObjectContext: self.managedObjectContext) as BiblePassage
             biblePassage.translation = "ASV"
-            biblePassage.passage = nonblankPassage
-            biblePassage.content = nonblankContent
+            biblePassage.passage = normalizedPassage
+            biblePassage.content = content
             
             var error: NSError?
             self.managedObjectContext.save(&error)
             
             completion(biblePassage)
-          } else {
-            completion(nil)
-          }
-        })
-      } else {
-        completion(nil)
-      }
-    })
+          },
+          failure: failure)
+        },
+      failure: failure)
   }
 
 }

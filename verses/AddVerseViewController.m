@@ -14,6 +14,7 @@
 
 @property (weak, nonatomic) IBOutlet UITextField *passageTextField;
 @property (weak, nonatomic) IBOutlet UIActivityIndicatorView *activityIndicator;
+@property (weak, nonatomic) IBOutlet UILabel *errorText;
 
 @end
 
@@ -21,23 +22,33 @@
 
 - (void)viewWillAppear:(BOOL)animated {
   [self.passageTextField becomeFirstResponder];
+  self.errorText.hidden = true;
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
-  [self.passageTextField resignFirstResponder];
+    [self.passageTextField resignFirstResponder];
+    
+    NSUserDefaults *sharedDefaults = [[NSUserDefaults alloc] initWithSuiteName:@"group.thewilliams.verses"];
+    [sharedDefaults setValue:self.passageTextField.text forKeyPath:@"LastVerse"];
+    [sharedDefaults synchronize];
 }
 
 - (IBAction)addVerse:(id)sender {
   if (self.passageTextField.text.length > 0) {
     [self.activityIndicator startAnimating];
     NSString *passage = self.passageTextField.text;
-    [self.bibleAPI loadPassage:passage completion:^(BiblePassage *biblePassage) {
-      [self.activityIndicator stopAnimating];
-      if (biblePassage == nil) return;
-
-      self.biblePassage = biblePassage;
-      [self performSegueWithIdentifier:@"unwindAddVerse" sender:sender];
-    }];
+    [self.bibleAPI loadPassage:passage
+                   completion:^(BiblePassage *biblePassage) {
+                      [self.activityIndicator stopAnimating];
+                      self.errorText.hidden = true;
+                      self.biblePassage = biblePassage;
+                      [self performSegueWithIdentifier:@"unwindAddVerse" sender:sender];
+                   }
+                   failure:^(NSString *errorMessage) {
+                       [self.activityIndicator stopAnimating];
+                       self.errorText.text = errorMessage;
+                       self.errorText.hidden = false;
+                   }];
   } else {
     [self performSegueWithIdentifier:@"unwindAddVerse" sender:sender];
   }
