@@ -8,13 +8,18 @@
 
 import UIKit
 import NotificationCenter
+import Foundation
 
 class TodayViewController: UIViewController {
-  @IBOutlet weak var verseLabel: UILabel!
+    @IBOutlet weak var verseLabel: UILabel!
         
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view from its nib.
+    }
+    
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(false)
+        self.updateVerseText()
     }
     
     override func didReceiveMemoryWarning() {
@@ -23,14 +28,18 @@ class TodayViewController: UIViewController {
     }
     
     func widgetPerformUpdateWithCompletionHandler(completionHandler: ((NCUpdateResult) -> Void)!) {
-      verseLabel.text = "John 3:16 - For God so loved the world, He gave His only begotten Son..."
-        // Perform any setup necessary in order to update the view.
-
-        // If an error is encoutered, use NCUpdateResult.Failed
-        // If there's no update required, use NCUpdateResult.NoData
-        // If there's an update, use NCUpdateResult.NewData
-
         completionHandler(NCUpdateResult.NewData)
+        self.updateVerseText()
     }
-  
+    
+//    func userDefaultsDidChange(notification: NSNotification) {
+//        self.updateVerseText()
+//    }
+    
+    func updateVerseText() {
+        let defaults: NSUserDefaults = NSUserDefaults(suiteName: "group.thewilliams.verses")
+        let verse: AnyObject = defaults.valueForKey("LastVerse")
+        self.verseLabel.text = "\(verse)"
+    }
 }
+
