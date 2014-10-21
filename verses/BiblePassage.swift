@@ -26,7 +26,7 @@ class BibliaAPI : NSObject {
   init(moc : NSManagedObjectContext) {
     managedObjectContext = moc
     requestManager = AFHTTPRequestOperationManager()
-    requestManager.responseSerializer = AFJSONResponseSerializer()
+    requestManager.responseSerializer = AFJSONResponseSerializer() as AFHTTPResponseSerializer
   }
 
   func parsePassage(passage: String, completion: (String) -> (Void), failure: (String) -> (Void)) {

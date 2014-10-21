@@ -71,6 +71,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		B70F681119F5E87B00AC174F /* today-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "today-Bridging-Header.h"; sourceTree = "<group>"; };
+		B70F681219F5EAFE00AC174F /* verses-Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "verses-Bridging-Header.h"; sourceTree = "<group>"; };
 		B78096E319664FED0004D560 /* AddVerseViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddVerseViewController.h; sourceTree = "<group>"; };
 		B78096E419664FED0004D560 /* AddVerseViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddVerseViewController.m; sourceTree = "<group>"; };
 		B78096E6196650D30004D560 /* VersesTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VersesTableViewController.h; sourceTree = "<group>"; };
@@ -81,7 +83,6 @@
 		B7B7046E19981D5600162B5D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B7B7046F19981D5600162B5D /* TodayViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodayViewController.swift; sourceTree = "<group>"; };
 		B7B7047119981D5600162B5D /* MainInterface.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = MainInterface.storyboard; sourceTree = "<group>"; };
-		B7C75E931983E77500DC2877 /* verses-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "verses-Bridging-Header.h"; sourceTree = "<group>"; };
 		B7C75E941983E77500DC2877 /* BiblePassage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BiblePassage.swift; sourceTree = "<group>"; };
 		B7E06A63196A4CDE008C2873 /* VerseDetailTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VerseDetailTableViewController.h; sourceTree = "<group>"; };
 		B7E06A64196A4CDE008C2873 /* VerseDetailTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VerseDetailTableViewController.m; sourceTree = "<group>"; };
@@ -102,8 +103,9 @@
 		B7F4E8B91965E43A00466BA7 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		B7F4E8BB1965E43A00466BA7 /* versesTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = versesTests.m; sourceTree = "<group>"; };
 		B7F4E8C51965E72300466BA7 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
+		BBAD18BB7ADEB2831E37270B /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		E14CAB0BA205450DA43E233D /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
-		F7BE1E8430EA467E9A26AD80 /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = "<group>"; };
+		EE29E3E47F68D575281DA8E3 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 		FD18A9E919E4709D0013FCDC /* verses.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = verses.entitlements; sourceTree = "<group>"; };
 		FD18A9EA19E4717F0013FCDC /* today.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = today.entitlements; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -168,7 +170,7 @@
 				B7B7046C19981D5600162B5D /* today */,
 				B7F4E8951965E43900466BA7 /* Frameworks */,
 				B7F4E8941965E43900466BA7 /* Products */,
-				F7BE1E8430EA467E9A26AD80 /* Pods.xcconfig */,
+				B8E8D879B828160631B882B6 /* Pods */,
 			);
 			sourceTree = "<group>";
 		};
@@ -212,7 +214,6 @@
 				B78096E419664FED0004D560 /* AddVerseViewController.m */,
 				B7F4E8A81965E43A00466BA7 /* Images.xcassets */,
 				B7F4E89D1965E43A00466BA7 /* Supporting Files */,
-				B7C75E931983E77500DC2877 /* verses-Bridging-Header.h */,
 			);
 			path = verses;
 			sourceTree = "<group>";
@@ -224,6 +225,8 @@
 				B7F4E89F1965E43A00466BA7 /* InfoPlist.strings */,
 				B7F4E8A21965E43A00466BA7 /* main.m */,
 				B7F4E8A41965E43A00466BA7 /* verses-Prefix.pch */,
+				B70F681219F5EAFE00AC174F /* verses-Bridging-Header.h */,
+				B70F681119F5E87B00AC174F /* today-Bridging-Header.h */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -244,6 +247,15 @@
 				B7F4E8B81965E43A00466BA7 /* InfoPlist.strings */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		B8E8D879B828160631B882B6 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				BBAD18BB7ADEB2831E37270B /* Pods.debug.xcconfig */,
+				EE29E3E47F68D575281DA8E3 /* Pods.release.xcconfig */,
+			);
+			name = Pods;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -413,7 +425,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Pods-resources.sh\"\n";
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods/Pods-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -507,6 +519,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				SKIP_INSTALL = YES;
+				SWIFT_OBJC_BRIDGING_HEADER = "verses/today-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
 			name = Debug;
@@ -525,6 +538,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				SKIP_INSTALL = YES;
+				SWIFT_OBJC_BRIDGING_HEADER = "verses/today-Bridging-Header.h";
 			};
 			name = Release;
 		};
@@ -546,6 +560,7 @@
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
+				DEFINES_MODULE = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_OPTIMIZATION_LEVEL = 0;
@@ -563,6 +578,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
+				SWIFT_OBJC_BRIDGING_HEADER = "verses/verses-Bridging-Header.h";
 			};
 			name = Debug;
 		};
@@ -584,6 +600,7 @@
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = YES;
+				DEFINES_MODULE = YES;
 				ENABLE_NS_ASSERTIONS = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
@@ -594,13 +611,14 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				SDKROOT = iphoneos;
+				SWIFT_OBJC_BRIDGING_HEADER = "verses/verses-Bridging-Header.h";
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;
 		};
 		B7F4E8C01965E43A00466BA7 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = F7BE1E8430EA467E9A26AD80 /* Pods.xcconfig */;
+			baseConfigurationReference = BBAD18BB7ADEB2831E37270B /* Pods.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
@@ -615,6 +633,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
+				SWIFT_INSTALL_OBJC_HEADER = YES;
 				SWIFT_OBJC_BRIDGING_HEADER = "verses/verses-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				WRAPPER_EXTENSION = app;
@@ -623,7 +642,7 @@
 		};
 		B7F4E8C11965E43A00466BA7 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = F7BE1E8430EA467E9A26AD80 /* Pods.xcconfig */;
+			baseConfigurationReference = EE29E3E47F68D575281DA8E3 /* Pods.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
@@ -638,6 +657,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
+				SWIFT_INSTALL_OBJC_HEADER = YES;
 				SWIFT_OBJC_BRIDGING_HEADER = "verses/verses-Bridging-Header.h";
 				WRAPPER_EXTENSION = app;
 			};

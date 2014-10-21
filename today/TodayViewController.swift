@@ -37,8 +37,8 @@ class TodayViewController: UIViewController {
 //    }
     
     func updateVerseText() {
-        let defaults: NSUserDefaults = NSUserDefaults(suiteName: "group.thewilliams.verses")
-        let verse: AnyObject = defaults.valueForKey("LastVerse")
+        let defaults: NSUserDefaults = NSUserDefaults(suiteName: "group.thewilliams.verses")!
+        let verse: AnyObject = defaults.valueForKey("LastVerse")!
         self.verseLabel.text = "\(verse)"
     }
 }
