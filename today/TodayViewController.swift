@@ -12,15 +12,17 @@ import Foundation
 
 class TodayViewController: UIViewController {
     @IBOutlet weak var verseLabel: UILabel!
+    @IBOutlet weak var verseReference: UILabel!
         
     override func viewDidLoad() {
         super.viewDidLoad()
-    }
-    
-    override func viewWillAppear(animated: Bool) {
-        super.viewWillAppear(false)
         self.updateVerseText()
     }
+    
+//    override func viewWillAppear(animated: Bool) {
+//        super.viewWillAppear(false)
+//        
+//    }
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -32,14 +34,12 @@ class TodayViewController: UIViewController {
         self.updateVerseText()
     }
     
-//    func userDefaultsDidChange(notification: NSNotification) {
-//        self.updateVerseText()
-//    }
-    
     func updateVerseText() {
         let defaults: NSUserDefaults = NSUserDefaults(suiteName: "group.thewilliams.verses")!
-        let verse: AnyObject = defaults.valueForKey("LastVerse")!
+        let verseRef: AnyObject = defaults.valueForKey("VerseReference")!
+        let verse: AnyObject = defaults.valueForKey("VerseContent")!
         self.verseLabel.text = "\(verse)"
+        self.verseReference.text = "\(verseRef)"
     }
 }
 
