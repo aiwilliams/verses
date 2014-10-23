@@ -19,14 +19,8 @@ class TodayViewController: UIViewController {
         self.updateVerseText()
     }
     
-//    override func viewWillAppear(animated: Bool) {
-//        super.viewWillAppear(false)
-//        
-//    }
-    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
     }
     
     func widgetPerformUpdateWithCompletionHandler(completionHandler: ((NCUpdateResult) -> Void)!) {

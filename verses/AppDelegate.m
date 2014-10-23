@@ -21,6 +21,30 @@
   rootViewController.userManagedObjectContext = self.userManagedObjectContext;
 }
 
+- (void)applicationWillResignActive:(UIApplication *)application {
+    NSEntityDescription *entityDescription = [NSEntityDescription entityForName:@"BiblePassage" inManagedObjectContext:self.userManagedObjectContext];
+    NSFetchRequest *request = [[NSFetchRequest alloc] init];
+    [request setEntity:entityDescription];
+    [request setResultType:NSDictionaryResultType];
+//    NSExpression *expression = [NSExpression expressionForKeyPath:@"passage"];
+    NSError *error = nil;
+    NSArray *objects = [self.userManagedObjectContext executeFetchRequest:request error:&error];
+    if (objects == nil) {
+        NSLog(@"objects were nil");
+    }
+    else {
+        if ([objects count] > 0) {
+            NSString *lastVerseRef = [[objects lastObject] valueForKey:@"passage"];
+            NSString *lastVerseContent = [[objects lastObject] valueForKey:@"content"];
+            
+            NSUserDefaults *sharedDefaults = [[NSUserDefaults alloc] initWithSuiteName:@"group.thewilliams.verses"];
+            [sharedDefaults setValue:lastVerseRef forKeyPath:@"VerseReference"];
+            [sharedDefaults setValue:lastVerseContent forKey:@"VerseContent"];
+            [sharedDefaults synchronize];
+        }
+    }
+}
+
 #pragma mark - Core Data stack
 
 @synthesize userManagedObjectContext = _userManagedObjectContext;

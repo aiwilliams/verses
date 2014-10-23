@@ -38,11 +38,6 @@
                       [self.activityIndicator stopAnimating];
                       self.errorText.hidden = true;
                       self.biblePassage = biblePassage;
-                      NSLog(@"%@", self.biblePassage);
-                      NSUserDefaults *sharedDefaults = [[NSUserDefaults alloc] initWithSuiteName:@"group.thewilliams.verses"];
-                      [sharedDefaults setValue:self.biblePassage.passage forKeyPath:@"VerseReference"];
-                      [sharedDefaults setValue:self.biblePassage.content forKey:@"VerseContent"];
-                      [sharedDefaults synchronize];
                       [self performSegueWithIdentifier:@"unwindAddVerse" sender:sender];
                    }
                    failure:^(NSString *errorMessage) {
