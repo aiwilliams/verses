@@ -25,6 +25,7 @@
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="288" translatesAutoresizingMaskIntoConstraints="NO" id="7Ur-RP-7xh">
                                 <rect key="frame" x="16" y="37" width="288" height="17"/>
+                                <gestureRecognizers/>
                                 <constraints>
                                     <constraint firstAttribute="height" relation="lessThanOrEqual" constant="200" id="31z-tq-z2O"/>
                                 </constraints>
@@ -33,6 +34,10 @@
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
+                        <accessibility key="accessibilityConfiguration">
+                            <accessibilityTraits key="traits" none="YES" link="YES"/>
+                        </accessibility>
+                        <gestureRecognizers/>
                         <constraints>
                             <constraint firstAttribute="trailingMargin" secondItem="vGO-gP-gEX" secondAttribute="trailing" constant="104" id="KZQ-V4-S2g"/>
                             <constraint firstItem="7Ur-RP-7xh" firstAttribute="leading" secondItem="S3S-Oj-5AN" secondAttribute="leadingMargin" id="MsL-5T-HA2"/>
@@ -44,6 +49,9 @@
                             <constraint firstItem="7Ur-RP-7xh" firstAttribute="trailing" secondItem="S3S-Oj-5AN" secondAttribute="trailingMargin" id="qxb-Vw-tfz"/>
                             <constraint firstItem="7Ur-RP-7xh" firstAttribute="top" secondItem="Ft6-oW-KC0" secondAttribute="bottom" constant="37" id="r9y-UN-QE2"/>
                         </constraints>
+                        <connections>
+                            <outletCollection property="gestureRecognizers" destination="C7c-ow-F5U" appends="YES" id="e0C-f1-B7u"/>
+                        </connections>
                     </view>
                     <extendedEdge key="edgesForExtendedLayout"/>
                     <nil key="simulatedStatusBarMetrics"/>
@@ -57,6 +65,11 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="vXp-U4-Rya" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <tapGestureRecognizer id="C7c-ow-F5U">
+                    <connections>
+                        <action selector="openContainingApp:" destination="M4Y-Lb-cyx" id="zae-ed-YNn"/>
+                    </connections>
+                </tapGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="532" y="312.5"/>
         </scene>

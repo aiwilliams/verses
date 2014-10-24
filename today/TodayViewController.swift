@@ -35,5 +35,10 @@ class TodayViewController: UIViewController {
         self.verseLabel.text = "\(verse)"
         self.verseReference.text = "\(verseRef)"
     }
+    
+    @IBAction func openContainingApp(sender: AnyObject) {
+        let appUrl: NSURL = NSURL(string: "verses://index")!
+        self.extensionContext?.openURL(appUrl, completionHandler: nil)
+    }
 }
 

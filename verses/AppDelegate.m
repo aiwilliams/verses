@@ -30,7 +30,10 @@
     NSError *error = nil;
     NSArray *objects = [self.userManagedObjectContext executeFetchRequest:request error:&error];
     if (objects == nil) {
-        NSLog(@"objects were nil");
+        NSUserDefaults *sharedDefaults = [[NSUserDefaults alloc] initWithSuiteName:@"group.thewilliams.verses"];
+        [sharedDefaults setValue:@"" forKeyPath:@"VerseReference"];
+        [sharedDefaults setValue:@"You don't have any verses!" forKey:@"VerseContent"];
+        [sharedDefaults synchronize];
     }
     else {
         if ([objects count] > 0) {
@@ -43,6 +46,11 @@
             [sharedDefaults synchronize];
         }
     }
+}
+
+- (BOOL)application:(UIApplication *)application openURL:(NSURL *)url
+  sourceApplication:(NSString *)sourceApplication annotation:(id)annotation {
+    return YES;
 }
 
 #pragma mark - Core Data stack
