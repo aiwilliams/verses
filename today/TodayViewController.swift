@@ -11,9 +11,9 @@ import NotificationCenter
 import Foundation
 
 class TodayViewController: UIViewController {
-    @IBOutlet weak var verseLabel: UILabel!
-    @IBOutlet weak var verseReference: UILabel!
-        
+    @IBOutlet var verseLabel: UILabel!
+    @IBOutlet var verseReference: UILabel!
+
     override func viewDidLoad() {
         super.viewDidLoad()
         self.updateVerseText()
@@ -24,7 +24,6 @@ class TodayViewController: UIViewController {
     }
     
     func widgetPerformUpdateWithCompletionHandler(completionHandler: ((NCUpdateResult) -> Void)!) {
-        completionHandler(NCUpdateResult.NewData)
         self.updateVerseText()
     }
     

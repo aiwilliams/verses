@@ -16,9 +16,42 @@
 @implementation AppDelegate
 
 - (void)applicationDidFinishLaunching:(UIApplication *)application {
-  UINavigationController *navigationController = (UINavigationController *)self.window.rootViewController;
-  VersesTableViewController *rootViewController = (VersesTableViewController *)[[navigationController viewControllers] objectAtIndex:0];
-  rootViewController.userManagedObjectContext = self.userManagedObjectContext;
+    UINavigationController *navigationController = (UINavigationController *)self.window.rootViewController;
+    VersesTableViewController *rootViewController = (VersesTableViewController *)[[navigationController viewControllers] objectAtIndex:0];
+    rootViewController.userManagedObjectContext = self.userManagedObjectContext;
+    
+    NSEntityDescription *entityDescription = [NSEntityDescription entityForName:@"BiblePassage" inManagedObjectContext:self.userManagedObjectContext];
+    NSFetchRequest *request = [[NSFetchRequest alloc] init];
+    [request setEntity:entityDescription];
+    [request setResultType:NSDictionaryResultType];
+    NSError *error = nil;
+    NSArray *objects = [self.userManagedObjectContext executeFetchRequest:request error:&error];
+    
+    UIUserNotificationType types = UIUserNotificationTypeBadge | UIUserNotificationTypeAlert | UIUserNotificationTypeSound;
+    UIUserNotificationSettings *settings = [UIUserNotificationSettings settingsForTypes:types categories:nil];
+    [[UIApplication sharedApplication] registerUserNotificationSettings:settings];
+    NSString *lastVerseRef = [[objects lastObject] valueForKey:@"passage"];
+    NSString *lastVerseContent = [[objects lastObject] valueForKey:@"content"];
+
+    
+    UILocalNotification *localNotification = [[UILocalNotification alloc] init];
+    
+    localNotification.timeZone = [NSTimeZone defaultTimeZone];
+    
+    NSDateComponents *comps = [[NSDateComponents alloc] init];
+    [comps setDay:29];
+    [comps setMonth:10];
+    [comps setYear:2014];
+    [comps setHour:16];
+    
+    localNotification.fireDate = [[NSCalendar currentCalendar] dateFromComponents:comps];
+    localNotification.repeatInterval = NSCalendarUnitDay;
+    localNotification.alertBody = [NSString stringWithFormat:@"%@ \n\"%@\"", lastVerseRef, lastVerseContent];
+    localNotification.hasAction = true;
+    localNotification.alertAction = NSLocalizedString(@"View Details", nil);
+    localNotification.applicationIconBadgeNumber = 1;
+    
+    [[UIApplication sharedApplication] scheduleLocalNotification:localNotification];
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application {
@@ -26,7 +59,6 @@
     NSFetchRequest *request = [[NSFetchRequest alloc] init];
     [request setEntity:entityDescription];
     [request setResultType:NSDictionaryResultType];
-//    NSExpression *expression = [NSExpression expressionForKeyPath:@"passage"];
     NSError *error = nil;
     NSArray *objects = [self.userManagedObjectContext executeFetchRequest:request error:&error];
     if (objects == nil) {
@@ -50,6 +82,27 @@
 
 - (BOOL)application:(UIApplication *)application openURL:(NSURL *)url
   sourceApplication:(NSString *)sourceApplication annotation:(id)annotation {
+//    NSString *verseRef = url.lastPathComponent;
+//    NSEntityDescription *entityDescription = [NSEntityDescription entityForName:@"BiblePassage" inManagedObjectContext:self.userManagedObjectContext];
+//    NSFetchRequest *request = [[NSFetchRequest alloc] init];
+//    
+//    [request setEntity:entityDescription];
+//    [request setResultType:NSDictionaryResultType];
+//    
+//    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"passage = %@", verseRef];
+//    [request setPredicate:predicate];
+//    
+//    NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc]
+//                                        initWithKey:@"passage" ascending:YES];
+//    [request setSortDescriptors:@[sortDescriptor]];
+//    NSError *error;
+//    NSArray *array = [self.userManagedObjectContext executeFetchRequest:request error:&error];
+//    //    NSExpression *expression = [NSExpression expressionForKeyPath:@"passage"];
+//
+//    NSArray *objects = [self.userManagedObjectContext executeFetchRequest:request error:&error];
+//    
+//    NSLog(@"%@", objects);
+
     return YES;
 }
 

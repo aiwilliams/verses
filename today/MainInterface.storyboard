@@ -61,7 +61,7 @@
                     <size key="freeformSize" width="320" height="62"/>
                     <connections>
                         <outlet property="verseLabel" destination="7Ur-RP-7xh" id="fHp-i3-91Z"/>
-                        <outlet property="verseReference" destination="vGO-gP-gEX" id="VDv-1m-avG"/>
+                        <outlet property="verseReference" destination="vGO-gP-gEX" id="rSz-FD-yj2"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="vXp-U4-Rya" userLabel="First Responder" sceneMemberID="firstResponder"/>
