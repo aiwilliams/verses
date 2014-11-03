@@ -6,6 +6,7 @@
 //  Copyright (c) 2014 The Williams Family. All rights reserved.
 //
 
+#import "AppDelegate.h"
 #import "VersesTableViewController.h"
 #import "AddVerseViewController.h"
 #import "VerseDetailTableViewController.h"
@@ -15,6 +16,7 @@
 @interface VersesTableViewController ()
 @property (nonatomic, strong) NSFetchedResultsController *fetchedResultsController;
 @property (nonatomic, strong) NSIndexPath *disclosingRowIndexPath;
+@property (nonatomic, strong) NSManagedObjectContext *userManagedObjectContext;
 @end
 
 @implementation VersesTableViewController
@@ -23,6 +25,9 @@
 
 -(void)viewDidLoad {
     self.tableView.allowsMultipleSelectionDuringEditing = NO;
+    
+    AppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];
+    self.userManagedObjectContext = appDelegate.userManagedObjectContext;
     
     NSError *error;
     if (![[self fetchedResultsController] performFetch:&error]) {

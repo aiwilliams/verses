@@ -9,17 +9,9 @@
 #import "AppDelegate.h"
 #import "VersesTableViewController.h"
 
-@interface AppDelegate ()
-@property (nonatomic, strong, readonly) NSManagedObjectContext *userManagedObjectContext;
-@end
-
 @implementation AppDelegate
 
 - (void)applicationDidFinishLaunching:(UIApplication *)application {
-    UINavigationController *navigationController = (UINavigationController *)self.window.rootViewController;
-    VersesTableViewController *rootViewController = (VersesTableViewController *)[[navigationController viewControllers] objectAtIndex:0];
-    rootViewController.userManagedObjectContext = self.userManagedObjectContext;
-    
     NSEntityDescription *entityDescription = [NSEntityDescription entityForName:@"BiblePassage" inManagedObjectContext:self.userManagedObjectContext];
     NSFetchRequest *request = [[NSFetchRequest alloc] init];
     [request setEntity:entityDescription];
@@ -36,6 +28,8 @@
     
     UILocalNotification *localNotification = [[UILocalNotification alloc] init];
     
+    application.applicationIconBadgeNumber = 0;
+    
     localNotification.timeZone = [NSTimeZone defaultTimeZone];
     
     NSDateComponents *comps = [[NSDateComponents alloc] init];
@@ -49,7 +43,7 @@
     localNotification.alertBody = [NSString stringWithFormat:@"%@ \n\"%@\"", lastVerseRef, lastVerseContent];
     localNotification.hasAction = true;
     localNotification.alertAction = NSLocalizedString(@"View Details", nil);
-    localNotification.applicationIconBadgeNumber = 1;
+    localNotification.applicationIconBadgeNumber = localNotification.applicationIconBadgeNumber + 1;
     
     [[UIApplication sharedApplication] scheduleLocalNotification:localNotification];
 }
