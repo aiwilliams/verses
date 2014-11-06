@@ -21,7 +21,6 @@ class TimeSettingsViewController : UIViewController {
             let dateFormatter = NSDateFormatter()
             dateFormatter.dateFormat = "HH:mm"
             let time = dateFormatter.dateFromString(stringTime)
-            println("\(time)")
             remindersDatePicker.setDate(time!, animated: false)
         }
     }

@@ -62,10 +62,13 @@ class SettingsTableViewController : UITableViewController {
             
             localNotification.timeZone = NSTimeZone.defaultTimeZone()
             
-            let comps: NSDateComponents = NSDateComponents()
-            comps.hour = 7
+            let dateFormatter = NSDateFormatter()
+            dateFormatter.dateFormat = "HH:mm"
+            let userTimeSettings: String = defaults?.valueForKey("remindersTime") as String
+            let dateTime = dateFormatter.dateFromString(userTimeSettings)
+            let components = NSCalendar.currentCalendar().components(NSCalendarUnit.HourCalendarUnit, fromDate: dateTime!)
             
-            localNotification.fireDate = NSCalendar.currentCalendar().dateFromComponents(comps)
+            localNotification.fireDate = NSCalendar.currentCalendar().dateFromComponents(components)
             if defaults?.valueForKey("remindersFrequency") as String == "Daily" {
                 localNotification.repeatInterval = NSCalendarUnit.CalendarUnitDay
             }
