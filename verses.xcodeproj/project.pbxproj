@@ -30,6 +30,9 @@
 		B7F4E8BA1965E43A00466BA7 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = B7F4E8B81965E43A00466BA7 /* InfoPlist.strings */; };
 		B7F4E8BC1965E43A00466BA7 /* versesTests.m in Sources */ = {isa = PBXBuildFile; fileRef = B7F4E8BB1965E43A00466BA7 /* versesTests.m */; };
 		B7F4E8C61965E72300466BA7 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B7F4E8C51965E72300466BA7 /* Main.storyboard */; };
+		FD117C7C1A09710D00B01643 /* SettingsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD117C7B1A09710D00B01643 /* SettingsTableViewController.swift */; };
+		FDD6D0F81A0C1E2A00AE107F /* TimeSettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDD6D0F71A0C1E2A00AE107F /* TimeSettingsViewController.swift */; };
+		FDD6D0FA1A0C1E8500AE107F /* FrequencySettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDD6D0F91A0C1E8500AE107F /* FrequencySettingsViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -106,8 +109,11 @@
 		BBAD18BB7ADEB2831E37270B /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		E14CAB0BA205450DA43E233D /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		EE29E3E47F68D575281DA8E3 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
+		FD117C7B1A09710D00B01643 /* SettingsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsTableViewController.swift; sourceTree = "<group>"; };
 		FD18A9E919E4709D0013FCDC /* verses.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = verses.entitlements; sourceTree = "<group>"; };
 		FD18A9EA19E4717F0013FCDC /* today.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = today.entitlements; sourceTree = "<group>"; };
+		FDD6D0F71A0C1E2A00AE107F /* TimeSettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimeSettingsViewController.swift; sourceTree = "<group>"; };
+		FDD6D0F91A0C1E8500AE107F /* FrequencySettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FrequencySettingsViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -204,6 +210,9 @@
 				B7F4E8A51965E43A00466BA7 /* AppDelegate.h */,
 				B7F4E8A61965E43A00466BA7 /* AppDelegate.m */,
 				B7F4E8C51965E72300466BA7 /* Main.storyboard */,
+				FDD6D0F71A0C1E2A00AE107F /* TimeSettingsViewController.swift */,
+				FDD6D0F91A0C1E8500AE107F /* FrequencySettingsViewController.swift */,
+				FD117C7B1A09710D00B01643 /* SettingsTableViewController.swift */,
 				B78096E6196650D30004D560 /* VersesTableViewController.h */,
 				B78096E7196650D30004D560 /* VersesTableViewController.m */,
 				B7C75E941983E77500DC2877 /* BiblePassage.swift */,
@@ -445,8 +454,11 @@
 			files = (
 				B78096E519664FED0004D560 /* AddVerseViewController.m in Sources */,
 				B78096E8196650D30004D560 /* VersesTableViewController.m in Sources */,
+				FDD6D0FA1A0C1E8500AE107F /* FrequencySettingsViewController.swift in Sources */,
+				FDD6D0F81A0C1E2A00AE107F /* TimeSettingsViewController.swift in Sources */,
 				B78096EB1967028C0004D560 /* UserData.xcdatamodeld in Sources */,
 				B7E06A65196A4CDE008C2873 /* VerseDetailTableViewController.m in Sources */,
+				FD117C7C1A09710D00B01643 /* SettingsTableViewController.swift in Sources */,
 				B7F4E8A71965E43A00466BA7 /* AppDelegate.m in Sources */,
 				B7F4E8A31965E43A00466BA7 /* main.m in Sources */,
 				B7C75E951983E77500DC2877 /* BiblePassage.swift in Sources */,

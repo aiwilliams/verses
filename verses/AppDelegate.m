@@ -12,40 +12,7 @@
 @implementation AppDelegate
 
 - (void)applicationDidFinishLaunching:(UIApplication *)application {
-    NSEntityDescription *entityDescription = [NSEntityDescription entityForName:@"BiblePassage" inManagedObjectContext:self.userManagedObjectContext];
-    NSFetchRequest *request = [[NSFetchRequest alloc] init];
-    [request setEntity:entityDescription];
-    [request setResultType:NSDictionaryResultType];
-    NSError *error = nil;
-    NSArray *objects = [self.userManagedObjectContext executeFetchRequest:request error:&error];
-    
-    UIUserNotificationType types = UIUserNotificationTypeBadge | UIUserNotificationTypeAlert | UIUserNotificationTypeSound;
-    UIUserNotificationSettings *settings = [UIUserNotificationSettings settingsForTypes:types categories:nil];
-    [[UIApplication sharedApplication] registerUserNotificationSettings:settings];
-    NSString *lastVerseRef = [[objects lastObject] valueForKey:@"passage"];
-    NSString *lastVerseContent = [[objects lastObject] valueForKey:@"content"];
-
-    
-    UILocalNotification *localNotification = [[UILocalNotification alloc] init];
-    
     application.applicationIconBadgeNumber = 0;
-    
-    localNotification.timeZone = [NSTimeZone defaultTimeZone];
-    
-    NSDateComponents *comps = [[NSDateComponents alloc] init];
-    [comps setDay:29];
-    [comps setMonth:10];
-    [comps setYear:2014];
-    [comps setHour:16];
-    
-    localNotification.fireDate = [[NSCalendar currentCalendar] dateFromComponents:comps];
-    localNotification.repeatInterval = NSCalendarUnitDay;
-    localNotification.alertBody = [NSString stringWithFormat:@"%@ \n\"%@\"", lastVerseRef, lastVerseContent];
-    localNotification.hasAction = true;
-    localNotification.alertAction = NSLocalizedString(@"View Details", nil);
-    localNotification.applicationIconBadgeNumber = localNotification.applicationIconBadgeNumber + 1;
-    
-    [[UIApplication sharedApplication] scheduleLocalNotification:localNotification];
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application {
