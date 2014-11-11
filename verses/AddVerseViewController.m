@@ -1,4 +1,5 @@
 #import "AddVerseViewController.h"
+#import "verses-Swift.h"
 
 @interface AddVerseViewController ()
 

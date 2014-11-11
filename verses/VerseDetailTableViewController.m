@@ -1,4 +1,5 @@
 #import "VerseDetailTableViewController.h"
+#import "verses-Swift.h"
 
 @interface VerseDetailTableViewController ()
 @property (weak, nonatomic) IBOutlet UITableViewCell *passageCell;
