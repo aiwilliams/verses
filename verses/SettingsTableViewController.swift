@@ -18,38 +18,11 @@ class SettingsTableViewController : UITableViewController {
     var lastVerseContent: AnyObject?
     
     override func viewDidLoad() {
-
-        // Get the NSUserDefaults ready...
-        
-        let settingsDefaults = NSUserDefaults(suiteName: "settings")
-        
-        // Fetch verses from CoreData...
-        
-        let appDelegate = UIApplication.sharedApplication().delegate as AppDelegate
-        let moc = appDelegate.userManagedObjectContext
-
-        let entityDescription: NSEntityDescription = NSEntityDescription.entityForName("BiblePassage", inManagedObjectContext: moc)!
-        let request: NSFetchRequest = NSFetchRequest()
-        request.entity = entityDescription
-        request.resultType = NSFetchRequestResultType.DictionaryResultType
-        
-        let objects: NSArray = moc.executeFetchRequest(request, error: nil)!
-        
-        let lastCoreDataObject: AnyObject? = objects.lastObject
-        lastVerseRef = lastCoreDataObject!.valueForKey("passage")
-        lastVerseContent = lastCoreDataObject!.valueForKey("content")
-        
-        // Check for previous user settings...
-        
-        if settingsDefaults?.valueForKey("remindersSwitch") != nil {
-            if settingsDefaults?.valueForKey("remindersSwitch") as String == "on" {
-                remindersSwitch.setOn(true, animated: false)
-            }
-            else {
-                remindersSwitch.setOn(false, animated: false)
-            }
+        remindersSwitch.setOn(false, animated: false)
+        let defaults = NSUserDefaults(suiteName: "settings")!
+        if let state = defaults.valueForKey("remindersSwitch") as? String {
+            remindersSwitch.setOn(state == "on", animated: false)
         }
-        
     }
 
     @IBAction func didToggleReminders(sender: UISwitch) {
@@ -69,6 +42,7 @@ class SettingsTableViewController : UITableViewController {
             let components = NSCalendar.currentCalendar().components(NSCalendarUnit.HourCalendarUnit, fromDate: dateTime!)
             
             localNotification.fireDate = NSCalendar.currentCalendar().dateFromComponents(components)
+            
             if defaults?.valueForKey("remindersFrequency") as String == "Daily" {
                 localNotification.repeatInterval = NSCalendarUnit.CalendarUnitDay
             }
@@ -78,13 +52,16 @@ class SettingsTableViewController : UITableViewController {
             else {
                 localNotification.repeatInterval = NSCalendarUnit.CalendarUnitMonth
             }
-            localNotification.alertBody = "\(lastVerseRef)"
+            
+            let appDelegate = UIApplication.sharedApplication().delegate! as AppDelegate
+            let biblePassage = appDelegate.biblePassageStore.activeBiblePassage()
+            
+            localNotification.alertBody = "\(biblePassage?.passage)"
             localNotification.hasAction = true
             localNotification.applicationIconBadgeNumber = localNotification.applicationIconBadgeNumber + 1
             
             UIApplication.sharedApplication().scheduleLocalNotification(localNotification)
-        }
-        else {
+        } else {
             defaults!.setValue("off", forKey: "remindersSwitch")
         }
     }

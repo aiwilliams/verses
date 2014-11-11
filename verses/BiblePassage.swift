@@ -1,11 +1,3 @@
-//
-//  BiblePassage.swift
-//  verses
-//
-//  Created by Adam Williams on 7/26/14.
-//  Copyright (c) 2014 The Williams Family. All rights reserved.
-//
-
 import Foundation
 import CoreData
 
@@ -13,6 +5,29 @@ class BiblePassage : NSManagedObject {
   @NSManaged var translation : String
   @NSManaged var passage: String
   @NSManaged var content : String
+}
+
+class BiblePassageStore : NSObject {
+    let managedObjectContext: NSManagedObjectContext
+
+    init(moc : NSManagedObjectContext) {
+        managedObjectContext = moc
+    }
+
+    func passages() -> [BiblePassage]? {
+        let entityDescription: NSEntityDescription = NSEntityDescription.entityForName("BiblePassage", inManagedObjectContext: managedObjectContext)!
+        let request: NSFetchRequest = NSFetchRequest()
+        request.entity = entityDescription
+        
+        var error: NSError?
+        return managedObjectContext.executeFetchRequest(request, error: &error) as [BiblePassage]?
+    }
+    
+    // For now, return the last passage...
+    func activeBiblePassage() -> BiblePassage? {
+        let passages = self.passages()!
+        return passages.last
+    }
 }
 
 class BibliaAPI : NSObject {
