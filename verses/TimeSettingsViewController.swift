@@ -44,7 +44,7 @@ class TimeSettingsViewController : UIViewController {
             let dateTime = dateFormatter.dateFromString(userTimeSettings)
             let components = NSCalendar.currentCalendar().components(NSCalendarUnit.HourCalendarUnit, fromDate: dateTime!)
             
-            localNotification.timeZone = NSTimeZone(name: "GMT")
+            // localNotification.timeZone = NSTimeZone(name: "GMT")
             localNotification.fireDate = NSCalendar.currentCalendar().dateFromComponents(components)
             
             if defaultSettings.valueForKey("remindersFrequency") as String == "Daily" {
