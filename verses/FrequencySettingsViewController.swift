@@ -14,20 +14,20 @@ class FrequencySettingsViewController : UIViewController, UIPickerViewDataSource
     @IBOutlet var frequencyPicker: UIPickerView!
     
     var frequencyPickerDataSource = ["Daily", "Weekly", "Monthly"]
-    let defaultSettings = NSUserDefaults(suiteName: "settings")
+    let defaultSettings = NSUserDefaults(suiteName: "settings")!
     
     override func viewDidLoad() {
         self.frequencyPicker.dataSource = self
         self.frequencyPicker.delegate = self
         
-        if defaultSettings?.valueForKey("remindersFrequency") != nil {
-            if defaultSettings?.valueForKey("remindersFrequency") as String == "Daily" {
+        if defaultSettings.valueForKey("remindersFrequency") != nil {
+            if defaultSettings.valueForKey("remindersFrequency") as String == "Daily" {
                 frequencyPicker.selectRow(0, inComponent: 0, animated: false)
             }
-            else if defaultSettings?.valueForKey("remindersFrequency") as String == "Weekly" {
+            else if defaultSettings.valueForKey("remindersFrequency") as String == "Weekly" {
                 frequencyPicker.selectRow(1, inComponent: 0, animated: false)
             }
-            else if defaultSettings?.valueForKey("remindersFrequency") as String == "Monthly" {
+            else if defaultSettings.valueForKey("remindersFrequency") as String == "Monthly" {
                 frequencyPicker.selectRow(2, inComponent: 0, animated: false)
             }
         }
@@ -46,6 +46,44 @@ class FrequencySettingsViewController : UIViewController, UIPickerViewDataSource
     }
     
     func pickerView(pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-        defaultSettings?.setValue(frequencyPickerDataSource[row], forKey: "remindersFrequency")
+        defaultSettings.setValue(frequencyPickerDataSource[row], forKey: "remindersFrequency")
+        
+        if defaultSettings.valueForKey("remindersSwitch") as NSString == "on" {
+            println("Rescheduling UILocalNotification based on a change in frequency settings...")
+            
+            UIApplication.sharedApplication().cancelAllLocalNotifications()
+            
+            let localNotification: UILocalNotification = UILocalNotification()
+            
+            localNotification.timeZone = NSTimeZone.defaultTimeZone()
+            
+            let dateFormatter = NSDateFormatter()
+            dateFormatter.dateFormat = "HH:mm"
+            let userTimeSettings: String = defaultSettings.valueForKey("remindersTime") as String
+            let dateTime = dateFormatter.dateFromString(userTimeSettings)
+            let components = NSCalendar.currentCalendar().components(NSCalendarUnit.HourCalendarUnit, fromDate: dateTime!)
+            
+            localNotification.timeZone = NSTimeZone(name: "GMT")
+            localNotification.fireDate = NSCalendar.currentCalendar().dateFromComponents(components)
+            
+            if defaultSettings.valueForKey("remindersFrequency") as String == "Daily" {
+                localNotification.repeatInterval = NSCalendarUnit.CalendarUnitDay
+            }
+            else if defaultSettings.valueForKey("remindersFrequency") as String == "Weekly" {
+                localNotification.repeatInterval = NSCalendarUnit.CalendarUnitWeekday
+            }
+            else {
+                localNotification.repeatInterval = NSCalendarUnit.CalendarUnitMonth
+            }
+            
+            let appDelegate = UIApplication.sharedApplication().delegate! as AppDelegate
+            let biblePassage = appDelegate.biblePassageStore.activeBiblePassage()
+            
+            localNotification.alertBody = "\(biblePassage?.passage)"
+            localNotification.hasAction = true
+            localNotification.applicationIconBadgeNumber = localNotification.applicationIconBadgeNumber + 1
+            
+            UIApplication.sharedApplication().scheduleLocalNotification(localNotification)
+        }
     }
 }

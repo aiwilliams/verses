@@ -26,10 +26,12 @@ class SettingsTableViewController : UITableViewController {
     }
 
     @IBAction func didToggleReminders(sender: UISwitch) {
-        let defaults = NSUserDefaults(suiteName: "settings")
+        let defaults = NSUserDefaults(suiteName: "settings")!
         
         if sender.on == true {
-            defaults!.setValue("on", forKey: "remindersSwitch")
+            defaults.setValue("on", forKey: "remindersSwitch")
+            
+            UIApplication.sharedApplication().cancelAllLocalNotifications()
             
             let localNotification: UILocalNotification = UILocalNotification()
             
@@ -37,16 +39,17 @@ class SettingsTableViewController : UITableViewController {
             
             let dateFormatter = NSDateFormatter()
             dateFormatter.dateFormat = "HH:mm"
-            let userTimeSettings: String = defaults?.valueForKey("remindersTime") as String
+            let userTimeSettings: String = defaults.valueForKey("remindersTime") as String
             let dateTime = dateFormatter.dateFromString(userTimeSettings)
             let components = NSCalendar.currentCalendar().components(NSCalendarUnit.HourCalendarUnit, fromDate: dateTime!)
             
+            localNotification.timeZone = NSTimeZone(name: "GMT")
             localNotification.fireDate = NSCalendar.currentCalendar().dateFromComponents(components)
             
-            if defaults?.valueForKey("remindersFrequency") as String == "Daily" {
+            if defaults.valueForKey("remindersFrequency") as String == "Daily" {
                 localNotification.repeatInterval = NSCalendarUnit.CalendarUnitDay
             }
-            else if defaults?.valueForKey("remindersFrequency") as String == "Weekly" {
+            else if defaults.valueForKey("remindersFrequency") as String == "Weekly" {
                 localNotification.repeatInterval = NSCalendarUnit.CalendarUnitWeekday
             }
             else {
@@ -62,7 +65,7 @@ class SettingsTableViewController : UITableViewController {
             
             UIApplication.sharedApplication().scheduleLocalNotification(localNotification)
         } else {
-            defaults!.setValue("off", forKey: "remindersSwitch")
+            defaults.setValue("off", forKey: "remindersSwitch")
         }
     }
     
