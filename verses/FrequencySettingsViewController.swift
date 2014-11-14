@@ -49,8 +49,6 @@ class FrequencySettingsViewController : UIViewController, UIPickerViewDataSource
         defaultSettings.setValue(frequencyPickerDataSource[row], forKey: "remindersFrequency")
         
         if defaultSettings.valueForKey("remindersSwitch") as NSString == "on" {
-            println("Rescheduling UILocalNotification based on a change in frequency settings...")
-            
             UIApplication.sharedApplication().cancelAllLocalNotifications()
             
             let localNotification: UILocalNotification = UILocalNotification()
@@ -62,8 +60,8 @@ class FrequencySettingsViewController : UIViewController, UIPickerViewDataSource
             let userTimeSettings: String = defaultSettings.valueForKey("remindersTime") as String
             let dateTime = dateFormatter.dateFromString(userTimeSettings)
             let components = NSCalendar.currentCalendar().components(NSCalendarUnit.HourCalendarUnit, fromDate: dateTime!)
+
             
-            // localNotification.timeZone = NSTimeZone(name: "GMT")
             localNotification.fireDate = NSCalendar.currentCalendar().dateFromComponents(components)
             
             if defaultSettings.valueForKey("remindersFrequency") as String == "Daily" {
@@ -79,7 +77,7 @@ class FrequencySettingsViewController : UIViewController, UIPickerViewDataSource
             let appDelegate = UIApplication.sharedApplication().delegate! as AppDelegate
             let biblePassage = appDelegate.biblePassageStore.activeBiblePassage()
             
-            localNotification.alertBody = "\(biblePassage?.passage)"
+            localNotification.alertBody = "\(biblePassage!.passage)"
             localNotification.hasAction = true
             localNotification.applicationIconBadgeNumber = localNotification.applicationIconBadgeNumber + 1
             

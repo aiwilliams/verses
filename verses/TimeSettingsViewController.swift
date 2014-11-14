@@ -29,9 +29,7 @@ class TimeSettingsViewController : UIViewController {
         let remindersTime = formattedDate(sender.date!!)
         defaultSettings.setValue(remindersTime, forKey: "remindersTime")
         
-        if defaultSettings.valueForKey("remindersSwitch") as NSString == "on" {
-            println("Rescheduling UILocalNotification based on a change in time settings...")
-            
+        if defaultSettings.valueForKey("remindersSwitch") as NSString == "on" {            
             UIApplication.sharedApplication().cancelAllLocalNotifications()
             
             let localNotification: UILocalNotification = UILocalNotification()
@@ -42,9 +40,10 @@ class TimeSettingsViewController : UIViewController {
             dateFormatter.dateFormat = "HH:mm"
             let userTimeSettings: String = defaultSettings.valueForKey("remindersTime") as String
             let dateTime = dateFormatter.dateFromString(userTimeSettings)
-            let components = NSCalendar.currentCalendar().components(NSCalendarUnit.HourCalendarUnit, fromDate: dateTime!)
             
-            // localNotification.timeZone = NSTimeZone(name: "GMT")
+            let calendar = NSCalendar.currentCalendar()
+            let components: NSDateComponents = calendar.components(NSCalendarUnit.HourCalendarUnit | NSCalendarUnit.MinuteCalendarUnit, fromDate: dateTime!)
+            
             localNotification.fireDate = NSCalendar.currentCalendar().dateFromComponents(components)
             
             if defaultSettings.valueForKey("remindersFrequency") as String == "Daily" {
@@ -60,7 +59,7 @@ class TimeSettingsViewController : UIViewController {
             let appDelegate = UIApplication.sharedApplication().delegate! as AppDelegate
             let biblePassage = appDelegate.biblePassageStore.activeBiblePassage()
             
-            localNotification.alertBody = "\(biblePassage?.passage)"
+            localNotification.alertBody = "\(biblePassage!.passage)"
             localNotification.hasAction = true
             localNotification.applicationIconBadgeNumber = localNotification.applicationIconBadgeNumber + 1
             

@@ -43,7 +43,6 @@ class SettingsTableViewController : UITableViewController {
             let dateTime = dateFormatter.dateFromString(userTimeSettings)
             let components = NSCalendar.currentCalendar().components(NSCalendarUnit.HourCalendarUnit, fromDate: dateTime!)
             
-            // localNotification.timeZone = NSTimeZone(name: "GMT")
             localNotification.fireDate = NSCalendar.currentCalendar().dateFromComponents(components)
             
             if defaults.valueForKey("remindersFrequency") as String == "Daily" {
@@ -59,7 +58,7 @@ class SettingsTableViewController : UITableViewController {
             let appDelegate = UIApplication.sharedApplication().delegate! as AppDelegate
             let biblePassage = appDelegate.biblePassageStore.activeBiblePassage()
             
-            localNotification.alertBody = "\(biblePassage?.passage)"
+            localNotification.alertBody = "\(biblePassage!.passage)"
             localNotification.hasAction = true
             localNotification.applicationIconBadgeNumber = localNotification.applicationIconBadgeNumber + 1
             
