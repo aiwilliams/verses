@@ -65,6 +65,7 @@ class SettingsTableViewController : UITableViewController {
             UIApplication.sharedApplication().scheduleLocalNotification(localNotification)
         } else {
             defaults.setValue("off", forKey: "remindersSwitch")
+            UIApplication.sharedApplication().cancelAllLocalNotifications()
         }
     }
     
