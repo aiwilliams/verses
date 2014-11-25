@@ -18,6 +18,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
     }
     
+    func application(application: UIApplication, openURL url: NSURL, sourceApplication: String?, annotation: AnyObject?) -> Bool {
+        println(url)
+        return true
+    }
+
     func exportToTodayApp(biblePassage: BiblePassage) {
         let sharedDefaults = NSUserDefaults(suiteName: "group.thewilliams.verses")!
         sharedDefaults.setObject(biblePassage.passage, forKey: "VerseReference")

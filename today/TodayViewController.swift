@@ -1,11 +1,3 @@
-//
-//  TodayViewController.swift
-//  today
-//
-//  Created by Adam Williams on 8/10/14.
-//  Copyright (c) 2014 The Williams Family. All rights reserved.
-//
-
 import UIKit
 import NotificationCenter
 import Foundation
@@ -28,16 +20,24 @@ class TodayViewController: UIViewController {
     }
     
     func updateVerseText() {
-        let defaults: NSUserDefaults = NSUserDefaults(suiteName: "group.thewilliams.verses")!
-        let verseRef: AnyObject = defaults.valueForKey("VerseReference")!
-        let verse: AnyObject = defaults.valueForKey("VerseContent")!
-        self.verseLabel.text = "\(verse)"
-        self.verseReference.text = "\(verseRef)"
+        let defaults = NSUserDefaults(suiteName: "group.thewilliams.verses")!
+        if let verseRef = defaults.valueForKey("VerseReference") as? String {
+            let verse = defaults.valueForKey("VerseContent")! as String
+            self.verseLabel.text = verse
+            self.verseReference.text = verseRef
+        } else {
+            self.verseLabel.text = "You have no verses. Touch to add one!"
+        }
     }
     
     @IBAction func openContainingApp(sender: AnyObject) {
-        let appUrl: NSURL = NSURL(string: "verses://index")!
-        self.extensionContext?.openURL(appUrl, completionHandler: nil)
+        let defaults = NSUserDefaults(suiteName: "group.thewilliams.verses")!
+        var appUrl = NSURL(string: "verses://index")
+        if let verseRef = defaults.valueForKey("VerseReference") as? String {
+            let versePath = verseRef.stringByAddingPercentEscapesUsingEncoding(NSUTF8StringEncoding)!
+            appUrl = appUrl?.URLByAppendingPathComponent(versePath)
+        }
+        self.extensionContext?.openURL(appUrl!, completionHandler: nil)
     }
 }
 

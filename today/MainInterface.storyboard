@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6250" systemVersion="14A388b" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="M4Y-Lb-cyx">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6250" systemVersion="14B25" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="M4Y-Lb-cyx">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6244"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
@@ -17,37 +17,33 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="62"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7Ur-RP-7xh">
+                                <rect key="frame" x="0.0" y="34" width="304" height="17"/>
+                                <gestureRecognizers/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vGO-gP-gEX">
-                                <rect key="frame" x="16" y="8" width="184" height="21"/>
+                                <rect key="frame" x="0.0" y="8" width="304" height="18"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="288" translatesAutoresizingMaskIntoConstraints="NO" id="7Ur-RP-7xh">
-                                <rect key="frame" x="16" y="37" width="288" height="17"/>
-                                <gestureRecognizers/>
-                                <constraints>
-                                    <constraint firstAttribute="height" relation="lessThanOrEqual" constant="200" id="31z-tq-z2O"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                         </subviews>
+                        <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                         <accessibility key="accessibilityConfiguration">
                             <accessibilityTraits key="traits" none="YES" link="YES"/>
                         </accessibility>
                         <gestureRecognizers/>
                         <constraints>
-                            <constraint firstAttribute="trailingMargin" secondItem="vGO-gP-gEX" secondAttribute="trailing" constant="104" id="KZQ-V4-S2g"/>
-                            <constraint firstItem="7Ur-RP-7xh" firstAttribute="leading" secondItem="S3S-Oj-5AN" secondAttribute="leadingMargin" id="MsL-5T-HA2"/>
-                            <constraint firstItem="vGO-gP-gEX" firstAttribute="top" secondItem="Ft6-oW-KC0" secondAttribute="bottom" constant="8" id="Xby-0V-eHo"/>
-                            <constraint firstItem="vGO-gP-gEX" firstAttribute="leading" secondItem="S3S-Oj-5AN" secondAttribute="leadingMargin" id="hSu-tx-oq1"/>
-                            <constraint firstItem="FKl-LY-JtV" firstAttribute="top" secondItem="7Ur-RP-7xh" secondAttribute="bottom" constant="8" id="hvf-Nh-yZZ"/>
-                            <constraint firstItem="7Ur-RP-7xh" firstAttribute="top" secondItem="vGO-gP-gEX" secondAttribute="bottom" constant="8" id="oJn-of-X4o"/>
-                            <constraint firstAttribute="centerX" secondItem="7Ur-RP-7xh" secondAttribute="centerX" id="pFL-fJ-rzd"/>
-                            <constraint firstItem="7Ur-RP-7xh" firstAttribute="trailing" secondItem="S3S-Oj-5AN" secondAttribute="trailingMargin" id="qxb-Vw-tfz"/>
-                            <constraint firstItem="7Ur-RP-7xh" firstAttribute="top" secondItem="Ft6-oW-KC0" secondAttribute="bottom" constant="37" id="r9y-UN-QE2"/>
+                            <constraint firstItem="vGO-gP-gEX" firstAttribute="trailing" secondItem="S3S-Oj-5AN" secondAttribute="trailingMargin" id="4Js-WV-ifF"/>
+                            <constraint firstItem="FKl-LY-JtV" firstAttribute="top" secondItem="7Ur-RP-7xh" secondAttribute="bottom" constant="11" id="A1n-7b-H8a"/>
+                            <constraint firstItem="7Ur-RP-7xh" firstAttribute="leading" secondItem="S3S-Oj-5AN" secondAttribute="leading" id="Gih-UY-O0T"/>
+                            <constraint firstItem="7Ur-RP-7xh" firstAttribute="top" secondItem="vGO-gP-gEX" secondAttribute="bottom" constant="8" id="Ktn-Yt-LKf"/>
+                            <constraint firstItem="7Ur-RP-7xh" firstAttribute="trailing" secondItem="S3S-Oj-5AN" secondAttribute="trailingMargin" id="ZCU-sC-ykU"/>
+                            <constraint firstItem="vGO-gP-gEX" firstAttribute="top" secondItem="Ft6-oW-KC0" secondAttribute="bottom" constant="8" id="pi7-hf-XNr"/>
+                            <constraint firstItem="vGO-gP-gEX" firstAttribute="leading" secondItem="S3S-Oj-5AN" secondAttribute="leading" id="uTp-kf-YzI"/>
                         </constraints>
                         <connections>
                             <outletCollection property="gestureRecognizers" destination="C7c-ow-F5U" appends="YES" id="e0C-f1-B7u"/>
@@ -71,7 +67,7 @@
                     </connections>
                 </tapGestureRecognizer>
             </objects>
-            <point key="canvasLocation" x="532" y="312.5"/>
+            <point key="canvasLocation" x="515" y="229"/>
         </scene>
     </scenes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
