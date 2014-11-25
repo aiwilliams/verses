@@ -32,10 +32,9 @@ class TodayViewController: UIViewController {
     
     @IBAction func openContainingApp(sender: AnyObject) {
         let defaults = NSUserDefaults(suiteName: "group.thewilliams.verses")!
-        var appUrl = NSURL(string: "verses://index")
+        var appUrl = NSURL(string: "verses://verse")
         if let verseRef = defaults.valueForKey("VerseReference") as? String {
-            let versePath = verseRef.stringByAddingPercentEscapesUsingEncoding(NSUTF8StringEncoding)!
-            appUrl = appUrl?.URLByAppendingPathComponent(versePath)
+            appUrl = appUrl?.URLByAppendingPathComponent(verseRef)
         }
         self.extensionContext?.openURL(appUrl!, completionHandler: nil)
     }

@@ -74,6 +74,9 @@ class BibliaAPI : NSObject {
   }
 
   func loadPassage(passage: String, completion: (BiblePassage) -> (Void), failure: (String) -> (Void) ) {
+    loadFakePassage(completion)
+    return
+        
     parsePassage(passage,
       completion: { (normalizedPassage: String) in
         self.loadContentOfPassage(normalizedPassage,
@@ -92,5 +95,17 @@ class BibliaAPI : NSObject {
         },
       failure: failure)
   }
+    
+    func loadFakePassage(completion: (BiblePassage) -> (Void)) {
+        let biblePassage = NSEntityDescription.insertNewObjectForEntityForName("BiblePassage", inManagedObjectContext: self.managedObjectContext) as BiblePassage
+        biblePassage.translation = "ESV"
+        biblePassage.passage = "Genesis 1:1-5"
+        biblePassage.content = "In the beginning, God created the heavens and the earth. The earth was without form and void, and darkness was over the face of the deep. And the Spirit of God was hovering over the face of the waters. And God said, \"Let there be light,\" and there was light. And God saw that the light was good. And God separated the light from the darkness. God called the light Day, and the darkness he called Night. And there was evening and there was morning, the first day."
+        
+        var error: NSError?
+        self.managedObjectContext.save(&error)
+        
+        completion(biblePassage)
+    }
 
 }
