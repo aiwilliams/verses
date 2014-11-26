@@ -14,9 +14,6 @@ class SettingsTableViewController : UITableViewController {
     
     @IBOutlet var remindersSwitch: UISwitch!
     
-    var lastVerseRef: AnyObject?
-    var lastVerseContent: AnyObject?
-    
     override func viewDidLoad() {
         remindersSwitch.setOn(false, animated: false)
         let defaults = NSUserDefaults(suiteName: "settings")!

@@ -357,7 +357,7 @@
                                         </tableViewCellContentView>
                                         <rect key="contentStretch" x="0.0" y="0.0" width="0.94999999999999996" height="1"/>
                                         <connections>
-                                            <segue destination="0we-K4-nUa" kind="push" id="XCm-RT-gbf"/>
+                                            <segue destination="0we-K4-nUa" kind="push" identifier="versesTableSegue" id="XCm-RT-gbf"/>
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="blue" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="settings" id="Xep-wk-OAq">

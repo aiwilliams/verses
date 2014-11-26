@@ -28,6 +28,17 @@ class BiblePassageStore : NSObject {
         let passages = self.passages()!
         return passages.last
     }
+    
+    func biblePassageForVerseReference(verseReference: String) -> BiblePassage? {
+        if let p = passages() {
+            for biblePassage in p {
+                if biblePassage.passage == verseReference {
+                    return biblePassage
+                }
+            }
+        }
+        return nil
+    }
 }
 
 class BibliaAPI : NSObject {
@@ -75,25 +86,24 @@ class BibliaAPI : NSObject {
 
   func loadPassage(passage: String, completion: (BiblePassage) -> (Void), failure: (String) -> (Void) ) {
     loadFakePassage(completion)
-    return
         
-    parsePassage(passage,
-      completion: { (normalizedPassage: String) in
-        self.loadContentOfPassage(normalizedPassage,
-          completion: { (content) in
-            let biblePassage = NSEntityDescription.insertNewObjectForEntityForName("BiblePassage", inManagedObjectContext: self.managedObjectContext) as BiblePassage
-            biblePassage.translation = "ASV"
-            biblePassage.passage = normalizedPassage
-            biblePassage.content = content
-            
-            var error: NSError?
-            self.managedObjectContext.save(&error)
-            
-            completion(biblePassage)
-          },
-          failure: failure)
-        },
-      failure: failure)
+//    parsePassage(passage,
+//      completion: { (normalizedPassage: String) in
+//        self.loadContentOfPassage(normalizedPassage,
+//          completion: { (content) in
+//            let biblePassage = NSEntityDescription.insertNewObjectForEntityForName("BiblePassage", inManagedObjectContext: self.managedObjectContext) as BiblePassage
+//            biblePassage.translation = "ASV"
+//            biblePassage.passage = normalizedPassage
+//            biblePassage.content = content
+//            
+//            var error: NSError?
+//            self.managedObjectContext.save(&error)
+//            
+//            completion(biblePassage)
+//          },
+//          failure: failure)
+//        },
+//      failure: failure)
   }
     
     func loadFakePassage(completion: (BiblePassage) -> (Void)) {

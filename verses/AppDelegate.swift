@@ -19,7 +19,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     func application(application: UIApplication, openURL url: NSURL, sourceApplication: String?, annotation: AnyObject?) -> Bool {
-        println(url)
+        if url.host! == "verse" {
+            let verseReference = url.pathComponents[1] as String
+            let navigationController = window?.rootViewController? as UINavigationController
+            let homeTableViewController = navigationController.viewControllers[0] as UITableViewController
+            
+            homeTableViewController.performSegueWithIdentifier("versesTableSegue", sender: self)
+            
+            let versesTableViewController = navigationController.viewControllers.last as VersesTableViewController
+            versesTableViewController.biblePassage = biblePassageStore.biblePassageForVerseReference(verseReference)
+        }
+        
         return true
     }
 

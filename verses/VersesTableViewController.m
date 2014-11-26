@@ -24,6 +24,11 @@
       NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
       abort();
     }
+    
+    if (self.biblePassage) {
+        self.disclosingRowIndexPath = [self.fetchedResultsController indexPathForObject:self.biblePassage];
+        [self performSegueWithIdentifier:@"verseDetail" sender:self];
+    }
 }
 
 #pragma mark - Fetched results controller
@@ -108,10 +113,6 @@
 }
 
 #pragma mark - Navigation
-
--(IBAction)unwindToList:(UIStoryboardSegue *)segue {
-  
-}
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
