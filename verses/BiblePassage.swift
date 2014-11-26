@@ -56,7 +56,7 @@ class BibliaAPI : NSObject {
         }
       },
       failure: { (operation: AFHTTPRequestOperation!,error: NSError!) in
-        failure("Sorry! I have failed you :/")
+        failure("Something went wrong, sorry!")
       }
     )
   }
@@ -68,7 +68,7 @@ class BibliaAPI : NSObject {
         completion(responseObject.valueForKey("text") as NSString)
       },
       failure: { (operation: AFHTTPRequestOperation!,error: NSError!) in
-        failure("Sorry! I have failed you :/")
+        failure("Something went wrong, sorry!")
       }
     )
   }
