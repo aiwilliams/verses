@@ -75,9 +75,12 @@ class FrequencySettingsViewController : UIViewController, UIPickerViewDataSource
             }
             
             let appDelegate = UIApplication.sharedApplication().delegate! as AppDelegate
-            let biblePassage = appDelegate.biblePassageStore.activeBiblePassage()
-            
-            localNotification.alertBody = "\(biblePassage!.passage)"
+            if let biblePassage = appDelegate.biblePassageStore.activeBiblePassage() {
+                localNotification.alertBody = "\(biblePassage.passage)"
+            }
+            else {
+                localNotification.alertBody = "Unknown Verse"
+            }
             localNotification.hasAction = true
             localNotification.applicationIconBadgeNumber = localNotification.applicationIconBadgeNumber + 1
             

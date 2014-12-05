@@ -20,6 +20,18 @@ class SettingsTableViewController : UITableViewController {
         if let state = defaults.valueForKey("remindersSwitch") as? String {
             remindersSwitch.setOn(state == "on", animated: false)
         }
+        
+        if defaults.valueForKey("remindersSwitch") == nil {
+            defaults.setValue("off", forKey: "remindersSwitch")
+        }
+        
+        if defaults.valueForKey("remindersFrequency") == nil {
+            defaults.setValue("Daily", forKey: "remindersFrequency")
+        }
+        
+        if defaults.valueForKey("remindersTime") == nil {
+            defaults.setValue("9:00", forKey: "remindersTime")
+        }
     }
 
     @IBAction func didToggleReminders(sender: UISwitch) {
@@ -53,9 +65,12 @@ class SettingsTableViewController : UITableViewController {
             }
             
             let appDelegate = UIApplication.sharedApplication().delegate! as AppDelegate
-            let biblePassage = appDelegate.biblePassageStore.activeBiblePassage()
-            
-            localNotification.alertBody = "\(biblePassage!.passage)"
+            if let biblePassage = appDelegate.biblePassageStore.activeBiblePassage() {
+                localNotification.alertBody = "\(biblePassage.passage)"
+            }
+            else {
+                localNotification.alertBody = "Unknown Verse"
+            }
             localNotification.hasAction = true
             localNotification.applicationIconBadgeNumber = localNotification.applicationIconBadgeNumber + 1
             

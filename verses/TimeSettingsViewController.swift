@@ -57,9 +57,13 @@ class TimeSettingsViewController : UIViewController {
             }
             
             let appDelegate = UIApplication.sharedApplication().delegate! as AppDelegate
-            let biblePassage = appDelegate.biblePassageStore.activeBiblePassage()
+            if let biblePassage = appDelegate.biblePassageStore.activeBiblePassage() {
+                localNotification.alertBody = "\(biblePassage.passage)"
+            }
+            else {
+                localNotification.alertBody = "Unknown Verse"
+            }
             
-            localNotification.alertBody = "\(biblePassage!.passage)"
             localNotification.hasAction = true
             localNotification.applicationIconBadgeNumber = localNotification.applicationIconBadgeNumber + 1
             
