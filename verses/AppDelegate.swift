@@ -23,12 +23,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             if let openedURL = url.pathComponents? {
                 let verseReference = openedURL[1] as String
                 let navigationController = window?.rootViewController? as UINavigationController
+                navigationController.popToRootViewControllerAnimated(false)
                 let homeTableViewController = navigationController.viewControllers[0] as UITableViewController
                 
                 homeTableViewController.performSegueWithIdentifier("versesTableSegue", sender: self)
                 
-                let versesTableViewController = navigationController.viewControllers.last as VersesTableViewController
-                versesTableViewController.biblePassage = biblePassageStore.biblePassageForVerseReference(verseReference)
+                if let versesTableViewController = navigationController.viewControllers.last as? VersesTableViewController {
+                    versesTableViewController.biblePassage = biblePassageStore.biblePassageForVerseReference(verseReference)
+                }
             }
         }
         
