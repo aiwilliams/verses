@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6250" systemVersion="13F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="thz-W3-izQ">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6254" systemVersion="14B25" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="thz-W3-izQ">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6244"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6247"/>
     </dependencies>
     <scenes>
         <!--Verses-->
@@ -49,7 +49,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="R44-mY-6bH" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-102" y="-161"/>
+            <point key="canvasLocation" x="-430" y="-1101"/>
         </scene>
         <!--Settings Table View Controller-->
         <scene sceneID="Sfq-TK-08i">
@@ -86,7 +86,7 @@
                             </tableViewSection>
                             <tableViewSection headerTitle="" id="8HZ-4d-g9F">
                                 <cells>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="blue" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="0Ro-Ht-AzN">
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="blue" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="time" id="0Ro-Ht-AzN">
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="0Ro-Ht-AzN" id="4SU-zu-oAh">
                                             <autoresizingMask key="autoresizingMask"/>
@@ -100,10 +100,10 @@
                                             </subviews>
                                         </tableViewCellContentView>
                                         <connections>
-                                            <segue destination="x8R-vb-zmU" kind="push" id="fD1-Al-OD9"/>
+                                            <segue destination="x8R-vb-zmU" kind="push" identifier="TimeSegue" id="fD1-Al-OD9"/>
                                         </connections>
                                     </tableViewCell>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="blue" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="ilQ-d9-HOe">
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="blue" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="frequency" id="ilQ-d9-HOe">
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="ilQ-d9-HOe" id="4xv-dh-dv8">
                                             <autoresizingMask key="autoresizingMask"/>
@@ -117,7 +117,29 @@
                                             </subviews>
                                         </tableViewCellContentView>
                                         <connections>
-                                            <segue destination="YwD-vd-d17" kind="push" id="mNa-Oq-2fm"/>
+                                            <segue destination="YwD-vd-d17" kind="push" identifier="FrequencySegue" id="mNa-Oq-2fm"/>
+                                        </connections>
+                                    </tableViewCell>
+                                </cells>
+                            </tableViewSection>
+                            <tableViewSection headerTitle="" id="cwG-nk-CkW">
+                                <cells>
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="n4w-d6-mN7">
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" contentMode="center" tableViewCell="n4w-d6-mN7" id="Md2-dt-vdK">
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Add Reminder" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yHB-VP-OIV">
+                                                    <rect key="frame" x="17" y="13" width="112" height="21"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                        </tableViewCellContentView>
+                                        <gestureRecognizers/>
+                                        <connections>
+                                            <outletCollection property="gestureRecognizers" destination="ucE-nY-p6Y" appends="YES" id="1j9-VR-Cn2"/>
                                         </connections>
                                     </tableViewCell>
                                 </cells>
@@ -134,8 +156,13 @@
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="cNq-qG-Soq" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <tapGestureRecognizer id="ucE-nY-p6Y">
+                    <connections>
+                        <action selector="didAddReminder:" destination="zKV-1L-4jd" id="yfX-PQ-5os"/>
+                    </connections>
+                </tapGestureRecognizer>
             </objects>
-            <point key="canvasLocation" x="-42" y="963"/>
+            <point key="canvasLocation" x="-370" y="20"/>
         </scene>
         <!--Time-->
         <scene sceneID="bM7-8H-T0J">
@@ -168,7 +195,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="46b-jE-Dk9" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="392" y="573"/>
+            <point key="canvasLocation" x="64" y="-367"/>
         </scene>
         <!--Frequency-->
         <scene sceneID="7Gk-le-gIe">
@@ -195,7 +222,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Vf1-1X-VXC" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="392" y="1299"/>
+            <point key="canvasLocation" x="64" y="359"/>
         </scene>
         <!--Verse Detail-->
         <scene sceneID="h1Y-sF-fxe">
@@ -269,7 +296,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="xKl-vv-KEE" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="846" y="573"/>
+            <point key="canvasLocation" x="518" y="-367"/>
         </scene>
         <!--Add Verse-->
         <scene sceneID="Eai-Jp-dbv">
@@ -329,7 +356,7 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Fkr-Mc-qQn" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <exit id="kws-Rs-X28" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="392" y="-161"/>
+            <point key="canvasLocation" x="64" y="-1101"/>
         </scene>
         <!--Home-->
         <scene sceneID="9hu-W4-cHo">
@@ -390,7 +417,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="zQw-yo-am8" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-544" y="571"/>
+            <point key="canvasLocation" x="-872" y="-369"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="xwW-4Q-u3f">
@@ -406,7 +433,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ddU-In-5t6" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-978" y="573"/>
+            <point key="canvasLocation" x="-1306" y="-367"/>
         </scene>
     </scenes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">

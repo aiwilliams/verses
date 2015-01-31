@@ -9,66 +9,45 @@
 import Foundation
 import UIKit
 
-class TimeSettingsViewController : UIViewController {
+class TimeSettingsViewController : UIViewController, ReminderForm {
     
     @IBOutlet var remindersDatePicker: UIDatePicker!
     
+    var reminder: Reminder!
     let defaultSettings = NSUserDefaults(suiteName: "settings")!
     
     override func viewDidLoad() {
-        if defaultSettings.valueForKey("remindersTime") != nil {
-            let stringTime: String = defaultSettings.valueForKey("remindersTime") as String
-            let dateFormatter = NSDateFormatter()
-            dateFormatter.dateFormat = "HH:mm"
-            let time = dateFormatter.dateFromString(stringTime)
-            remindersDatePicker.setDate(time!, animated: false)
-        }
+        remindersDatePicker.setDate(self.reminder.time, animated: false)
     }
     
     @IBAction func dateDidChange(sender: AnyObject) {
-        let remindersTime = formattedDate(sender.date!!)
-        defaultSettings.setValue(remindersTime, forKey: "remindersTime")
+        reminder.time = sender.date!!
+        reminder.managedObjectContext!.save(nil)
         
-        if defaultSettings.valueForKey("remindersSwitch") as NSString == "on" {            
-            UIApplication.sharedApplication().cancelAllLocalNotifications()
-            
-            let localNotification: UILocalNotification = UILocalNotification()
-            
-            localNotification.timeZone = NSTimeZone.defaultTimeZone()
-            
-            let dateFormatter = NSDateFormatter()
-            dateFormatter.dateFormat = "HH:mm"
-            let userTimeSettings: String = defaultSettings.valueForKey("remindersTime") as String
-            let dateTime = dateFormatter.dateFromString(userTimeSettings)
-            
-            let calendar = NSCalendar.currentCalendar()
-            let components: NSDateComponents = calendar.components(NSCalendarUnit.HourCalendarUnit | NSCalendarUnit.MinuteCalendarUnit, fromDate: dateTime!)
-            
-            localNotification.fireDate = NSCalendar.currentCalendar().dateFromComponents(components)
-            
-            if defaultSettings.valueForKey("remindersFrequency") as String == "Daily" {
-                localNotification.repeatInterval = NSCalendarUnit.CalendarUnitDay
-            }
-            else if defaultSettings.valueForKey("remindersFrequency") as String == "Weekly" {
-                localNotification.repeatInterval = NSCalendarUnit.CalendarUnitWeekday
-            }
-            else {
-                localNotification.repeatInterval = NSCalendarUnit.CalendarUnitMonth
-            }
-            
-            let appDelegate = UIApplication.sharedApplication().delegate! as AppDelegate
-            if let biblePassage = appDelegate.biblePassageStore.activeBiblePassage() {
-                localNotification.alertBody = "\(biblePassage.passage)"
-            }
-            else {
-                localNotification.alertBody = "Unknown Verse"
-            }
-            
-            localNotification.hasAction = true
-            localNotification.applicationIconBadgeNumber = localNotification.applicationIconBadgeNumber + 1
-            
-            UIApplication.sharedApplication().scheduleLocalNotification(localNotification)
+        if defaultSettings.valueForKey("remindersSwitch") as NSString == "off" { return }
+        
+        UIApplication.sharedApplication().cancelAllLocalNotifications()
+        let localNotification: UILocalNotification = UILocalNotification()
+        localNotification.timeZone = NSTimeZone.defaultTimeZone()
+        
+        let calendar = NSCalendar.currentCalendar()
+        let components: NSDateComponents = calendar.components(NSCalendarUnit.HourCalendarUnit | NSCalendarUnit.MinuteCalendarUnit, fromDate: reminder.time)
+        
+        localNotification.fireDate = NSCalendar.currentCalendar().dateFromComponents(components)
+        localNotification.repeatInterval = reminder.frequency
+        
+        let appDelegate = UIApplication.sharedApplication().delegate! as AppDelegate
+        if let biblePassage = appDelegate.biblePassageStore.activeBiblePassage() {
+            localNotification.alertBody = "\(biblePassage.passage)"
         }
+        else {
+            localNotification.alertBody = "Unknown Verse"
+        }
+        
+        localNotification.hasAction = true
+        localNotification.applicationIconBadgeNumber = localNotification.applicationIconBadgeNumber + 1
+        
+        UIApplication.sharedApplication().scheduleLocalNotification(localNotification)
     }
     
     func formattedDate(passedDate: NSDate) -> NSString {

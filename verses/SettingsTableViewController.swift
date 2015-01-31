@@ -10,9 +10,37 @@ import Foundation
 import UIKit
 import CoreData
 
+@objc protocol ReminderForm {
+    var reminder: Reminder! { get set }
+}
+
 class SettingsTableViewController : UITableViewController {
     
+    var data = []
+    let appDelegate: AppDelegate = UIApplication.sharedApplication().delegate as AppDelegate
+    lazy var managedObjectContext: NSManagedObjectContext = { self.appDelegate.managedObjectContext }()
     @IBOutlet var remindersSwitch: UISwitch!
+    
+    lazy var reminder: Reminder = {
+        let fetchRequest = NSFetchRequest()
+        let entity: NSEntityDescription = NSEntityDescription.entityForName("Reminder", inManagedObjectContext: self.managedObjectContext)!
+        fetchRequest.entity = entity
+        
+        var error: NSError?
+        let fetchData = self.appDelegate.managedObjectContext.executeFetchRequest(fetchRequest, error: &error)!
+        
+        var reply: Reminder!
+        if fetchData.count == 0 {
+            reply = Reminder(entity: entity, insertIntoManagedObjectContext: self.managedObjectContext)
+            reply.frequency = .DayCalendarUnit
+            reply.time = NSDate()
+            self.managedObjectContext.save(nil)
+        } else {
+            reply = fetchData[0] as Reminder
+        }
+        
+        return reply
+        }()
     
     override func viewDidLoad() {
         remindersSwitch.setOn(false, animated: false)
@@ -33,7 +61,15 @@ class SettingsTableViewController : UITableViewController {
             defaults.setValue("9:00", forKey: "remindersTime")
         }
     }
-
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        let reminderSegueIDs = ["FrequencySegue", "TimeSegue"]
+        if !contains(reminderSegueIDs, segue.identifier ?? "") { return }
+        
+        let reminderForm = segue.destinationViewController as ReminderForm
+        reminderForm.reminder = self.reminder
+    }
+    
     @IBAction func didToggleReminders(sender: UISwitch) {
         let defaults = NSUserDefaults(suiteName: "settings")!
         
@@ -81,4 +117,15 @@ class SettingsTableViewController : UITableViewController {
         }
     }
     
+    override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+        return 3
+    }
+    
+//    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+//        <#code#>
+//    }
+    
+    @IBAction func didAddReminder(sender: AnyObject) {
+
+    }
 }

@@ -30,6 +30,8 @@
 		B7F4E8BC1965E43A00466BA7 /* versesTests.m in Sources */ = {isa = PBXBuildFile; fileRef = B7F4E8BB1965E43A00466BA7 /* versesTests.m */; };
 		B7F4E8C61965E72300466BA7 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B7F4E8C51965E72300466BA7 /* Main.storyboard */; };
 		FD117C7C1A09710D00B01643 /* SettingsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD117C7B1A09710D00B01643 /* SettingsTableViewController.swift */; };
+		FD30F2D51A72B6D8005BBC02 /* Reminder.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD30F2D41A72B6D8005BBC02 /* Reminder.swift */; };
+		FD30F2D61A72B6D8005BBC02 /* Reminder.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD30F2D41A72B6D8005BBC02 /* Reminder.swift */; };
 		FDD6D0F81A0C1E2A00AE107F /* TimeSettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDD6D0F71A0C1E2A00AE107F /* TimeSettingsViewController.swift */; };
 		FDD6D0FA1A0C1E8500AE107F /* FrequencySettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDD6D0F91A0C1E8500AE107F /* FrequencySettingsViewController.swift */; };
 /* End PBXBuildFile section */
@@ -109,6 +111,8 @@
 		FD117C7B1A09710D00B01643 /* SettingsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsTableViewController.swift; sourceTree = "<group>"; };
 		FD18A9E919E4709D0013FCDC /* verses.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = verses.entitlements; sourceTree = "<group>"; };
 		FD18A9EA19E4717F0013FCDC /* today.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = today.entitlements; sourceTree = "<group>"; };
+		FD30F2D31A72B6D7005BBC02 /* versesTests-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "versesTests-Bridging-Header.h"; sourceTree = "<group>"; };
+		FD30F2D41A72B6D8005BBC02 /* Reminder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Reminder.swift; path = ../Reminder.swift; sourceTree = "<group>"; };
 		FDD6D0F71A0C1E2A00AE107F /* TimeSettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimeSettingsViewController.swift; sourceTree = "<group>"; };
 		FDD6D0F91A0C1E8500AE107F /* FrequencySettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FrequencySettingsViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -169,11 +173,12 @@
 			isa = PBXGroup;
 			children = (
 				B7F4E89C1965E43A00466BA7 /* verses */,
-				B7F4E8B51965E43A00466BA7 /* versesTests */,
 				B7B7046C19981D5600162B5D /* today */,
+				B7F4E8B51965E43A00466BA7 /* versesTests */,
 				B7F4E8951965E43900466BA7 /* Frameworks */,
 				B7F4E8941965E43900466BA7 /* Products */,
 				B8E8D879B828160631B882B6 /* Pods */,
+				FD30F2D31A72B6D7005BBC02 /* versesTests-Bridging-Header.h */,
 			);
 			sourceTree = "<group>";
 		};
@@ -203,21 +208,12 @@
 		B7F4E89C1965E43A00466BA7 /* verses */ = {
 			isa = PBXGroup;
 			children = (
-				FD18A9E919E4709D0013FCDC /* verses.entitlements */,
 				B7F49D851A11A11B00E4520E /* AppDelegate.swift */,
-				B7F4E8C51965E72300466BA7 /* Main.storyboard */,
-				FDD6D0F71A0C1E2A00AE107F /* TimeSettingsViewController.swift */,
-				FDD6D0F91A0C1E8500AE107F /* FrequencySettingsViewController.swift */,
-				FD117C7B1A09710D00B01643 /* SettingsTableViewController.swift */,
-				B78096E6196650D30004D560 /* VersesTableViewController.h */,
-				B78096E7196650D30004D560 /* VersesTableViewController.m */,
-				B7C75E941983E77500DC2877 /* BiblePassage.swift */,
-				B7E06A63196A4CDE008C2873 /* VerseDetailTableViewController.h */,
-				B7E06A64196A4CDE008C2873 /* VerseDetailTableViewController.m */,
-				B78096E91967028C0004D560 /* UserData.xcdatamodeld */,
-				B78096E319664FED0004D560 /* AddVerseViewController.h */,
-				B78096E419664FED0004D560 /* AddVerseViewController.m */,
+				FD18A9E919E4709D0013FCDC /* verses.entitlements */,
 				B7F4E8A81965E43A00466BA7 /* Images.xcassets */,
+				FD30F2C91A72AE2A005BBC02 /* model */,
+				FD30F2CA1A72AE47005BBC02 /* view */,
+				FD30F2CB1A72AE4C005BBC02 /* controller */,
 				B7F4E89D1965E43A00466BA7 /* Supporting Files */,
 			);
 			path = verses;
@@ -260,6 +256,48 @@
 				EE29E3E47F68D575281DA8E3 /* Pods.release.xcconfig */,
 			);
 			name = Pods;
+			sourceTree = "<group>";
+		};
+		FD30F2C91A72AE2A005BBC02 /* model */ = {
+			isa = PBXGroup;
+			children = (
+				B7C75E941983E77500DC2877 /* BiblePassage.swift */,
+				FD30F2D41A72B6D8005BBC02 /* Reminder.swift */,
+				B78096E91967028C0004D560 /* UserData.xcdatamodeld */,
+			);
+			name = model;
+			sourceTree = "<group>";
+		};
+		FD30F2CA1A72AE47005BBC02 /* view */ = {
+			isa = PBXGroup;
+			children = (
+				B7F4E8C51965E72300466BA7 /* Main.storyboard */,
+			);
+			name = view;
+			sourceTree = "<group>";
+		};
+		FD30F2CB1A72AE4C005BBC02 /* controller */ = {
+			isa = PBXGroup;
+			children = (
+				FD30F2CC1A72AEC9005BBC02 /* settings */,
+				B78096E6196650D30004D560 /* VersesTableViewController.h */,
+				B78096E7196650D30004D560 /* VersesTableViewController.m */,
+				B7E06A63196A4CDE008C2873 /* VerseDetailTableViewController.h */,
+				B7E06A64196A4CDE008C2873 /* VerseDetailTableViewController.m */,
+				B78096E319664FED0004D560 /* AddVerseViewController.h */,
+				B78096E419664FED0004D560 /* AddVerseViewController.m */,
+			);
+			name = controller;
+			sourceTree = "<group>";
+		};
+		FD30F2CC1A72AEC9005BBC02 /* settings */ = {
+			isa = PBXGroup;
+			children = (
+				FD117C7B1A09710D00B01643 /* SettingsTableViewController.swift */,
+				FDD6D0F71A0C1E2A00AE107F /* TimeSettingsViewController.swift */,
+				FDD6D0F91A0C1E8500AE107F /* FrequencySettingsViewController.swift */,
+			);
+			name = settings;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -456,6 +494,7 @@
 				B7E06A65196A4CDE008C2873 /* VerseDetailTableViewController.m in Sources */,
 				FD117C7C1A09710D00B01643 /* SettingsTableViewController.swift in Sources */,
 				B7C75E951983E77500DC2877 /* BiblePassage.swift in Sources */,
+				FD30F2D51A72B6D8005BBC02 /* Reminder.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -464,6 +503,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				B7F4E8BC1965E43A00466BA7 /* versesTests.m in Sources */,
+				FD30F2D61A72B6D8005BBC02 /* Reminder.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -673,6 +713,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/verses.app/verses";
+				CLANG_ENABLE_MODULES = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SDKROOT)/Developer/Library/Frameworks",
 					"$(inherited)",
@@ -685,7 +726,10 @@
 					"$(inherited)",
 				);
 				INFOPLIST_FILE = "versesTests/versesTests-Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "versesTests-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				TEST_HOST = "$(BUNDLE_LOADER)";
 				WRAPPER_EXTENSION = xctest;
 			};
@@ -695,6 +739,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/verses.app/verses";
+				CLANG_ENABLE_MODULES = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SDKROOT)/Developer/Library/Frameworks",
 					"$(inherited)",
@@ -703,7 +748,9 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "verses/verses-Prefix.pch";
 				INFOPLIST_FILE = "versesTests/versesTests-Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "versesTests-Bridging-Header.h";
 				TEST_HOST = "$(BUNDLE_LOADER)";
 				WRAPPER_EXTENSION = xctest;
 			};

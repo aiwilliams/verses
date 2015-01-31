@@ -9,6 +9,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     lazy var biblePassageStore: BiblePassageStore = { return BiblePassageStore(moc: self.managedObjectContext) }()
     
     func applicationDidFinishLaunching(application: UIApplication) {
+        application.registerUserNotificationSettings(UIUserNotificationSettings(forTypes: UIUserNotificationType.Sound | UIUserNotificationType.Alert | UIUserNotificationType.Badge, categories: nil))
         application.applicationIconBadgeNumber = 0
     }
     
@@ -25,12 +26,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 let navigationController = window?.rootViewController? as UINavigationController
                 navigationController.popToRootViewControllerAnimated(false)
                 let homeTableViewController = navigationController.viewControllers[0] as UITableViewController
-                
+                // I think we need a custom controller for the home view, so that when we prepare for segue, we can access the versestableview...
                 homeTableViewController.performSegueWithIdentifier("versesTableSegue", sender: self)
                 
-                if let versesTableViewController = navigationController.viewControllers.last as? VersesTableViewController {
-                    versesTableViewController.biblePassage = biblePassageStore.biblePassageForVerseReference(verseReference)
-                }
+//                let viewControllers = navigationController.viewControllers!
+//                if let versesTableViewController = viewControllers.last as? VersesTableViewController {
+//                    versesTableViewController.biblePassage = biblePassageStore.biblePassageForVerseReference(verseReference)
+//                }
             }
         }
         
