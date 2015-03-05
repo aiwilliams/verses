@@ -2,9 +2,9 @@ import Foundation
 import CoreData
 
 class BiblePassage : NSManagedObject {
-  @NSManaged var translation : String
-  @NSManaged var passage: String
-  @NSManaged var content : String
+  @NSManaged var translation : String?
+  @NSManaged var passage: String?
+  @NSManaged var content : String?
 }
 
 class BiblePassageStore : NSObject {

@@ -16,12 +16,12 @@ import CoreData
 
 class SettingsTableViewController : UITableViewController {
     
-    var data = []
+    let remindersSwitchTag = 100
+    let remindersSwitchIndexPath = NSIndexPath(forRow: 0, inSection: 0)
     let appDelegate: AppDelegate = UIApplication.sharedApplication().delegate as AppDelegate
     lazy var managedObjectContext: NSManagedObjectContext = { self.appDelegate.managedObjectContext }()
-    @IBOutlet var remindersSwitch: UISwitch!
     
-    lazy var reminder: Reminder = {
+    lazy var reminders: [Reminder] = {
         let fetchRequest = NSFetchRequest()
         let entity: NSEntityDescription = NSEntityDescription.entityForName("Reminder", inManagedObjectContext: self.managedObjectContext)!
         fetchRequest.entity = entity
@@ -39,41 +39,38 @@ class SettingsTableViewController : UITableViewController {
             reply = fetchData[0] as Reminder
         }
         
-        return reply
+        return [ reply ]
         }()
     
-    override func viewDidLoad() {
-        remindersSwitch.setOn(false, animated: false)
-        let defaults = NSUserDefaults(suiteName: "settings")!
-        if let state = defaults.valueForKey("remindersSwitch") as? String {
-            remindersSwitch.setOn(state == "on", animated: false)
-        }
+    lazy var remindersSwitch: UISwitch = {
+        return self.view.viewWithTag(self.remindersSwitchTag) as UISwitch
+    }()
+    
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
         
-        if defaults.valueForKey("remindersSwitch") == nil {
-            defaults.setValue("off", forKey: "remindersSwitch")
-        }
-        
-        if defaults.valueForKey("remindersFrequency") == nil {
-            defaults.setValue("Daily", forKey: "remindersFrequency")
-        }
-        
-        if defaults.valueForKey("remindersTime") == nil {
-            defaults.setValue("9:00", forKey: "remindersTime")
-        }
+//        remindersSwitch.setOn(false, animated: false)
+//        let defaults = NSUserDefaults(suiteName: "settings")!
+//        if let state = defaults.valueForKey("remindersSwitch") as? String {
+//            remindersSwitch.setOn(state == "on", animated: false)
+//        }
+//        
+//        if defaults.valueForKey("remindersSwitch") == nil {
+//            defaults.setValue("off", forKey: "remindersSwitch")
+//        }
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        let reminderSegueIDs = ["FrequencySegue", "TimeSegue"]
-        if !contains(reminderSegueIDs, segue.identifier ?? "") { return }
-        
+        if segue.identifier != "ReminderDetailSegue" { return }
+
         let reminderForm = segue.destinationViewController as ReminderForm
-        reminderForm.reminder = self.reminder
+        reminderForm.reminder = self.reminders[self.tableView.indexPathForSelectedRow()!.row]
     }
     
     @IBAction func didToggleReminders(sender: UISwitch) {
         let defaults = NSUserDefaults(suiteName: "settings")!
         
-        if sender.on == true {
+        if sender.on {
             defaults.setValue("on", forKey: "remindersSwitch")
             
             UIApplication.sharedApplication().cancelAllLocalNotifications()
@@ -118,12 +115,37 @@ class SettingsTableViewController : UITableViewController {
     }
     
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-        return 3
+        return 2
     }
     
-//    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-//        <#code#>
-//    }
+    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        if section == remindersSwitchIndexPath.section {
+            return 1
+        }
+        
+        // If we reach this part of the method, we are in the reminders list section
+        return reminders.count
+    }
+    
+    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+        let isRemindersSwitchCell = indexPath == remindersSwitchIndexPath
+        let identifier = isRemindersSwitchCell ? "RemindersSwitchCell" : "ReminderCell"
+        var cell = tableView.dequeueReusableCellWithIdentifier(identifier) as UITableViewCell
+        
+        if !isRemindersSwitchCell { // the cell is a reminder description cell
+            let reminder = reminders[indexPath.row]
+            cell.textLabel!.text = stringDateFromNSDate(reminder.time)
+            cell.detailTextLabel!.text = "Frequency"
+        }
+        
+        return cell
+    }
+    
+    func stringDateFromNSDate(dateToConvert: NSDate) -> String {
+        let dateFormatter = NSDateFormatter()
+        dateFormatter.dateStyle = .MediumStyle
+        return dateFormatter.stringFromDate(dateToConvert)
+    }
     
     @IBAction func didAddReminder(sender: AnyObject) {
 

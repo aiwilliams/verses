@@ -8,15 +8,12 @@
 
 /* Begin PBXBuildFile section */
 		43C9A8A6A2C64855B06D18B5 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E14CAB0BA205450DA43E233D /* libPods.a */; };
-		B78096E519664FED0004D560 /* AddVerseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B78096E419664FED0004D560 /* AddVerseViewController.m */; };
-		B78096E8196650D30004D560 /* VersesTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B78096E7196650D30004D560 /* VersesTableViewController.m */; };
 		B78096EB1967028C0004D560 /* UserData.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = B78096E91967028C0004D560 /* UserData.xcdatamodeld */; };
 		B7B7046B19981D5600162B5D /* NotificationCenter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B7B7046A19981D5600162B5D /* NotificationCenter.framework */; };
 		B7B7047019981D5600162B5D /* TodayViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7B7046F19981D5600162B5D /* TodayViewController.swift */; };
 		B7B7047219981D5600162B5D /* MainInterface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B7B7047119981D5600162B5D /* MainInterface.storyboard */; };
 		B7B7047519981D5600162B5D /* today.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = B7B7046919981D5600162B5D /* today.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		B7C75E951983E77500DC2877 /* BiblePassage.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7C75E941983E77500DC2877 /* BiblePassage.swift */; };
-		B7E06A65196A4CDE008C2873 /* VerseDetailTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B7E06A64196A4CDE008C2873 /* VerseDetailTableViewController.m */; };
 		B7F49D861A11A11B00E4520E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7F49D851A11A11B00E4520E /* AppDelegate.swift */; };
 		B7F4E8971965E43A00466BA7 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B7F4E8961965E43900466BA7 /* Foundation.framework */; };
 		B7F4E8991965E43A00466BA7 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B7F4E8981965E43A00466BA7 /* CoreGraphics.framework */; };
@@ -29,9 +26,13 @@
 		B7F4E8BA1965E43A00466BA7 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = B7F4E8B81965E43A00466BA7 /* InfoPlist.strings */; };
 		B7F4E8BC1965E43A00466BA7 /* versesTests.m in Sources */ = {isa = PBXBuildFile; fileRef = B7F4E8BB1965E43A00466BA7 /* versesTests.m */; };
 		B7F4E8C61965E72300466BA7 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B7F4E8C51965E72300466BA7 /* Main.storyboard */; };
+		FD029D271A81593100C7BC0F /* VerseDetailTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD029D261A81593100C7BC0F /* VerseDetailTableViewController.swift */; };
+		FD029D291A817A6200C7BC0F /* AddVerseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD029D281A817A6200C7BC0F /* AddVerseViewController.swift */; };
 		FD117C7C1A09710D00B01643 /* SettingsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD117C7B1A09710D00B01643 /* SettingsTableViewController.swift */; };
+		FD12EB661AA238BA00EAA23F /* ReminderDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD12EB651AA238BA00EAA23F /* ReminderDetailViewController.swift */; };
 		FD30F2D51A72B6D8005BBC02 /* Reminder.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD30F2D41A72B6D8005BBC02 /* Reminder.swift */; };
 		FD30F2D61A72B6D8005BBC02 /* Reminder.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD30F2D41A72B6D8005BBC02 /* Reminder.swift */; };
+		FD35E2CA1A7D7FBF007651D8 /* VersesTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD35E2C91A7D7FBF007651D8 /* VersesTableViewController.swift */; };
 		FDD6D0F81A0C1E2A00AE107F /* TimeSettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDD6D0F71A0C1E2A00AE107F /* TimeSettingsViewController.swift */; };
 		FDD6D0FA1A0C1E8500AE107F /* FrequencySettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDD6D0F91A0C1E8500AE107F /* FrequencySettingsViewController.swift */; };
 /* End PBXBuildFile section */
@@ -77,10 +78,6 @@
 /* Begin PBXFileReference section */
 		B70F681119F5E87B00AC174F /* today-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "today-Bridging-Header.h"; sourceTree = "<group>"; };
 		B70F681219F5EAFE00AC174F /* verses-Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "verses-Bridging-Header.h"; sourceTree = "<group>"; };
-		B78096E319664FED0004D560 /* AddVerseViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddVerseViewController.h; sourceTree = "<group>"; };
-		B78096E419664FED0004D560 /* AddVerseViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddVerseViewController.m; sourceTree = "<group>"; };
-		B78096E6196650D30004D560 /* VersesTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VersesTableViewController.h; sourceTree = "<group>"; };
-		B78096E7196650D30004D560 /* VersesTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VersesTableViewController.m; sourceTree = "<group>"; };
 		B78096EA1967028C0004D560 /* UserData.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = UserData.xcdatamodel; sourceTree = "<group>"; };
 		B7B7046919981D5600162B5D /* today.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = today.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		B7B7046A19981D5600162B5D /* NotificationCenter.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = NotificationCenter.framework; path = System/Library/Frameworks/NotificationCenter.framework; sourceTree = SDKROOT; };
@@ -88,8 +85,6 @@
 		B7B7046F19981D5600162B5D /* TodayViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodayViewController.swift; sourceTree = "<group>"; };
 		B7B7047119981D5600162B5D /* MainInterface.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = MainInterface.storyboard; sourceTree = "<group>"; };
 		B7C75E941983E77500DC2877 /* BiblePassage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BiblePassage.swift; sourceTree = "<group>"; };
-		B7E06A63196A4CDE008C2873 /* VerseDetailTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VerseDetailTableViewController.h; sourceTree = "<group>"; };
-		B7E06A64196A4CDE008C2873 /* VerseDetailTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VerseDetailTableViewController.m; sourceTree = "<group>"; };
 		B7F49D851A11A11B00E4520E /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		B7F4E8931965E43900466BA7 /* verses.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = verses.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B7F4E8961965E43900466BA7 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -108,11 +103,15 @@
 		BBAD18BB7ADEB2831E37270B /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		E14CAB0BA205450DA43E233D /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		EE29E3E47F68D575281DA8E3 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
+		FD029D261A81593100C7BC0F /* VerseDetailTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VerseDetailTableViewController.swift; sourceTree = "<group>"; };
+		FD029D281A817A6200C7BC0F /* AddVerseViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddVerseViewController.swift; sourceTree = "<group>"; };
 		FD117C7B1A09710D00B01643 /* SettingsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsTableViewController.swift; sourceTree = "<group>"; };
+		FD12EB651AA238BA00EAA23F /* ReminderDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReminderDetailViewController.swift; sourceTree = "<group>"; };
 		FD18A9E919E4709D0013FCDC /* verses.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = verses.entitlements; sourceTree = "<group>"; };
 		FD18A9EA19E4717F0013FCDC /* today.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = today.entitlements; sourceTree = "<group>"; };
 		FD30F2D31A72B6D7005BBC02 /* versesTests-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "versesTests-Bridging-Header.h"; sourceTree = "<group>"; };
 		FD30F2D41A72B6D8005BBC02 /* Reminder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Reminder.swift; path = ../Reminder.swift; sourceTree = "<group>"; };
+		FD35E2C91A7D7FBF007651D8 /* VersesTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VersesTableViewController.swift; sourceTree = "<group>"; };
 		FDD6D0F71A0C1E2A00AE107F /* TimeSettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimeSettingsViewController.swift; sourceTree = "<group>"; };
 		FDD6D0F91A0C1E8500AE107F /* FrequencySettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FrequencySettingsViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -280,12 +279,9 @@
 			isa = PBXGroup;
 			children = (
 				FD30F2CC1A72AEC9005BBC02 /* settings */,
-				B78096E6196650D30004D560 /* VersesTableViewController.h */,
-				B78096E7196650D30004D560 /* VersesTableViewController.m */,
-				B7E06A63196A4CDE008C2873 /* VerseDetailTableViewController.h */,
-				B7E06A64196A4CDE008C2873 /* VerseDetailTableViewController.m */,
-				B78096E319664FED0004D560 /* AddVerseViewController.h */,
-				B78096E419664FED0004D560 /* AddVerseViewController.m */,
+				FD35E2C91A7D7FBF007651D8 /* VersesTableViewController.swift */,
+				FD029D261A81593100C7BC0F /* VerseDetailTableViewController.swift */,
+				FD029D281A817A6200C7BC0F /* AddVerseViewController.swift */,
 			);
 			name = controller;
 			sourceTree = "<group>";
@@ -294,6 +290,7 @@
 			isa = PBXGroup;
 			children = (
 				FD117C7B1A09710D00B01643 /* SettingsTableViewController.swift */,
+				FD12EB651AA238BA00EAA23F /* ReminderDetailViewController.swift */,
 				FDD6D0F71A0C1E2A00AE107F /* TimeSettingsViewController.swift */,
 				FDD6D0F91A0C1E8500AE107F /* FrequencySettingsViewController.swift */,
 			);
@@ -485,16 +482,17 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FD35E2CA1A7D7FBF007651D8 /* VersesTableViewController.swift in Sources */,
 				B7F49D861A11A11B00E4520E /* AppDelegate.swift in Sources */,
-				B78096E519664FED0004D560 /* AddVerseViewController.m in Sources */,
-				B78096E8196650D30004D560 /* VersesTableViewController.m in Sources */,
 				FDD6D0FA1A0C1E8500AE107F /* FrequencySettingsViewController.swift in Sources */,
+				FD029D291A817A6200C7BC0F /* AddVerseViewController.swift in Sources */,
+				FD029D271A81593100C7BC0F /* VerseDetailTableViewController.swift in Sources */,
 				FDD6D0F81A0C1E2A00AE107F /* TimeSettingsViewController.swift in Sources */,
 				B78096EB1967028C0004D560 /* UserData.xcdatamodeld in Sources */,
-				B7E06A65196A4CDE008C2873 /* VerseDetailTableViewController.m in Sources */,
 				FD117C7C1A09710D00B01643 /* SettingsTableViewController.swift in Sources */,
 				B7C75E951983E77500DC2877 /* BiblePassage.swift in Sources */,
 				FD30F2D51A72B6D8005BBC02 /* Reminder.swift in Sources */,
+				FD12EB661AA238BA00EAA23F /* ReminderDetailViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

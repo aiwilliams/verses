@@ -41,7 +41,7 @@ class TimeSettingsViewController : UIViewController, ReminderForm {
             localNotification.alertBody = "\(biblePassage.passage)"
         }
         else {
-            localNotification.alertBody = "Unknown Verse"
+            localNotification.alertBody = "You don't have any verses!"
         }
         
         localNotification.hasAction = true
