@@ -103,4 +103,8 @@ class VersesTableViewController: UITableViewController, NSFetchedResultsControll
             }
         }
     }
+    
+    @IBAction func returnFromSegueActions(sender: UIStoryboardSegue){
+        
+    }
 }

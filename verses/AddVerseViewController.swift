@@ -22,7 +22,6 @@ class AddVerseViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.managedObjectContext = self.appDelegate.managedObjectContext
-        biblePassage = NSEntityDescription.insertNewObjectForEntityForName("BiblePassage", inManagedObjectContext: self.managedObjectContext) as BiblePassage
     }
     
     override func viewWillAppear(animated: Bool) {
@@ -45,7 +44,7 @@ class AddVerseViewController: UIViewController {
                     self.activityIndicator.stopAnimating()
                     self.errorText.hidden = true
                     self.biblePassage = returnedPassage
-                    self.performSegueWithIdentifier("unwindAddVerse", sender: sender)
+                    self.performSegueWithIdentifier("unwindAddVerse", sender: self)
                 }, failure: { (errorMessage: String) -> Void in
                     self.activityIndicator.stopAnimating()
                     self.errorText.text = errorMessage

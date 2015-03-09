@@ -347,7 +347,7 @@
                     <navigationItem key="navigationItem" title="Add Verse" id="Zf8-ge-Z3C">
                         <barButtonItem key="leftBarButtonItem" title="Cancel" id="8yt-z5-19v">
                             <connections>
-                                <segue destination="kws-Rs-X28" kind="unwind" identifier="unwindAddVerse" unwindAction="unwindToList:" id="SBp-GV-f1p"/>
+                                <segue destination="kws-Rs-X28" kind="unwind" unwindAction="returnFromSegueActions:" id="R1p-5n-iWN"/>
                             </connections>
                         </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" systemItem="done" id="ltt-Fl-ycp">
@@ -360,6 +360,7 @@
                         <outlet property="activityIndicator" destination="E9d-u5-wnK" id="MRW-D6-gBp"/>
                         <outlet property="errorText" destination="yf2-CW-HyM" id="9QJ-wW-ne1"/>
                         <outlet property="passageTextField" destination="UUe-y9-8Px" id="Q5h-w0-hDV"/>
+                        <segue destination="kws-Rs-X28" kind="unwind" identifier="unwindAddVerse" unwindAction="returnFromSegueActions:" id="Ind-Dt-v1d"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Fkr-Mc-qQn" userLabel="First Responder" sceneMemberID="firstResponder"/>
