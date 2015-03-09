@@ -92,26 +92,27 @@ class VerseSourceAPI : NSObject {
     }
 
     func loadPassage(passage: String, completion: (BiblePassage) -> (Void), failure: (String) -> (Void) ) {
-        loadFakePassage(completion)
-        // parsePassage(passage,
-        //     completion: { (normalizedPassage: String) in
-        //         self.loadContentOfPassage(normalizedPassage,
-        //             completion: { (content) in
-        //                 let biblePassage = NSEntityDescription.insertNewObjectForEntityForName("BiblePassage", inManagedObjectContext: self.managedObjectContext) as BiblePassage
-        //                 biblePassage.translation = "ASV"
-        //                 biblePassage.passage = normalizedPassage
-        //                 biblePassage.content = content
+//        loadFakePassage(completion)
+         parsePassage(passage,
+             completion: { (normalizedPassage: String) in
+                 self.loadContentOfPassage(normalizedPassage,
+                     completion: { (content) in
+                         let biblePassage = NSEntityDescription.insertNewObjectForEntityForName("BiblePassage", inManagedObjectContext: self.managedObjectContext) as BiblePassage
+                         biblePassage.translation = "ASV"
+                         biblePassage.passage = normalizedPassage
+                         biblePassage.content = content
 
-        //                 var error: NSError?
-        //                 self.managedObjectContext.save(&error)
+                         var error: NSError?
+                         self.managedObjectContext.save(&error)
 
-        //                 completion(biblePassage)
-        //             },
-        //             failure: failure)
-        //     },
-        //     failure: failure)
+                         completion(biblePassage)
+                     },
+                     failure: failure)
+             },
+             failure: failure)
     }
 
+    // For those times when the servers just aren't working.
     func loadFakePassage(completion: (BiblePassage) -> (Void)) {
         let biblePassage = NSEntityDescription.insertNewObjectForEntityForName("BiblePassage", inManagedObjectContext: self.managedObjectContext) as BiblePassage
         biblePassage.translation = "ESV"
