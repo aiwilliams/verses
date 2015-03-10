@@ -33,9 +33,15 @@ class TodayViewController: UIViewController {
     @IBAction func openContainingApp(sender: AnyObject) {
         let defaults = NSUserDefaults(suiteName: "group.thewilliams.verses")!
         var appUrl = NSURL(string: "verses://verse")
+        
+        if self.verseLabel.text == "You have no verses. Touch to add one!" {
+            appUrl = NSURL(string: "verses://addverse")
+        }
+        
         if let verseRef = defaults.valueForKey("VerseReference") as? String {
             appUrl = appUrl?.URLByAppendingPathComponent(verseRef)
         }
+        
         self.extensionContext?.openURL(appUrl!, completionHandler: nil)
     }
 }

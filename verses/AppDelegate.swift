@@ -21,10 +21,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
 
     func application(application: UIApplication, openURL url: NSURL, sourceApplication: String?, annotation: AnyObject?) -> Bool {
+        let navigationController = window?.rootViewController? as UINavigationController
+        
         if url.host! == "verse" {
             if let openedURL = url.pathComponents? {
                 let verseReference = openedURL[1] as String
-                let navigationController = window?.rootViewController? as UINavigationController
                 navigationController.popToRootViewControllerAnimated(false)
                 let homeTableViewController = navigationController.viewControllers[0] as UITableViewController
                 // I think we need a custom controller for the home view, so that when we prepare for segue, we can access the versestableview...
@@ -35,6 +36,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 //                    versesTableViewController.biblePassage = biblePassageStore.biblePassageForVerseReference(verseReference)
 //                }
             }
+        } else if url.host! == "addverse" {
+            navigationController.popToRootViewControllerAnimated(false)
+            let homeTableViewController = navigationController.viewControllers[0] as UITableViewController
+            homeTableViewController.performSegueWithIdentifier("versesTableSegue", sender: self)
+            let versesTableViewController = navigationController.viewControllers[1] as UITableViewController
+            versesTableViewController.performSegueWithIdentifier("addVerse", sender: self)
         }
 
         return true
@@ -44,6 +51,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let sharedDefaults = NSUserDefaults(suiteName: "group.thewilliams.verses")!
         sharedDefaults.setObject(biblePassage.passage, forKey: "VerseReference")
         sharedDefaults.setObject(biblePassage.content, forKey: "VerseContent")
+
         sharedDefaults.synchronize()
     }
 
