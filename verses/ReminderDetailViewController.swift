@@ -14,6 +14,7 @@ class ReminderDetailViewController: UITableViewController, ReminderForm {
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         let reminderSegueIDs = ["FrequencySegue", "TimeSegue"]
+        
         if !contains(reminderSegueIDs, segue.identifier ?? "") { return }
         
         let reminderForm = segue.destinationViewController as ReminderForm

@@ -16,6 +16,7 @@ class FrequencySettingsViewController : UIViewController, UIPickerViewDataSource
     var reminder: Reminder!
     var frequencyPickerDataSource: [NSCalendarUnit] = [.DayCalendarUnit, .WeekCalendarUnit, .MonthCalendarUnit]
     var frequencyPickerTitles = ["Day", "Week", "Month"]
+    
     let appDelegate: AppDelegate = UIApplication.sharedApplication().delegate as AppDelegate
     let defaultSettings = NSUserDefaults(suiteName: "settings")!
     
@@ -41,8 +42,6 @@ class FrequencySettingsViewController : UIViewController, UIPickerViewDataSource
         self.reminder.frequency = frequencyPickerDataSource[row]
         let managedObjectContext = self.appDelegate.managedObjectContext
         managedObjectContext.save(nil)
-        
-        if defaultSettings.valueForKey("remindersSwitch") as NSString == "off" { return }
         
         UIApplication.sharedApplication().cancelAllLocalNotifications()
         

@@ -14,6 +14,7 @@ class TimeSettingsViewController : UIViewController, ReminderForm {
     @IBOutlet var remindersDatePicker: UIDatePicker!
     
     var reminder: Reminder!
+    
     let defaultSettings = NSUserDefaults(suiteName: "settings")!
     
     override func viewDidLoad() {
@@ -23,8 +24,6 @@ class TimeSettingsViewController : UIViewController, ReminderForm {
     @IBAction func dateDidChange(sender: AnyObject) {
         reminder.time = sender.date!!
         reminder.managedObjectContext!.save(nil)
-        
-        if defaultSettings.valueForKey("remindersSwitch") as NSString == "off" { return }
         
         UIApplication.sharedApplication().cancelAllLocalNotifications()
         let localNotification: UILocalNotification = UILocalNotification()

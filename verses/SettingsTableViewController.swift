@@ -49,6 +49,8 @@ class SettingsTableViewController : UITableViewController, RemindersSwitchSectio
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if segue.identifier != "ReminderDetailSegue" { return }
         
+        let detail = segue.destinationViewController as ReminderDetailViewController
+        
         let indexPath = tableView.indexPathForSelectedRow()!
         let section = sections[indexPath.section] as RemindersListSection
         let reminderForm = segue.destinationViewController as ReminderForm
