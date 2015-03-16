@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		43C9A8A6A2C64855B06D18B5 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E14CAB0BA205450DA43E233D /* libPods.a */; };
+		B751F9851AB783FD005BBF73 /* SettingsSections.swift in Sources */ = {isa = PBXBuildFile; fileRef = B751F9841AB783FD005BBF73 /* SettingsSections.swift */; };
 		B78096EB1967028C0004D560 /* UserData.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = B78096E91967028C0004D560 /* UserData.xcdatamodeld */; };
 		B7B7046B19981D5600162B5D /* NotificationCenter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B7B7046A19981D5600162B5D /* NotificationCenter.framework */; };
 		B7B7047019981D5600162B5D /* TodayViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7B7046F19981D5600162B5D /* TodayViewController.swift */; };
@@ -35,12 +36,6 @@
 		FD35E2CA1A7D7FBF007651D8 /* VersesTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD35E2C91A7D7FBF007651D8 /* VersesTableViewController.swift */; };
 		FDD6D0F81A0C1E2A00AE107F /* TimeSettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDD6D0F71A0C1E2A00AE107F /* TimeSettingsViewController.swift */; };
 		FDD6D0FA1A0C1E8500AE107F /* FrequencySettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDD6D0F91A0C1E8500AE107F /* FrequencySettingsViewController.swift */; };
-		FDD869231AAA0C9E00F20D52 /* SettingsSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDD869221AAA0C9E00F20D52 /* SettingsSection.swift */; };
-		FDD869241AAA0C9E00F20D52 /* SettingsSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDD869221AAA0C9E00F20D52 /* SettingsSection.swift */; };
-		FDD869261AAA0DF800F20D52 /* RemindersSwitchSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDD869251AAA0DF800F20D52 /* RemindersSwitchSection.swift */; };
-		FDD869271AAA0DF800F20D52 /* RemindersSwitchSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDD869251AAA0DF800F20D52 /* RemindersSwitchSection.swift */; };
-		FDD869291AAA0F9600F20D52 /* ReminderListSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDD869281AAA0F9600F20D52 /* ReminderListSection.swift */; };
-		FDD8692A1AAA0F9600F20D52 /* ReminderListSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDD869281AAA0F9600F20D52 /* ReminderListSection.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -84,6 +79,7 @@
 /* Begin PBXFileReference section */
 		B70F681119F5E87B00AC174F /* today-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "today-Bridging-Header.h"; sourceTree = "<group>"; };
 		B70F681219F5EAFE00AC174F /* verses-Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "verses-Bridging-Header.h"; sourceTree = "<group>"; };
+		B751F9841AB783FD005BBF73 /* SettingsSections.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsSections.swift; sourceTree = "<group>"; };
 		B78096EA1967028C0004D560 /* UserData.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = UserData.xcdatamodel; sourceTree = "<group>"; };
 		B7B7046919981D5600162B5D /* today.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = today.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		B7B7046A19981D5600162B5D /* NotificationCenter.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = NotificationCenter.framework; path = System/Library/Frameworks/NotificationCenter.framework; sourceTree = SDKROOT; };
@@ -120,9 +116,6 @@
 		FD35E2C91A7D7FBF007651D8 /* VersesTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VersesTableViewController.swift; sourceTree = "<group>"; };
 		FDD6D0F71A0C1E2A00AE107F /* TimeSettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimeSettingsViewController.swift; sourceTree = "<group>"; };
 		FDD6D0F91A0C1E8500AE107F /* FrequencySettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FrequencySettingsViewController.swift; sourceTree = "<group>"; };
-		FDD869221AAA0C9E00F20D52 /* SettingsSection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsSection.swift; sourceTree = "<group>"; };
-		FDD869251AAA0DF800F20D52 /* RemindersSwitchSection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RemindersSwitchSection.swift; sourceTree = "<group>"; };
-		FDD869281AAA0F9600F20D52 /* ReminderListSection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReminderListSection.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -298,23 +291,13 @@
 		FD30F2CC1A72AEC9005BBC02 /* settings */ = {
 			isa = PBXGroup;
 			children = (
-				FDD869211AAA0C0C00F20D52 /* settings sections */,
 				FD117C7B1A09710D00B01643 /* SettingsTableViewController.swift */,
+				B751F9841AB783FD005BBF73 /* SettingsSections.swift */,
 				FD12EB651AA238BA00EAA23F /* ReminderDetailViewController.swift */,
 				FDD6D0F71A0C1E2A00AE107F /* TimeSettingsViewController.swift */,
 				FDD6D0F91A0C1E8500AE107F /* FrequencySettingsViewController.swift */,
 			);
 			name = settings;
-			sourceTree = "<group>";
-		};
-		FDD869211AAA0C0C00F20D52 /* settings sections */ = {
-			isa = PBXGroup;
-			children = (
-				FDD869221AAA0C9E00F20D52 /* SettingsSection.swift */,
-				FDD869251AAA0DF800F20D52 /* RemindersSwitchSection.swift */,
-				FDD869281AAA0F9600F20D52 /* ReminderListSection.swift */,
-			);
-			name = "settings sections";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -506,11 +489,9 @@
 				B7F49D861A11A11B00E4520E /* AppDelegate.swift in Sources */,
 				FDD6D0FA1A0C1E8500AE107F /* FrequencySettingsViewController.swift in Sources */,
 				FD029D291A817A6200C7BC0F /* AddVerseViewController.swift in Sources */,
+				B751F9851AB783FD005BBF73 /* SettingsSections.swift in Sources */,
 				FD029D271A81593100C7BC0F /* VerseDetailTableViewController.swift in Sources */,
 				FDD6D0F81A0C1E2A00AE107F /* TimeSettingsViewController.swift in Sources */,
-				FDD869231AAA0C9E00F20D52 /* SettingsSection.swift in Sources */,
-				FDD869291AAA0F9600F20D52 /* ReminderListSection.swift in Sources */,
-				FDD869261AAA0DF800F20D52 /* RemindersSwitchSection.swift in Sources */,
 				B78096EB1967028C0004D560 /* UserData.xcdatamodeld in Sources */,
 				FD117C7C1A09710D00B01643 /* SettingsTableViewController.swift in Sources */,
 				B7C75E951983E77500DC2877 /* BiblePassage.swift in Sources */,
@@ -523,11 +504,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				FDD869241AAA0C9E00F20D52 /* SettingsSection.swift in Sources */,
 				B7F4E8BC1965E43A00466BA7 /* versesTests.m in Sources */,
 				FD30F2D61A72B6D8005BBC02 /* Reminder.swift in Sources */,
-				FDD869271AAA0DF800F20D52 /* RemindersSwitchSection.swift in Sources */,
-				FDD8692A1AAA0F9600F20D52 /* ReminderListSection.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

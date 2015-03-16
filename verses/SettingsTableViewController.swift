@@ -21,18 +21,16 @@ class SettingsTableViewController : UITableViewController, RemindersSwitchSectio
     
     func remindersSwitchSet(#on: Bool) {
         remindersOn = on
-//        let changingSections = sections.filter({ !$0.enabledWhenRemindersOff() })
+        let changingSections = sections.filter({ !$0.enabledWhenRemindersOff() })
+        let indexRange = NSIndexSet(indexesInRange: NSMakeRange(1, changingSections.count))
         
         self.tableView.beginUpdates()
-        
-//        for section in changingSections {
-//            let index = find(sections, section)!
-            if on {
-                self.tableView.insertSections(NSIndexSet(index: 1), withRowAnimation: .Fade)
-            } else {
-                self.tableView.deleteSections(NSIndexSet(index: 1), withRowAnimation: .Fade)
-            }
-//        }
+
+        if remindersOn {
+            self.tableView.insertSections(indexRange, withRowAnimation: .Fade)
+        } else {
+            self.tableView.deleteSections(indexRange, withRowAnimation: .Fade)
+        }
         
         self.tableView.endUpdates()
     }
@@ -42,7 +40,8 @@ class SettingsTableViewController : UITableViewController, RemindersSwitchSectio
         
         self.sections = [
             RemindersSwitchSection(delegate: self, switchOn: true),
-            RemindersListSection(managedObjectContext: self.managedObjectContext)
+            RemindersListSection(managedObjectContext: self.managedObjectContext),
+            RemindersAddSection()
         ]
     }
     
@@ -74,6 +73,11 @@ class SettingsTableViewController : UITableViewController, RemindersSwitchSectio
     }
     
     @IBAction func didAddReminder(sender: AnyObject) {
-
+        let remindersListSection = sections[1] as RemindersListSection
+        remindersListSection.addReminder()
+        let indexPath = NSIndexPath(forRow: remindersListSection.numberOfRows()-1, inSection: 1)
+        self.tableView.beginUpdates()
+        self.tableView.insertRowsAtIndexPaths([indexPath], withRowAnimation: .Fade)
+        self.tableView.endUpdates()
     }
 }
