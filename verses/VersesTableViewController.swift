@@ -10,7 +10,7 @@ import Foundation
 import UIKit
 import CoreData
 
-class VersesTableViewController: UITableViewController, NSFetchedResultsControllerDelegate {
+class VersesTableViewController: UITableViewController, NSFetchedResultsControllerDelegate, AddVerseDelegate {
     let appDelegate: AppDelegate = UIApplication.sharedApplication().delegate as AppDelegate
     var managedObjectContext: NSManagedObjectContext?
 
@@ -95,8 +95,22 @@ class VersesTableViewController: UITableViewController, NSFetchedResultsControll
             detailController.biblePassage = self.fetchedResultsController.objectAtIndexPath(self.tableView.indexPathForSelectedRow()!) as? BiblePassage
         }
     }
-
-    @IBAction func returnFromSegueActions(sender: UIStoryboardSegue){
-        // must remain for unwind segue to work
+    
+    func addVerseCanceled() {
+        self.dismissViewControllerAnimated(true, completion: nil)
     }
+    
+    func verseAdded() {
+        self.dismissViewControllerAnimated(true, completion: nil)
+    }
+    
+    @IBAction func addVerse(sender: AnyObject) {
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let addVerseNavigationController = storyboard.instantiateViewControllerWithIdentifier("addVerse") as UINavigationController
+        addVerseNavigationController.modalTransitionStyle = .CoverVertical
+        let addVerseController = addVerseNavigationController.childViewControllers[0] as AddVerseViewController
+        addVerseController.delegate = self
+        self.presentViewController(addVerseNavigationController, animated: true, completion: nil)
+    }
+    
 }

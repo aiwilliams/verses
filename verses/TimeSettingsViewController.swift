@@ -37,7 +37,7 @@ class TimeSettingsViewController : UIViewController, ReminderForm {
         
         let appDelegate = UIApplication.sharedApplication().delegate! as AppDelegate
         if let biblePassage = appDelegate.biblePassageStore.activeBiblePassage() {
-            localNotification.alertBody = "\(biblePassage.passage)"
+            localNotification.alertBody = "\(biblePassage.passage!)"
         }
         else {
             localNotification.alertBody = "You don't have any verses!"

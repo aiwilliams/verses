@@ -2,6 +2,7 @@
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6254" systemVersion="14C109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="thz-W3-izQ">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6247"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
         <!--Verses-->
@@ -39,7 +40,7 @@
                     <navigationItem key="navigationItem" title="Verses" id="t3q-gQ-Qcj">
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="8ec-QT-qq5">
                             <connections>
-                                <segue destination="von-ug-doM" kind="push" identifier="addVerse" id="Izu-1x-yKc"/>
+                                <action selector="addVerse:" destination="0we-K4-nUa" id="yKW-76-1FJ"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -322,37 +323,41 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="1 John 3:16" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="UUe-y9-8Px">
-                                <rect key="frame" x="20" y="115" width="280" height="30"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no"/>
-                            </textField>
                             <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" hidesWhenStopped="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="E9d-u5-wnK">
                                 <rect key="frame" x="273" y="120" width="20" height="20"/>
                             </activityIndicatorView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Error fetching verse from the Internet." textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yf2-CW-HyM">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Error fetching verse from the Internet." textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yf2-CW-HyM">
                                 <rect key="frame" x="16" y="217" width="288" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="1 John 3:16" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="UUe-y9-8Px">
+                                <rect key="frame" x="20" y="115" width="280" height="30"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no"/>
+                            </textField>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstItem="yf2-CW-HyM" firstAttribute="leading" secondItem="cNu-HC-evF" secondAttribute="leadingMargin" id="2wP-0t-Q2P"/>
+                            <constraint firstItem="hW5-5r-WQn" firstAttribute="top" secondItem="yf2-CW-HyM" secondAttribute="bottom" constant="330" id="5XO-7H-9R0"/>
                             <constraint firstItem="UUe-y9-8Px" firstAttribute="leading" secondItem="cNu-HC-evF" secondAttribute="leading" constant="20" id="HXO-En-dkH"/>
                             <constraint firstItem="UUe-y9-8Px" firstAttribute="top" secondItem="T94-XJ-pWg" secondAttribute="bottom" constant="51" id="Oy9-iN-nvr"/>
                             <constraint firstAttribute="trailing" secondItem="UUe-y9-8Px" secondAttribute="trailing" constant="20" id="jJR-qy-4gd"/>
+                            <constraint firstItem="yf2-CW-HyM" firstAttribute="top" secondItem="UUe-y9-8Px" secondAttribute="bottom" constant="72" id="qUp-oC-2of"/>
+                            <constraint firstItem="yf2-CW-HyM" firstAttribute="trailing" secondItem="cNu-HC-evF" secondAttribute="trailingMargin" id="sdc-7W-5xv"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="Add Verse" id="Zf8-ge-Z3C">
-                        <barButtonItem key="leftBarButtonItem" title="Cancel" id="8yt-z5-19v">
+                    <navigationItem key="navigationItem" title="Add Verse" id="E1B-UZ-epe">
+                        <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="tli-NX-Oba">
                             <connections>
-                                <segue destination="kws-Rs-X28" kind="unwind" unwindAction="returnFromSegueActions:" id="R1p-5n-iWN"/>
+                                <action selector="cancelAddVerse:" destination="von-ug-doM" id="mfF-68-fGs"/>
                             </connections>
                         </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" systemItem="done" id="ltt-Fl-ycp">
+                        <barButtonItem key="rightBarButtonItem" systemItem="done" id="OKx-lU-Dzd">
                             <connections>
-                                <action selector="addVerse:" destination="von-ug-doM" id="4Ll-ak-l1k"/>
+                                <action selector="addVerse:" destination="von-ug-doM" id="Fdu-3z-rgR"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -360,13 +365,11 @@
                         <outlet property="activityIndicator" destination="E9d-u5-wnK" id="MRW-D6-gBp"/>
                         <outlet property="errorText" destination="yf2-CW-HyM" id="9QJ-wW-ne1"/>
                         <outlet property="passageTextField" destination="UUe-y9-8Px" id="Q5h-w0-hDV"/>
-                        <segue destination="kws-Rs-X28" kind="unwind" identifier="unwindAddVerse" unwindAction="returnFromSegueActions:" id="Ind-Dt-v1d"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Fkr-Mc-qQn" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <exit id="kws-Rs-X28" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="64" y="-1101"/>
+            <point key="canvasLocation" x="704" y="-1101"/>
         </scene>
         <!--Home-->
         <scene sceneID="9hu-W4-cHo">
@@ -429,10 +432,10 @@
             </objects>
             <point key="canvasLocation" x="-872" y="-369"/>
         </scene>
-        <!--Navigation Controller-->
+        <!--Home Navigation Controller-->
         <scene sceneID="xwW-4Q-u3f">
             <objects>
-                <navigationController id="thz-W3-izQ" sceneMemberID="viewController">
+                <navigationController id="thz-W3-izQ" customClass="HomeNavigationController" customModule="verses" customModuleProvider="target" sceneMemberID="viewController">
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="k4P-Vw-WdO">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -444,6 +447,24 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ddU-In-5t6" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-1306" y="-367"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="BT0-vW-sto">
+            <objects>
+                <navigationController storyboardIdentifier="addVerse" automaticallyAdjustsScrollViewInsets="NO" id="Ard-I8-Uc7" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="Uhx-rA-9P1">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="von-ug-doM" kind="relationship" relationship="rootViewController" id="eQx-pC-MSo"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="81O-WG-yTV" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="172" y="-1101"/>
         </scene>
     </scenes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">

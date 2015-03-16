@@ -10,6 +10,11 @@ import Foundation
 import UIKit
 import CoreData
 
+protocol AddVerseDelegate {
+    func addVerseCanceled()
+    func verseAdded()
+}
+
 class AddVerseViewController: UIViewController {
     @IBOutlet var passageTextField: UITextField!
     @IBOutlet var activityIndicator: UIActivityIndicatorView!
@@ -19,6 +24,7 @@ class AddVerseViewController: UIViewController {
 
     var bibleApi: VerseSourceAPI?
     var biblePassage: BiblePassage!
+    var delegate: AddVerseDelegate!
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -42,7 +48,7 @@ class AddVerseViewController: UIViewController {
                     self.activityIndicator.stopAnimating()
                     self.errorText.hidden = true
                     self.biblePassage = returnedPassage
-                    self.performSegueWithIdentifier("unwindAddVerse", sender: self)
+                    self.delegate.verseAdded()
                 }, failure: { (errorMessage: String) -> Void in
                     self.activityIndicator.stopAnimating()
                     self.errorText.text = errorMessage
@@ -50,8 +56,11 @@ class AddVerseViewController: UIViewController {
                 })
         }
         else {
-            self.performSegueWithIdentifier("unwindAddVerse", sender: sender)
+            self.delegate.addVerseCanceled()
         }
     }
 
+    @IBAction func cancelAddVerse(sender: AnyObject) {
+        self.delegate.addVerseCanceled()
+    }
 }

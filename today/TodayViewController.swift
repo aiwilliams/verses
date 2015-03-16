@@ -5,7 +5,7 @@ import Foundation
 class TodayViewController: UIViewController {
     @IBOutlet var verseLabel: UILabel!
     @IBOutlet var verseReference: UILabel!
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.updateVerseText()
@@ -22,9 +22,14 @@ class TodayViewController: UIViewController {
     func updateVerseText() {
         let defaults = NSUserDefaults(suiteName: "group.thewilliams.verses")!
         if let verseRef = defaults.valueForKey("VerseReference") as? String {
-            let verse = defaults.valueForKey("VerseContent")! as String
-            self.verseLabel.text = verse
-            self.verseReference.text = verseRef
+            if defaults.boolForKey("ContainsVerses") {
+                let verse = defaults.valueForKey("VerseContent")! as String
+                self.verseReference.text = verseRef
+                self.verseLabel.text = verse
+            } else {
+                self.verseReference.text = ""
+                self.verseLabel.text = "You have no verses. Touch to add one!"
+            }
         } else {
             self.verseLabel.text = "You have no verses. Touch to add one!"
         }
