@@ -18,7 +18,7 @@ class RemindersSwitchSection: NSObject, SettingsSection {
     
     init(delegate: RemindersSwitchSectionDelegate, switchOn: Bool) {
         self.delegate = delegate
-        remindersSwitch = UISwitch() // "switch" is an operator for bad programmers
+        remindersSwitch = UISwitch()
         super.init()
         
         self.remindersSwitch.on = switchOn
@@ -58,12 +58,8 @@ class RemindersListSection: SettingsSection {
             var error: NSError?
             
             var fetchData = self.managedObjectContext.executeFetchRequest(fetchRequest, error: &error)! as [Reminder]
-            if fetchData.count == 0 {
-                return [ self.addReminder() ]
-            } else {
-                fetchData = self.managedObjectContext.executeFetchRequest(fetchRequest, error: &error)! as [Reminder]
-                return fetchData
-            }
+            fetchData = self.managedObjectContext.executeFetchRequest(fetchRequest, error: &error)! as [Reminder]
+            return fetchData
         }
     }
     
@@ -93,6 +89,12 @@ class RemindersListSection: SettingsSection {
         reminder.time = NSDate()
         self.managedObjectContext.save(nil)
         return reminder
+    }
+    
+    func deleteReminder(index: Int) {
+        let reminder: Reminder = self.reminders[index]
+        self.managedObjectContext.deleteObject(reminder)
+        self.managedObjectContext.save(nil)
     }
     
     func enabledWhenRemindersOff() -> Bool {

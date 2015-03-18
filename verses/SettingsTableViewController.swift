@@ -17,7 +17,13 @@ class SettingsTableViewController : UITableViewController, RemindersSwitchSectio
     var remindersOn = true
     let appDelegate: AppDelegate = UIApplication.sharedApplication().delegate as AppDelegate
     lazy var managedObjectContext: NSManagedObjectContext = { self.appDelegate.managedObjectContext }()
-    var sections: [SettingsSection]!
+    lazy var sections: [SettingsSection] = {
+        return [
+            RemindersSwitchSection(delegate: self, switchOn: true),
+            RemindersListSection(managedObjectContext: self.managedObjectContext),
+            RemindersAddSection()
+        ]
+    }()
     
     func remindersSwitchSet(#on: Bool) {
         remindersOn = on
@@ -33,16 +39,6 @@ class SettingsTableViewController : UITableViewController, RemindersSwitchSectio
         }
         
         self.tableView.endUpdates()
-    }
-
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        
-        self.sections = [
-            RemindersSwitchSection(delegate: self, switchOn: true),
-            RemindersListSection(managedObjectContext: self.managedObjectContext),
-            RemindersAddSection()
-        ]
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
@@ -70,6 +66,16 @@ class SettingsTableViewController : UITableViewController, RemindersSwitchSectio
         var cell = tableView.dequeueReusableCellWithIdentifier(identifier) as UITableViewCell
         section.configureCell(cell, atIndex: indexPath.row)
         return cell
+    }
+    
+    override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
+        if editingStyle == UITableViewCellEditingStyle.Delete {
+            let remindersListSection = sections[1] as RemindersListSection
+            self.tableView.beginUpdates()
+            remindersListSection.deleteReminder(indexPath.row)
+            tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: UITableViewRowAnimation.Automatic)
+            self.tableView.endUpdates()
+        }
     }
     
     @IBAction func didAddReminder(sender: AnyObject) {
