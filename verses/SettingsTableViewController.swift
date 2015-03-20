@@ -40,8 +40,10 @@ class SettingsTableViewController : UITableViewController, RemindersSwitchSectio
 
         if remindersOn {
             self.tableView.insertSections(indexRange, withRowAnimation: .Fade)
+            self.rebuildNotifications()
         } else {
             self.tableView.deleteSections(indexRange, withRowAnimation: .Fade)
+            UIApplication.sharedApplication().cancelAllLocalNotifications()
         }
         
         self.tableView.endUpdates()
@@ -92,14 +94,7 @@ class SettingsTableViewController : UITableViewController, RemindersSwitchSectio
     
     func reminderChanged(reminder: Reminder) {
         managedObjectContext.save(nil)
-        
-        var notifications = [UILocalNotification]()
-        for r in remindersList.reminders {
-            notifications += [createLocalNotification(r)]
-        }
-        
-        UIApplication.sharedApplication().cancelAllLocalNotifications()
-        UIApplication.sharedApplication().scheduledLocalNotifications = notifications
+        self.rebuildNotifications()
     }
     
     func createLocalNotification(reminder: Reminder) -> UILocalNotification {
@@ -122,6 +117,16 @@ class SettingsTableViewController : UITableViewController, RemindersSwitchSectio
         localNotification.applicationIconBadgeNumber = localNotification.applicationIconBadgeNumber + 1
         
         return localNotification
+    }
+    
+    func rebuildNotifications() {
+        var notifications = [UILocalNotification]()
+        for r in remindersList.reminders {
+            notifications += [createLocalNotification(r)]
+        }
+        
+        UIApplication.sharedApplication().cancelAllLocalNotifications()
+        UIApplication.sharedApplication().scheduledLocalNotifications = notifications
     }
 
 }
