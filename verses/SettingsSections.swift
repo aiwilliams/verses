@@ -6,6 +6,7 @@ protocol SettingsSection { // for typed Array of section models
     func reuseIdentifier() -> String
     func numberOfRows() -> Int
     func configureCell(cell: UITableViewCell, atIndex index: Int)
+    var isEditable: Bool { get }
 }
 
 protocol RemindersSwitchSectionDelegate {
@@ -15,10 +16,11 @@ protocol RemindersSwitchSectionDelegate {
 class RemindersSwitchSection: NSObject, SettingsSection {
     var delegate: RemindersSwitchSectionDelegate
     var remindersSwitch: UISwitch
+    var isEditable = false
     
     init(delegate: RemindersSwitchSectionDelegate, switchOn: Bool) {
         self.delegate = delegate
-        remindersSwitch = UISwitch()
+        self.remindersSwitch = UISwitch()
         super.init()
         
         self.remindersSwitch.on = switchOn
@@ -49,6 +51,7 @@ class RemindersSwitchSection: NSObject, SettingsSection {
 
 class RemindersListSection: SettingsSection {
     var managedObjectContext: NSManagedObjectContext
+    var isEditable = true
     
     var reminders: [Reminder] {
         get {
@@ -117,6 +120,8 @@ class RemindersListSection: SettingsSection {
 }
 
 class RemindersAddSection: NSObject, SettingsSection {
+    var isEditable = false
+    
     func enabledWhenRemindersOff() -> Bool {
         return false
     }

@@ -84,6 +84,10 @@ class SettingsTableViewController : UITableViewController, RemindersSwitchSectio
         }
     }
     
+    override func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
+        return sections[indexPath.section].isEditable
+    }
+    
     @IBAction func didAddReminder(sender: AnyObject) {
         let reminder = remindersList.addReminder()
         let indexPath = NSIndexPath(forRow: remindersList.numberOfRows()-1, inSection: 1)
