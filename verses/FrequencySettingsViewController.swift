@@ -13,7 +13,7 @@ class FrequencySettingsViewController : UIViewController, UIPickerViewDataSource
 
     @IBOutlet var frequencyPicker: UIPickerView!
     
-    var delegate: ReminderEditorDelegate!
+    var delegate: ReminderFormDelegate!
     var reminder: Reminder!
     
     var frequencyPickerDataSource: [NSCalendarUnit] = [.DayCalendarUnit, .WeekCalendarUnit, .MonthCalendarUnit]

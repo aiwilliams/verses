@@ -14,7 +14,7 @@ class TimeSettingsViewController : UIViewController, ReminderForm {
     @IBOutlet var remindersDatePicker: UIDatePicker!
     
     var reminder: Reminder!
-    var delegate: ReminderEditorDelegate!
+    var delegate: ReminderFormDelegate!
     
     let defaultSettings = NSUserDefaults(suiteName: "settings")!
     

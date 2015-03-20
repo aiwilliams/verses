@@ -11,7 +11,7 @@ import UIKit
 class ReminderDetailViewController: UITableViewController {
     
     var reminder: Reminder!
-    var delegate: ReminderEditorDelegate!
+    var delegate: ReminderFormDelegate!
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         let reminderSegueIDs = ["FrequencySegue", "TimeSegue"]

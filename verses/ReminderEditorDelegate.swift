@@ -6,6 +6,6 @@
 //  Copyright (c) 2015 The Williams Family. All rights reserved.
 //
 
-@objc protocol ReminderEditorDelegate {
+@objc protocol ReminderFormDelegate {
     func reminderChanged(reminder: Reminder)
 }

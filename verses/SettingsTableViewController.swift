@@ -11,10 +11,10 @@ import CoreData
 
 @objc protocol ReminderForm {
     var reminder: Reminder! { get set }
-    var delegate: ReminderEditorDelegate! { get set }
+    var delegate: ReminderFormDelegate! { get set }
 }
 
-class SettingsTableViewController : UITableViewController, RemindersSwitchSectionDelegate, ReminderEditorDelegate {
+class SettingsTableViewController : UITableViewController, RemindersSwitchSectionDelegate, ReminderFormDelegate {
     var remindersOn = true
     
     let appDelegate: AppDelegate = UIApplication.sharedApplication().delegate as AppDelegate
