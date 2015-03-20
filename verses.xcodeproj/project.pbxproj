@@ -31,10 +31,11 @@
 		FD029D291A817A6200C7BC0F /* AddVerseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD029D281A817A6200C7BC0F /* AddVerseViewController.swift */; };
 		FD117C7C1A09710D00B01643 /* SettingsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD117C7B1A09710D00B01643 /* SettingsTableViewController.swift */; };
 		FD12EB661AA238BA00EAA23F /* ReminderDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD12EB651AA238BA00EAA23F /* ReminderDetailViewController.swift */; };
+		FD17757C1ABC670A005458DE /* ReminderNotification.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD17757B1ABC670A005458DE /* ReminderNotification.swift */; };
 		FD30F2D51A72B6D8005BBC02 /* Reminder.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD30F2D41A72B6D8005BBC02 /* Reminder.swift */; };
 		FD30F2D61A72B6D8005BBC02 /* Reminder.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD30F2D41A72B6D8005BBC02 /* Reminder.swift */; };
 		FD35E2CA1A7D7FBF007651D8 /* VersesTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD35E2C91A7D7FBF007651D8 /* VersesTableViewController.swift */; };
-		FDD2CE861ABA2A3800070A2B /* ReminderEditorDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDD2CE851ABA2A3800070A2B /* ReminderEditorDelegate.swift */; };
+		FDD2CE861ABA2A3800070A2B /* ReminderFormDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDD2CE851ABA2A3800070A2B /* ReminderFormDelegate.swift */; };
 		FDD6D0F81A0C1E2A00AE107F /* TimeSettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDD6D0F71A0C1E2A00AE107F /* TimeSettingsViewController.swift */; };
 		FDD6D0FA1A0C1E8500AE107F /* FrequencySettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDD6D0F91A0C1E8500AE107F /* FrequencySettingsViewController.swift */; };
 /* End PBXBuildFile section */
@@ -110,12 +111,13 @@
 		FD029D281A817A6200C7BC0F /* AddVerseViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddVerseViewController.swift; sourceTree = "<group>"; };
 		FD117C7B1A09710D00B01643 /* SettingsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsTableViewController.swift; sourceTree = "<group>"; };
 		FD12EB651AA238BA00EAA23F /* ReminderDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReminderDetailViewController.swift; sourceTree = "<group>"; };
+		FD17757B1ABC670A005458DE /* ReminderNotification.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReminderNotification.swift; sourceTree = "<group>"; };
 		FD18A9E919E4709D0013FCDC /* verses.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = verses.entitlements; sourceTree = "<group>"; };
 		FD18A9EA19E4717F0013FCDC /* today.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = today.entitlements; sourceTree = "<group>"; };
 		FD30F2D31A72B6D7005BBC02 /* versesTests-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "versesTests-Bridging-Header.h"; sourceTree = "<group>"; };
 		FD30F2D41A72B6D8005BBC02 /* Reminder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Reminder.swift; path = ../Reminder.swift; sourceTree = "<group>"; };
 		FD35E2C91A7D7FBF007651D8 /* VersesTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VersesTableViewController.swift; sourceTree = "<group>"; };
-		FDD2CE851ABA2A3800070A2B /* ReminderEditorDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReminderEditorDelegate.swift; sourceTree = "<group>"; };
+		FDD2CE851ABA2A3800070A2B /* ReminderFormDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReminderFormDelegate.swift; sourceTree = "<group>"; };
 		FDD6D0F71A0C1E2A00AE107F /* TimeSettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimeSettingsViewController.swift; sourceTree = "<group>"; };
 		FDD6D0F91A0C1E8500AE107F /* FrequencySettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FrequencySettingsViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -294,11 +296,12 @@
 			isa = PBXGroup;
 			children = (
 				FD117C7B1A09710D00B01643 /* SettingsTableViewController.swift */,
+				FD17757B1ABC670A005458DE /* ReminderNotification.swift */,
 				B751F9841AB783FD005BBF73 /* SettingsSections.swift */,
 				FD12EB651AA238BA00EAA23F /* ReminderDetailViewController.swift */,
 				FDD6D0F71A0C1E2A00AE107F /* TimeSettingsViewController.swift */,
 				FDD6D0F91A0C1E8500AE107F /* FrequencySettingsViewController.swift */,
-				FDD2CE851ABA2A3800070A2B /* ReminderEditorDelegate.swift */,
+				FDD2CE851ABA2A3800070A2B /* ReminderFormDelegate.swift */,
 			);
 			name = settings;
 			sourceTree = "<group>";
@@ -490,6 +493,7 @@
 			files = (
 				FD35E2CA1A7D7FBF007651D8 /* VersesTableViewController.swift in Sources */,
 				B7F49D861A11A11B00E4520E /* AppDelegate.swift in Sources */,
+				FD17757C1ABC670A005458DE /* ReminderNotification.swift in Sources */,
 				FDD6D0FA1A0C1E8500AE107F /* FrequencySettingsViewController.swift in Sources */,
 				FD029D291A817A6200C7BC0F /* AddVerseViewController.swift in Sources */,
 				B751F9851AB783FD005BBF73 /* SettingsSections.swift in Sources */,
@@ -498,7 +502,7 @@
 				B78096EB1967028C0004D560 /* UserData.xcdatamodeld in Sources */,
 				FD117C7C1A09710D00B01643 /* SettingsTableViewController.swift in Sources */,
 				B7C75E951983E77500DC2877 /* BiblePassage.swift in Sources */,
-				FDD2CE861ABA2A3800070A2B /* ReminderEditorDelegate.swift in Sources */,
+				FDD2CE861ABA2A3800070A2B /* ReminderFormDelegate.swift in Sources */,
 				FD30F2D51A72B6D8005BBC02 /* Reminder.swift in Sources */,
 				FD12EB661AA238BA00EAA23F /* ReminderDetailViewController.swift in Sources */,
 			);

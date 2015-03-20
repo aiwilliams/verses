@@ -2,21 +2,25 @@ import UIKit
 import CoreData
 
 protocol SettingsSection { // for typed Array of section models
-    func enabledWhenRemindersOff() -> Bool
-    func reuseIdentifier() -> String
-    func numberOfRows() -> Int
-    func configureCell(cell: UITableViewCell, atIndex index: Int)
     var isEditable: Bool { get }
+    var reuseIdentifier: String { get }
+    var enabledWhenRemindersOff: Bool { get }
+    
+    func configureCell(cell: UITableViewCell, atIndex index: Int)
+    func selectRow(atIndex index: Int)
+    func numberOfRows() -> Int
 }
 
 protocol RemindersSwitchSectionDelegate {
-    func remindersSwitchSet(#on: Bool)
+    func remindersSwitchSection(section: RemindersSwitchSection, setSwitchOn on: Bool)
 }
 
 class RemindersSwitchSection: NSObject, SettingsSection {
     var delegate: RemindersSwitchSectionDelegate
     var remindersSwitch: UISwitch
     var isEditable = false
+    var reuseIdentifier = "RemindersSwitchCell"
+    var enabledWhenRemindersOff = true
     
     init(delegate: RemindersSwitchSectionDelegate, switchOn: Bool) {
         self.delegate = delegate
@@ -28,42 +32,36 @@ class RemindersSwitchSection: NSObject, SettingsSection {
     }
     
     func switchChanged() {
-        self.delegate.remindersSwitchSet(on: self.remindersSwitch.on)
-    }
-    
-    func enabledWhenRemindersOff() -> Bool {
-        return true
-    }
-    
-    func reuseIdentifier() -> String {
-        return "RemindersSwitchCell"
-    }
-    
-    func numberOfRows() -> Int {
-        return 1
+        self.delegate.remindersSwitchSection(self, setSwitchOn: self.remindersSwitch.on)
     }
     
     func configureCell(cell: UITableViewCell, atIndex index: Int) {
         cell.accessoryView = self.remindersSwitch
         cell.selectionStyle = .None
     }
+    
+    func numberOfRows() -> Int {
+        return 1
+    }
+    
+    func selectRow(atIndex index: Int) {}
 }
 
 class RemindersListSection: SettingsSection {
     var managedObjectContext: NSManagedObjectContext
     var isEditable = true
+    var enabledWhenRemindersOff = false
+    var reuseIdentifier = "ReminderCell"
     
     var reminders: [Reminder] {
-        get {
-            let fetchRequest = NSFetchRequest()
-            fetchRequest.entity = self.entity
-            
-            var error: NSError?
-            
-            var fetchData = self.managedObjectContext.executeFetchRequest(fetchRequest, error: &error)! as [Reminder]
-            fetchData = self.managedObjectContext.executeFetchRequest(fetchRequest, error: &error)! as [Reminder]
-            return fetchData
-        }
+        let fetchRequest = NSFetchRequest()
+        fetchRequest.entity = self.entity
+        
+        var error: NSError?
+        
+        var fetchData = self.managedObjectContext.executeFetchRequest(fetchRequest, error: &error)! as [Reminder]
+        fetchData = self.managedObjectContext.executeFetchRequest(fetchRequest, error: &error)! as [Reminder]
+        return fetchData
     }
     
     lazy var entity: NSEntityDescription = {
@@ -100,41 +98,42 @@ class RemindersListSection: SettingsSection {
         self.managedObjectContext.save(nil)
     }
     
-    func enabledWhenRemindersOff() -> Bool {
-        return false
-    }
-    
-    func reuseIdentifier() -> String {
-        return "ReminderCell"
+    func configureCell(cell: UITableViewCell, atIndex index: Int) {
+        let reminder = reminders[index]
+        cell.textLabel!.text = dateFormatter.stringFromDate(reminder.time)
+        cell.detailTextLabel!.text = frequencies[UInt(reminder.rawFrequency)]
     }
     
     func numberOfRows() -> Int {
         return reminders.count
     }
     
-    func configureCell(cell: UITableViewCell, atIndex index: Int) {
-        let reminder = reminders[index]
-        cell.textLabel!.text = dateFormatter.stringFromDate(reminder.time)
-        cell.detailTextLabel!.text = frequencies[UInt(reminder.rawFrequency)]
-    }
+    func selectRow(atIndex index: Int) {}
+}
+
+protocol RemindersAddSectionDelegate {
+    func remindersAddSectionShouldAddReminder(section: RemindersAddSection)
 }
 
 class RemindersAddSection: NSObject, SettingsSection {
+    var delegate: RemindersAddSectionDelegate
     var isEditable = false
+    var enabledWhenRemindersOff = false
+    var reuseIdentifier = "RemindersAddCell"
     
-    func enabledWhenRemindersOff() -> Bool {
-        return false
+    init(delegate: RemindersAddSectionDelegate) {
+        self.delegate = delegate
     }
     
-    func reuseIdentifier() -> String {
-        return "RemindersAddCell"
+    func configureCell(cell: UITableViewCell, atIndex index: Int) {
+        // don't do anything weird like change the selection style to none
     }
     
     func numberOfRows() -> Int {
         return 1
     }
     
-    func configureCell(cell: UITableViewCell, atIndex index: Int) {
-        cell.selectionStyle = .None
+    func selectRow(atIndex index: Int) {
+        self.delegate.remindersAddSectionShouldAddReminder(self)
     }
 }

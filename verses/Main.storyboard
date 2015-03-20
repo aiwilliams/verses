@@ -112,9 +112,6 @@
                                             <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                             <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
-                                            <connections>
-                                                <outletCollection property="gestureRecognizers" destination="eGJ-LY-PIr" appends="YES" id="Xxs-gT-rlv"/>
-                                            </connections>
                                         </label>
                                     </subviews>
                                 </tableViewCellContentView>
@@ -129,11 +126,6 @@
                     <navigationItem key="navigationItem" id="Kj7-hV-k01"/>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="cNq-qG-Soq" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <tapGestureRecognizer id="eGJ-LY-PIr">
-                    <connections>
-                        <action selector="didAddReminder:" destination="zKV-1L-4jd" id="6jB-rz-Lub"/>
-                    </connections>
-                </tapGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="-370" y="20"/>
         </scene>
