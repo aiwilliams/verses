@@ -100,7 +100,7 @@
                                     <segue destination="dO3-0e-zdY" kind="push" identifier="ReminderDetailSegue" id="nIO-SX-5pI"/>
                                 </connections>
                             </tableViewCell>
-                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="RemindersAddCell" textLabel="R7u-d3-2gx" style="IBUITableViewCellStyleDefault" id="us4-pS-5G5">
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="RemindersAddCell" textLabel="R7u-d3-2gx" style="IBUITableViewCellStyleDefault" id="us4-pS-5G5">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="us4-pS-5G5" id="y6h-Vg-ahf">
