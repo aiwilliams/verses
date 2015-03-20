@@ -8,9 +8,10 @@
 
 import UIKit
 
-class ReminderDetailViewController: UITableViewController, ReminderForm {
+class ReminderDetailViewController: UITableViewController {
     
     var reminder: Reminder!
+    var delegate: ReminderEditorDelegate!
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         let reminderSegueIDs = ["FrequencySegue", "TimeSegue"]
@@ -19,6 +20,7 @@ class ReminderDetailViewController: UITableViewController, ReminderForm {
         
         let reminderForm = segue.destinationViewController as ReminderForm
         reminderForm.reminder = self.reminder
+        reminderForm.delegate = delegate
     }
 
 

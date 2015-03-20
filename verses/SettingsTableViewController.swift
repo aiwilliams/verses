@@ -11,11 +11,14 @@ import CoreData
 
 @objc protocol ReminderForm {
     var reminder: Reminder! { get set }
+    var delegate: ReminderEditorDelegate! { get set }
 }
 
-class SettingsTableViewController : UITableViewController, RemindersSwitchSectionDelegate {
+class SettingsTableViewController : UITableViewController, RemindersSwitchSectionDelegate, ReminderEditorDelegate {
     var remindersOn = true
+    
     let appDelegate: AppDelegate = UIApplication.sharedApplication().delegate as AppDelegate
+    
     lazy var managedObjectContext: NSManagedObjectContext = { self.appDelegate.managedObjectContext }()
     lazy var sections: [SettingsSection] = {
         return [
@@ -24,6 +27,9 @@ class SettingsTableViewController : UITableViewController, RemindersSwitchSectio
             RemindersAddSection()
         ]
     }()
+    var remindersList: RemindersListSection {
+        get { return sections[1] as RemindersListSection }
+    }
     
     func remindersSwitchSet(#on: Bool) {
         remindersOn = on
@@ -44,12 +50,11 @@ class SettingsTableViewController : UITableViewController, RemindersSwitchSectio
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if segue.identifier != "ReminderDetailSegue" { return }
         
-        let detail = segue.destinationViewController as ReminderDetailViewController
-        
         let indexPath = tableView.indexPathForSelectedRow()!
         let section = sections[indexPath.section] as RemindersListSection
-        let reminderForm = segue.destinationViewController as ReminderForm
-        reminderForm.reminder = section.reminders[indexPath.row]
+        let detail = segue.destinationViewController as ReminderDetailViewController
+        detail.reminder = section.reminders[indexPath.row]
+        detail.delegate = self
     }
     
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
@@ -70,20 +75,53 @@ class SettingsTableViewController : UITableViewController, RemindersSwitchSectio
     
     override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
         if editingStyle == UITableViewCellEditingStyle.Delete {
-            let remindersListSection = sections[1] as RemindersListSection
             self.tableView.beginUpdates()
-            remindersListSection.deleteReminder(indexPath.row)
+            remindersList.deleteReminder(indexPath.row)
             tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: UITableViewRowAnimation.Automatic)
             self.tableView.endUpdates()
         }
     }
     
     @IBAction func didAddReminder(sender: AnyObject) {
-        let remindersListSection = sections[1] as RemindersListSection
-        remindersListSection.addReminder()
-        let indexPath = NSIndexPath(forRow: remindersListSection.numberOfRows()-1, inSection: 1)
+        let reminder = remindersList.addReminder()
+        let indexPath = NSIndexPath(forRow: remindersList.numberOfRows()-1, inSection: 1)
         self.tableView.beginUpdates()
         self.tableView.insertRowsAtIndexPaths([indexPath], withRowAnimation: .Fade)
         self.tableView.endUpdates()
     }
+    
+    func reminderChanged(reminder: Reminder) {
+        managedObjectContext.save(nil)
+        
+        var notifications = [UILocalNotification]()
+        for r in remindersList.reminders {
+            notifications += [createLocalNotification(r)]
+        }
+        
+        UIApplication.sharedApplication().cancelAllLocalNotifications()
+        UIApplication.sharedApplication().scheduledLocalNotifications = notifications
+    }
+    
+    func createLocalNotification(reminder: Reminder) -> UILocalNotification {
+        let localNotification: UILocalNotification = UILocalNotification()
+        localNotification.timeZone = NSTimeZone.defaultTimeZone()
+        
+        let components = NSCalendar.currentCalendar().components(NSCalendarUnit.HourCalendarUnit, fromDate: reminder.time)
+        localNotification.fireDate = NSCalendar.currentCalendar().dateFromComponents(components)
+        
+        localNotification.repeatInterval = reminder.frequency
+        
+        let appDelegate = UIApplication.sharedApplication().delegate! as AppDelegate
+        if let biblePassage = appDelegate.biblePassageStore.activeBiblePassage() {
+            localNotification.alertBody = "\(biblePassage.passage!)"
+        }
+        else {
+            localNotification.alertBody = "You don't have any verses!"
+        }
+        localNotification.hasAction = true
+        localNotification.applicationIconBadgeNumber = localNotification.applicationIconBadgeNumber + 1
+        
+        return localNotification
+    }
+
 }

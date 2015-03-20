@@ -14,6 +14,7 @@ class TimeSettingsViewController : UIViewController, ReminderForm {
     @IBOutlet var remindersDatePicker: UIDatePicker!
     
     var reminder: Reminder!
+    var delegate: ReminderEditorDelegate!
     
     let defaultSettings = NSUserDefaults(suiteName: "settings")!
     
@@ -23,37 +24,6 @@ class TimeSettingsViewController : UIViewController, ReminderForm {
     
     @IBAction func dateDidChange(sender: AnyObject) {
         reminder.time = sender.date!!
-        reminder.managedObjectContext!.save(nil)
-        
-        UIApplication.sharedApplication().cancelAllLocalNotifications()
-        let localNotification: UILocalNotification = UILocalNotification()
-        localNotification.timeZone = NSTimeZone.defaultTimeZone()
-        
-        let calendar = NSCalendar.currentCalendar()
-        let components: NSDateComponents = calendar.components(NSCalendarUnit.HourCalendarUnit | NSCalendarUnit.MinuteCalendarUnit, fromDate: reminder.time)
-        
-        localNotification.fireDate = NSCalendar.currentCalendar().dateFromComponents(components)
-        localNotification.repeatInterval = reminder.frequency
-        
-        let appDelegate = UIApplication.sharedApplication().delegate! as AppDelegate
-        if let biblePassage = appDelegate.biblePassageStore.activeBiblePassage() {
-            localNotification.alertBody = "\(biblePassage.passage!)"
-        }
-        else {
-            localNotification.alertBody = "You don't have any verses!"
-        }
-        
-        localNotification.hasAction = true
-        localNotification.applicationIconBadgeNumber = localNotification.applicationIconBadgeNumber + 1
-        
-        UIApplication.sharedApplication().scheduleLocalNotification(localNotification)
-    }
-    
-    func formattedDate(passedDate: NSDate) -> NSString {
-        let dateFormatter = NSDateFormatter()
-        dateFormatter.dateFormat = "HH:mm"
-        let postDate = dateFormatter.stringFromDate(passedDate)
-        
-        return postDate
+        self.delegate!.reminderChanged(reminder)
     }
 }
