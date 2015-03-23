@@ -19,11 +19,18 @@ class TimeSettingsViewController : UIViewController, ReminderForm {
     let defaultSettings = NSUserDefaults(suiteName: "settings")!
     
     override func viewDidLoad() {
-        remindersDatePicker.setDate(self.reminder.time, animated: false)
+        remindersDatePicker.setDate(self.reminder.fireDate, animated: false)
     }
     
     @IBAction func dateDidChange(sender: AnyObject) {
-        reminder.time = sender.date!!
+        let existingComponents = NSCalendar.currentCalendar().components(.CalendarUnitYear | .CalendarUnitMonth | .CalendarUnitDay, fromDate: self.reminder.fireDate)
+        let pickerComponents = NSCalendar.currentCalendar().components(.CalendarUnitHour | .CalendarUnitMinute, fromDate: sender.date!!)
+
+        existingComponents.hour = pickerComponents.hour
+        existingComponents.minute = pickerComponents.minute
+        
+        reminder.fireDate = NSCalendar.currentCalendar().dateFromComponents(existingComponents)!
+
         self.delegate!.reminderChanged(reminder)
     }
 }

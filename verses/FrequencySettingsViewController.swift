@@ -25,7 +25,7 @@ class FrequencySettingsViewController : UIViewController, UIPickerViewDataSource
     override func viewDidLoad() {
         self.frequencyPicker.dataSource = self
         self.frequencyPicker.delegate = self
-        self.frequencyPicker.selectRow(find(self.frequencyPickerDataSource, self.reminder.frequency)!, inComponent: 0, animated: false)
+        self.frequencyPicker.selectRow(find(self.frequencyPickerDataSource, self.reminder.repeatInterval)!, inComponent: 0, animated: false)
     }
     
     func numberOfComponentsInPickerView(pickerView: UIPickerView) -> Int {
@@ -41,7 +41,7 @@ class FrequencySettingsViewController : UIViewController, UIPickerViewDataSource
     }
     
     func pickerView(pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-        self.reminder.frequency = frequencyPickerDataSource[row]
+        self.reminder.repeatInterval = frequencyPickerDataSource[row]
         self.delegate!.reminderChanged(reminder)
     }
     

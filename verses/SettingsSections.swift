@@ -69,14 +69,14 @@ class RemindersListSection: SettingsSection {
     }()
     
     var frequencies = [
-        NSCalendarUnit.DayCalendarUnit.rawValue: "Daily",
-        NSCalendarUnit.WeekCalendarUnit.rawValue: "Weekly",
-        NSCalendarUnit.MonthCalendarUnit.rawValue: "Monthly"
+        NSCalendarUnit.CalendarUnitDay.rawValue: "Daily",
+        NSCalendarUnit.CalendarUnitWeekday.rawValue: "Weekly",
+        NSCalendarUnit.CalendarUnitMonth.rawValue: "Monthly"
     ]
     
     lazy var dateFormatter: NSDateFormatter = {
         let formatter = NSDateFormatter()
-        formatter.dateStyle = .MediumStyle
+        formatter.dateStyle = .LongStyle
         return formatter
     }()
     
@@ -86,8 +86,6 @@ class RemindersListSection: SettingsSection {
     
     func addReminder() -> Reminder {
         let reminder = Reminder(entity: entity, insertIntoManagedObjectContext: self.managedObjectContext)
-        reminder.frequency = .DayCalendarUnit
-        reminder.time = NSDate()
         self.managedObjectContext.save(nil)
         return reminder
     }
@@ -100,8 +98,8 @@ class RemindersListSection: SettingsSection {
     
     func configureCell(cell: UITableViewCell, atIndex index: Int) {
         let reminder = reminders[index]
-        cell.textLabel!.text = dateFormatter.stringFromDate(reminder.time)
-        cell.detailTextLabel!.text = frequencies[UInt(reminder.rawFrequency)]
+        cell.textLabel!.text = dateFormatter.stringFromDate(reminder.nextFireDate)
+        cell.detailTextLabel!.text = frequencies[UInt(reminder.rawRepeatInterval)]
     }
     
     func numberOfRows() -> Int {
@@ -112,7 +110,7 @@ class RemindersListSection: SettingsSection {
 }
 
 protocol RemindersAddSectionDelegate {
-    func remindersAddSectionShouldAddReminder(section: RemindersAddSection)
+    func addReminder(section: RemindersAddSection)
 }
 
 class RemindersAddSection: NSObject, SettingsSection {
@@ -134,6 +132,6 @@ class RemindersAddSection: NSObject, SettingsSection {
     }
     
     func selectRow(atIndex index: Int) {
-        self.delegate.remindersAddSectionShouldAddReminder(self)
+        self.delegate.addReminder(self)
     }
 }

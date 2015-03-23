@@ -12,15 +12,18 @@ class ReminderNotification: UILocalNotification {
     init(reminder: Reminder, alertBody: String) {
         super.init()
         
+        var userInfo = [String:String]()
+        userInfo["reminderURI"] = reminder.uri
+        
+        self.userInfo = userInfo
+        
         self.hasAction = true
         self.applicationIconBadgeNumber = 1
         self.timeZone = NSTimeZone.defaultTimeZone()
-        
-        self.repeatInterval = reminder.frequency
+        self.fireDate = reminder.fireDate
+        self.repeatInterval = reminder.repeatInterval
+
         self.alertBody = alertBody
-        
-        let components = NSCalendar.currentCalendar().components(.DayCalendarUnit, fromDate: reminder.time)
-        self.fireDate = NSCalendar.currentCalendar().dateFromComponents(components)
     }
  
     required init(coder aDecoder: NSCoder) {

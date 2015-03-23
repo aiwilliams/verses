@@ -49,7 +49,7 @@ class SettingsTableViewController : UITableViewController, RemindersSwitchSectio
         self.tableView.endUpdates()
     }
     
-    func remindersAddSectionShouldAddReminder(section: RemindersAddSection) {
+    func addReminder(section: RemindersAddSection) {
         let reminder = remindersList.addReminder()
         let indexPath = NSIndexPath(forRow: remindersList.numberOfRows()-1, inSection: 1)
         self.tableView.insertRowsAtIndexPaths([indexPath], withRowAnimation: .Fade)
@@ -63,6 +63,8 @@ class SettingsTableViewController : UITableViewController, RemindersSwitchSectio
         let detail = segue.destinationViewController as ReminderDetailViewController
         detail.reminder = section.reminders[indexPath.row]
         detail.delegate = self
+        
+        println(UIApplication.sharedApplication().scheduledLocalNotifications)
     }
     
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
@@ -102,6 +104,7 @@ class SettingsTableViewController : UITableViewController, RemindersSwitchSectio
     func reminderChanged(reminder: Reminder) {
         managedObjectContext.save(nil)
         self.rebuildNotifications()
+        self.tableView.reloadData()
     }
     
     func rebuildNotifications() {

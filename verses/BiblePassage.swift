@@ -74,7 +74,6 @@ class VerseSourceAPI : NSObject {
                 }
             },
             failure: { (operation: AFHTTPRequestOperation!,error: NSError!) in
-                println(operation)
                 failure("Sorry! I have failed you :/")
             }
         )
