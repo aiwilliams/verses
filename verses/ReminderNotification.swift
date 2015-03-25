@@ -19,6 +19,7 @@ class ReminderNotification: UILocalNotification {
         
         self.hasAction = true
         self.applicationIconBadgeNumber = 1
+        self.soundName = UILocalNotificationDefaultSoundName
         self.timeZone = NSTimeZone.defaultTimeZone()
         self.fireDate = reminder.fireDate
         self.repeatInterval = reminder.repeatInterval

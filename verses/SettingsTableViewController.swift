@@ -63,8 +63,6 @@ class SettingsTableViewController : UITableViewController, RemindersSwitchSectio
         let detail = segue.destinationViewController as ReminderDetailViewController
         detail.reminder = section.reminders[indexPath.row]
         detail.delegate = self
-        
-        println(UIApplication.sharedApplication().scheduledLocalNotifications)
     }
     
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
