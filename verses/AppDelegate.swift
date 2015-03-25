@@ -11,7 +11,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, AddVerseDelegate {
     
     func applicationDidFinishLaunching(application: UIApplication) {
         application.registerUserNotificationSettings(UIUserNotificationSettings(forTypes: UIUserNotificationType.Sound | UIUserNotificationType.Alert | UIUserNotificationType.Badge, categories: nil))
-        application.applicationIconBadgeNumber = 0
     }
     
     func applicationWillResignActive(application: UIApplication) {
@@ -20,6 +19,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate, AddVerseDelegate {
         } else {
             clearTodayApp()
         }
+    }
+    
+    func applicationDidBecomeActive(application: UIApplication) {
+        application.applicationIconBadgeNumber = 0
     }
     
     func application(application: UIApplication, openURL url: NSURL, sourceApplication: String?, annotation: AnyObject?) -> Bool {
