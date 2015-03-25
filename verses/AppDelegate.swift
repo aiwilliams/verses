@@ -53,6 +53,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate, AddVerseDelegate {
         return true
     }
     
+    func application(application: UIApplication, didReceiveLocalNotification notification: UILocalNotification) {
+        let navigationController = window?.rootViewController? as UINavigationController
+        navigationController.popToRootViewControllerAnimated(false)
+        let homeTableViewController = navigationController.viewControllers[0] as UITableViewController
+        homeTableViewController.performSegueWithIdentifier("versesTableSegue", sender: self)
+    }
+    
     func exportToTodayApp(biblePassage: BiblePassage) {
         let sharedDefaults = NSUserDefaults(suiteName: "group.thewilliams.verses")!
         sharedDefaults.setObject(biblePassage.passage, forKey: "VerseReference")

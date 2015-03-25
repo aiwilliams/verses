@@ -14,10 +14,18 @@ import CoreData
     var delegate: ReminderFormDelegate! { get set }
 }
 
+extension Array {
+    func sample() -> T {
+        let randomIndex = random() % count
+        return self[randomIndex]
+    }
+}
+
 class SettingsTableViewController : UITableViewController, RemindersSwitchSectionDelegate, RemindersAddSectionDelegate, ReminderFormDelegate {
     var remindersOn = true
     
     let appDelegate: AppDelegate = UIApplication.sharedApplication().delegate as AppDelegate
+    let reminderNotificationMessages: [String] = ["Come look at your verses!"]
     
     lazy var managedObjectContext: NSManagedObjectContext = { self.appDelegate.managedObjectContext }()
     lazy var sections: [SettingsSection] = {
@@ -115,15 +123,7 @@ class SettingsTableViewController : UITableViewController, RemindersSwitchSectio
     }
     
     func createLocalNotification(reminder: Reminder) -> UILocalNotification {
-        var alertBody: String
-        let appDelegate = UIApplication.sharedApplication().delegate! as AppDelegate
-        if let biblePassage = appDelegate.biblePassageStore.activeBiblePassage() {
-            alertBody = "\(biblePassage.passage!)"
-        }
-        else {
-            alertBody = "You don't have any verses!"
-        }
-        
+        var alertBody: String = reminderNotificationMessages.sample()
         return ReminderNotification(reminder: reminder, alertBody: alertBody)
     }
 
