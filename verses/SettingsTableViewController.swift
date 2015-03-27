@@ -25,8 +25,13 @@ class SettingsTableViewController : UITableViewController, RemindersSwitchSectio
     var remindersOn = true
     
     let appDelegate: AppDelegate = UIApplication.sharedApplication().delegate as AppDelegate
-    let reminderNotificationMessages: [String] = ["Come look at your verses!"]
-    
+    let reminderNotificationMessages: [String] = [
+        "Whatever you're doing is not as important as the Bible.",
+        "God wants YOU! (to memorize the Bible)",
+        "You haven't studied your verses in a while... but it's whatever.",
+        "People who memorize the Bible are way more fabulous."
+    ]
+
     lazy var managedObjectContext: NSManagedObjectContext = { self.appDelegate.managedObjectContext }()
     lazy var sections: [SettingsSection] = {
         return [

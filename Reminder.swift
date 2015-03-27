@@ -25,28 +25,41 @@ class Reminder: NSManagedObject {
         return objectID.URIRepresentation().absoluteString
     }
     
-    var nextFireDate: NSDate! {
+    var nextFireDate: NSDate {
         if fireDate.timeIntervalSinceNow > 0.0 {
             return fireDate
         }
+
+        let calendar = NSCalendar.currentCalendar()
+        let estimatedComponents = calendar.components(repeatInterval, fromDate: fireDate, toDate: NSDate(), options: nil)
+        let estimatedDate = calendar.dateByAddingComponents(estimatedComponents, toDate: fireDate, options: nil)!
         
-        let components = NSDateComponents()
-        switch repeatInterval {
-            case NSCalendarUnit.CalendarUnitDay:
-                components.day = 1;
-            case NSCalendarUnit.CalendarUnitWeekday:
-                components.day = 7;
-            case NSCalendarUnit.CalendarUnitMonth:
-                components.month = 1;
-            default:
-                break;
+        var nextDate = estimatedDate
+        if estimatedDate.timeIntervalSinceNow < 0 { // date is slightly after current date
+            nextDate = calendar.dateByAddingComponents(repeatIntervalComponents(), toDate: estimatedDate, options: nil)!
         }
         
-        return NSCalendar.currentCalendar().dateByAddingComponents(components, toDate: fireDate, options: nil)!
+        return nextDate
     }
     
     var repeatInterval: NSCalendarUnit {
         get { return NSCalendarUnit(UInt(self.rawRepeatInterval)) }
         set(newInterval) { self.rawRepeatInterval = newInterval.rawValue }
+    }
+    
+    func repeatIntervalComponents() -> NSDateComponents {
+        let components = NSDateComponents()
+        switch repeatInterval {
+        case NSCalendarUnit.CalendarUnitDay:
+            components.day = 1;
+        case NSCalendarUnit.CalendarUnitWeekday:
+            components.day = 7;
+        case NSCalendarUnit.CalendarUnitMonth:
+            components.month = 1;
+        default:
+            break;
+        }
+        
+        return components
     }
 }

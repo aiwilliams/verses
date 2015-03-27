@@ -6,7 +6,7 @@
         <attribute name="translation" optional="YES" attributeType="String" syncable="YES"/>
     </entity>
     <entity name="Reminder" representedClassName="verses.Reminder" syncable="YES">
-        <attribute name="fireDate" attributeType="Date" syncable="YES"/>
+        <attribute name="fireDate" optional="YES" attributeType="Date" syncable="YES"/>
         <attribute name="rawRepeatInterval" attributeType="Integer 16" defaultValueString="16" syncable="YES"/>
     </entity>
     <elements>
