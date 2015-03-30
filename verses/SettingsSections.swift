@@ -12,29 +12,34 @@ protocol SettingsSection { // for typed Array of section models
 }
 
 protocol RemindersSwitchSectionDelegate {
-    func remindersSwitchSection(section: RemindersSwitchSection, setSwitchToggled state: Bool)
+    func remindersSwitchSection(section: RemindersSwitchSection, toggled: Bool)
 }
 
 class RemindersSwitchSection: NSObject, SettingsSection {
     var delegate: RemindersSwitchSectionDelegate
-    var remindersSwitch: UISwitch
-    var userDefaults: NSUserDefaults
+
+    var remindersSwitch = UISwitch()
+    var userDefaults = NSUserDefaults()
     var isEditable = false
     var reuseIdentifier = "RemindersSwitchCell"
     var enabledWhenRemindersOff = true
     
-    init(delegate: RemindersSwitchSectionDelegate, switchOn: Bool) {
+    var on : Bool {
+        get { return userDefaults.boolForKey("remindersOn") }
+    }
+    
+    init(delegate: RemindersSwitchSectionDelegate) {
         self.delegate = delegate
-        self.remindersSwitch = UISwitch()
-        self.userDefaults = NSUserDefaults()
+
         super.init()
         
-        self.remindersSwitch.on = switchOn
+        self.remindersSwitch.on = self.on
         self.remindersSwitch.addTarget(self, action: "switchChanged", forControlEvents: .ValueChanged)
     }
     
     func switchChanged() {
-        self.delegate.remindersSwitchSection(self, setSwitchToggled: self.remindersSwitch.on)
+        userDefaults.setBool(remindersSwitch.on, forKey: "remindersOn")
+        self.delegate.remindersSwitchSection(self, toggled: self.remindersSwitch.on)
     }
     
     func configureCell(cell: UITableViewCell, atIndex index: Int) {
