@@ -40,12 +40,25 @@ class SettingsTableViewController : UITableViewController, RemindersSwitchSectio
             RemindersAddSection(delegate: self)
         ]
     }()
+    
+    var switchSection: RemindersSwitchSection {
+        get { return sections[0] as RemindersSwitchSection }
+    }
     var remindersList: RemindersListSection {
         get { return sections[1] as RemindersListSection }
     }
     
-    func remindersSwitchSection(section: RemindersSwitchSection, setSwitchOn on: Bool) {
-        remindersOn = on
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        if self.switchSection.userDefaults.boolForKey("remindersOn") == false {
+            remindersSwitchSection(switchSection, setSwitchToggled: false)
+        } else {
+            remindersSwitchSection(switchSection, setSwitchToggled: true)
+        }
+    }
+    
+    func remindersSwitchSection(section: RemindersSwitchSection, setSwitchToggled state: Bool) {
+        remindersOn = state
         let changingSections = sections.filter({ !$0.enabledWhenRemindersOff })
         let indexRange = NSIndexSet(indexesInRange: NSMakeRange(1, changingSections.count))
         
@@ -53,9 +66,13 @@ class SettingsTableViewController : UITableViewController, RemindersSwitchSectio
 
         if remindersOn {
             self.tableView.insertSections(indexRange, withRowAnimation: .Fade)
+            section.userDefaults.setBool(true, forKey: "remindersOn")
+            section.remindersSwitch.on = true
             self.rebuildNotifications()
         } else {
             self.tableView.deleteSections(indexRange, withRowAnimation: .Fade)
+            section.userDefaults.setBool(false, forKey: "remindersOn")
+            section.remindersSwitch.on = false
             UIApplication.sharedApplication().cancelAllLocalNotifications()
         }
         

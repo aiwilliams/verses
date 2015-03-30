@@ -12,12 +12,13 @@ protocol SettingsSection { // for typed Array of section models
 }
 
 protocol RemindersSwitchSectionDelegate {
-    func remindersSwitchSection(section: RemindersSwitchSection, setSwitchOn on: Bool)
+    func remindersSwitchSection(section: RemindersSwitchSection, setSwitchToggled state: Bool)
 }
 
 class RemindersSwitchSection: NSObject, SettingsSection {
     var delegate: RemindersSwitchSectionDelegate
     var remindersSwitch: UISwitch
+    var userDefaults: NSUserDefaults
     var isEditable = false
     var reuseIdentifier = "RemindersSwitchCell"
     var enabledWhenRemindersOff = true
@@ -25,6 +26,7 @@ class RemindersSwitchSection: NSObject, SettingsSection {
     init(delegate: RemindersSwitchSectionDelegate, switchOn: Bool) {
         self.delegate = delegate
         self.remindersSwitch = UISwitch()
+        self.userDefaults = NSUserDefaults()
         super.init()
         
         self.remindersSwitch.on = switchOn
@@ -32,7 +34,7 @@ class RemindersSwitchSection: NSObject, SettingsSection {
     }
     
     func switchChanged() {
-        self.delegate.remindersSwitchSection(self, setSwitchOn: self.remindersSwitch.on)
+        self.delegate.remindersSwitchSection(self, setSwitchToggled: self.remindersSwitch.on)
     }
     
     func configureCell(cell: UITableViewCell, atIndex index: Int) {
