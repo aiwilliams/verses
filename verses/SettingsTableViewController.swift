@@ -27,7 +27,7 @@ class SettingsTableViewController : UITableViewController, RemindersSwitchSectio
         "Whatever you're doing is not as important as the Bible.",
         "God wants YOU! (to memorize the Bible)",
         "You haven't studied your verses in a while... but it's whatever.",
-        "People who memorize the Bible are way more fabulous."
+        "People who memorize the Bible are scientifically proven to be much fabulous-er... That is a word, right?"
     ]
 
     lazy var managedObjectContext: NSManagedObjectContext = { self.appDelegate.managedObjectContext }()

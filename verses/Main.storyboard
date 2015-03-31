@@ -443,10 +443,10 @@
             </objects>
             <point key="canvasLocation" x="-872" y="-369"/>
         </scene>
-        <!--Home Navigation Controller-->
+        <!--Navigation Controller-->
         <scene sceneID="xwW-4Q-u3f">
             <objects>
-                <navigationController id="thz-W3-izQ" customClass="HomeNavigationController" customModule="verses" customModuleProvider="target" sceneMemberID="viewController">
+                <navigationController id="thz-W3-izQ" sceneMemberID="viewController">
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="k4P-Vw-WdO">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
