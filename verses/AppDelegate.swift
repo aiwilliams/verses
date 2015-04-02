@@ -23,6 +23,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate, AddVerseDelegate {
     
     func applicationDidBecomeActive(application: UIApplication) {
         application.applicationIconBadgeNumber = 0
+        
+        // Reload reminder messages
+        let settingsTableViewController = SettingsTableViewController()
+        settingsTableViewController.rebuildNotifications()
     }
     
     func application(application: UIApplication, openURL url: NSURL, sourceApplication: String?, annotation: AnyObject?) -> Bool {
@@ -58,6 +62,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate, AddVerseDelegate {
         navigationController.popToRootViewControllerAnimated(false)
         let homeTableViewController = navigationController.viewControllers[0] as UITableViewController
         homeTableViewController.performSegueWithIdentifier("versesTableSegue", sender: self)
+        
+        // Reload reminder messages
         let settingsTableViewController = SettingsTableViewController()
         settingsTableViewController.rebuildNotifications()
     }
