@@ -58,6 +58,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate, AddVerseDelegate {
         navigationController.popToRootViewControllerAnimated(false)
         let homeTableViewController = navigationController.viewControllers[0] as UITableViewController
         homeTableViewController.performSegueWithIdentifier("versesTableSegue", sender: self)
+        let settingsTableViewController = SettingsTableViewController()
+        settingsTableViewController.rebuildNotifications()
     }
     
     func exportToTodayApp(biblePassage: BiblePassage) {

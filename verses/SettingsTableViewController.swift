@@ -26,8 +26,11 @@ class SettingsTableViewController : UITableViewController, RemindersSwitchSectio
     let reminderNotificationMessages: [String] = [
         "Whatever you're doing is not as important as the Bible.",
         "God wants YOU! (to memorize the Bible)",
-        "You haven't studied your verses in a while... but it's whatever.",
-        "People who memorize the Bible are scientifically proven to be much fabulous-er... That is a word, right?"
+        "You haven't studied your verses in a while...",
+        "People who memorize the Bible are scientifically proven to be fabulous-er... That is a word, right?",
+        "Just in case you forgot, here's a friendly reminder - MEMORIZE THE BIBLE!",
+        "The Bible is awesome, you should probably memorize it.",
+        "Are you sad? Memorizing the Bible will lift your spirits!"
     ]
 
     lazy var managedObjectContext: NSManagedObjectContext = { self.appDelegate.managedObjectContext }()
