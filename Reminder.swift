@@ -20,6 +20,14 @@ class Reminder: NSManagedObject {
         self.repeatInterval = .CalendarUnitDay
     }
     
+    convenience init(_ context: NSManagedObjectContext!) {
+        self.init(entity: Reminder.entity(context), insertIntoManagedObjectContext: context)
+    }
+    
+    class func entity(managedObjectContext: NSManagedObjectContext!) -> NSEntityDescription {
+        return NSEntityDescription.entityForName("Reminder", inManagedObjectContext: managedObjectContext)!
+    }
+    
     // Answer the unique identifier of this Reminder. It will be correct only after the object has been saved.
     var uri: String! {
         return objectID.URIRepresentation().absoluteString
@@ -45,6 +53,19 @@ class Reminder: NSManagedObject {
     var repeatInterval: NSCalendarUnit {
         get { return NSCalendarUnit(UInt(self.rawRepeatInterval)) }
         set(newInterval) { self.rawRepeatInterval = newInterval.rawValue }
+    }
+    
+    func repeatIntervalDescription() -> String {
+        switch repeatInterval {
+        case NSCalendarUnit.CalendarUnitDay:
+            return "Daily"
+        case NSCalendarUnit.CalendarUnitWeekday:
+            return "Weekly"
+        case NSCalendarUnit.CalendarUnitMonth:
+            return "Monthly"
+        default:
+            return "Unknown"
+        }
     }
     
     func repeatIntervalComponents() -> NSDateComponents {

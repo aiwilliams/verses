@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1C6387E91ACF0B0B00AFC08A /* ReminderTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C6387E81ACF0B0B00AFC08A /* ReminderTests.swift */; };
 		43C9A8A6A2C64855B06D18B5 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E14CAB0BA205450DA43E233D /* libPods.a */; };
 		B751F9851AB783FD005BBF73 /* SettingsSections.swift in Sources */ = {isa = PBXBuildFile; fileRef = B751F9841AB783FD005BBF73 /* SettingsSections.swift */; };
 		B78096EB1967028C0004D560 /* UserData.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = B78096E91967028C0004D560 /* UserData.xcdatamodeld */; };
@@ -25,19 +26,15 @@
 		B7F4E8B11965E43A00466BA7 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B7F4E8961965E43900466BA7 /* Foundation.framework */; };
 		B7F4E8B21965E43A00466BA7 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B7F4E89A1965E43A00466BA7 /* UIKit.framework */; };
 		B7F4E8BA1965E43A00466BA7 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = B7F4E8B81965E43A00466BA7 /* InfoPlist.strings */; };
-		B7F4E8BC1965E43A00466BA7 /* versesTests.m in Sources */ = {isa = PBXBuildFile; fileRef = B7F4E8BB1965E43A00466BA7 /* versesTests.m */; };
 		B7F4E8C61965E72300466BA7 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B7F4E8C51965E72300466BA7 /* Main.storyboard */; };
 		FD029D271A81593100C7BC0F /* VerseDetailTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD029D261A81593100C7BC0F /* VerseDetailTableViewController.swift */; };
 		FD029D291A817A6200C7BC0F /* AddVerseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD029D281A817A6200C7BC0F /* AddVerseViewController.swift */; };
 		FD117C7C1A09710D00B01643 /* SettingsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD117C7B1A09710D00B01643 /* SettingsTableViewController.swift */; };
-		FD12EB661AA238BA00EAA23F /* ReminderDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD12EB651AA238BA00EAA23F /* ReminderDetailViewController.swift */; };
 		FD17757C1ABC670A005458DE /* ReminderNotification.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD17757B1ABC670A005458DE /* ReminderNotification.swift */; };
 		FD30F2D51A72B6D8005BBC02 /* Reminder.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD30F2D41A72B6D8005BBC02 /* Reminder.swift */; };
 		FD30F2D61A72B6D8005BBC02 /* Reminder.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD30F2D41A72B6D8005BBC02 /* Reminder.swift */; };
 		FD35E2CA1A7D7FBF007651D8 /* VersesTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD35E2C91A7D7FBF007651D8 /* VersesTableViewController.swift */; };
 		FDD2CE861ABA2A3800070A2B /* ReminderFormDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDD2CE851ABA2A3800070A2B /* ReminderFormDelegate.swift */; };
-		FDD6D0F81A0C1E2A00AE107F /* TimeSettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDD6D0F71A0C1E2A00AE107F /* TimeSettingsViewController.swift */; };
-		FDD6D0FA1A0C1E8500AE107F /* FrequencySettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDD6D0F91A0C1E8500AE107F /* FrequencySettingsViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -79,6 +76,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		1C6387E81ACF0B0B00AFC08A /* ReminderTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReminderTests.swift; sourceTree = "<group>"; };
 		B70F681119F5E87B00AC174F /* today-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "today-Bridging-Header.h"; sourceTree = "<group>"; };
 		B70F681219F5EAFE00AC174F /* verses-Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "verses-Bridging-Header.h"; sourceTree = "<group>"; };
 		B751F9841AB783FD005BBF73 /* SettingsSections.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsSections.swift; sourceTree = "<group>"; };
@@ -102,7 +100,6 @@
 		B7F4E8AF1965E43A00466BA7 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
 		B7F4E8B71965E43A00466BA7 /* versesTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "versesTests-Info.plist"; sourceTree = "<group>"; };
 		B7F4E8B91965E43A00466BA7 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		B7F4E8BB1965E43A00466BA7 /* versesTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = versesTests.m; sourceTree = "<group>"; };
 		B7F4E8C51965E72300466BA7 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		BBAD18BB7ADEB2831E37270B /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		E14CAB0BA205450DA43E233D /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -110,7 +107,6 @@
 		FD029D261A81593100C7BC0F /* VerseDetailTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VerseDetailTableViewController.swift; sourceTree = "<group>"; };
 		FD029D281A817A6200C7BC0F /* AddVerseViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddVerseViewController.swift; sourceTree = "<group>"; };
 		FD117C7B1A09710D00B01643 /* SettingsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsTableViewController.swift; sourceTree = "<group>"; };
-		FD12EB651AA238BA00EAA23F /* ReminderDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReminderDetailViewController.swift; sourceTree = "<group>"; };
 		FD17757B1ABC670A005458DE /* ReminderNotification.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReminderNotification.swift; sourceTree = "<group>"; };
 		FD18A9E919E4709D0013FCDC /* verses.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = verses.entitlements; sourceTree = "<group>"; };
 		FD18A9EA19E4717F0013FCDC /* today.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = today.entitlements; sourceTree = "<group>"; };
@@ -118,8 +114,6 @@
 		FD30F2D41A72B6D8005BBC02 /* Reminder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Reminder.swift; path = ../Reminder.swift; sourceTree = "<group>"; };
 		FD35E2C91A7D7FBF007651D8 /* VersesTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VersesTableViewController.swift; sourceTree = "<group>"; };
 		FDD2CE851ABA2A3800070A2B /* ReminderFormDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReminderFormDelegate.swift; sourceTree = "<group>"; };
-		FDD6D0F71A0C1E2A00AE107F /* TimeSettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimeSettingsViewController.swift; sourceTree = "<group>"; };
-		FDD6D0F91A0C1E8500AE107F /* FrequencySettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FrequencySettingsViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -239,7 +233,7 @@
 		B7F4E8B51965E43A00466BA7 /* versesTests */ = {
 			isa = PBXGroup;
 			children = (
-				B7F4E8BB1965E43A00466BA7 /* versesTests.m */,
+				1C6387E81ACF0B0B00AFC08A /* ReminderTests.swift */,
 				B7F4E8B61965E43A00466BA7 /* Supporting Files */,
 			);
 			path = versesTests;
@@ -266,6 +260,7 @@
 		FD30F2C91A72AE2A005BBC02 /* model */ = {
 			isa = PBXGroup;
 			children = (
+				FD17757B1ABC670A005458DE /* ReminderNotification.swift */,
 				B7C75E941983E77500DC2877 /* BiblePassage.swift */,
 				FD30F2D41A72B6D8005BBC02 /* Reminder.swift */,
 				B78096E91967028C0004D560 /* UserData.xcdatamodeld */,
@@ -296,11 +291,7 @@
 			isa = PBXGroup;
 			children = (
 				FD117C7B1A09710D00B01643 /* SettingsTableViewController.swift */,
-				FD17757B1ABC670A005458DE /* ReminderNotification.swift */,
 				B751F9841AB783FD005BBF73 /* SettingsSections.swift */,
-				FD12EB651AA238BA00EAA23F /* ReminderDetailViewController.swift */,
-				FDD6D0F71A0C1E2A00AE107F /* TimeSettingsViewController.swift */,
-				FDD6D0F91A0C1E8500AE107F /* FrequencySettingsViewController.swift */,
 				FDD2CE851ABA2A3800070A2B /* ReminderFormDelegate.swift */,
 			);
 			name = settings;
@@ -494,17 +485,14 @@
 				FD35E2CA1A7D7FBF007651D8 /* VersesTableViewController.swift in Sources */,
 				B7F49D861A11A11B00E4520E /* AppDelegate.swift in Sources */,
 				FD17757C1ABC670A005458DE /* ReminderNotification.swift in Sources */,
-				FDD6D0FA1A0C1E8500AE107F /* FrequencySettingsViewController.swift in Sources */,
 				FD029D291A817A6200C7BC0F /* AddVerseViewController.swift in Sources */,
 				B751F9851AB783FD005BBF73 /* SettingsSections.swift in Sources */,
 				FD029D271A81593100C7BC0F /* VerseDetailTableViewController.swift in Sources */,
-				FDD6D0F81A0C1E2A00AE107F /* TimeSettingsViewController.swift in Sources */,
 				B78096EB1967028C0004D560 /* UserData.xcdatamodeld in Sources */,
 				FD117C7C1A09710D00B01643 /* SettingsTableViewController.swift in Sources */,
 				B7C75E951983E77500DC2877 /* BiblePassage.swift in Sources */,
 				FDD2CE861ABA2A3800070A2B /* ReminderFormDelegate.swift in Sources */,
 				FD30F2D51A72B6D8005BBC02 /* Reminder.swift in Sources */,
-				FD12EB661AA238BA00EAA23F /* ReminderDetailViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -512,8 +500,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B7F4E8BC1965E43A00466BA7 /* versesTests.m in Sources */,
 				FD30F2D61A72B6D8005BBC02 /* Reminder.swift in Sources */,
+				1C6387E91ACF0B0B00AFC08A /* ReminderTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
