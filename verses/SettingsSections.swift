@@ -7,8 +7,9 @@ protocol SettingsSection { // for typed Array of section models
     var enabledWhenRemindersOff: Bool { get }
     
     func configureCell(cell: UITableViewCell, atIndex index: Int)
-    func selectRow(atIndex index: Int)
+    func selectRow(atIndex index: Int, inSection section: Int, inTableView tableView: UITableView!)
     func numberOfRows() -> Int
+    func heightForRow(index: Int) -> Int
 }
 
 protocol RemindersSwitchSectionDelegate {
@@ -51,28 +52,26 @@ class RemindersSwitchSection: NSObject, SettingsSection {
         return 1
     }
     
-    func selectRow(atIndex index: Int) {}
+    func heightForRow(index: Int) -> Int {
+        return 44
+    }
+    
+    func selectRow(atIndex index: Int, inSection section: Int, inTableView tableView: UITableView!) {}
 }
 
-class RemindersListSection: SettingsSection {
+class ReminderSection: SettingsSection {
     var managedObjectContext: NSManagedObjectContext
     var isEditable = true
     var enabledWhenRemindersOff = false
     var reuseIdentifier = "ReminderCell"
+    var selectedIndex: Int?
+    var reminder: Reminder
     
-    var reminders: [Reminder] {
-        let fetchRequest = NSFetchRequest()
-        fetchRequest.entity = self.entity
-        
-        var error: NSError?
-        
-        var fetchData = self.managedObjectContext.executeFetchRequest(fetchRequest, error: &error)! as [Reminder]
-        fetchData = self.managedObjectContext.executeFetchRequest(fetchRequest, error: &error)! as [Reminder]
-        return fetchData
-    }
-    
-    lazy var entity: NSEntityDescription = {
-        return NSEntityDescription.entityForName("Reminder", inManagedObjectContext: self.managedObjectContext)!
+    lazy var timeFormatter : NSDateFormatter = {
+        let formatter = NSDateFormatter()
+        formatter.dateStyle = .NoStyle
+        formatter.timeStyle = .ShortStyle
+        return formatter
     }()
     
     var frequencies = [
@@ -87,37 +86,61 @@ class RemindersListSection: SettingsSection {
         return formatter
     }()
     
-    init(managedObjectContext: NSManagedObjectContext) {
+    init(managedObjectContext: NSManagedObjectContext, reminder: Reminder?) {
         self.managedObjectContext = managedObjectContext
+        if reminder == nil {
+            self.reminder = Reminder(managedObjectContext)
+        } else {
+            self.reminder = reminder!
+        }
     }
     
     func addReminder() -> Reminder {
-        let reminder = Reminder(entity: entity, insertIntoManagedObjectContext: self.managedObjectContext)
+        let reminder = Reminder(managedObjectContext)
         self.managedObjectContext.save(nil)
         return reminder
     }
     
-    func deleteReminder(index: Int) {
-        let reminder: Reminder = self.reminders[index]
+    func deleteReminder() {
         self.managedObjectContext.deleteObject(reminder)
         self.managedObjectContext.save(nil)
     }
     
     func configureCell(cell: UITableViewCell, atIndex index: Int) {
-        let reminder = reminders[index]
-        cell.textLabel!.text = dateFormatter.stringFromDate(reminder.nextFireDate)
-        cell.detailTextLabel!.text = frequencies[UInt(reminder.rawRepeatInterval)]
+        switch index {
+        case 0:
+            cell.textLabel!.text = "Time"
+            cell.detailTextLabel!.text = timeFormatter.stringFromDate(reminder.fireDate)
+        default:
+            cell.textLabel!.text = "Frequency"
+            cell.detailTextLabel!.text = reminder.repeatIntervalDescription()
+        }
     }
     
     func numberOfRows() -> Int {
-        return reminders.count
+        return 2
     }
     
-    func selectRow(atIndex index: Int) {}
+    func heightForRow(index: Int) -> Int {
+        if index == selectedIndex {
+            return 300
+        } else {
+            return 44
+        }
+    }
+    
+    func selectRow(atIndex index: Int, inSection section: Int, inTableView tableView: UITableView!) {
+        if selectedIndex == index {
+            selectedIndex = nil
+        } else {
+            selectedIndex = index
+        }
+        tableView.reloadRowsAtIndexPaths([NSIndexPath(forRow: index, inSection: section)], withRowAnimation: .Automatic)
+    }
 }
 
 protocol RemindersAddSectionDelegate {
-    func addReminder(section: RemindersAddSection)
+    func addReminder(section: RemindersAddSection, sectionIndex: Int)
 }
 
 class RemindersAddSection: NSObject, SettingsSection {
@@ -138,7 +161,11 @@ class RemindersAddSection: NSObject, SettingsSection {
         return 1
     }
     
-    func selectRow(atIndex index: Int) {
-        self.delegate.addReminder(self)
+    func heightForRow(index: Int) -> Int {
+        return 44
+    }
+    
+    func selectRow(atIndex index: Int, inSection section: Int, inTableView tableView: UITableView!) {
+        self.delegate.addReminder(self, sectionIndex: section)
     }
 }

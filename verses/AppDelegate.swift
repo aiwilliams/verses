@@ -24,9 +24,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate, AddVerseDelegate {
     func applicationDidBecomeActive(application: UIApplication) {
         application.applicationIconBadgeNumber = 0
         
+        // TODO: Reload notifications
         // Reload reminder messages
         let settingsTableViewController = SettingsTableViewController()
-        settingsTableViewController.rebuildNotifications()
+//        settingsTableViewController.rebuildNotifications()
     }
     
     func application(application: UIApplication, openURL url: NSURL, sourceApplication: String?, annotation: AnyObject?) -> Bool {

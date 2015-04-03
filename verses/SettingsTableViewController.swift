@@ -34,19 +34,11 @@ class SettingsTableViewController : UITableViewController, RemindersSwitchSectio
     ]
 
     lazy var managedObjectContext: NSManagedObjectContext = { self.appDelegate.managedObjectContext }()
-    lazy var sections: [SettingsSection] = {
-        return [
-            RemindersSwitchSection(delegate: self),
-            RemindersListSection(managedObjectContext: self.managedObjectContext),
-            RemindersAddSection(delegate: self)
-        ]
-    }()
+    var sections: [SettingsSection] = []
+    var reminders: [Reminder] = []
     
     var switchSection: RemindersSwitchSection {
         get { return sections[0] as RemindersSwitchSection }
-    }
-    var remindersList: RemindersListSection {
-        get { return sections[1] as RemindersListSection }
     }
     
     func remindersSwitchSection(section: RemindersSwitchSection, toggled: Bool) {
@@ -66,21 +58,53 @@ class SettingsTableViewController : UITableViewController, RemindersSwitchSectio
         self.tableView.endUpdates()
     }
     
-    func addReminder(section: RemindersAddSection) {
-        let reminder = remindersList.addReminder()
-        let indexPath = NSIndexPath(forRow: remindersList.numberOfRows()-1, inSection: 1)
-        self.tableView.insertRowsAtIndexPaths([indexPath], withRowAnimation: .Fade)
+    func addReminder(section: RemindersAddSection, sectionIndex: Int) {
+        let reminderSection = ReminderSection(managedObjectContext: self.managedObjectContext, reminder: nil)
+        sections.insert(reminderSection, atIndex: sectionIndex)
+        
+        var indexPaths : [NSIndexPath] = []
+        for i in 1...(reminderSection.numberOfRows()) {
+            indexPaths += [NSIndexPath(forRow: i, inSection: sectionIndex)]
+        }
+
+        self.tableView.insertSections(NSIndexSet(index: sectionIndex), withRowAnimation: .Fade)
     }
     
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        if segue.identifier != "ReminderDetailSegue" { return }
-        
-        let indexPath = tableView.indexPathForSelectedRow()!
-        let section = sections[indexPath.section] as RemindersListSection
-        let detail = segue.destinationViewController as ReminderDetailViewController
-        detail.reminder = section.reminders[indexPath.row]
-        detail.delegate = self
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        self.sections  = [
+            RemindersSwitchSection(delegate: self),
+            RemindersAddSection(delegate: self)
+        ]
+        loadRemindersSections()
     }
+    
+    func loadRemindersSections() {
+        let fetchRequest = NSFetchRequest()
+        fetchRequest.entity = Reminder.entity(managedObjectContext)
+        
+        var error: NSError?
+        reminders = managedObjectContext.executeFetchRequest(fetchRequest, error: &error)! as [Reminder]
+        if error != nil {
+            println("Fetch error: \(error)")
+        }
+        
+        var i = 1
+        for r in reminders {
+            sections.insert(ReminderSection(managedObjectContext: managedObjectContext, reminder: r), atIndex: i)
+            i++
+        }
+    }
+    
+//    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+//        if segue.identifier != "ReminderDetailSegue" { return }
+//        
+//        let indexPath = tableView.indexPathForSelectedRow()!
+//        let section = sections[indexPath.section] as RemindersListSection
+//        let detail = segue.destinationViewController as ReminderDetailViewController
+//        detail.reminder = section.reminders[indexPath.row]
+//        detail.delegate = self
+//    }
     
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         return self.switchSection.on ? sections.count : sections.filter({ $0.enabledWhenRemindersOff }).count
@@ -101,9 +125,11 @@ class SettingsTableViewController : UITableViewController, RemindersSwitchSectio
     override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
         if editingStyle == UITableViewCellEditingStyle.Delete {
             self.tableView.beginUpdates()
-            remindersList.deleteReminder(indexPath.row)
+            let reminderSection = sections[indexPath.section] as ReminderSection
+            reminderSection.deleteReminder()
+            sections.removeAtIndex(indexPath.section)
             rebuildNotifications()
-            tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: UITableViewRowAnimation.Automatic)
+            tableView.deleteSections(NSIndexSet(index: indexPath.section), withRowAnimation: .Fade)
             self.tableView.endUpdates()
         }
     }
@@ -113,7 +139,11 @@ class SettingsTableViewController : UITableViewController, RemindersSwitchSectio
     }
     
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        self.sections[indexPath.section].selectRow(atIndex: indexPath.row)
+        sections[indexPath.section].selectRow(atIndex: indexPath.row, inSection: indexPath.section, inTableView: tableView)
+    }
+    
+    override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+        return CGFloat(sections[indexPath.section].heightForRow(indexPath.row))
     }
     
     func reminderChanged(reminder: Reminder) {
@@ -123,12 +153,15 @@ class SettingsTableViewController : UITableViewController, RemindersSwitchSectio
     }
     
     func rebuildNotifications() {
-        var notifications = [UILocalNotification]()
-        for r in remindersList.reminders {
-            notifications += [createLocalNotification(r)]
+        if sections.count > 2 {
+            var notifications = [UILocalNotification]()
+            let reminderLists = sections[1...sections.count-2]
+            for section in reminderLists {
+                let reminderSection = section as ReminderSection
+                notifications += [createLocalNotification(reminderSection.reminder)]
+            }
+            UIApplication.sharedApplication().scheduledLocalNotifications = notifications
         }
-        
-        UIApplication.sharedApplication().scheduledLocalNotifications = notifications
     }
     
     func createLocalNotification(reminder: Reminder) -> UILocalNotification {
