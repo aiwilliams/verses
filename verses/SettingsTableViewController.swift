@@ -9,10 +9,14 @@
 import UIKit
 import CoreData
 
+// MARK: Protocols
+
 @objc protocol ReminderForm {
     var reminder: Reminder! { get set }
     var delegate: ReminderFormDelegate! { get set }
 }
+
+// MARK: Extensions
 
 extension Array {
     func sample() -> T {
@@ -22,6 +26,8 @@ extension Array {
 }
 
 class SettingsTableViewController : UITableViewController, RemindersSwitchSectionDelegate, RemindersAddSectionDelegate, ReminderFormDelegate {
+    // MARK: Variable and constant declarations
+    
     let appDelegate: AppDelegate = UIApplication.sharedApplication().delegate as AppDelegate
     let reminderNotificationMessages: [String] = [
         "Whatever you're doing is not as important as the Bible.",
@@ -41,6 +47,19 @@ class SettingsTableViewController : UITableViewController, RemindersSwitchSectio
         get { return sections[0] as RemindersSwitchSection }
     }
     
+    // MARK: Setup
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        self.sections  = [
+            RemindersSwitchSection(delegate: self),
+            RemindersAddSection(delegate: self)
+        ]
+        loadRemindersSections()
+    }
+    
+    // MARK: Custom section methods
+    
     func remindersSwitchSection(section: RemindersSwitchSection, toggled: Bool) {
         let changingSections = sections.filter({ !$0.enabledWhenRemindersOff })
         let indexRange = NSIndexSet(indexesInRange: NSMakeRange(1, changingSections.count))
@@ -59,6 +78,8 @@ class SettingsTableViewController : UITableViewController, RemindersSwitchSectio
     }
     
     func addReminder(section: RemindersAddSection, sectionIndex: Int) {
+        // TODO: Schedule reminder for added reminder
+        
         let reminderSection = ReminderSection(managedObjectContext: self.managedObjectContext, reminder: nil)
         sections.insert(reminderSection, atIndex: sectionIndex)
         
@@ -68,15 +89,6 @@ class SettingsTableViewController : UITableViewController, RemindersSwitchSectio
         }
 
         self.tableView.insertSections(NSIndexSet(index: sectionIndex), withRowAnimation: .Fade)
-    }
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        self.sections  = [
-            RemindersSwitchSection(delegate: self),
-            RemindersAddSection(delegate: self)
-        ]
-        loadRemindersSections()
     }
     
     func loadRemindersSections() {
@@ -96,32 +108,47 @@ class SettingsTableViewController : UITableViewController, RemindersSwitchSectio
         }
     }
     
-//    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-//        if segue.identifier != "ReminderDetailSegue" { return }
-//        
-//        let indexPath = tableView.indexPathForSelectedRow()!
-//        let section = sections[indexPath.section] as RemindersListSection
-//        let detail = segue.destinationViewController as ReminderDetailViewController
-//        detail.reminder = section.reminders[indexPath.row]
-//        detail.delegate = self
-//    }
+    // MARK: Table view methods
     
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         return self.switchSection.on ? sections.count : sections.filter({ $0.enabledWhenRemindersOff }).count
     }
     
+    override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+        return CGFloat(sections[indexPath.section].heightForRow(indexPath.row))
+    }
+
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return sections[section].numberOfRows()
     }
-    
+
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let section = sections[indexPath.section]
-        let identifier = section.reuseIdentifier
-        var cell = tableView.dequeueReusableCellWithIdentifier(identifier) as UITableViewCell
-        section.configureCell(cell, atIndex: indexPath.row)
-        return cell
+        var cell: UITableViewCell!
+
+        if indexPath.section == 0 {
+            cell = tableView.dequeueReusableCellWithIdentifier("RemindersSwitchCell") as UITableViewCell
+        } else if indexPath.section == sections.count - 1 {
+            cell = tableView.dequeueReusableCellWithIdentifier("RemindersAddCell") as UITableViewCell
+        } else {
+            var nibName: String?
+            if indexPath.row == 0 {
+                nibName = "SettingsTableViewTimeCell"
+            } else {
+                nibName = "SettingsTableViewFrequencyCell"
+            }
+            let nibArray = NSBundle.mainBundle().loadNibNamed(nibName, owner: self, options: nil)
+            cell = (nibArray[0] as UITableViewCell)
+        }
+        
+        section.configureCell(cell!, atIndex: indexPath.row)
+        return cell!
     }
     
+    override func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
+        return sections[indexPath.section].isEditable
+    }
+
     override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
         if editingStyle == UITableViewCellEditingStyle.Delete {
             self.tableView.beginUpdates()
@@ -134,17 +161,11 @@ class SettingsTableViewController : UITableViewController, RemindersSwitchSectio
         }
     }
     
-    override func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
-        return sections[indexPath.section].isEditable
-    }
-    
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         sections[indexPath.section].selectRow(atIndex: indexPath.row, inSection: indexPath.section, inTableView: tableView)
     }
     
-    override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
-        return CGFloat(sections[indexPath.section].heightForRow(indexPath.row))
-    }
+    // MARK: UILocalNotification management
     
     func reminderChanged(reminder: Reminder) {
         managedObjectContext.save(nil)

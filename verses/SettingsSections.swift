@@ -106,16 +106,7 @@ class ReminderSection: SettingsSection {
         self.managedObjectContext.save(nil)
     }
     
-    func configureCell(cell: UITableViewCell, atIndex index: Int) {
-        switch index {
-        case 0:
-            cell.textLabel!.text = "Time"
-            cell.detailTextLabel!.text = timeFormatter.stringFromDate(reminder.fireDate)
-        default:
-            cell.textLabel!.text = "Frequency"
-            cell.detailTextLabel!.text = reminder.repeatIntervalDescription()
-        }
-    }
+    func configureCell(cell: UITableViewCell, atIndex index: Int) {}
     
     func numberOfRows() -> Int {
         return 2
@@ -123,7 +114,7 @@ class ReminderSection: SettingsSection {
     
     func heightForRow(index: Int) -> Int {
         if index == selectedIndex {
-            return 300
+            return 205
         } else {
             return 44
         }

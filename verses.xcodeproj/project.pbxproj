@@ -34,6 +34,10 @@
 		FD30F2D51A72B6D8005BBC02 /* Reminder.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD30F2D41A72B6D8005BBC02 /* Reminder.swift */; };
 		FD30F2D61A72B6D8005BBC02 /* Reminder.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD30F2D41A72B6D8005BBC02 /* Reminder.swift */; };
 		FD35E2CA1A7D7FBF007651D8 /* VersesTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD35E2C91A7D7FBF007651D8 /* VersesTableViewController.swift */; };
+		FD836F951AD021BF00C34F7E /* SettingsTableViewTimeCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = FD836F941AD021BF00C34F7E /* SettingsTableViewTimeCell.xib */; };
+		FD836F971AD0223300C34F7E /* SettingsTableViewFrequencyCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = FD836F961AD0223300C34F7E /* SettingsTableViewFrequencyCell.xib */; };
+		FD961D221AD31B4F00E5D5C3 /* SettingsTableViewFrequencyCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD961D201AD31B4F00E5D5C3 /* SettingsTableViewFrequencyCell.swift */; };
+		FD961D231AD31B4F00E5D5C3 /* SettingsTableViewTimeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD961D211AD31B4F00E5D5C3 /* SettingsTableViewTimeCell.swift */; };
 		FDD2CE861ABA2A3800070A2B /* ReminderFormDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDD2CE851ABA2A3800070A2B /* ReminderFormDelegate.swift */; };
 /* End PBXBuildFile section */
 
@@ -113,6 +117,10 @@
 		FD30F2D31A72B6D7005BBC02 /* versesTests-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "versesTests-Bridging-Header.h"; sourceTree = "<group>"; };
 		FD30F2D41A72B6D8005BBC02 /* Reminder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Reminder.swift; path = ../Reminder.swift; sourceTree = "<group>"; };
 		FD35E2C91A7D7FBF007651D8 /* VersesTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VersesTableViewController.swift; sourceTree = "<group>"; };
+		FD836F941AD021BF00C34F7E /* SettingsTableViewTimeCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SettingsTableViewTimeCell.xib; sourceTree = "<group>"; };
+		FD836F961AD0223300C34F7E /* SettingsTableViewFrequencyCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SettingsTableViewFrequencyCell.xib; sourceTree = "<group>"; };
+		FD961D201AD31B4F00E5D5C3 /* SettingsTableViewFrequencyCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SettingsTableViewFrequencyCell.swift; path = ../../../../../../.Trash/SettingsTableViewFrequencyCell.swift; sourceTree = "<group>"; };
+		FD961D211AD31B4F00E5D5C3 /* SettingsTableViewTimeCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SettingsTableViewTimeCell.swift; path = ../../../../../../.Trash/SettingsTableViewTimeCell.swift; sourceTree = "<group>"; };
 		FDD2CE851ABA2A3800070A2B /* ReminderFormDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReminderFormDelegate.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -272,6 +280,8 @@
 			isa = PBXGroup;
 			children = (
 				B7F4E8C51965E72300466BA7 /* Main.storyboard */,
+				FD836F941AD021BF00C34F7E /* SettingsTableViewTimeCell.xib */,
+				FD836F961AD0223300C34F7E /* SettingsTableViewFrequencyCell.xib */,
 			);
 			name = view;
 			sourceTree = "<group>";
@@ -292,6 +302,8 @@
 			children = (
 				FD117C7B1A09710D00B01643 /* SettingsTableViewController.swift */,
 				B751F9841AB783FD005BBF73 /* SettingsSections.swift */,
+				FD961D211AD31B4F00E5D5C3 /* SettingsTableViewTimeCell.swift */,
+				FD961D201AD31B4F00E5D5C3 /* SettingsTableViewFrequencyCell.swift */,
 				FDD2CE851ABA2A3800070A2B /* ReminderFormDelegate.swift */,
 			);
 			name = settings;
@@ -421,8 +433,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				B7F4E8C61965E72300466BA7 /* Main.storyboard in Resources */,
+				FD836F951AD021BF00C34F7E /* SettingsTableViewTimeCell.xib in Resources */,
 				B7F4E8A11965E43A00466BA7 /* InfoPlist.strings in Resources */,
 				B7F4E8A91965E43A00466BA7 /* Images.xcassets in Resources */,
+				FD836F971AD0223300C34F7E /* SettingsTableViewFrequencyCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -484,6 +498,7 @@
 			files = (
 				FD35E2CA1A7D7FBF007651D8 /* VersesTableViewController.swift in Sources */,
 				B7F49D861A11A11B00E4520E /* AppDelegate.swift in Sources */,
+				FD961D221AD31B4F00E5D5C3 /* SettingsTableViewFrequencyCell.swift in Sources */,
 				FD17757C1ABC670A005458DE /* ReminderNotification.swift in Sources */,
 				FD029D291A817A6200C7BC0F /* AddVerseViewController.swift in Sources */,
 				B751F9851AB783FD005BBF73 /* SettingsSections.swift in Sources */,
@@ -493,6 +508,7 @@
 				B7C75E951983E77500DC2877 /* BiblePassage.swift in Sources */,
 				FDD2CE861ABA2A3800070A2B /* ReminderFormDelegate.swift in Sources */,
 				FD30F2D51A72B6D8005BBC02 /* Reminder.swift in Sources */,
+				FD961D231AD31B4F00E5D5C3 /* SettingsTableViewTimeCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
