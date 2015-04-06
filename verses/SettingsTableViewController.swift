@@ -9,8 +9,6 @@
 import UIKit
 import CoreData
 
-// MARK: Protocols
-
 // MARK: Extensions
 
 extension Array {
@@ -27,22 +25,14 @@ class SettingsTableViewController : UITableViewController,
     // MARK: Variable and constant declarations
     
     let appDelegate: AppDelegate = UIApplication.sharedApplication().delegate as AppDelegate
-    let reminderNotificationMessages: [String] = [
-        "Whatever you're doing is not as important as the Bible.",
-        "God wants YOU! (to memorize the Bible)",
-        "You haven't studied your verses in a while...",
-        "People who memorize the Bible are scientifically proven to be fabulous-er... That is a word, right?",
-        "Just in case you forgot, here's a friendly reminder - MEMORIZE THE BIBLE!",
-        "The Bible is awesome, you should probably memorize it.",
-        "Are you sad? Memorizing the Bible will lift your spirits!"
-    ]
 
     lazy var managedObjectContext: NSManagedObjectContext = { self.appDelegate.managedObjectContext }()
+    
     var sections: [SettingsSectionViewController] = []
     var reminders: [Reminder] = []
     
-    var switchSection: RemindersSwitchSection {
-        get { return sections[0] as RemindersSwitchSection }
+    var switchSection: RemindersSwitchSectionViewController {
+        get { return sections[0] as RemindersSwitchSectionViewController }
     }
     
     // MARK: Setup
@@ -58,13 +48,13 @@ class SettingsTableViewController : UITableViewController,
     
     // MARK: Custom section methods
     
-    func remindersSwitchSection(section: RemindersSwitchSection, toggled: Bool) {
+    func remindersSwitchDidChange(on: Bool) {
         let changingSections = sections.filter({ !$0.enabledWhenRemindersOff })
         let indexRange = NSIndexSet(indexesInRange: NSMakeRange(1, changingSections.count))
         
         self.tableView.beginUpdates()
 
-        if toggled == true {
+        if on == true {
             self.tableView.insertSections(indexRange, withRowAnimation: .Fade)
             self.rebuildNotifications()
         } else {
@@ -78,7 +68,7 @@ class SettingsTableViewController : UITableViewController,
     func addReminder(section: RemindersAddSectionViewController, sectionIndex: Int) {
         // TODO: Schedule reminder for added reminder
         
-        let reminderSection = ReminderSection(managedObjectContext: self.managedObjectContext, reminder: nil)
+        let reminderSection = ReminderSectionViewController(managedObjectContext: self.managedObjectContext, reminder: nil)
         sections.insert(reminderSection, atIndex: sectionIndex)
         
         var indexPaths : [NSIndexPath] = []
@@ -101,7 +91,7 @@ class SettingsTableViewController : UITableViewController,
         
         var i = 1
         for r in reminders {
-            sections.insert(ReminderSection(managedObjectContext: managedObjectContext, reminder: r), atIndex: i)
+            sections.insert(ReminderSectionViewController(managedObjectContext: managedObjectContext, reminder: r), atIndex: i)
             i++
         }
     }
@@ -122,25 +112,7 @@ class SettingsTableViewController : UITableViewController,
 
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let section = sections[indexPath.section]
-        var cell: UITableViewCell!
-
-        if indexPath.section == 0 {
-            cell = tableView.dequeueReusableCellWithIdentifier("RemindersSwitchCell") as UITableViewCell
-        } else if indexPath.section == sections.count - 1 {
-            cell = tableView.dequeueReusableCellWithIdentifier("RemindersAddCell") as UITableViewCell
-        } else {
-            var nibName: String?
-            if indexPath.row == 0 {
-                nibName = "SettingsTableViewTimeCell"
-            } else {
-                nibName = "SettingsTableViewFrequencyCell"
-            }
-            let nibArray = NSBundle.mainBundle().loadNibNamed(nibName, owner: self, options: nil)
-            cell = (nibArray[0] as UITableViewCell)
-        }
-        
-        section.configureCell(cell!, atIndex: indexPath.row)
-        return cell!
+        return section.tableView(tableView, cellForRow: indexPath.row)
     }
     
     override func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
@@ -150,7 +122,7 @@ class SettingsTableViewController : UITableViewController,
     override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
         if editingStyle == UITableViewCellEditingStyle.Delete {
             self.tableView.beginUpdates()
-            let reminderSection = sections[indexPath.section] as ReminderSection
+            let reminderSection = sections[indexPath.section] as ReminderSectionViewController
             reminderSection.deleteReminder()
             sections.removeAtIndex(indexPath.section)
             rebuildNotifications()
@@ -165,6 +137,16 @@ class SettingsTableViewController : UITableViewController,
     
     // MARK: UILocalNotification management
     
+    let reminderNotificationMessages: [String] = [
+        "Whatever you're doing is not as important as the Bible.",
+        "God wants YOU! (to memorize the Bible)",
+        "You haven't studied your verses in a while...",
+        "People who memorize the Bible are scientifically proven to be fabulous-er... That is a word, right?",
+        "Just in case you forgot, here's a friendly reminder - MEMORIZE THE BIBLE!",
+        "The Bible is awesome, you should probably memorize it.",
+        "Are you sad? Memorizing the Bible will lift your spirits!"
+    ]
+    
     func reminderChanged(reminder: Reminder) {
         managedObjectContext.save(nil)
         self.rebuildNotifications()
@@ -176,7 +158,7 @@ class SettingsTableViewController : UITableViewController,
             var notifications = [UILocalNotification]()
             let reminderLists = sections[1...sections.count-2]
             for section in reminderLists {
-                let reminderSection = section as ReminderSection
+                let reminderSection = section as ReminderSectionViewController
                 notifications += [createLocalNotification(reminderSection.reminder)]
             }
             UIApplication.sharedApplication().scheduledLocalNotifications = notifications

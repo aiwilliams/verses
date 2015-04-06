@@ -6,14 +6,14 @@ protocol SettingsSectionViewController { // for typed Array of section models
     var reuseIdentifier: String { get }
     var enabledWhenRemindersOff: Bool { get }
     
-    func configureCell(cell: UITableViewCell, atIndex index: Int)
+    func tableView(tableView: UITableView, cellForRow row: Int) -> UITableViewCell
     func selectRow(atIndex index: Int, inSection section: Int, inTableView tableView: UITableView!)
     func numberOfRows() -> Int
     func heightForRow(index: Int) -> Int
 }
 
 protocol RemindersSwitchSectionViewDelegate {
-    func remindersSwitchSection(section: RemindersSwitchSectionViewController, toggled: Bool)
+    func remindersSwitchDidChange(on: Bool)
 }
 
 class RemindersSwitchSectionViewController: NSObject, SettingsSectionViewController {
@@ -40,12 +40,14 @@ class RemindersSwitchSectionViewController: NSObject, SettingsSectionViewControl
     
     func switchChanged() {
         userDefaults.setBool(remindersSwitch.on, forKey: "remindersOn")
-        self.delegate.remindersSwitchSection(self, toggled: self.remindersSwitch.on)
+        self.delegate.remindersSwitchDidChange(self.remindersSwitch.on)
     }
     
-    func configureCell(cell: UITableViewCell, atIndex index: Int) {
+    func tableView(tableView: UITableView, cellForRow row: Int) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCellWithIdentifier("RemindersSwitchCell") as UITableViewCell
         cell.accessoryView = self.remindersSwitch
         cell.selectionStyle = .None
+        return cell
     }
     
     func numberOfRows() -> Int {
@@ -106,8 +108,22 @@ class ReminderSectionViewController: SettingsSectionViewController {
         self.managedObjectContext.save(nil)
     }
     
-    func configureCell(cell: UITableViewCell, atIndex index: Int) {}
-    
+    func tableView(tableView: UITableView, cellForRow row: Int) -> UITableViewCell {
+        var cell: UITableViewCell!
+        
+        var nibName: String?
+        if row == 0 {
+            nibName = "SettingsTableViewTimeCell"
+        } else {
+            nibName = "SettingsTableViewFrequencyCell"
+        }
+        
+        let nibArray = NSBundle.mainBundle().loadNibNamed(nibName, owner: tableView, options: nil)
+        cell = (nibArray[0] as UITableViewCell)
+        
+        return cell!
+    }
+
     func numberOfRows() -> Int {
         return 2
     }
@@ -144,10 +160,10 @@ class RemindersAddSectionViewController: NSObject, SettingsSectionViewController
         self.delegate = delegate
     }
     
-    func configureCell(cell: UITableViewCell, atIndex index: Int) {
-        // don't do anything weird like change the selection style to none
+    func tableView(tableView: UITableView, cellForRow index: Int) -> UITableViewCell {
+        return tableView.dequeueReusableCellWithIdentifier("RemindersAddCell") as UITableViewCell
     }
-    
+
     func numberOfRows() -> Int {
         return 1
     }

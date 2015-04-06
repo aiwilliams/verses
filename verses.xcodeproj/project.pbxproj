@@ -9,7 +9,7 @@
 /* Begin PBXBuildFile section */
 		1C6387E91ACF0B0B00AFC08A /* ReminderTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C6387E81ACF0B0B00AFC08A /* ReminderTests.swift */; };
 		43C9A8A6A2C64855B06D18B5 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E14CAB0BA205450DA43E233D /* libPods.a */; };
-		B751F9851AB783FD005BBF73 /* SettingsSections.swift in Sources */ = {isa = PBXBuildFile; fileRef = B751F9841AB783FD005BBF73 /* SettingsSections.swift */; };
+		B751F9851AB783FD005BBF73 /* SettingsSectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B751F9841AB783FD005BBF73 /* SettingsSectionViewController.swift */; };
 		B78096EB1967028C0004D560 /* UserData.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = B78096E91967028C0004D560 /* UserData.xcdatamodeld */; };
 		B7B7046B19981D5600162B5D /* NotificationCenter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B7B7046A19981D5600162B5D /* NotificationCenter.framework */; };
 		B7B7047019981D5600162B5D /* TodayViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7B7046F19981D5600162B5D /* TodayViewController.swift */; };
@@ -82,7 +82,7 @@
 		1C6387E81ACF0B0B00AFC08A /* ReminderTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReminderTests.swift; sourceTree = "<group>"; };
 		B70F681119F5E87B00AC174F /* today-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "today-Bridging-Header.h"; sourceTree = "<group>"; };
 		B70F681219F5EAFE00AC174F /* verses-Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "verses-Bridging-Header.h"; sourceTree = "<group>"; };
-		B751F9841AB783FD005BBF73 /* SettingsSections.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsSections.swift; sourceTree = "<group>"; };
+		B751F9841AB783FD005BBF73 /* SettingsSectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsSectionViewController.swift; sourceTree = "<group>"; };
 		B78096EA1967028C0004D560 /* UserData.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = UserData.xcdatamodel; sourceTree = "<group>"; };
 		B7B7046919981D5600162B5D /* today.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = today.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		B7B7046A19981D5600162B5D /* NotificationCenter.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = NotificationCenter.framework; path = System/Library/Frameworks/NotificationCenter.framework; sourceTree = SDKROOT; };
@@ -299,9 +299,9 @@
 			isa = PBXGroup;
 			children = (
 				FD117C7B1A09710D00B01643 /* SettingsTableViewController.swift */,
+				B751F9841AB783FD005BBF73 /* SettingsSectionViewController.swift */,
 				FD6254B11AD32664007A41E3 /* SettingsTableViewFrequencyCell.swift */,
 				FD6254B21AD32664007A41E3 /* SettingsTableViewTimeCell.swift */,
-				B751F9841AB783FD005BBF73 /* SettingsSections.swift */,
 			);
 			name = settings;
 			sourceTree = "<group>";
@@ -498,7 +498,7 @@
 				FD6254B31AD32664007A41E3 /* SettingsTableViewFrequencyCell.swift in Sources */,
 				FD17757C1ABC670A005458DE /* ReminderNotification.swift in Sources */,
 				FD029D291A817A6200C7BC0F /* AddVerseViewController.swift in Sources */,
-				B751F9851AB783FD005BBF73 /* SettingsSections.swift in Sources */,
+				B751F9851AB783FD005BBF73 /* SettingsSectionViewController.swift in Sources */,
 				FD029D271A81593100C7BC0F /* VerseDetailTableViewController.swift in Sources */,
 				B78096EB1967028C0004D560 /* UserData.xcdatamodeld in Sources */,
 				FD117C7C1A09710D00B01643 /* SettingsTableViewController.swift in Sources */,
