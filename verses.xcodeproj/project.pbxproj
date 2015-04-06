@@ -38,7 +38,6 @@
 		FD6254B41AD32664007A41E3 /* SettingsTableViewTimeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD6254B21AD32664007A41E3 /* SettingsTableViewTimeCell.swift */; };
 		FD836F951AD021BF00C34F7E /* SettingsTableViewTimeCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = FD836F941AD021BF00C34F7E /* SettingsTableViewTimeCell.xib */; };
 		FD836F971AD0223300C34F7E /* SettingsTableViewFrequencyCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = FD836F961AD0223300C34F7E /* SettingsTableViewFrequencyCell.xib */; };
-		FDD2CE861ABA2A3800070A2B /* ReminderFormDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDD2CE851ABA2A3800070A2B /* ReminderFormDelegate.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -121,7 +120,6 @@
 		FD6254B21AD32664007A41E3 /* SettingsTableViewTimeCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsTableViewTimeCell.swift; sourceTree = "<group>"; };
 		FD836F941AD021BF00C34F7E /* SettingsTableViewTimeCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SettingsTableViewTimeCell.xib; sourceTree = "<group>"; };
 		FD836F961AD0223300C34F7E /* SettingsTableViewFrequencyCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SettingsTableViewFrequencyCell.xib; sourceTree = "<group>"; };
-		FDD2CE851ABA2A3800070A2B /* ReminderFormDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReminderFormDelegate.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -304,7 +302,6 @@
 				FD6254B11AD32664007A41E3 /* SettingsTableViewFrequencyCell.swift */,
 				FD6254B21AD32664007A41E3 /* SettingsTableViewTimeCell.swift */,
 				B751F9841AB783FD005BBF73 /* SettingsSections.swift */,
-				FDD2CE851ABA2A3800070A2B /* ReminderFormDelegate.swift */,
 			);
 			name = settings;
 			sourceTree = "<group>";
@@ -506,7 +503,6 @@
 				B78096EB1967028C0004D560 /* UserData.xcdatamodeld in Sources */,
 				FD117C7C1A09710D00B01643 /* SettingsTableViewController.swift in Sources */,
 				B7C75E951983E77500DC2877 /* BiblePassage.swift in Sources */,
-				FDD2CE861ABA2A3800070A2B /* ReminderFormDelegate.swift in Sources */,
 				FD30F2D51A72B6D8005BBC02 /* Reminder.swift in Sources */,
 				FD6254B41AD32664007A41E3 /* SettingsTableViewTimeCell.swift in Sources */,
 			);

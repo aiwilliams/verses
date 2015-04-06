@@ -11,11 +11,6 @@ import CoreData
 
 // MARK: Protocols
 
-@objc protocol ReminderForm {
-    var reminder: Reminder! { get set }
-    var delegate: ReminderFormDelegate! { get set }
-}
-
 // MARK: Extensions
 
 extension Array {
@@ -27,8 +22,7 @@ extension Array {
 
 class SettingsTableViewController : UITableViewController,
     RemindersSwitchSectionViewDelegate,
-    RemindersAddSectionViewDelegate,
-    ReminderFormDelegate {
+    RemindersAddSectionViewDelegate {
     
     // MARK: Variable and constant declarations
     
