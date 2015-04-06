@@ -1,7 +1,7 @@
 import UIKit
 import CoreData
 
-protocol SettingsSection { // for typed Array of section models
+protocol SettingsSectionViewController { // for typed Array of section models
     var isEditable: Bool { get }
     var reuseIdentifier: String { get }
     var enabledWhenRemindersOff: Bool { get }
@@ -12,12 +12,12 @@ protocol SettingsSection { // for typed Array of section models
     func heightForRow(index: Int) -> Int
 }
 
-protocol RemindersSwitchSectionDelegate {
-    func remindersSwitchSection(section: RemindersSwitchSection, toggled: Bool)
+protocol RemindersSwitchSectionViewDelegate {
+    func remindersSwitchSection(section: RemindersSwitchSectionViewController, toggled: Bool)
 }
 
-class RemindersSwitchSection: NSObject, SettingsSection {
-    var delegate: RemindersSwitchSectionDelegate
+class RemindersSwitchSectionViewController: NSObject, SettingsSectionViewController {
+    var delegate: RemindersSwitchSectionViewDelegate
 
     var remindersSwitch = UISwitch()
     var userDefaults = NSUserDefaults()
@@ -29,7 +29,7 @@ class RemindersSwitchSection: NSObject, SettingsSection {
         get { return userDefaults.boolForKey("remindersOn") }
     }
     
-    init(delegate: RemindersSwitchSectionDelegate) {
+    init(delegate: RemindersSwitchSectionViewDelegate) {
         self.delegate = delegate
 
         super.init()
@@ -59,7 +59,7 @@ class RemindersSwitchSection: NSObject, SettingsSection {
     func selectRow(atIndex index: Int, inSection section: Int, inTableView tableView: UITableView!) {}
 }
 
-class ReminderSection: SettingsSection {
+class ReminderSectionViewController: SettingsSectionViewController {
     var managedObjectContext: NSManagedObjectContext
     var isEditable = true
     var enabledWhenRemindersOff = false
@@ -130,17 +130,17 @@ class ReminderSection: SettingsSection {
     }
 }
 
-protocol RemindersAddSectionDelegate {
-    func addReminder(section: RemindersAddSection, sectionIndex: Int)
+protocol RemindersAddSectionViewDelegate {
+    func addReminder(section: RemindersAddSectionViewController, sectionIndex: Int)
 }
 
-class RemindersAddSection: NSObject, SettingsSection {
-    var delegate: RemindersAddSectionDelegate
+class RemindersAddSectionViewController: NSObject, SettingsSectionViewController {
+    var delegate: RemindersAddSectionViewDelegate
     var isEditable = false
     var enabledWhenRemindersOff = false
     var reuseIdentifier = "RemindersAddCell"
     
-    init(delegate: RemindersAddSectionDelegate) {
+    init(delegate: RemindersAddSectionViewDelegate) {
         self.delegate = delegate
     }
     

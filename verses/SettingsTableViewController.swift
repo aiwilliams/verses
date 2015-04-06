@@ -25,7 +25,11 @@ extension Array {
     }
 }
 
-class SettingsTableViewController : UITableViewController, RemindersSwitchSectionDelegate, RemindersAddSectionDelegate, ReminderFormDelegate {
+class SettingsTableViewController : UITableViewController,
+    RemindersSwitchSectionViewDelegate,
+    RemindersAddSectionViewDelegate,
+    ReminderFormDelegate {
+    
     // MARK: Variable and constant declarations
     
     let appDelegate: AppDelegate = UIApplication.sharedApplication().delegate as AppDelegate
@@ -40,7 +44,7 @@ class SettingsTableViewController : UITableViewController, RemindersSwitchSectio
     ]
 
     lazy var managedObjectContext: NSManagedObjectContext = { self.appDelegate.managedObjectContext }()
-    var sections: [SettingsSection] = []
+    var sections: [SettingsSectionViewController] = []
     var reminders: [Reminder] = []
     
     var switchSection: RemindersSwitchSection {
@@ -52,8 +56,8 @@ class SettingsTableViewController : UITableViewController, RemindersSwitchSectio
     override func viewDidLoad() {
         super.viewDidLoad()
         self.sections  = [
-            RemindersSwitchSection(delegate: self),
-            RemindersAddSection(delegate: self)
+            RemindersSwitchSectionViewController(delegate: self),
+            RemindersAddSectionViewController(delegate: self)
         ]
         loadRemindersSections()
     }
@@ -77,7 +81,7 @@ class SettingsTableViewController : UITableViewController, RemindersSwitchSectio
         self.tableView.endUpdates()
     }
     
-    func addReminder(section: RemindersAddSection, sectionIndex: Int) {
+    func addReminder(section: RemindersAddSectionViewController, sectionIndex: Int) {
         // TODO: Schedule reminder for added reminder
         
         let reminderSection = ReminderSection(managedObjectContext: self.managedObjectContext, reminder: nil)
