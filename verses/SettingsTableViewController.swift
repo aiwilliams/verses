@@ -65,18 +65,12 @@ class SettingsTableViewController : UITableViewController,
         self.tableView.endUpdates()
     }
     
-    func addReminder(section: RemindersAddSectionViewController, sectionIndex: Int) {
+    func addReminder(section: RemindersAddSectionViewController) {
         // TODO: Schedule reminder for added reminder
-        
+        let indexBeforeAddSection = sections.count-1
         let reminderSection = ReminderSectionViewController(managedObjectContext: self.managedObjectContext, reminder: nil)
-        sections.insert(reminderSection, atIndex: sectionIndex)
-        
-        var indexPaths : [NSIndexPath] = []
-        for i in 1...(reminderSection.numberOfRows()) {
-            indexPaths += [NSIndexPath(forRow: i, inSection: sectionIndex)]
-        }
-
-        self.tableView.insertSections(NSIndexSet(index: sectionIndex), withRowAnimation: .Fade)
+        sections.insert(reminderSection, atIndex: indexBeforeAddSection)
+        self.tableView.insertSections(NSIndexSet(index: indexBeforeAddSection), withRowAnimation: .Fade)
     }
     
     func loadRemindersSections() {
@@ -132,7 +126,8 @@ class SettingsTableViewController : UITableViewController,
     }
     
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        sections[indexPath.section].selectRow(atIndex: indexPath.row, inSection: indexPath.section, inTableView: tableView)
+        sections[indexPath.section].tableView(tableView, didSelectRow: indexPath.row)
+        tableView.reloadRowsAtIndexPaths([indexPath], withRowAnimation: .Automatic)
     }
     
     // MARK: UILocalNotification management

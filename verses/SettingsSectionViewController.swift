@@ -7,7 +7,7 @@ protocol SettingsSectionViewController { // for typed Array of section models
     var enabledWhenRemindersOff: Bool { get }
     
     func tableView(tableView: UITableView, cellForRow row: Int) -> UITableViewCell
-    func selectRow(atIndex index: Int, inSection section: Int, inTableView tableView: UITableView!)
+    func tableView(tableView: UITableView, didSelectRow row: Int)
     func numberOfRows() -> Int
     func heightForRow(index: Int) -> Int
 }
@@ -49,6 +49,8 @@ class RemindersSwitchSectionViewController: NSObject, SettingsSectionViewControl
         cell.selectionStyle = .None
         return cell
     }
+
+    func tableView(tableView: UITableView, didSelectRow row: Int) {}
     
     func numberOfRows() -> Int {
         return 1
@@ -57,8 +59,6 @@ class RemindersSwitchSectionViewController: NSObject, SettingsSectionViewControl
     func heightForRow(index: Int) -> Int {
         return 44
     }
-    
-    func selectRow(atIndex index: Int, inSection section: Int, inTableView tableView: UITableView!) {}
 }
 
 class ReminderSectionViewController: SettingsSectionViewController {
@@ -66,9 +66,13 @@ class ReminderSectionViewController: SettingsSectionViewController {
     var isEditable = true
     var enabledWhenRemindersOff = false
     var reuseIdentifier = "ReminderCell"
-    var selectedIndex: Int?
     var reminder: Reminder
-    
+
+    var timeCell: SettingsTableViewTimeCell?
+    var frequencyCell: SettingsTableViewFrequencyCell?
+
+    var selectedRow = 0
+
     lazy var timeFormatter : NSDateFormatter = {
         let formatter = NSDateFormatter()
         formatter.dateStyle = .NoStyle
@@ -109,45 +113,46 @@ class ReminderSectionViewController: SettingsSectionViewController {
     }
     
     func tableView(tableView: UITableView, cellForRow row: Int) -> UITableViewCell {
-        var cell: UITableViewCell!
-        
-        var nibName: String?
         if row == 0 {
-            nibName = "SettingsTableViewTimeCell"
+            if timeCell == nil {
+                timeCell = loadCellFromNib("SettingsTableViewTimeCell", owner: tableView) as? SettingsTableViewTimeCell
+            }
+            return timeCell!
         } else {
-            nibName = "SettingsTableViewFrequencyCell"
+            if frequencyCell == nil {
+                frequencyCell = loadCellFromNib("SettingsTableViewFrequencyCell", owner: tableView) as? SettingsTableViewFrequencyCell
+            }
+            return frequencyCell!
         }
-        
-        let nibArray = NSBundle.mainBundle().loadNibNamed(nibName, owner: tableView, options: nil)
-        cell = (nibArray[0] as UITableViewCell)
-        
-        return cell!
+    }
+    
+    func tableView(tableView: UITableView, didSelectRow row: Int) {
+        selectedRow = row
+        if row == 0 {
+            timeCell?.datePicker.hidden = false
+            frequencyCell?.picker.hidden = true
+        } else {
+            timeCell?.datePicker.hidden = true
+            frequencyCell?.picker.hidden = false
+        }
     }
 
     func numberOfRows() -> Int {
         return 2
     }
     
-    func heightForRow(index: Int) -> Int {
-        if index == selectedIndex {
-            return 205
-        } else {
-            return 44
-        }
+    func heightForRow(row: Int) -> Int {
+        return selectedRow == row ? 205 : 44
     }
     
-    func selectRow(atIndex index: Int, inSection section: Int, inTableView tableView: UITableView!) {
-        if selectedIndex == index {
-            selectedIndex = nil
-        } else {
-            selectedIndex = index
-        }
-        tableView.reloadRowsAtIndexPaths([NSIndexPath(forRow: index, inSection: section)], withRowAnimation: .Automatic)
+    func loadCellFromNib(nibName: String, owner: AnyObject) -> UITableViewCell {
+        let nibArray = NSBundle.mainBundle().loadNibNamed(nibName, owner: owner, options: nil)
+        return nibArray[0] as UITableViewCell
     }
 }
 
 protocol RemindersAddSectionViewDelegate {
-    func addReminder(section: RemindersAddSectionViewController, sectionIndex: Int)
+    func addReminder(section: RemindersAddSectionViewController)
 }
 
 class RemindersAddSectionViewController: NSObject, SettingsSectionViewController {
@@ -172,7 +177,7 @@ class RemindersAddSectionViewController: NSObject, SettingsSectionViewController
         return 44
     }
     
-    func selectRow(atIndex index: Int, inSection section: Int, inTableView tableView: UITableView!) {
-        self.delegate.addReminder(self, sectionIndex: section)
+    func tableView(tableView: UITableView, didSelectRow row: Int) {
+        self.delegate.addReminder(self)
     }
 }
