@@ -76,35 +76,70 @@
                                     </subviews>
                                 </tableViewCellContentView>
                             </tableViewCell>
-                            <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="RemindersTimeCell" rowHeight="44" id="us4-pS-5G5">
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="RemindersTimeCell" rowHeight="200" id="us4-pS-5G5" customClass="SettingsTableViewTimeCell" customModule="verses" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="us4-pS-5G5" id="y6h-Vg-ahf">
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Time" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eTl-P7-0YR">
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Time" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eTl-P7-0YR">
                                             <rect key="frame" x="16" y="13" width="42" height="18"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
+                                        <datePicker contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="dateAndTime" minuteInterval="1" translatesAutoresizingMaskIntoConstraints="NO" id="bbq-VK-rGA">
+                                            <rect key="frame" x="0.0" y="37" width="320" height="162"/>
+                                            <date key="date" timeIntervalSinceReferenceDate="450218620.14053702">
+                                                <!--2015-04-08 20:43:40 +0000-->
+                                            </date>
+                                        </datePicker>
                                     </subviews>
+                                    <constraints>
+                                        <constraint firstAttribute="trailingMargin" secondItem="bbq-VK-rGA" secondAttribute="trailing" constant="-8" id="Gr3-R0-yqM"/>
+                                        <constraint firstAttribute="bottomMargin" secondItem="bbq-VK-rGA" secondAttribute="bottom" constant="-7.5" id="bA8-bq-7iL"/>
+                                        <constraint firstItem="bbq-VK-rGA" firstAttribute="top" secondItem="y6h-Vg-ahf" secondAttribute="topMargin" constant="29" id="fnu-3A-7nX"/>
+                                        <constraint firstItem="bbq-VK-rGA" firstAttribute="leading" secondItem="y6h-Vg-ahf" secondAttribute="leadingMargin" constant="-8" id="hZs-6N-7bw"/>
+                                        <constraint firstItem="eTl-P7-0YR" firstAttribute="top" secondItem="y6h-Vg-ahf" secondAttribute="topMargin" constant="5" id="iFL-KT-jeS"/>
+                                        <constraint firstItem="eTl-P7-0YR" firstAttribute="leading" secondItem="y6h-Vg-ahf" secondAttribute="leadingMargin" constant="8" id="jIs-js-7XI"/>
+                                        <constraint firstAttribute="trailingMargin" secondItem="eTl-P7-0YR" secondAttribute="trailing" constant="254" id="kEN-1q-z3Y"/>
+                                        <constraint firstItem="bbq-VK-rGA" firstAttribute="top" secondItem="eTl-P7-0YR" secondAttribute="bottom" constant="6" id="pH4-91-yqL"/>
+                                    </constraints>
                                 </tableViewCellContentView>
+                                <connections>
+                                    <outlet property="datePicker" destination="bbq-VK-rGA" id="Ed8-HB-4ra"/>
+                                </connections>
                             </tableViewCell>
-                            <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="RemindersFrequencyCell" rowHeight="44" id="MOM-1o-j8r">
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="RemindersFrequencyCell" rowHeight="200" id="MOM-1o-j8r" customClass="SettingsTableViewFrequencyCell" customModule="verses" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="MOM-1o-j8r" id="PqP-IL-fRd">
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Frequency" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dCD-wo-NIC">
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Frequency" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dCD-wo-NIC">
                                             <rect key="frame" x="16" y="13" width="81" height="21"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
+                                        <pickerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="mr6-KM-8XP">
+                                            <rect key="frame" x="0.0" y="37" width="320" height="162"/>
+                                        </pickerView>
                                     </subviews>
+                                    <constraints>
+                                        <constraint firstItem="dCD-wo-NIC" firstAttribute="leading" secondItem="PqP-IL-fRd" secondAttribute="leadingMargin" constant="8" id="CJo-dg-15I"/>
+                                        <constraint firstAttribute="bottomMargin" secondItem="mr6-KM-8XP" secondAttribute="bottom" constant="-7.5" id="F3r-DV-27b"/>
+                                        <constraint firstAttribute="trailingMargin" secondItem="dCD-wo-NIC" secondAttribute="trailing" constant="215" id="G7N-zC-htw"/>
+                                        <constraint firstItem="mr6-KM-8XP" firstAttribute="top" secondItem="PqP-IL-fRd" secondAttribute="topMargin" constant="29" id="GrN-rX-4g8"/>
+                                        <constraint firstAttribute="trailingMargin" secondItem="mr6-KM-8XP" secondAttribute="trailing" constant="-8" id="OVP-yY-d69"/>
+                                        <constraint firstItem="mr6-KM-8XP" firstAttribute="leading" secondItem="PqP-IL-fRd" secondAttribute="leadingMargin" constant="-8" id="VCH-4u-nU5"/>
+                                        <constraint firstItem="dCD-wo-NIC" firstAttribute="top" secondItem="PqP-IL-fRd" secondAttribute="topMargin" constant="5" id="iBC-st-QfF"/>
+                                        <constraint firstItem="mr6-KM-8XP" firstAttribute="top" secondItem="dCD-wo-NIC" secondAttribute="bottom" constant="3" id="zWI-b3-HdX"/>
+                                    </constraints>
                                 </tableViewCellContentView>
+                                <connections>
+                                    <outlet property="picker" destination="mr6-KM-8XP" id="Flt-HE-Y9H"/>
+                                </connections>
                             </tableViewCell>
                             <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="RemindersAddCell" textLabel="jvH-q6-gvL" rowHeight="44" style="IBUITableViewCellStyleDefault" id="6iB-yL-XQ7">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>

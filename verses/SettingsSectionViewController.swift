@@ -115,12 +115,12 @@ class ReminderSectionViewController: SettingsSectionViewController {
     func tableView(tableView: UITableView, cellForRow row: Int) -> UITableViewCell {
         if row == 0 {
             if timeCell == nil {
-                timeCell = loadCellFromNib("SettingsTableViewTimeCell", owner: tableView) as? SettingsTableViewTimeCell
+                timeCell = tableView.dequeueReusableCellWithIdentifier("RemindersTimeCell") as? SettingsTableViewTimeCell
             }
             return timeCell!
         } else {
             if frequencyCell == nil {
-                frequencyCell = loadCellFromNib("SettingsTableViewFrequencyCell", owner: tableView) as? SettingsTableViewFrequencyCell
+                frequencyCell = tableView.dequeueReusableCellWithIdentifier("RemindersFrequencyCell") as? SettingsTableViewFrequencyCell
             }
             return frequencyCell!
         }
@@ -143,11 +143,6 @@ class ReminderSectionViewController: SettingsSectionViewController {
     
     func heightForRow(row: Int) -> Int {
         return selectedRow == row ? 205 : 44
-    }
-    
-    func loadCellFromNib(nibName: String, owner: AnyObject) -> UITableViewCell {
-        let nibArray = NSBundle.mainBundle().loadNibNamed(nibName, owner: owner, options: nil)
-        return nibArray[0] as UITableViewCell
     }
 }
 

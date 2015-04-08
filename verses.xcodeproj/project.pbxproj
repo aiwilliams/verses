@@ -36,8 +36,6 @@
 		FD35E2CA1A7D7FBF007651D8 /* VersesTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD35E2C91A7D7FBF007651D8 /* VersesTableViewController.swift */; };
 		FD6254B31AD32664007A41E3 /* SettingsTableViewFrequencyCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD6254B11AD32664007A41E3 /* SettingsTableViewFrequencyCell.swift */; };
 		FD6254B41AD32664007A41E3 /* SettingsTableViewTimeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD6254B21AD32664007A41E3 /* SettingsTableViewTimeCell.swift */; };
-		FD836F951AD021BF00C34F7E /* SettingsTableViewTimeCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = FD836F941AD021BF00C34F7E /* SettingsTableViewTimeCell.xib */; };
-		FD836F971AD0223300C34F7E /* SettingsTableViewFrequencyCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = FD836F961AD0223300C34F7E /* SettingsTableViewFrequencyCell.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -118,8 +116,6 @@
 		FD35E2C91A7D7FBF007651D8 /* VersesTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VersesTableViewController.swift; sourceTree = "<group>"; };
 		FD6254B11AD32664007A41E3 /* SettingsTableViewFrequencyCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsTableViewFrequencyCell.swift; sourceTree = "<group>"; };
 		FD6254B21AD32664007A41E3 /* SettingsTableViewTimeCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsTableViewTimeCell.swift; sourceTree = "<group>"; };
-		FD836F941AD021BF00C34F7E /* SettingsTableViewTimeCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SettingsTableViewTimeCell.xib; sourceTree = "<group>"; };
-		FD836F961AD0223300C34F7E /* SettingsTableViewFrequencyCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SettingsTableViewFrequencyCell.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -278,8 +274,6 @@
 			isa = PBXGroup;
 			children = (
 				B7F4E8C51965E72300466BA7 /* Main.storyboard */,
-				FD836F941AD021BF00C34F7E /* SettingsTableViewTimeCell.xib */,
-				FD836F961AD0223300C34F7E /* SettingsTableViewFrequencyCell.xib */,
 			);
 			name = view;
 			sourceTree = "<group>";
@@ -430,10 +424,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				B7F4E8C61965E72300466BA7 /* Main.storyboard in Resources */,
-				FD836F951AD021BF00C34F7E /* SettingsTableViewTimeCell.xib in Resources */,
 				B7F4E8A11965E43A00466BA7 /* InfoPlist.strings in Resources */,
 				B7F4E8A91965E43A00466BA7 /* Images.xcassets in Resources */,
-				FD836F971AD0223300C34F7E /* SettingsTableViewFrequencyCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
