@@ -71,13 +71,21 @@ class VersesTableViewController: UITableViewController, NSFetchedResultsControll
         if passage.passage != nil { cell.textLabel!.text = passage.passage }
         return cell
     }
-
-    override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
-        if editingStyle == UITableViewCellEditingStyle.Delete {
+    
+    override func tableView(tableView: UITableView, editActionsForRowAtIndexPath indexPath: NSIndexPath) -> [AnyObject]? {
+        let editAction = UITableViewRowAction(style: .Normal, title: "Today", handler: { (action: UITableViewRowAction!, indexPath: NSIndexPath!) in
+            println("TODO: Implement 'Today' action")
+        })
+        editAction.backgroundColor = UIColor.greenColor()
+        
+        let deleteAction = UITableViewRowAction(style: .Normal, title: "Delete", handler: { (action: UITableViewRowAction!, indexPath: NSIndexPath!) in
             let passage: BiblePassage = self.fetchedResultsController.objectAtIndexPath(indexPath) as BiblePassage
             self.managedObjectContext?.deleteObject(passage)
             self.managedObjectContext?.save(nil)
-        }
+        })
+        deleteAction.backgroundColor = UIColor.redColor()
+        
+        return [deleteAction, editAction]
     }
 
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
