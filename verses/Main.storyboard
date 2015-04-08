@@ -30,6 +30,9 @@
                                         </label>
                                     </subviews>
                                 </tableViewCellContentView>
+                                <connections>
+                                    <segue destination="Gid-GW-v2c" kind="push" identifier="verseDetail" id="7P2-EA-5f2"/>
+                                </connections>
                             </tableViewCell>
                         </prototypes>
                         <connections>
@@ -130,6 +133,80 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="cNq-qG-Soq" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-370" y="20"/>
+        </scene>
+        <!--Verse Detail-->
+        <scene sceneID="h1Y-sF-fxe">
+            <objects>
+                <tableViewController id="Gid-GW-v2c" customClass="VerseDetailTableViewController" customModule="verses" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="10" id="m4F-tC-TZF">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" red="0.93725490196078431" green="0.93725490196078431" blue="0.95686274509803926" alpha="1" colorSpace="calibratedRGB"/>
+                        <sections>
+                            <tableViewSection headerTitle="NKJV" id="ZYz-br-VRy">
+                                <cells>
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="passageCell" rowHeight="44" id="5U2-2l-xi9">
+                                        <rect key="frame" x="0.0" y="64" width="320" height="258"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" tableViewCell="5U2-2l-xi9" id="c7P-x1-pUk">
+                                            <rect key="frame" x="0.0" y="0.0" width="320" height="257"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Label" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="300" translatesAutoresizingMaskIntoConstraints="NO" id="lOf-cy-nuQ">
+                                                    <rect key="frame" x="10" y="11" width="300" height="21"/>
+                                                    <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
+                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="lOf-cy-nuQ" firstAttribute="top" secondItem="c7P-x1-pUk" secondAttribute="top" constant="11" id="4no-T5-khu"/>
+                                                <constraint firstAttribute="bottom" secondItem="lOf-cy-nuQ" secondAttribute="bottom" constant="11" id="W3u-8x-5OC"/>
+                                                <constraint firstItem="lOf-cy-nuQ" firstAttribute="leading" secondItem="c7P-x1-pUk" secondAttribute="leading" constant="10" id="fid-9R-2OE"/>
+                                                <constraint firstAttribute="trailing" secondItem="lOf-cy-nuQ" secondAttribute="trailing" constant="10" id="zWU-X2-Wke"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </cells>
+                            </tableViewSection>
+                            <tableViewSection headerTitle="Progress" id="5XH-cl-ezT">
+                                <cells>
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="passageCell" textLabel="2wU-TL-VaN" rowHeight="233" style="IBUITableViewCellStyleDefault" id="nPb-vk-cEm">
+                                        <rect key="frame" x="0.0" y="64" width="320" height="258"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" tableViewCell="nPb-vk-cEm" id="W69-wo-iBU">
+                                            <rect key="frame" x="0.0" y="0.0" width="320" height="257"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="Title" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="2wU-TL-VaN">
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </cells>
+                            </tableViewSection>
+                        </sections>
+                        <connections>
+                            <outlet property="dataSource" destination="Gid-GW-v2c" id="aFs-5I-BEq"/>
+                            <outlet property="delegate" destination="Gid-GW-v2c" id="L9g-x4-bQo"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" title="Verse Detail" id="c4I-wV-VlX">
+                        <barButtonItem key="backBarButtonItem" title="Done" id="gn5-Xs-pWA"/>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="navigationItem" destination="c4I-wV-VlX" id="GU2-qK-7un"/>
+                        <outlet property="passageCell" destination="5U2-2l-xi9" id="thA-Th-bk4"/>
+                        <outlet property="passageTextLabel" destination="lOf-cy-nuQ" id="OHX-2U-vn9"/>
+                    </connections>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="xKl-vv-KEE" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="172" y="-451"/>
         </scene>
         <!--Add Verse-->
         <scene sceneID="Eai-Jp-dbv">

@@ -33,11 +33,6 @@ class VersesTableViewController: UITableViewController, NSFetchedResultsControll
         self.tableView.allowsMultipleSelectionDuringEditing = false
         self.managedObjectContext = self.appDelegate.managedObjectContext
         self.fetchedResultsController.performFetch(nil)
-//
-//        if let passage: BiblePassage? = self.biblePassage as BiblePassage? {
-//            self.disclosingRowIndexPath = self.fetchedResultsController.indexPathForObject(self.biblePassage)
-//            self.performSegueWithIdentifier("verseDetail", sender: self)
-//        }
     }
 
     func controllerWillChangeContent(controller: NSFetchedResultsController) {
@@ -83,10 +78,6 @@ class VersesTableViewController: UITableViewController, NSFetchedResultsControll
             self.managedObjectContext?.deleteObject(passage)
             self.managedObjectContext?.save(nil)
         }
-    }
-
-    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        self.performSegueWithIdentifier("verseDetail", sender: self)
     }
 
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {

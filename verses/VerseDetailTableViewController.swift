@@ -15,7 +15,7 @@ class VerseDetailTableViewController: UITableViewController {
     @IBOutlet var passageTextLabel: UILabel!
     var biblePassage: BiblePassage?
     
-    override func viewWillAppear(animated: Bool) {
+    override func viewDidLoad() {
         self.navigationController?.title = self.biblePassage?.passage
         self.passageTextLabel.text = self.biblePassage?.content
     }
