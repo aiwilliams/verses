@@ -127,7 +127,7 @@ class SettingsTableViewController : UITableViewController,
     
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         sections[indexPath.section].tableView(tableView, didSelectRow: indexPath.row)
-
+        tableView.reloadData()
         // tableView.reloadRowsAtIndexPaths([indexPath], withRowAnimation: .Automatic)
     }
     

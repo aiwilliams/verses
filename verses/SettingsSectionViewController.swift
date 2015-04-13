@@ -71,7 +71,7 @@ class ReminderSectionViewController: SettingsSectionViewController {
     var timeCell: SettingsTableViewTimeCell?
     var frequencyCell: SettingsTableViewFrequencyCell?
 
-    var selectedRow = 0
+    var selectedRow: Int?
 
     lazy var timeFormatter : NSDateFormatter = {
         let formatter = NSDateFormatter()
@@ -113,6 +113,11 @@ class ReminderSectionViewController: SettingsSectionViewController {
     }
     
     func tableView(tableView: UITableView, cellForRow row: Int) -> UITableViewCell {
+        if selectedRow == nil {
+            frequencyCell?.picker.hidden = true
+            timeCell?.datePicker.hidden = true
+        }
+
         if row == 0 {
             if timeCell == nil {
                 timeCell = tableView.dequeueReusableCellWithIdentifier("RemindersTimeCell") as? SettingsTableViewTimeCell
@@ -121,6 +126,7 @@ class ReminderSectionViewController: SettingsSectionViewController {
         } else {
             if frequencyCell == nil {
                 frequencyCell = tableView.dequeueReusableCellWithIdentifier("RemindersFrequencyCell") as? SettingsTableViewFrequencyCell
+                frequencyCell!.customInitialization()
             }
             return frequencyCell!
         }

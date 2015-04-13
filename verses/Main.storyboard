@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6751" systemVersion="14C1514" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="thz-W3-izQ">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7531" systemVersion="14C1514" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="thz-W3-izQ">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6736"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7520"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
@@ -83,7 +83,7 @@
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Time" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eTl-P7-0YR">
-                                            <rect key="frame" x="16" y="13" width="42" height="18"/>
+                                            <rect key="frame" x="16" y="13" width="112" height="18"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
@@ -102,7 +102,7 @@
                                         <constraint firstItem="bbq-VK-rGA" firstAttribute="leading" secondItem="y6h-Vg-ahf" secondAttribute="leadingMargin" constant="-8" id="hZs-6N-7bw"/>
                                         <constraint firstItem="eTl-P7-0YR" firstAttribute="top" secondItem="y6h-Vg-ahf" secondAttribute="topMargin" constant="5" id="iFL-KT-jeS"/>
                                         <constraint firstItem="eTl-P7-0YR" firstAttribute="leading" secondItem="y6h-Vg-ahf" secondAttribute="leadingMargin" constant="8" id="jIs-js-7XI"/>
-                                        <constraint firstAttribute="trailingMargin" secondItem="eTl-P7-0YR" secondAttribute="trailing" constant="254" id="kEN-1q-z3Y"/>
+                                        <constraint firstAttribute="trailingMargin" secondItem="eTl-P7-0YR" secondAttribute="trailing" constant="184" id="kEN-1q-z3Y"/>
                                         <constraint firstItem="bbq-VK-rGA" firstAttribute="top" secondItem="eTl-P7-0YR" secondAttribute="bottom" constant="6" id="pH4-91-yqL"/>
                                     </constraints>
                                 </tableViewCellContentView>
@@ -117,7 +117,7 @@
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Frequency" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dCD-wo-NIC">
-                                            <rect key="frame" x="16" y="13" width="81" height="21"/>
+                                            <rect key="frame" x="16" y="13" width="166" height="21"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
@@ -129,7 +129,7 @@
                                     <constraints>
                                         <constraint firstItem="dCD-wo-NIC" firstAttribute="leading" secondItem="PqP-IL-fRd" secondAttribute="leadingMargin" constant="8" id="CJo-dg-15I"/>
                                         <constraint firstAttribute="bottomMargin" secondItem="mr6-KM-8XP" secondAttribute="bottom" constant="-7.5" id="F3r-DV-27b"/>
-                                        <constraint firstAttribute="trailingMargin" secondItem="dCD-wo-NIC" secondAttribute="trailing" constant="215" id="G7N-zC-htw"/>
+                                        <constraint firstAttribute="trailingMargin" secondItem="dCD-wo-NIC" secondAttribute="trailing" constant="130" id="G7N-zC-htw"/>
                                         <constraint firstItem="mr6-KM-8XP" firstAttribute="top" secondItem="PqP-IL-fRd" secondAttribute="topMargin" constant="29" id="GrN-rX-4g8"/>
                                         <constraint firstAttribute="trailingMargin" secondItem="mr6-KM-8XP" secondAttribute="trailing" constant="-8" id="OVP-yY-d69"/>
                                         <constraint firstItem="mr6-KM-8XP" firstAttribute="leading" secondItem="PqP-IL-fRd" secondAttribute="leadingMargin" constant="-8" id="VCH-4u-nU5"/>
