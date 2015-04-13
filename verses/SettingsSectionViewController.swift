@@ -44,7 +44,7 @@ class RemindersSwitchSectionViewController: NSObject, SettingsSectionViewControl
     }
     
     func tableView(tableView: UITableView, cellForRow row: Int) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("RemindersSwitchCell") as UITableViewCell
+        let cell = tableView.dequeueReusableCellWithIdentifier("RemindersSwitchCell") as! UITableViewCell
         cell.accessoryView = self.remindersSwitch
         cell.selectionStyle = .None
         return cell
@@ -161,7 +161,7 @@ class RemindersAddSectionViewController: NSObject, SettingsSectionViewController
     }
     
     func tableView(tableView: UITableView, cellForRow index: Int) -> UITableViewCell {
-        return tableView.dequeueReusableCellWithIdentifier("RemindersAddCell") as UITableViewCell
+        return tableView.dequeueReusableCellWithIdentifier("RemindersAddCell") as! UITableViewCell
     }
 
     func numberOfRows() -> Int {

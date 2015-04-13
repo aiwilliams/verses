@@ -20,7 +20,7 @@ class AddVerseViewController: UIViewController {
     @IBOutlet var activityIndicator: UIActivityIndicatorView!
     @IBOutlet var errorText: UILabel!
 
-    let appDelegate: AppDelegate = UIApplication.sharedApplication().delegate as AppDelegate
+    let appDelegate: AppDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
 
     var bibleApi: VerseSourceAPI?
     var biblePassage: BiblePassage!
@@ -41,10 +41,10 @@ class AddVerseViewController: UIViewController {
     }
 
     @IBAction func addVerse(sender: AnyObject) {
-        if countElements(self.passageTextField.text) > 0 {
+        if count(self.passageTextField.text) > 0 {
             self.activityIndicator.startAnimating()
             var passage: NSString = self.passageTextField.text
-            self.bibleApi!.loadPassage(passage, completion: { (returnedPassage: BiblePassage) in
+            self.bibleApi!.loadPassage(passage as String, completion: { (returnedPassage: BiblePassage) in
                     self.activityIndicator.stopAnimating()
                     self.errorText.hidden = true
                     self.biblePassage = returnedPassage

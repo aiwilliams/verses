@@ -24,7 +24,7 @@ class SettingsTableViewController : UITableViewController,
     
     // MARK: Variable and constant declarations
     
-    let appDelegate: AppDelegate = UIApplication.sharedApplication().delegate as AppDelegate
+    let appDelegate: AppDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
 
     lazy var managedObjectContext: NSManagedObjectContext = { self.appDelegate.managedObjectContext }()
     
@@ -32,7 +32,7 @@ class SettingsTableViewController : UITableViewController,
     var reminders: [Reminder] = []
     
     var switchSection: RemindersSwitchSectionViewController {
-        get { return sections[0] as RemindersSwitchSectionViewController }
+        get { return sections[0] as! RemindersSwitchSectionViewController }
     }
     
     // MARK: Setup
@@ -78,7 +78,7 @@ class SettingsTableViewController : UITableViewController,
         fetchRequest.entity = Reminder.entity(managedObjectContext)
         
         var error: NSError?
-        reminders = managedObjectContext.executeFetchRequest(fetchRequest, error: &error)! as [Reminder]
+        reminders = managedObjectContext.executeFetchRequest(fetchRequest, error: &error)! as! [Reminder]
         if error != nil {
             println("Fetch error: \(error)")
         }
@@ -116,7 +116,7 @@ class SettingsTableViewController : UITableViewController,
     override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
         if editingStyle == UITableViewCellEditingStyle.Delete {
             self.tableView.beginUpdates()
-            let reminderSection = sections[indexPath.section] as ReminderSectionViewController
+            let reminderSection = sections[indexPath.section] as! ReminderSectionViewController
             reminderSection.deleteReminder()
             sections.removeAtIndex(indexPath.section)
             rebuildNotifications()
@@ -154,7 +154,7 @@ class SettingsTableViewController : UITableViewController,
             var notifications = [UILocalNotification]()
             let reminderLists = sections[1...sections.count-2]
             for section in reminderLists {
-                let reminderSection = section as ReminderSectionViewController
+                let reminderSection = section as! ReminderSectionViewController
                 notifications += [createLocalNotification(reminderSection.reminder)]
             }
             UIApplication.sharedApplication().scheduledLocalNotifications = notifications

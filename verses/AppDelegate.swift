@@ -14,7 +14,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, AddVerseDelegate {
     }
     
     func applicationWillResignActive(application: UIApplication) {
-        if let passage = self.biblePassageStore.activeBiblePassage()? {
+        if let passage = self.biblePassageStore.activeBiblePassage() {
             exportToTodayApp(passage)
         } else {
             clearTodayApp()
@@ -31,13 +31,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate, AddVerseDelegate {
     }
     
     func application(application: UIApplication, openURL url: NSURL, sourceApplication: String?, annotation: AnyObject?) -> Bool {
-        let navigationController = window?.rootViewController? as UINavigationController
+        let navigationController = window?.rootViewController as! UINavigationController
         
         if url.host! == "verse" {
-            if let openedURL = url.pathComponents? {
-                let verseReference = openedURL[1] as String
+            if let openedURL = url.pathComponents {
+                let verseReference = openedURL[1] as! String
                 navigationController.popToRootViewControllerAnimated(false)
-                let homeTableViewController = navigationController.viewControllers[0] as UITableViewController
+                let homeTableViewController = navigationController.viewControllers[0] as! UITableViewController
                 // I think we need a custom controller for the home view, so that when we prepare for segue, we can access the versestableview...
                 homeTableViewController.performSegueWithIdentifier("versesTableSegue", sender: self)
                 
@@ -48,9 +48,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate, AddVerseDelegate {
             }
         } else if url.host! == "addverse" {
             let storyboard = UIStoryboard(name: "Main", bundle: nil)
-            let addVerseNavigationController = storyboard.instantiateViewControllerWithIdentifier("addVerse") as UINavigationController
+            let addVerseNavigationController = storyboard.instantiateViewControllerWithIdentifier("addVerse") as! UINavigationController
             addVerseNavigationController.modalTransitionStyle = .CoverVertical
-            let addVerseController = addVerseNavigationController.childViewControllers[0] as AddVerseViewController
+            let addVerseController = addVerseNavigationController.childViewControllers[0] as! AddVerseViewController
             addVerseController.delegate = self
             self.window!.rootViewController!.presentViewController(addVerseNavigationController, animated: true, completion: nil)
         }
@@ -59,9 +59,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate, AddVerseDelegate {
     }
     
     func application(application: UIApplication, didReceiveLocalNotification notification: UILocalNotification) {
-        let navigationController = window?.rootViewController? as UINavigationController
+        let navigationController = window?.rootViewController as! UINavigationController
         navigationController.popToRootViewControllerAnimated(false)
-        let homeTableViewController = navigationController.viewControllers[0] as UITableViewController
+        let homeTableViewController = navigationController.viewControllers[0] as! UITableViewController
         homeTableViewController.performSegueWithIdentifier("versesTableSegue", sender: self)
         
         // Reload reminder messages
@@ -88,7 +88,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, AddVerseDelegate {
         let modelUrl = NSBundle.mainBundle().URLForResource("UserData", withExtension: "momd")!
         let mom = NSManagedObjectModel(contentsOfURL: modelUrl)!
         let fileManager = NSFileManager.defaultManager()
-        let libraryUrl: NSURL = fileManager.URLsForDirectory(NSSearchPathDirectory.DocumentDirectory, inDomains: NSSearchPathDomainMask.UserDomainMask).last as NSURL
+        let libraryUrl: NSURL = fileManager.URLsForDirectory(NSSearchPathDirectory.DocumentDirectory, inDomains: NSSearchPathDomainMask.UserDomainMask).last as! NSURL
         let url = libraryUrl.URLByAppendingPathComponent("Example.storedata")
         
         let coordinator = NSPersistentStoreCoordinator(managedObjectModel: mom)

@@ -23,7 +23,7 @@ class TodayViewController: UIViewController {
         let defaults = NSUserDefaults(suiteName: "group.thewilliams.verses")!
         if let verseRef = defaults.valueForKey("VerseReference") as? String {
             if defaults.boolForKey("ContainsVerses") {
-                let verse = defaults.valueForKey("VerseContent")! as String
+                let verse = defaults.valueForKey("VerseContent")! as! String
                 self.verseReference.text = verseRef
                 self.verseLabel.text = verse
             } else {

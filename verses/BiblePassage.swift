@@ -20,7 +20,7 @@ class BiblePassageStore : NSObject {
         request.entity = entityDescription
 
         var error: NSError?
-        return managedObjectContext.executeFetchRequest(request, error: &error) as [BiblePassage]?
+        return managedObjectContext.executeFetchRequest(request, error: &error) as! [BiblePassage]?
     }
 
     // For now, return the last passage...
@@ -66,7 +66,7 @@ class VerseSourceAPI : NSObject {
     func parsePassage(passage: String, completion: (String) -> (Void), failure: (String) -> (Void)) {
         requestManager.GET(remoteAPI.parseURL, parameters: remoteAPI.parseParameters(passage),
             success: { (operation: AFHTTPRequestOperation!,responseObject: AnyObject!) in
-                let passage = responseObject.valueForKey("passage") as NSString
+                let passage = responseObject.valueForKey("passage") as! String
                 if passage == "" {
                     failure("That's not a valid verse! Try again.")
                 } else {
@@ -82,7 +82,7 @@ class VerseSourceAPI : NSObject {
     func loadContentOfPassage(passage: String, completion: (String) -> (Void), failure: (String) -> (Void)) {
         requestManager.GET(remoteAPI.loadURL, parameters: remoteAPI.loadParameters(passage),
             success: { (operation: AFHTTPRequestOperation!,responseObject: AnyObject!) in
-                completion(responseObject.valueForKey("text") as NSString)
+                completion(responseObject.valueForKey("tas!t") as! String)
             },
             failure: { (operation: AFHTTPRequestOperation!,error: NSError!) in
                 failure("Sorry! I have failed you :/")
@@ -96,7 +96,7 @@ class VerseSourceAPI : NSObject {
              completion: { (normalizedPassage: String) in
                  self.loadContentOfPassage(normalizedPassage,
                      completion: { (content) in
-                         let biblePassage = NSEntityDescription.insertNewObjectForEntityForName("BiblePassage", inManagedObjectContext: self.managedObjectContext) as BiblePassage
+                         let biblePassage = NSEntityDescription.insertNewObjectForEntityForName("BiblePassage", inManagedObjectContext: self.managedObjectContext) as! BiblePassage
                          biblePassage.translation = "ASV"
                          biblePassage.passage = normalizedPassage
                          biblePassage.content = content
@@ -113,7 +113,7 @@ class VerseSourceAPI : NSObject {
 
     // For those times when the servers just aren't working.
     func loadFakePassage(completion: (BiblePassage) -> (Void)) {
-        let biblePassage = NSEntityDescription.insertNewObjectForEntityForName("BiblePassage", inManagedObjectContext: self.managedObjectContext) as BiblePassage
+        let biblePassage = NSEntityDescription.insertNewObjectForEntityForName("BiblePassage", inManagedObjectContext: self.managedObjectContext) as! BiblePassage
         biblePassage.translation = "ESV"
         biblePassage.passage = "Genesis 1:1-5"
         biblePassage.content = "In the beginning, God created the heavens and the earth. The earth was without form and void, and darkness was over the face of the deep. And the Spirit of God was hovering over the face of the waters. And God said, \"Let there be light,\" and there was light. And God saw that the light was good. And God separated the light from the darkness. God called the light Day, and the darkness he called Night. And there was evening and there was morning, the first day."
