@@ -126,9 +126,11 @@ class SettingsTableViewController : UITableViewController,
     }
     
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        let section = sections[indexPath.section]
         sections[indexPath.section].tableView(tableView, didSelectRow: indexPath.row)
-        tableView.reloadData()
-        // tableView.reloadRowsAtIndexPaths([indexPath], withRowAnimation: .Automatic)
+        
+        // Why does passing an empty array work? Is it reloading all rows?
+        tableView.reloadRowsAtIndexPaths([], withRowAnimation: UITableViewRowAnimation.Automatic)
     }
     
     // MARK: UILocalNotification management
