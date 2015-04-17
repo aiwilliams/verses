@@ -82,7 +82,7 @@ class VerseSourceAPI : NSObject {
     func loadContentOfPassage(passage: String, completion: (String) -> (Void), failure: (String) -> (Void)) {
         requestManager.GET(remoteAPI.loadURL, parameters: remoteAPI.loadParameters(passage),
             success: { (operation: AFHTTPRequestOperation!,responseObject: AnyObject!) in
-                completion(responseObject.valueForKey("tas!t") as! String)
+                completion(responseObject.valueForKey("text") as! String)
             },
             failure: { (operation: AFHTTPRequestOperation!,error: NSError!) in
                 failure("Sorry! I have failed you :/")
