@@ -51,6 +51,15 @@ class VersesTableViewController: UITableViewController, NSFetchedResultsControll
             break
         }
     }
+    
+    override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
+        switch editingStyle {
+        case .Delete:
+            tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: UITableViewRowAnimation.Automatic)
+        default:
+            break
+        }
+    }
 
     func controllerDidChangeContent(controller: NSFetchedResultsController) {
         self.tableView.endUpdates()
@@ -71,7 +80,7 @@ class VersesTableViewController: UITableViewController, NSFetchedResultsControll
         if passage.passage != nil { cell.textLabel!.text = passage.passage }
         return cell
     }
-    
+
     override func tableView(tableView: UITableView, editActionsForRowAtIndexPath indexPath: NSIndexPath) -> [AnyObject]? {
         let editAction = UITableViewRowAction(style: .Normal, title: "Today", handler: { (action: UITableViewRowAction!, indexPath: NSIndexPath!) in
             println("TODO: Implement 'Today' action")
