@@ -14,9 +14,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, AddVerseDelegate {
     }
     
     func applicationWillResignActive(application: UIApplication) {
-        if let passage = self.biblePassageStore.activeBiblePassage() {
-            exportToTodayApp(passage)
-        } else {
+        if self.biblePassageStore.activeBiblePassage() == nil {
             clearTodayApp()
         }
     }

@@ -11,6 +11,8 @@ import UIKit
 import CoreData
 
 class VersesTableViewController: UITableViewController, NSFetchedResultsControllerDelegate, AddVerseDelegate {
+    // MARK: Variable and constant declaration
+    
     let appDelegate: AppDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
     var managedObjectContext: NSManagedObjectContext?
 
@@ -28,12 +30,16 @@ class VersesTableViewController: UITableViewController, NSFetchedResultsControll
 
         return fetchedResultsController
     }()
+    
+    // MARK: Setup
 
     override func viewDidLoad() {
         self.tableView.allowsMultipleSelectionDuringEditing = false
         self.managedObjectContext = self.appDelegate.managedObjectContext
         self.fetchedResultsController.performFetch(nil)
     }
+    
+    // MARK: Table View methods
 
     func controllerWillChangeContent(controller: NSFetchedResultsController) {
         self.tableView.beginUpdates()
@@ -83,7 +89,8 @@ class VersesTableViewController: UITableViewController, NSFetchedResultsControll
 
     override func tableView(tableView: UITableView, editActionsForRowAtIndexPath indexPath: NSIndexPath) -> [AnyObject]? {
         let editAction = UITableViewRowAction(style: .Normal, title: "Today", handler: { (action: UITableViewRowAction!, indexPath: NSIndexPath!) in
-            println("TODO: Implement 'Today' action")
+            self.appDelegate.exportToTodayApp(self.fetchedResultsController.objectAtIndexPath(indexPath) as! BiblePassage)
+            tableView.cellForRowAtIndexPath(indexPath)!.setEditing(false, animated: true)
         })
         editAction.backgroundColor = UIColor.greenColor()
         
@@ -96,6 +103,8 @@ class VersesTableViewController: UITableViewController, NSFetchedResultsControll
         
         return [deleteAction, editAction]
     }
+    
+    // MARK: Segue Control
 
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if segue.identifier == "verseDetail" {
