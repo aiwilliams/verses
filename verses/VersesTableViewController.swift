@@ -90,9 +90,9 @@ class VersesTableViewController: UITableViewController, NSFetchedResultsControll
     override func tableView(tableView: UITableView, editActionsForRowAtIndexPath indexPath: NSIndexPath) -> [AnyObject]? {
         let editAction = UITableViewRowAction(style: .Normal, title: "Today", handler: { (action: UITableViewRowAction!, indexPath: NSIndexPath!) in
             self.appDelegate.exportToTodayApp(self.fetchedResultsController.objectAtIndexPath(indexPath) as! BiblePassage)
-            tableView.cellForRowAtIndexPath(indexPath)!.setEditing(false, animated: true)
+            tableView.editing = false
         })
-        editAction.backgroundColor = UIColor.greenColor()
+        editAction.backgroundColor = UIColor(red: 0.0/255.0, green: 103.0/255.0, blue: 216.0/255.0, alpha: 1.0)
         
         let deleteAction = UITableViewRowAction(style: .Normal, title: "Delete", handler: { (action: UITableViewRowAction!, indexPath: NSIndexPath!) in
             let passage: BiblePassage = self.fetchedResultsController.objectAtIndexPath(indexPath) as! BiblePassage
