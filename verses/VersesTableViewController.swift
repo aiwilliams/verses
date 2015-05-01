@@ -39,6 +39,18 @@ class VersesTableViewController: UITableViewController, NSFetchedResultsControll
         self.fetchedResultsController.performFetch(nil)
     }
     
+    // MARK: Custom methods
+    
+    func orderedPassages() -> [BiblePassage] {
+        let unorderedPassages = self.fetchedResultsController.fetchedObjects as! [BiblePassage]
+        let activePassage = self.appDelegate.biblePassageStore.activeBiblePassage
+        
+        if activePassage == nil { return unorderedPassages }
+        
+        let otherPassages = unorderedPassages.filter {$0 != activePassage}
+        return [activePassage!] + otherPassages
+    }
+    
     // MARK: Table View methods
 
     func controllerWillChangeContent(controller: NSFetchedResultsController) {
@@ -81,18 +93,21 @@ class VersesTableViewController: UITableViewController, NSFetchedResultsControll
     }
 
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let passage: BiblePassage = self.fetchedResultsController.objectAtIndexPath(indexPath) as! BiblePassage
+        let passage: BiblePassage = self.orderedPassages()[indexPath.row]
         let cell: UITableViewCell = tableView.dequeueReusableCellWithIdentifier("verseCell", forIndexPath: indexPath) as! UITableViewCell
         if passage.passage != nil { cell.textLabel!.text = passage.passage }
         return cell
     }
-
+    
     override func tableView(tableView: UITableView, editActionsForRowAtIndexPath indexPath: NSIndexPath) -> [AnyObject]? {
-        let editAction = UITableViewRowAction(style: .Normal, title: "Today", handler: { (action: UITableViewRowAction!, indexPath: NSIndexPath!) in
+        let flagAction = UITableViewRowAction(style: .Normal, title: "Flag", handler: { (action: UITableViewRowAction!, indexPath: NSIndexPath!) in
             self.appDelegate.exportToTodayApp(self.fetchedResultsController.objectAtIndexPath(indexPath) as! BiblePassage)
+//            self.appDelegate.biblePassageStore.activeBiblePassage = self.orderedPassages()[indexPath.row]
+//            tableView.reloadRowsAtIndexPaths([NSIndexPath(forRow: 0, inSection: 0), indexPath], withRowAnimation: .Automatic)
             tableView.editing = false
+//            tableView.reloadData()
         })
-        editAction.backgroundColor = UIColor(red: 0.0/255.0, green: 103.0/255.0, blue: 216.0/255.0, alpha: 1.0)
+        flagAction.backgroundColor = UIColor(red: 1.0, green: 0.6, blue: 0.0, alpha: 1.0)
         
         let deleteAction = UITableViewRowAction(style: .Normal, title: "Delete", handler: { (action: UITableViewRowAction!, indexPath: NSIndexPath!) in
             let passage: BiblePassage = self.fetchedResultsController.objectAtIndexPath(indexPath) as! BiblePassage
@@ -101,7 +116,7 @@ class VersesTableViewController: UITableViewController, NSFetchedResultsControll
         })
         deleteAction.backgroundColor = UIColor.redColor()
         
-        return [deleteAction, editAction]
+        return [deleteAction, flagAction]
     }
     
     // MARK: Segue Control
@@ -117,7 +132,8 @@ class VersesTableViewController: UITableViewController, NSFetchedResultsControll
         self.dismissViewControllerAnimated(true, completion: nil)
     }
     
-    func verseAdded() {
+    func verseAdded(passage: BiblePassage) {
+        self.appDelegate.biblePassageStore.activeBiblePassage = passage
         self.dismissViewControllerAnimated(true, completion: nil)
     }
     

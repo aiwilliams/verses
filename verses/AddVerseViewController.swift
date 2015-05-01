@@ -12,7 +12,7 @@ import CoreData
 
 protocol AddVerseDelegate {
     func addVerseCanceled()
-    func verseAdded()
+    func verseAdded(passage: BiblePassage)
 }
 
 class AddVerseViewController: UIViewController {
@@ -48,7 +48,7 @@ class AddVerseViewController: UIViewController {
                     self.activityIndicator.stopAnimating()
                     self.errorText.hidden = true
                     self.biblePassage = returnedPassage
-                    self.delegate.verseAdded()
+                    self.delegate.verseAdded(returnedPassage)
                 }, failure: { (errorMessage: String) -> Void in
                     self.activityIndicator.stopAnimating()
                     self.errorText.text = errorMessage

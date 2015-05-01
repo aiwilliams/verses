@@ -15,10 +15,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate, AddVerseDelegate {
     
     func applicationWillResignActive(application: UIApplication) {
         if biblePassageStore.passages()?.count == 1 {
-            exportToTodayApp(biblePassageStore.activeBiblePassage()!)
+            exportToTodayApp(biblePassageStore.activeBiblePassage!)
         }
         
-        if self.biblePassageStore.activeBiblePassage() == nil {
+        if self.biblePassageStore.activeBiblePassage == nil {
             clearTodayApp()
         }
     }
@@ -107,7 +107,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, AddVerseDelegate {
         self.window!.rootViewController!.dismissViewControllerAnimated(true, completion: nil)
     }
     
-    func verseAdded() {
+    func verseAdded(passage: BiblePassage) {
         self.window!.rootViewController!.dismissViewControllerAnimated(true, completion: nil)
     }
 }

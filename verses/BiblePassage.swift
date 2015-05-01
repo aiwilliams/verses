@@ -2,13 +2,28 @@ import Foundation
 import CoreData
 
 class BiblePassage : NSManagedObject {
-  @NSManaged var translation : String?
-  @NSManaged var passage: String?
-  @NSManaged var content : String?
+    @NSManaged var translation : String?
+    @NSManaged var passage: String?
+    @NSManaged var content : String?
+    @NSManaged var flagged : NSNumber?
 }
 
 class BiblePassageStore : NSObject {
     let managedObjectContext: NSManagedObjectContext
+    
+    var activeBiblePassage: BiblePassage? {
+        get {
+            return passages()?.filter({ passage in
+                return passage.flagged!.isEqualToNumber(NSNumber(bool: true))
+            }).first // return first flagged passage
+        }
+        
+        set(activePassage) {
+            let oldPassage = activeBiblePassage
+            if (oldPassage != nil) { oldPassage!.flagged = false }
+            activePassage?.flagged = true
+        }
+    }
 
     init(moc : NSManagedObjectContext) {
         managedObjectContext = moc
@@ -21,12 +36,6 @@ class BiblePassageStore : NSObject {
 
         var error: NSError?
         return managedObjectContext.executeFetchRequest(request, error: &error) as! [BiblePassage]?
-    }
-
-    // For now, return the last passage...
-    func activeBiblePassage() -> BiblePassage? {
-        let passages = self.passages()!
-        return passages.last
     }
 
     func biblePassageForVerseReference(verseReference: String) -> BiblePassage? {
