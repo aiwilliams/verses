@@ -54,6 +54,11 @@ class VersesTableViewController: UITableViewController, NSFetchedResultsControll
         return _orderedPassages!
     }
     
+    func flagCell(cell: UITableViewCell, atIndexPath indexPath: NSIndexPath) {
+        let activePassage = orderedPassages()[indexPath.row] == self.appDelegate.biblePassageStore.activeBiblePassage
+        cell.accessoryView = activePassage ? UIImageView(image: UIImage(named: "flag.png")) : nil
+    }
+    
     // MARK: Table View methods
 
     func controllerWillChangeContent(controller: NSFetchedResultsController) {
@@ -99,32 +104,39 @@ class VersesTableViewController: UITableViewController, NSFetchedResultsControll
         let passage: BiblePassage = self.orderedPassages()[indexPath.row]
         let cell: UITableViewCell = tableView.dequeueReusableCellWithIdentifier("verseCell", forIndexPath: indexPath) as! UITableViewCell
         if passage.passage != nil { cell.textLabel!.text = passage.passage }
-        
-        println("\ncellForRowAtIndexPath: \(indexPath.row)\norderedPassages: \(orderedPassages().map {$0.passage!})\n")
+//        flagCell(cell, atIndexPath: indexPath)
         
         return cell
     }
     
     override func tableView(tableView: UITableView, editActionsForRowAtIndexPath indexPath: NSIndexPath) -> [AnyObject]? {
         let passage = self.orderedPassages()[indexPath.row]
-        
-        let flagAction = UITableViewRowAction(style: .Normal, title: "Flag", handler: { (action: UITableViewRowAction!, indexPath: NSIndexPath!) in
-            self.appDelegate.exportToTodayApp(passage)
-            self.appDelegate.biblePassageStore.activeBiblePassage = self.orderedPassages()[indexPath.row]
-            
-            let topIndexPath = NSIndexPath(forRow: 0, inSection: 0)
-            tableView.moveRowAtIndexPath(indexPath, toIndexPath: topIndexPath)
-            tableView.editing = false
-        })
-        flagAction.backgroundColor = UIColor(red: 1.0, green: 0.6, blue: 0.0, alpha: 1.0)
+        var actions = [UITableViewRowAction]()
         
         let deleteAction = UITableViewRowAction(style: .Normal, title: "Delete", handler: { (action: UITableViewRowAction!, indexPath: NSIndexPath!) in
             self.managedObjectContext?.deleteObject(passage)
             self.managedObjectContext?.save(nil)
         })
-        deleteAction.backgroundColor = UIColor.redColor()
         
-        return [deleteAction, flagAction]
+        deleteAction.backgroundColor = UIColor.redColor()
+        actions.append(deleteAction)
+
+        if orderedPassages()[indexPath.row] != self.appDelegate.biblePassageStore.activeBiblePassage {
+            let flagAction = UITableViewRowAction(style: .Normal, title: "Flag", handler: { (action: UITableViewRowAction!, indexPath: NSIndexPath!) in
+                self.appDelegate.exportToTodayApp(passage)
+                self.appDelegate.biblePassageStore.activeBiblePassage = self.orderedPassages()[indexPath.row]
+                
+                let topIndexPath = NSIndexPath(forRow: 0, inSection: 0)
+                //            tableView.reloadRowsAtIndexPaths([indexPath, topIndexPath], withRowAnimation: .None)
+                
+                tableView.moveRowAtIndexPath(indexPath, toIndexPath: topIndexPath)
+                tableView.editing = false
+            })
+            flagAction.backgroundColor = UIColor(red: 1.0, green: 0.6, blue: 0.0, alpha: 1.0)
+            actions.append(flagAction)
+        }
+        
+        return actions
     }
     
     // MARK: Segue Control
