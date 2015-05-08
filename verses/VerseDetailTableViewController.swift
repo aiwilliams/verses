@@ -16,7 +16,7 @@ class VerseDetailTableViewController: UITableViewController {
     var biblePassage: BiblePassage?
     
     override func viewDidLoad() {
-        self.navigationController?.title = self.biblePassage?.passage
+        self.title = self.biblePassage?.passage
         self.passageTextLabel.text = self.biblePassage?.content
     }
     

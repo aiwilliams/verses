@@ -15,6 +15,7 @@ class VersesTableViewController: UITableViewController, NSFetchedResultsControll
     
     let appDelegate: AppDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
     var managedObjectContext: NSManagedObjectContext?
+    var _orderedPassages: [BiblePassage]?
 
     lazy var fetchedResultsController: NSFetchedResultsController = {
         let fetchRequest = NSFetchRequest()
@@ -42,13 +43,15 @@ class VersesTableViewController: UITableViewController, NSFetchedResultsControll
     // MARK: Custom methods
     
     func orderedPassages() -> [BiblePassage] {
-        let unorderedPassages = self.fetchedResultsController.fetchedObjects as! [BiblePassage]
+        if _orderedPassages == nil { _orderedPassages = self.fetchedResultsController.fetchedObjects as? [BiblePassage] }
         let activePassage = self.appDelegate.biblePassageStore.activeBiblePassage
         
-        if activePassage == nil { return unorderedPassages }
+        if activePassage == nil { return _orderedPassages! }
         
-        let otherPassages = unorderedPassages.filter {$0 != activePassage}
-        return [activePassage!] + otherPassages
+        let otherPassages = _orderedPassages!.filter {$0 != activePassage}
+        _orderedPassages = [activePassage!] + otherPassages
+        
+        return _orderedPassages!
     }
     
     // MARK: Table View methods
@@ -96,21 +99,26 @@ class VersesTableViewController: UITableViewController, NSFetchedResultsControll
         let passage: BiblePassage = self.orderedPassages()[indexPath.row]
         let cell: UITableViewCell = tableView.dequeueReusableCellWithIdentifier("verseCell", forIndexPath: indexPath) as! UITableViewCell
         if passage.passage != nil { cell.textLabel!.text = passage.passage }
+        
+        println("\ncellForRowAtIndexPath: \(indexPath.row)\norderedPassages: \(orderedPassages().map {$0.passage!})\n")
+        
         return cell
     }
     
     override func tableView(tableView: UITableView, editActionsForRowAtIndexPath indexPath: NSIndexPath) -> [AnyObject]? {
+        let passage = self.orderedPassages()[indexPath.row]
+        
         let flagAction = UITableViewRowAction(style: .Normal, title: "Flag", handler: { (action: UITableViewRowAction!, indexPath: NSIndexPath!) in
-            self.appDelegate.exportToTodayApp(self.fetchedResultsController.objectAtIndexPath(indexPath) as! BiblePassage)
-//            self.appDelegate.biblePassageStore.activeBiblePassage = self.orderedPassages()[indexPath.row]
-//            tableView.reloadRowsAtIndexPaths([NSIndexPath(forRow: 0, inSection: 0), indexPath], withRowAnimation: .Automatic)
+            self.appDelegate.exportToTodayApp(passage)
+            self.appDelegate.biblePassageStore.activeBiblePassage = self.orderedPassages()[indexPath.row]
+            
+            let topIndexPath = NSIndexPath(forRow: 0, inSection: 0)
+            tableView.moveRowAtIndexPath(indexPath, toIndexPath: topIndexPath)
             tableView.editing = false
-//            tableView.reloadData()
         })
         flagAction.backgroundColor = UIColor(red: 1.0, green: 0.6, blue: 0.0, alpha: 1.0)
         
         let deleteAction = UITableViewRowAction(style: .Normal, title: "Delete", handler: { (action: UITableViewRowAction!, indexPath: NSIndexPath!) in
-            let passage: BiblePassage = self.fetchedResultsController.objectAtIndexPath(indexPath) as! BiblePassage
             self.managedObjectContext?.deleteObject(passage)
             self.managedObjectContext?.save(nil)
         })
@@ -124,7 +132,7 @@ class VersesTableViewController: UITableViewController, NSFetchedResultsControll
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if segue.identifier == "verseDetail" {
             let detailController: VerseDetailTableViewController = segue.destinationViewController as! VerseDetailTableViewController
-            detailController.biblePassage = self.fetchedResultsController.objectAtIndexPath(self.tableView.indexPathForSelectedRow()!) as? BiblePassage
+            detailController.biblePassage = self.orderedPassages()[self.tableView.indexPathForSelectedRow()!.row]
         }
     }
     
