@@ -48,12 +48,63 @@
                                 <segue destination="BYZ-38-t0r" kind="show" id="TwX-wc-KxV"/>
                             </connections>
                         </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="gdH-VT-gFa"/>
+                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="gdH-VT-gFa">
+                            <connections>
+                                <segue destination="BGj-au-I5m" kind="presentation" id="0Ne-2l-Wj0"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="vOE-NK-sVH" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1106" y="-384"/>
+        </scene>
+        <!--Add Verse-->
+        <scene sceneID="CNb-Vk-cAs">
+            <objects>
+                <viewController id="2h5-9d-h6x" customClass="AddVerseController" customModule="Verses" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="lAW-NV-pcT"/>
+                        <viewControllerLayoutGuide type="bottom" id="WOe-uo-BVY"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="MFU-DV-FGZ">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Gc0-q9-h3h">
+                                <rect key="frame" x="20" y="105" width="560" height="30"/>
+                                <animations/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                        </subviews>
+                        <animations/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="leadingMargin" secondItem="Gc0-q9-h3h" secondAttribute="leading" id="4fw-YI-HWU"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="Gc0-q9-h3h" secondAttribute="trailing" id="IM4-Tj-dc6"/>
+                            <constraint firstItem="Gc0-q9-h3h" firstAttribute="top" secondItem="lAW-NV-pcT" secondAttribute="bottom" constant="41" id="tek-tl-7DT"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" title="Add Verse" id="1nm-FY-ltn">
+                        <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="V53-e9-OUF">
+                            <connections>
+                                <action selector="cancelButtonPressed:" destination="2h5-9d-h6x" id="Pay-V1-VTE"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" style="done" systemItem="done" id="VNr-3j-xwV">
+                            <connections>
+                                <action selector="doneButtonPressed:" destination="2h5-9d-h6x" id="odB-Dj-Fft"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="verseRequest" destination="Gc0-q9-h3h" id="1Wq-kh-3EC"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="wpT-4U-eOh" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2183" y="-1098"/>
         </scene>
         <!--James 1:1-->
         <scene sceneID="tne-QT-ifu">
@@ -132,6 +183,25 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="52i-zC-O6P" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="414" y="-384"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="UYt-lx-qNd">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="BGj-au-I5m" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="a3b-Yy-i1T">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <animations/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="2h5-9d-h6x" kind="relationship" relationship="rootViewController" id="R7m-eO-BYh"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="cap-t1-w9J" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1485" y="-1098"/>
         </scene>
     </scenes>
 </document>
