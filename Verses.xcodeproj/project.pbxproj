@@ -8,13 +8,14 @@
 
 /* Begin PBXBuildFile section */
 		FDB61B8D1BF533D800F8C61D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDB61B8C1BF533D800F8C61D /* AppDelegate.swift */; };
-		FDB61B8F1BF533D800F8C61D /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDB61B8E1BF533D800F8C61D /* ViewController.swift */; };
+		FDB61B8F1BF533D800F8C61D /* VersePracticeController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDB61B8E1BF533D800F8C61D /* VersePracticeController.swift */; };
 		FDB61B921BF533D800F8C61D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FDB61B901BF533D800F8C61D /* Main.storyboard */; };
 		FDB61B951BF533D800F8C61D /* Verses.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = FDB61B931BF533D800F8C61D /* Verses.xcdatamodeld */; };
 		FDB61B971BF533D800F8C61D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FDB61B961BF533D800F8C61D /* Assets.xcassets */; };
 		FDB61B9A1BF533D800F8C61D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FDB61B981BF533D800F8C61D /* LaunchScreen.storyboard */; };
 		FDB61BA51BF533D800F8C61D /* VersesTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDB61BA41BF533D800F8C61D /* VersesTests.swift */; };
 		FDB61BB01BF533D800F8C61D /* VersesUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDB61BAF1BF533D800F8C61D /* VersesUITests.swift */; };
+		FDB61BBE1BF5410000F8C61D /* VersesIndexController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDB61BBD1BF5410000F8C61D /* VersesIndexController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -37,7 +38,7 @@
 /* Begin PBXFileReference section */
 		FDB61B891BF533D800F8C61D /* Verses.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Verses.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FDB61B8C1BF533D800F8C61D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		FDB61B8E1BF533D800F8C61D /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		FDB61B8E1BF533D800F8C61D /* VersePracticeController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VersePracticeController.swift; sourceTree = "<group>"; };
 		FDB61B911BF533D800F8C61D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		FDB61B941BF533D800F8C61D /* Verses.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Verses.xcdatamodel; sourceTree = "<group>"; };
 		FDB61B961BF533D800F8C61D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -49,6 +50,7 @@
 		FDB61BAB1BF533D800F8C61D /* VersesUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = VersesUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		FDB61BAF1BF533D800F8C61D /* VersesUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VersesUITests.swift; sourceTree = "<group>"; };
 		FDB61BB11BF533D800F8C61D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		FDB61BBD1BF5410000F8C61D /* VersesIndexController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VersesIndexController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -100,7 +102,8 @@
 			isa = PBXGroup;
 			children = (
 				FDB61B8C1BF533D800F8C61D /* AppDelegate.swift */,
-				FDB61B8E1BF533D800F8C61D /* ViewController.swift */,
+				FDB61B8E1BF533D800F8C61D /* VersePracticeController.swift */,
+				FDB61BBD1BF5410000F8C61D /* VersesIndexController.swift */,
 				FDB61B901BF533D800F8C61D /* Main.storyboard */,
 				FDB61B961BF533D800F8C61D /* Assets.xcassets */,
 				FDB61B981BF533D800F8C61D /* LaunchScreen.storyboard */,
@@ -259,8 +262,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				FDB61B8F1BF533D800F8C61D /* ViewController.swift in Sources */,
+				FDB61B8F1BF533D800F8C61D /* VersePracticeController.swift in Sources */,
 				FDB61B951BF533D800F8C61D /* Verses.xcdatamodeld in Sources */,
+				FDB61BBE1BF5410000F8C61D /* VersesIndexController.swift in Sources */,
 				FDB61B8D1BF533D800F8C61D /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

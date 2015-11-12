@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ViewController: UIViewController {
+class VersePracticeController: UIViewController {
     @IBOutlet var helpLabel: UILabel!
 
     override func viewDidLoad() {
