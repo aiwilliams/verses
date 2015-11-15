@@ -8,6 +8,7 @@
 
 import Foundation
 import UIKit
+import CoreData
 
 class AddVerseController: UIViewController {
     var APIURL: String = "http://heartversesapi.herokuapp.com/api/v1"
@@ -19,6 +20,7 @@ class AddVerseController: UIViewController {
 
     @IBAction func doneButtonPressed(sender: AnyObject) {
         fetchVerseTextFromAPI(verseRequest.text!)
+        self.dismissViewControllerAnimated(true, completion: nil)
     }
     
     func fetchVerseTextFromAPI(passage: String) {
@@ -36,10 +38,32 @@ class AddVerseController: UIViewController {
             if let verses = data["verses"] as? NSArray {
                 if let topVerse = verses[0] as? NSDictionary {
                     if let text = topVerse["text"] as? String {
-                        print(text)
+                        if let book = topVerse["book"] as? String {
+                            if let chapter = topVerse["chapter"] as? Int {
+                                if let verse = topVerse["verse"] as? Int {
+                                    let passage = "\(book) \(chapter):\(verse)"
+                                    saveVerse(passage, text: text)
+                                }
+                            }
+                        }
                     }
                 }
             }
+        }
+    }
+    
+    func saveVerse(passage: String, text: String) {
+        let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+        let moc = appDelegate.managedObjectContext
+        let entity = NSEntityDescription.entityForName("Verse", inManagedObjectContext: moc)
+        let verse = NSManagedObject(entity: entity!, insertIntoManagedObjectContext: moc)
+        verse.setValue(passage, forKey: "passage")
+        verse.setValue(text, forKey: "text")
+        
+        do {
+            try moc.save()
+        } catch let error as NSError {
+            print("Could not save \(error), \(error.userInfo)")
         }
     }
 }
