@@ -44,4 +44,14 @@ class VersesIndexController: UITableViewController {
         cell!.textLabel!.text = verse.valueForKey("passage") as? String
         return cell!
     }
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if segue.identifier! == "verseDetailSegue" {
+            let verseDetail = segue.destinationViewController as! VerseDetailController
+            let indexPath: NSIndexPath = self.tableView.indexPathForCell(sender as! UITableViewCell)!
+            let verse = verses[indexPath.row]
+            verseDetail.text = verse.valueForKey("text") as! String
+            verseDetail.passage = verse.valueForKey("passage") as! String
+        }
+    }
 }
