@@ -13,6 +13,12 @@ import CoreData
 class AddVerseController: UIViewController {
     var APIURL: String = "http://heartversesapi.herokuapp.com/api/v1"
     @IBOutlet var verseRequest: UITextField!
+    @IBOutlet var errorLabel: UILabel!
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        errorLabel.hidden = true
+    }
 
     @IBAction func cancelButtonPressed(sender: AnyObject) {
         self.dismissViewControllerAnimated(true, completion: nil)
@@ -20,14 +26,21 @@ class AddVerseController: UIViewController {
 
     @IBAction func doneButtonPressed(sender: AnyObject) {
         let url = parsePassageIntoURLString(verseRequest.text!)
-        fetchAndSaveVerseText(url)
-        self.dismissViewControllerAnimated(true, completion: nil)
+        if url == "failure" {
+            errorLabel.hidden = false
+        } else {
+            fetchAndSaveVerseText(url)
+            self.dismissViewControllerAnimated(true, completion: nil)
+        }
     }
     
     func parsePassageIntoURLString(rawPassage: String) -> String {
-        let parseURL = NSURL(string: self.APIURL + "/parse/" + rawPassage)!
-        let parseData: NSData? = NSData(contentsOfURL: parseURL)
+        let parseURL = NSURL(string: self.APIURL + "/parse/" + rawPassage)
+        if parseURL == nil { return "failure" } // they put a space
+        let parseData: NSData? = NSData(contentsOfURL: parseURL!)
         var parseJSON: AnyObject? = nil
+        
+        if parseData == nil { return "failure" } // they put in an out-of-bounds passage or something dumb
         
         do {
             parseJSON = try NSJSONSerialization.JSONObjectWithData(parseData!, options: NSJSONReadingOptions.AllowFragments)
@@ -49,7 +62,6 @@ class AddVerseController: UIViewController {
     }
     
     func fetchAndSaveVerseText(passageURL: String) {
-        print(self.APIURL + passageURL)
         let verseURL = NSURL(string: self.APIURL + passageURL)!
         let verseData: NSData? = NSData(contentsOfURL: verseURL)
         var verseJSON: AnyObject? = nil

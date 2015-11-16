@@ -120,13 +120,26 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Sorry! An error occurred while I was trying to fetch the verse. Try again?" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="C4L-vn-hkd">
+                                <rect key="frame" x="20" y="143" width="560" height="76"/>
+                                <animations/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="76" id="uH8-mN-7h4"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <animations/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstAttribute="leadingMargin" secondItem="Gc0-q9-h3h" secondAttribute="leading" id="4fw-YI-HWU"/>
                             <constraint firstAttribute="trailingMargin" secondItem="Gc0-q9-h3h" secondAttribute="trailing" id="IM4-Tj-dc6"/>
+                            <constraint firstAttribute="leadingMargin" secondItem="C4L-vn-hkd" secondAttribute="leading" id="gI0-l7-1v5"/>
                             <constraint firstItem="Gc0-q9-h3h" firstAttribute="top" secondItem="lAW-NV-pcT" secondAttribute="bottom" constant="41" id="tek-tl-7DT"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="C4L-vn-hkd" secondAttribute="trailing" id="wOE-vb-zDP"/>
+                            <constraint firstItem="C4L-vn-hkd" firstAttribute="top" secondItem="Gc0-q9-h3h" secondAttribute="bottom" constant="8" id="wli-8d-UMw"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Add Verse" id="1nm-FY-ltn">
@@ -142,6 +155,7 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="errorLabel" destination="C4L-vn-hkd" id="azv-Fm-ByS"/>
                         <outlet property="verseRequest" destination="Gc0-q9-h3h" id="1Wq-kh-3EC"/>
                     </connections>
                 </viewController>
