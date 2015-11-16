@@ -25,18 +25,30 @@ class AddVerseController: UIViewController {
     }
 
     @IBAction func doneButtonPressed(sender: AnyObject) {
-        let url = parsePassageIntoURLString(verseRequest.text!)
-        if url == "failure" {
+        let cleanURL = cleanRawPassage(verseRequest.text!)
+        if cleanURL == "failure" {
             errorLabel.hidden = false
         } else {
-            fetchAndSaveVerseText(url)
-            self.dismissViewControllerAnimated(true, completion: nil)
+            let url = parsePassageIntoURLString(cleanURL)
+            
+            if url == "failure" {
+                errorLabel.hidden = false
+            } else {
+                fetchAndSaveVerseText(url)
+                self.dismissViewControllerAnimated(true, completion: nil)
+            }
         }
+    }
+    
+    func cleanRawPassage(rawPassage: String) -> String {
+        if let spacesRegex: NSRegularExpression = try? NSRegularExpression(pattern: " ", options: NSRegularExpressionOptions.CaseInsensitive) {
+            return spacesRegex.stringByReplacingMatchesInString(rawPassage, options: NSMatchingOptions.ReportCompletion, range: NSMakeRange(0, rawPassage.characters.count), withTemplate: "")
+        }
+        return "failure"
     }
     
     func parsePassageIntoURLString(rawPassage: String) -> String {
         let parseURL = NSURL(string: self.APIURL + "/parse/" + rawPassage)
-        if parseURL == nil { return "failure" } // they put a space
         let parseData: NSData? = NSData(contentsOfURL: parseURL!)
         var parseJSON: AnyObject? = nil
         
