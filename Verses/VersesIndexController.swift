@@ -46,7 +46,7 @@ class VersesIndexController: UITableViewController {
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        if segue.identifier! == "verseDetailSegue" {
+        if segue.identifier == "verseDetailSegue" {
             let verseDetail = segue.destinationViewController as! VerseDetailController
             let indexPath: NSIndexPath = self.tableView.indexPathForCell(sender as! UITableViewCell)!
             let verse = verses[indexPath.row]
