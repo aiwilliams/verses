@@ -19,19 +19,45 @@ class AddVerseController: UIViewController {
     }
 
     @IBAction func doneButtonPressed(sender: AnyObject) {
-        fetchVerseTextFromAPI(verseRequest.text!)
+        let url = parsePassageIntoURLString(verseRequest.text!)
+        fetchAndSaveVerseText(url)
         self.dismissViewControllerAnimated(true, completion: nil)
     }
     
-    func fetchVerseTextFromAPI(passage: String) {
-        let verseURL = NSURL(string: self.APIURL + verseRequest.text!)!
+    func parsePassageIntoURLString(rawPassage: String) -> String {
+        let parseURL = NSURL(string: self.APIURL + "/parse/" + rawPassage)!
+        let parseData: NSData? = NSData(contentsOfURL: parseURL)
+        var parseJSON: AnyObject? = nil
+        
+        do {
+            parseJSON = try NSJSONSerialization.JSONObjectWithData(parseData!, options: NSJSONReadingOptions.AllowFragments)
+        } catch _ as NSError {
+            print("could not serialize parsed passage JSON from HeartVersesAPI")
+        }
+        
+        if let data = parseJSON as? NSDictionary {
+            if let book = data["book"] as? String {
+                if let chapter = data["chapter"] as? Int {
+                    if let verse = data["verse"] as? Int {
+                        return "/kjv/\(book)/\(chapter)/\(verse)"
+                    }
+                }
+            }
+        }
+        
+        return "failure"
+    }
+    
+    func fetchAndSaveVerseText(passageURL: String) {
+        print(self.APIURL + passageURL)
+        let verseURL = NSURL(string: self.APIURL + passageURL)!
         let verseData: NSData? = NSData(contentsOfURL: verseURL)
         var verseJSON: AnyObject? = nil
-
+        
         do {
             verseJSON = try NSJSONSerialization.JSONObjectWithData(verseData!, options: NSJSONReadingOptions.AllowFragments)
         } catch _ as NSError {
-            print("could not serialize JSON from HeartVersesAPI")
+            print("could not serialize verse text JSON from HeartVersesAPI")
         }
         
         if let data = verseJSON as? NSDictionary {
