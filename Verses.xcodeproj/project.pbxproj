@@ -17,7 +17,6 @@
 		FDB61BB01BF533D800F8C61D /* VersesUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDB61BAF1BF533D800F8C61D /* VersesUITests.swift */; };
 		FDB61BBE1BF5410000F8C61D /* VersesIndexController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDB61BBD1BF5410000F8C61D /* VersesIndexController.swift */; };
 		FDB61BC01BF5457E00F8C61D /* AddVerseController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDB61BBF1BF5457E00F8C61D /* AddVerseController.swift */; };
-		FDFCE35D1BF92D26008A6606 /* VerseDetailController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDFCE35C1BF92D26008A6606 /* VerseDetailController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -54,7 +53,6 @@
 		FDB61BB11BF533D800F8C61D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		FDB61BBD1BF5410000F8C61D /* VersesIndexController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VersesIndexController.swift; sourceTree = "<group>"; };
 		FDB61BBF1BF5457E00F8C61D /* AddVerseController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddVerseController.swift; sourceTree = "<group>"; };
-		FDFCE35C1BF92D26008A6606 /* VerseDetailController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VerseDetailController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -109,7 +107,6 @@
 				FDB61B8E1BF533D800F8C61D /* VersePracticeController.swift */,
 				FDB61BBD1BF5410000F8C61D /* VersesIndexController.swift */,
 				FDB61BBF1BF5457E00F8C61D /* AddVerseController.swift */,
-				FDFCE35C1BF92D26008A6606 /* VerseDetailController.swift */,
 				FDB61B901BF533D800F8C61D /* Main.storyboard */,
 				FDB61B961BF533D800F8C61D /* Assets.xcassets */,
 				FDB61B981BF533D800F8C61D /* LaunchScreen.storyboard */,
@@ -270,7 +267,6 @@
 			files = (
 				FDB61B8F1BF533D800F8C61D /* VersePracticeController.swift in Sources */,
 				FDB61BC01BF5457E00F8C61D /* AddVerseController.swift in Sources */,
-				FDFCE35D1BF92D26008A6606 /* VerseDetailController.swift in Sources */,
 				FDB61B951BF533D800F8C61D /* Verses.xcdatamodeld in Sources */,
 				FDB61BBE1BF5410000F8C61D /* VersesIndexController.swift in Sources */,
 				FDB61B8D1BF533D800F8C61D /* AppDelegate.swift in Sources */,

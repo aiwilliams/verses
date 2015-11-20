@@ -36,7 +36,7 @@
                                 </tableViewCellContentView>
                                 <animations/>
                                 <connections>
-                                    <segue destination="iOQ-lL-idd" kind="show" identifier="verseDetailSegue" id="y7r-l0-uWY"/>
+                                    <segue destination="BYZ-38-t0r" kind="show" identifier="passagePracticeSegue" id="55G-9h-5rM"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
@@ -61,46 +61,6 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="vOE-NK-sVH" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1106" y="-384"/>
-        </scene>
-        <!--Verse Detail-->
-        <scene sceneID="OdZ-Sh-eoB">
-            <objects>
-                <viewController id="iOQ-lL-idd" customClass="VerseDetailController" customModule="Verses" customModuleProvider="target" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="cWA-cl-GWe"/>
-                        <viewControllerLayoutGuide type="bottom" id="mn7-rC-xwq"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="Bcx-55-uaJ">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5Bg-ME-PN7">
-                                <rect key="frame" x="20" y="72" width="560" height="133"/>
-                                <animations/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="133" id="kHi-gj-LnM"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                        </subviews>
-                        <animations/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <constraints>
-                            <constraint firstAttribute="trailingMargin" secondItem="5Bg-ME-PN7" secondAttribute="trailing" id="gIW-1Z-wVO"/>
-                            <constraint firstItem="5Bg-ME-PN7" firstAttribute="top" secondItem="cWA-cl-GWe" secondAttribute="bottom" constant="8" id="gkf-nx-5xI"/>
-                            <constraint firstAttribute="leadingMargin" secondItem="5Bg-ME-PN7" secondAttribute="leading" id="lXm-WM-9tn"/>
-                        </constraints>
-                    </view>
-                    <navigationItem key="navigationItem" title="Verse Detail" id="w4J-N7-lwh"/>
-                    <connections>
-                        <outlet property="verseTextLabel" destination="5Bg-ME-PN7" id="ggq-kG-4Cm"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="jJD-Yd-7DP" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="1462" y="289"/>
         </scene>
         <!--Add Verse-->
         <scene sceneID="CNb-Vk-cAs">
@@ -261,4 +221,7 @@
             <point key="canvasLocation" x="1485" y="-1098"/>
         </scene>
     </scenes>
+    <inferredMetricsTieBreakers>
+        <segue reference="TwX-wc-KxV"/>
+    </inferredMetricsTieBreakers>
 </document>

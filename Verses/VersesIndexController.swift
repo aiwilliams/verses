@@ -22,7 +22,7 @@ class VersesIndexController: UITableViewController {
 
         let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
         let moc = appDelegate.managedObjectContext
-        let fetchRequest = NSFetchRequest(entityName: "Verse")
+        let fetchRequest = NSFetchRequest(entityName: "Passage")
         
         do {
             let results = try moc.executeFetchRequest(fetchRequest)
@@ -41,17 +41,13 @@ class VersesIndexController: UITableViewController {
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("verseCell")
         let verse = verses[indexPath.row]
-        cell!.textLabel!.text = verse.valueForKey("passage") as? String
+        cell!.textLabel!.text = verse.valueForKey("reference") as? String
         return cell!
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        if segue.identifier == "verseDetailSegue" {
-            let verseDetail = segue.destinationViewController as! VerseDetailController
-            let indexPath: NSIndexPath = self.tableView.indexPathForCell(sender as! UITableViewCell)!
-            let verse = verses[indexPath.row]
-            verseDetail.text = verse.valueForKey("text") as! String
-            verseDetail.passage = verse.valueForKey("passage") as! String
+        if segue.identifier == "passagePracticeSegue" {
+            
         }
     }
 }

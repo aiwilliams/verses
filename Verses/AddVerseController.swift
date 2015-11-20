@@ -105,9 +105,9 @@ class AddVerseController: UIViewController {
     func saveVerse(passage: String, text: String) {
         let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
         let moc = appDelegate.managedObjectContext
-        let entity = NSEntityDescription.entityForName("Verse", inManagedObjectContext: moc)
+        let entity = NSEntityDescription.entityForName("Passage", inManagedObjectContext: moc)
         let verse = NSManagedObject(entity: entity!, insertIntoManagedObjectContext: moc)
-        verse.setValue(passage, forKey: "passage")
+        verse.setValue(passage, forKey: "reference")
         verse.setValue(text, forKey: "text")
         
         do {
