@@ -145,14 +145,24 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="J, a s o G a o t L J C, T t t t i t D: G." textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hwo-nT-Hzu">
-                                <rect key="frame" x="20" y="223" width="560" height="21"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="J, a s o G a o t L J C, T t t t i t D: G." textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hwo-nT-Hzu" userLabel="Basic Help Label">
+                                <rect key="frame" x="20" y="223" width="560" height="83"/>
                                 <animations/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="21" id="5EF-H9-X26"/>
+                                    <constraint firstAttribute="height" constant="83" id="5EF-H9-X26"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="J, a s o G a o t L J C, T t t t i t D: G." textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zAa-MO-Bnm" userLabel="Advanced Help Label">
+                                <rect key="frame" x="20" y="223" width="560" height="83"/>
+                                <animations/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="83" id="2Be-9J-2HD"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
@@ -163,7 +173,10 @@
                             <constraint firstAttribute="trailingMargin" secondItem="4tE-Md-p5j" secondAttribute="trailing" id="Hgh-6Y-QA6"/>
                             <constraint firstAttribute="trailingMargin" secondItem="hwo-nT-Hzu" secondAttribute="trailing" id="Vf9-bz-Qvm"/>
                             <constraint firstAttribute="leadingMargin" secondItem="hwo-nT-Hzu" secondAttribute="leading" id="X51-GN-663"/>
+                            <constraint firstAttribute="leadingMargin" secondItem="zAa-MO-Bnm" secondAttribute="leading" id="fAK-Qf-JcO"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="zAa-MO-Bnm" secondAttribute="trailing" id="hd0-Yj-q77"/>
                             <constraint firstItem="4tE-Md-p5j" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="8" id="k1S-MJ-dGI"/>
+                            <constraint firstItem="zAa-MO-Bnm" firstAttribute="top" secondItem="4tE-Md-p5j" secondAttribute="bottom" constant="58" id="oMd-63-zpo"/>
                             <constraint firstAttribute="leadingMargin" secondItem="4tE-Md-p5j" secondAttribute="leading" id="rVA-OM-54A"/>
                         </constraints>
                     </view>
@@ -175,7 +188,8 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
-                        <outlet property="helpLabel" destination="hwo-nT-Hzu" id="HN6-O9-FnM"/>
+                        <outlet property="advancedHelpLabel" destination="zAa-MO-Bnm" id="Cbp-s1-h0J"/>
+                        <outlet property="basicHelpLabel" destination="hwo-nT-Hzu" id="FRn-tb-Cdr"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
