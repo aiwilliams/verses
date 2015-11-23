@@ -46,11 +46,6 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="Your Verses" id="M3n-OS-hcW">
-                        <barButtonItem key="leftBarButtonItem" title="Practice" id="UDo-mj-FKr">
-                            <connections>
-                                <segue destination="BYZ-38-t0r" kind="show" id="TwX-wc-KxV"/>
-                            </connections>
-                        </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="gdH-VT-gFa">
                             <connections>
                                 <segue destination="BGj-au-I5m" kind="presentation" id="0Ne-2l-Wj0"/>
@@ -136,31 +131,25 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" bounces="NO" text="Type your verse here" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="4tE-Md-p5j">
-                                <rect key="frame" x="20" y="72" width="560" height="93"/>
+                                <rect key="frame" x="20" y="72" width="560" height="131"/>
                                 <animations/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="93" id="k7Y-Yr-Cg3"/>
+                                    <constraint firstAttribute="height" constant="131" id="xbX-TA-QJC"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="J, a s o G a o t L J C, T t t t i t D: G." textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hwo-nT-Hzu" userLabel="Basic Help Label">
-                                <rect key="frame" x="20" y="223" width="560" height="83"/>
+                            <label opaque="NO" userInteractionEnabled="NO" alpha="0.0" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="J, a s o G a o t L J C, T t t t i t D: G." textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hwo-nT-Hzu" userLabel="Basic Help Label">
+                                <rect key="frame" x="20" y="560" width="560" height="20"/>
                                 <animations/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="83" id="5EF-H9-X26"/>
-                                </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="J, a s o G a o t L J C, T t t t i t D: G." textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zAa-MO-Bnm" userLabel="Advanced Help Label">
-                                <rect key="frame" x="20" y="223" width="560" height="83"/>
+                            <label opaque="NO" userInteractionEnabled="NO" alpha="0.0" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="J, a s o G a o t L J C, T t t t i t D: G." textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zAa-MO-Bnm" userLabel="Advanced Help Label">
+                                <rect key="frame" x="20" y="560" width="560" height="20"/>
                                 <animations/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="83" id="2Be-9J-2HD"/>
-                                </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
@@ -169,15 +158,16 @@
                         <animations/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="hwo-nT-Hzu" firstAttribute="top" secondItem="4tE-Md-p5j" secondAttribute="bottom" constant="58" id="8cv-yi-w3K"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="4tE-Md-p5j" secondAttribute="trailing" id="Hgh-6Y-QA6"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="hwo-nT-Hzu" secondAttribute="trailing" id="Vf9-bz-Qvm"/>
-                            <constraint firstAttribute="leadingMargin" secondItem="hwo-nT-Hzu" secondAttribute="leading" id="X51-GN-663"/>
-                            <constraint firstAttribute="leadingMargin" secondItem="zAa-MO-Bnm" secondAttribute="leading" id="fAK-Qf-JcO"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="zAa-MO-Bnm" secondAttribute="trailing" id="hd0-Yj-q77"/>
-                            <constraint firstItem="4tE-Md-p5j" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="8" id="k1S-MJ-dGI"/>
-                            <constraint firstItem="zAa-MO-Bnm" firstAttribute="top" secondItem="4tE-Md-p5j" secondAttribute="bottom" constant="58" id="oMd-63-zpo"/>
-                            <constraint firstAttribute="leadingMargin" secondItem="4tE-Md-p5j" secondAttribute="leading" id="rVA-OM-54A"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="hwo-nT-Hzu" secondAttribute="trailing" id="05A-ba-dPu"/>
+                            <constraint firstItem="zAa-MO-Bnm" firstAttribute="height" secondItem="hwo-nT-Hzu" secondAttribute="height" id="2gz-sd-Cv8"/>
+                            <constraint firstItem="zAa-MO-Bnm" firstAttribute="centerX" secondItem="hwo-nT-Hzu" secondAttribute="centerX" id="3dG-rg-kS5"/>
+                            <constraint firstItem="4tE-Md-p5j" firstAttribute="width" secondItem="hwo-nT-Hzu" secondAttribute="width" id="9I3-aV-WWA"/>
+                            <constraint firstItem="4tE-Md-p5j" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="8" id="JJj-lV-9Ac"/>
+                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="hwo-nT-Hzu" secondAttribute="bottom" constant="20" id="UtW-5q-1vF"/>
+                            <constraint firstItem="zAa-MO-Bnm" firstAttribute="width" secondItem="hwo-nT-Hzu" secondAttribute="width" id="XBA-Ah-Q1Y"/>
+                            <constraint firstItem="zAa-MO-Bnm" firstAttribute="bottom" secondItem="hwo-nT-Hzu" secondAttribute="bottom" id="bHA-Uf-B6p"/>
+                            <constraint firstItem="4tE-Md-p5j" firstAttribute="centerX" secondItem="hwo-nT-Hzu" secondAttribute="centerX" id="jp9-8W-apc"/>
+                            <constraint firstAttribute="leadingMargin" secondItem="hwo-nT-Hzu" secondAttribute="leading" id="wA5-Hn-zzW"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="James 1:1" id="9bu-wA-1kC">
@@ -190,6 +180,7 @@
                     <connections>
                         <outlet property="advancedHelpLabel" destination="zAa-MO-Bnm" id="Cbp-s1-h0J"/>
                         <outlet property="basicHelpLabel" destination="hwo-nT-Hzu" id="FRn-tb-Cdr"/>
+                        <outlet property="distanceFromHelpToBottomLayoutGuide" destination="UtW-5q-1vF" id="ix7-hu-47f"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
@@ -235,7 +226,4 @@
             <point key="canvasLocation" x="1485" y="-1098"/>
         </scene>
     </scenes>
-    <inferredMetricsTieBreakers>
-        <segue reference="TwX-wc-KxV"/>
-    </inferredMetricsTieBreakers>
 </document>
