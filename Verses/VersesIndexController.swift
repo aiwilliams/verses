@@ -49,7 +49,10 @@ class VersesIndexController: UITableViewController {
         if segue.identifier == "passagePracticeSegue" {
             let destinationViewController = segue.destinationViewController as! VersePracticeController
             let ip: NSIndexPath = self.tableView.indexPathForCell(sender as! UITableViewCell)!
-            destinationViewController.indexPath = ip
+            let passageText: String = self.passages[ip.row].valueForKey("text") as! String
+            let passageReference: String = self.passages[ip.row].valueForKey("reference") as! String
+            destinationViewController.passageText = passageText
+            destinationViewController.passageReference = passageReference
         }
     }
 }

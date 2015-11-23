@@ -15,7 +15,8 @@ class VersePracticeController: UIViewController {
     @IBOutlet var distanceFromHelpToBottomLayoutGuide: NSLayoutConstraint!
     @IBOutlet var verseEntryTextView: UITextView!
     
-    var passage: NSManagedObject!
+    var passageText: String!
+    var passageReference: String!
     var indexPath: NSIndexPath!
     var hintLevel: Int = 0
 
@@ -24,20 +25,9 @@ class VersePracticeController: UIViewController {
 
         self.automaticallyAdjustsScrollViewInsets = false
         
-        let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
-        let moc = appDelegate.managedObjectContext
-        let fetchRequest = NSFetchRequest(entityName: "Passage")
-        
-        do {
-            let results = try moc.executeFetchRequest(fetchRequest)
-            passage = results[indexPath.row] as! NSManagedObject
-        } catch let error as NSError {
-            print("Could not fetch \(error), \(error.userInfo)")
-        }
-        
-        title = passage.valueForKey("reference") as? String
-        basicHelpLabel.text = passage.valueForKey("text") as? String
-        advancedHelpLabel.text = passage.valueForKey("text") as? String
+        title = passageReference
+        basicHelpLabel.text = passageText
+        advancedHelpLabel.text = passageText
         
         self.observeKeyboard()
         verseEntryTextView.becomeFirstResponder()
@@ -91,8 +81,6 @@ class VersePracticeController: UIViewController {
     func observeKeyboard() {
         NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("keyboardWillShow:"), name: UIKeyboardWillShowNotification, object: nil)
         NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("keyboardWillHide:"), name: UIKeyboardWillHideNotification, object: nil)
-//        NSNotificationCenter.defaultCenter().addObserver(self, forKeyPath: "keyboardWillShow:", options: .New, context: nil)
-//        NSNotificationCenter.defaultCenter().addObserver(self, forKeyPath: "keyboardWillHide:", options: .New, context: nil)
     }
     
     func keyboardWillShow(notification: NSNotification) {
