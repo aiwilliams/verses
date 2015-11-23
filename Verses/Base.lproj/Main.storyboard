@@ -130,7 +130,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" bounces="NO" text="Type your verse here" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="4tE-Md-p5j">
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" bounces="NO" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="4tE-Md-p5j">
                                 <rect key="frame" x="20" y="72" width="560" height="131"/>
                                 <animations/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -138,7 +138,7 @@
                                     <constraint firstAttribute="height" constant="131" id="xbX-TA-QJC"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences" returnKeyType="next"/>
                             </textView>
                             <label opaque="NO" userInteractionEnabled="NO" alpha="0.0" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="J, a s o G a o t L J C, T t t t i t D: G." textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hwo-nT-Hzu" userLabel="Basic Help Label">
                                 <rect key="frame" x="20" y="560" width="560" height="20"/>
@@ -181,6 +181,7 @@
                         <outlet property="advancedHelpLabel" destination="zAa-MO-Bnm" id="Cbp-s1-h0J"/>
                         <outlet property="basicHelpLabel" destination="hwo-nT-Hzu" id="FRn-tb-Cdr"/>
                         <outlet property="distanceFromHelpToBottomLayoutGuide" destination="UtW-5q-1vF" id="ix7-hu-47f"/>
+                        <outlet property="verseEntryTextView" destination="4tE-Md-p5j" id="r9u-60-Tdz"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>

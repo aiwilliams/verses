@@ -13,6 +13,7 @@ class VersePracticeController: UIViewController {
     @IBOutlet var basicHelpLabel: UILabel!
     @IBOutlet var advancedHelpLabel: UILabel!
     @IBOutlet var distanceFromHelpToBottomLayoutGuide: NSLayoutConstraint!
+    @IBOutlet var verseEntryTextView: UITextView!
     
     var passage: NSManagedObject!
     var indexPath: NSIndexPath!
@@ -39,6 +40,7 @@ class VersePracticeController: UIViewController {
         advancedHelpLabel.text = passage.valueForKey("text") as? String
         
         self.observeKeyboard()
+        verseEntryTextView.becomeFirstResponder()
     }
     
     func hideWordEndings() {
@@ -99,8 +101,6 @@ class VersePracticeController: UIViewController {
         let animationDuration = info.objectForKey(UIKeyboardAnimationDurationUserInfoKey)?.doubleValue
         let keyboardFrame: CGRect = frame.CGRectValue
         let height: CGFloat = keyboardFrame.size.height
-        
-        print("updating constraints for opening keyboard")
         
         self.distanceFromHelpToBottomLayoutGuide.constant = self.distanceFromHelpToBottomLayoutGuide.constant + height
         UIView.animateWithDuration(animationDuration!, animations: {
