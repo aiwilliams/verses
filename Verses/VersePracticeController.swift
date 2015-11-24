@@ -14,6 +14,7 @@ class VersePracticeController: UIViewController {
     @IBOutlet var advancedHelpLabel: UILabel!
     @IBOutlet var distanceFromHelpToBottomLayoutGuide: NSLayoutConstraint!
     @IBOutlet var verseEntryTextView: UITextView!
+    @IBOutlet var submissionButton: UIButton!
     
     var passageText: String!
     var passageReference: String!
@@ -90,7 +91,7 @@ class VersePracticeController: UIViewController {
         let keyboardFrame: CGRect = frame.CGRectValue
         let height: CGFloat = keyboardFrame.size.height
         
-        self.distanceFromHelpToBottomLayoutGuide.constant = height + 20
+        self.distanceFromHelpToBottomLayoutGuide.constant = height + submissionButton.frame.size.height + 20
         UIView.animateWithDuration(animationDuration!, animations: {
             self.view.layoutIfNeeded()
         })
@@ -100,7 +101,7 @@ class VersePracticeController: UIViewController {
         let info: NSDictionary = notification.userInfo!
         let animationDuration = info.objectForKey(UIKeyboardAnimationDurationUserInfoKey)?.doubleValue
         
-        self.distanceFromHelpToBottomLayoutGuide.constant = 20
+        self.distanceFromHelpToBottomLayoutGuide.constant = submissionButton.frame.size.height + 20
         UIView.animateWithDuration(animationDuration!, animations: {
             self.view.layoutIfNeeded()
         })
@@ -108,6 +109,36 @@ class VersePracticeController: UIViewController {
     
     @IBAction func endEditingOnTapOutside(sender: UITapGestureRecognizer) {
         verseEntryTextView.endEditing(true)
+    }
+
+    @IBAction func checkUserVerse(sender: UIButton) {
+        if removePunctuation(verseEntryTextView.text.lowercaseString) == removePunctuation(passageText.lowercaseString) {
+            UIView.animateWithDuration(0.5, animations: {
+                self.submissionButton.backgroundColor = UIColor(red: 0.16, green: 0.75, blue: 0.09, alpha: 1)
+                let animation = CABasicAnimation(keyPath: "position")
+                animation.duration = 0.11
+                animation.repeatCount = 1
+                animation.autoreverses = true
+                animation.fromValue = NSValue(CGPoint: CGPointMake(self.submissionButton.center.x, self.submissionButton.center.y))
+                animation.toValue = NSValue(CGPoint: CGPointMake(self.submissionButton.center.x, self.submissionButton.center.y - 3))
+                self.submissionButton.layer.addAnimation(animation, forKey: "position")
+            })
+        } else {
+            UIView.animateWithDuration(0.5, animations: {
+                self.submissionButton.backgroundColor = UIColor(red: 0.59, green: 0.23, blue: 0.18, alpha: 1)
+                let animation = CABasicAnimation(keyPath: "position")
+                animation.duration = 0.07
+                animation.repeatCount = 4
+                animation.autoreverses = true
+                animation.fromValue = NSValue(CGPoint: CGPointMake(self.submissionButton.center.x - 10, self.submissionButton.center.y))
+                animation.toValue = NSValue(CGPoint: CGPointMake(self.submissionButton.center.x + 10, self.submissionButton.center.y))
+                self.submissionButton.layer.addAnimation(animation, forKey: "position")
+            })
+        }
+    }
+    
+    func removePunctuation(text: String) -> String {
+        return text.componentsSeparatedByCharactersInSet(NSCharacterSet.letterCharacterSet().invertedSet).joinWithSeparator("")
     }
 }
 
