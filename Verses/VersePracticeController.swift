@@ -113,32 +113,42 @@ class VersePracticeController: UIViewController {
 
     @IBAction func checkUserVerse(sender: UIButton) {
         if removePunctuation(verseEntryTextView.text.lowercaseString) == removePunctuation(passageText.lowercaseString) {
-            UIView.animateWithDuration(0.5, animations: {
+            UIView.animateWithDuration(0.1, animations: {
                 self.submissionButton.backgroundColor = UIColor(red: 0.16, green: 0.75, blue: 0.09, alpha: 1)
-                let animation = CABasicAnimation(keyPath: "position")
-                animation.duration = 0.11
-                animation.repeatCount = 1
-                animation.autoreverses = true
-                animation.fromValue = NSValue(CGPoint: CGPointMake(self.submissionButton.center.x, self.submissionButton.center.y))
-                animation.toValue = NSValue(CGPoint: CGPointMake(self.submissionButton.center.x, self.submissionButton.center.y - 3))
-                self.submissionButton.layer.addAnimation(animation, forKey: "position")
+                self.submissionButton.setTitle("Great job!", forState: .Normal)
+                self.submissionButton.layer.addAnimation(self.bounceAnimation(), forKey: "position")
             })
         } else {
-            UIView.animateWithDuration(0.5, animations: {
+            UIView.animateWithDuration(0.1, animations: {
                 self.submissionButton.backgroundColor = UIColor(red: 0.59, green: 0.23, blue: 0.18, alpha: 1)
-                let animation = CABasicAnimation(keyPath: "position")
-                animation.duration = 0.07
-                animation.repeatCount = 4
-                animation.autoreverses = true
-                animation.fromValue = NSValue(CGPoint: CGPointMake(self.submissionButton.center.x - 10, self.submissionButton.center.y))
-                animation.toValue = NSValue(CGPoint: CGPointMake(self.submissionButton.center.x + 10, self.submissionButton.center.y))
-                self.submissionButton.layer.addAnimation(animation, forKey: "position")
+                self.submissionButton.setTitle("Try again!", forState: .Normal)
+                self.submissionButton.layer.addAnimation(self.shakeAnimation(), forKey: "position")
             })
         }
     }
     
     func removePunctuation(text: String) -> String {
         return text.componentsSeparatedByCharactersInSet(NSCharacterSet.letterCharacterSet().invertedSet).joinWithSeparator("")
+    }
+    
+    func shakeAnimation() -> CABasicAnimation {
+        let animation = CABasicAnimation(keyPath: "position")
+        animation.duration = 0.07
+        animation.repeatCount = 4
+        animation.autoreverses = true
+        animation.fromValue = NSValue(CGPoint: CGPointMake(self.submissionButton.center.x - 10, self.submissionButton.center.y))
+        animation.toValue = NSValue(CGPoint: CGPointMake(self.submissionButton.center.x + 10, self.submissionButton.center.y))
+        return animation
+    }
+    
+    func bounceAnimation() -> CABasicAnimation {
+        let animation = CABasicAnimation(keyPath: "position")
+        animation.duration = 0.11
+        animation.repeatCount = 1
+        animation.autoreverses = true
+        animation.fromValue = NSValue(CGPoint: CGPointMake(self.submissionButton.center.x, self.submissionButton.center.y))
+        animation.toValue = NSValue(CGPoint: CGPointMake(self.submissionButton.center.x, self.submissionButton.center.y - 3))
+        return animation
     }
 }
 
