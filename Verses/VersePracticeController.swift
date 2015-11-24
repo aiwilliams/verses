@@ -105,5 +105,9 @@ class VersePracticeController: UIViewController {
             self.view.layoutIfNeeded()
         })
     }
+    
+    @IBAction func endEditingOnTapOutside(sender: UITapGestureRecognizer) {
+        verseEntryTextView.endEditing(true)
+    }
 }
 
