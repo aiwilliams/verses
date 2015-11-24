@@ -79,18 +79,18 @@ class VersePracticeController: UIViewController {
     
     
     func observeKeyboard() {
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("keyboardWillShow:"), name: UIKeyboardWillShowNotification, object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("keyboardWillChangeFrame:"), name: UIKeyboardWillChangeFrameNotification, object: nil)
         NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("keyboardWillHide:"), name: UIKeyboardWillHideNotification, object: nil)
     }
     
-    func keyboardWillShow(notification: NSNotification) {
+    func keyboardWillChangeFrame(notification: NSNotification) {
         let info: NSDictionary = notification.userInfo!
         let frame = info.objectForKey(UIKeyboardFrameEndUserInfoKey)!
         let animationDuration = info.objectForKey(UIKeyboardAnimationDurationUserInfoKey)?.doubleValue
         let keyboardFrame: CGRect = frame.CGRectValue
         let height: CGFloat = keyboardFrame.size.height
         
-        self.distanceFromHelpToBottomLayoutGuide.constant = self.distanceFromHelpToBottomLayoutGuide.constant + height
+        self.distanceFromHelpToBottomLayoutGuide.constant = height + 20
         UIView.animateWithDuration(animationDuration!, animations: {
             self.view.layoutIfNeeded()
         })
