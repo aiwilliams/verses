@@ -193,7 +193,7 @@ class VersePracticeController: UIViewController {
         animation.repeatCount = 1
         animation.autoreverses = true
         animation.fromValue = NSValue(CGPoint: CGPointMake(self.submissionButton.center.x, self.submissionButton.center.y))
-        animation.toValue = NSValue(CGPoint: CGPointMake(self.submissionButton.center.x, self.submissionButton.center.y - 3))
+        animation.toValue = NSValue(CGPoint: CGPointMake(self.submissionButton.center.x, self.submissionButton.center.y - 10))
         return animation
     }
 }
