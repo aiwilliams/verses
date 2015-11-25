@@ -168,6 +168,13 @@
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <label opaque="NO" userInteractionEnabled="NO" alpha="0.0" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7RQ-kb-Wq2" userLabel="Intermediate Help Label">
+                                <rect key="frame" x="20" y="530" width="560" height="21"/>
+                                <animations/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <animations/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
@@ -179,11 +186,15 @@
                             <constraint firstItem="4tE-Md-p5j" firstAttribute="width" secondItem="hwo-nT-Hzu" secondAttribute="width" id="9I3-aV-WWA"/>
                             <constraint firstAttribute="leadingMargin" secondItem="3I9-vX-2li" secondAttribute="leading" id="GyI-Kn-3Lo"/>
                             <constraint firstItem="4tE-Md-p5j" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="8" id="JJj-lV-9Ac"/>
+                            <constraint firstItem="7RQ-kb-Wq2" firstAttribute="width" secondItem="hwo-nT-Hzu" secondAttribute="width" id="LAb-SP-xnP"/>
+                            <constraint firstItem="7RQ-kb-Wq2" firstAttribute="height" secondItem="hwo-nT-Hzu" secondAttribute="height" id="M6c-fD-SHE"/>
+                            <constraint firstItem="3I9-vX-2li" firstAttribute="top" secondItem="7RQ-kb-Wq2" secondAttribute="bottom" constant="11" id="UHo-JA-PYy"/>
                             <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="hwo-nT-Hzu" secondAttribute="bottom" constant="49" id="UtW-5q-1vF"/>
+                            <constraint firstItem="7RQ-kb-Wq2" firstAttribute="bottom" secondItem="hwo-nT-Hzu" secondAttribute="bottom" id="WvR-hw-xsG"/>
                             <constraint firstItem="zAa-MO-Bnm" firstAttribute="width" secondItem="hwo-nT-Hzu" secondAttribute="width" id="XBA-Ah-Q1Y"/>
                             <constraint firstItem="zAa-MO-Bnm" firstAttribute="bottom" secondItem="hwo-nT-Hzu" secondAttribute="bottom" id="bHA-Uf-B6p"/>
-                            <constraint firstItem="3I9-vX-2li" firstAttribute="top" secondItem="zAa-MO-Bnm" secondAttribute="bottom" constant="11" id="cCS-o0-R8N"/>
                             <constraint firstItem="4tE-Md-p5j" firstAttribute="centerX" secondItem="hwo-nT-Hzu" secondAttribute="centerX" id="jp9-8W-apc"/>
+                            <constraint firstItem="7RQ-kb-Wq2" firstAttribute="centerX" secondItem="hwo-nT-Hzu" secondAttribute="centerX" id="mH3-Ca-hiP"/>
                             <constraint firstAttribute="trailingMargin" secondItem="3I9-vX-2li" secondAttribute="trailing" id="rxl-Xf-Oz6"/>
                             <constraint firstAttribute="leadingMargin" secondItem="hwo-nT-Hzu" secondAttribute="leading" id="wA5-Hn-zzW"/>
                         </constraints>
@@ -203,6 +214,7 @@
                         <outlet property="basicHelpLabel" destination="hwo-nT-Hzu" id="FRn-tb-Cdr"/>
                         <outlet property="distanceFromHelpToBottomLayoutGuide" destination="UtW-5q-1vF" id="ix7-hu-47f"/>
                         <outlet property="helpButton" destination="c4K-J3-KPm" id="qH9-Zx-GJy"/>
+                        <outlet property="intermediateHelpLabel" destination="7RQ-kb-Wq2" id="cxj-IQ-bc1"/>
                         <outlet property="submissionButton" destination="3I9-vX-2li" id="bEP-0R-Czr"/>
                         <outlet property="verseEntryTextView" destination="4tE-Md-p5j" id="r9u-60-Tdz"/>
                     </connections>

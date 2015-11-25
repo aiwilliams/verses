@@ -9,8 +9,15 @@
 import UIKit
 import CoreData
 
+extension Int : SequenceType {
+    public func generate() -> RangeGenerator<Int> {
+        return (0..<self).generate()
+    }
+}
+
 class VersePracticeController: UIViewController {
     @IBOutlet var basicHelpLabel: UILabel!
+    @IBOutlet var intermediateHelpLabel: UILabel!
     @IBOutlet var advancedHelpLabel: UILabel!
     @IBOutlet var distanceFromHelpToBottomLayoutGuide: NSLayoutConstraint!
     @IBOutlet var verseEntryTextView: UITextView!
@@ -29,6 +36,7 @@ class VersePracticeController: UIViewController {
         
         title = passageReference
         basicHelpLabel.text = passageText
+        intermediateHelpLabel.text = passageText
         advancedHelpLabel.text = passageText
         
         self.observeKeyboard()
@@ -36,8 +44,8 @@ class VersePracticeController: UIViewController {
         submissionButton.layer.cornerRadius = 5
     }
     
-    func hideWordEndings() {
-        let text = basicHelpLabel.text!
+    func hideWordEndings(label: UILabel) {
+        let text = label.text!
         let attributed = NSMutableAttributedString(string: text)
         var index = 0
         var secondCharIndexes = [1]
@@ -62,7 +70,33 @@ class VersePracticeController: UIViewController {
             attributed.setAttributes([NSForegroundColorAttributeName:UIColor.clearColor()], range: NSMakeRange(i, (secondCharIndexes[nextIndex] - 2) - i))
             ++nextIndex
         }
-        basicHelpLabel.attributedText = attributed
+        label.attributedText = attributed
+    }
+    
+    func hideRandomWords(label: UILabel) {
+        let text = label.text!
+        let attributed = NSMutableAttributedString(string: text)
+        var index = 0
+        var lastSeenSpaceIndex = 0
+        var ranges: Array<NSRange> = Array<NSRange>()
+        for char in text.characters {
+            if char == " " {
+                ranges.append(NSMakeRange(lastSeenSpaceIndex, index - lastSeenSpaceIndex))
+                lastSeenSpaceIndex = index
+            }
+            ++index
+        }
+        
+        for _ in ranges.count / 3 {
+            let randomIndex = Int(arc4random_uniform(UInt32(ranges.count)))
+            ranges.removeAtIndex(randomIndex)
+        }
+
+        for range in ranges {
+            attributed.setAttributes([NSForegroundColorAttributeName:UIColor.clearColor()], range: range)
+        }
+        
+        label.attributedText = attributed
     }
 
     @IBAction func helpButtonPressed(sender: AnyObject) {
@@ -70,9 +104,12 @@ class VersePracticeController: UIViewController {
         
         switch hintLevel {
         case 1:
-            hideWordEndings()
+            hideWordEndings(basicHelpLabel)
             UIView.animateWithDuration(1, animations: { self.basicHelpLabel.alpha = 1 })
         case 2:
+            hideRandomWords(intermediateHelpLabel)
+            UIView.animateWithDuration(1, animations: { self.intermediateHelpLabel.alpha = 1 })
+        case 3:
             UIView.animateWithDuration(1, animations: { self.advancedHelpLabel.alpha = 1})
             helpButton.enabled = false
         default:
