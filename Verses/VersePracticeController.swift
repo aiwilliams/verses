@@ -150,7 +150,7 @@ class VersePracticeController: UIViewController {
     }
 
     @IBAction func checkUserVerse(sender: UIButton) {
-        if removePunctuation(verseEntryTextView.text.lowercaseString) == removePunctuation(passageText.lowercaseString) {
+        if normalizedString(verseEntryTextView.text.lowercaseString) == removePunctuation(passageText.lowercaseString) {
             UIView.animateWithDuration(0.1, animations: {
                 self.submissionButton.backgroundColor = UIColor(red: 0.16, green: 0.75, blue: 0.09, alpha: 1)
                 self.submissionButton.setTitle("Great job!", forState: .Normal)
@@ -173,8 +173,32 @@ class VersePracticeController: UIViewController {
         }
     }
     
+    func normalizedString(text: String) -> String {
+        let spelledOut = spellOutNumbers(text)
+        let final = removePunctuation(spelledOut)
+        return final
+    }
+    
     func removePunctuation(text: String) -> String {
         return text.componentsSeparatedByCharactersInSet(NSCharacterSet.letterCharacterSet().invertedSet).joinWithSeparator("")
+    }
+    
+    func spellOutNumbers(text: String) -> String {
+        var words: Array<String> = text.componentsSeparatedByString(" ")
+        var index = 0
+
+        for word in words {
+            if let numberWord: NSInteger = Int(word) {
+                let formatter = NSNumberFormatter()
+                formatter.numberStyle = .SpellOutStyle
+                let formattedNumber = formatter.stringFromNumber(numberWord)
+                words.removeAtIndex(index)
+                words.insert(formattedNumber!, atIndex: index)
+            }
+            ++index
+        }
+
+        return words.joinWithSeparator(" ")
     }
     
     func shakeAnimation() -> CABasicAnimation {
