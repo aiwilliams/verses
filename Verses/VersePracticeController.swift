@@ -125,6 +125,14 @@ class VersePracticeController: UIViewController {
                 self.submissionButton.setTitle("Try again!", forState: .Normal)
                 self.submissionButton.layer.addAnimation(self.shakeAnimation(), forKey: "position")
             })
+            let delay = 3.0 * Double(NSEC_PER_SEC)
+            let dispatchTime = dispatch_time(DISPATCH_TIME_NOW, Int64(delay))
+            dispatch_after(dispatchTime, dispatch_get_main_queue(), {
+                UIView.animateWithDuration(0.1, animations: {
+                    self.submissionButton.backgroundColor = UIColor(red:0.67, green:0.69, blue:0.08, alpha:1.0)
+                    self.submissionButton.setTitle("Check it!", forState: .Normal)
+                })
+            })
         }
     }
     
