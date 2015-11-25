@@ -32,6 +32,7 @@ class VersePracticeController: UIViewController {
         
         self.observeKeyboard()
         verseEntryTextView.becomeFirstResponder()
+        submissionButton.layer.cornerRadius = 5
     }
     
     func hideWordEndings() {
