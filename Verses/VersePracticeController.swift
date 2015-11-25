@@ -15,6 +15,7 @@ class VersePracticeController: UIViewController {
     @IBOutlet var distanceFromHelpToBottomLayoutGuide: NSLayoutConstraint!
     @IBOutlet var verseEntryTextView: UITextView!
     @IBOutlet var submissionButton: UIButton!
+    @IBOutlet var helpButton: UIBarButtonItem!
     
     var passageText: String!
     var passageReference: String!
@@ -73,12 +74,11 @@ class VersePracticeController: UIViewController {
             UIView.animateWithDuration(1, animations: { self.basicHelpLabel.alpha = 1 })
         case 2:
             UIView.animateWithDuration(1, animations: { self.advancedHelpLabel.alpha = 1})
+            helpButton.enabled = false
         default:
             break
         }
     }
-    
-    
     
     func observeKeyboard() {
         NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("keyboardWillChangeFrame:"), name: UIKeyboardWillChangeFrameNotification, object: nil)
