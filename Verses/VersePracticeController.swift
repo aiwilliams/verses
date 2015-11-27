@@ -146,10 +146,6 @@ class VersePracticeController: UIViewController {
             self.view.layoutIfNeeded()
         })
     }
-    
-    @IBAction func endEditingOnTapOutside(sender: UITapGestureRecognizer) {
-        verseEntryTextView.endEditing(true)
-    }
 
     @IBAction func checkUserVerse(sender: UIButton) {
         if normalizedString(verseEntryTextView.text.lowercaseString) == removePunctuation(passageText.lowercaseString) {

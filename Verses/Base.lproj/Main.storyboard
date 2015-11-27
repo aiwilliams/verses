@@ -135,7 +135,7 @@
                                 <animations/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences" returnKeyType="next"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
                             <label opaque="NO" userInteractionEnabled="NO" alpha="0.0" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="J, a s o G a o t L J C, T t t t i t D: G." textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zAa-MO-Bnm" userLabel="Advanced Help Label">
                                 <rect key="frame" x="20" y="530" width="560" height="21"/>
@@ -196,9 +196,6 @@
                             <constraint firstAttribute="leadingMargin" secondItem="hwo-nT-Hzu" secondAttribute="leading" id="wA5-Hn-zzW"/>
                             <constraint firstItem="3I9-vX-2li" firstAttribute="top" secondItem="4tE-Md-p5j" secondAttribute="bottom" constant="8" id="wpY-54-jCx"/>
                         </constraints>
-                        <connections>
-                            <outletCollection property="gestureRecognizers" destination="CD4-AI-sRp" appends="YES" id="5ba-vb-uaF"/>
-                        </connections>
                     </view>
                     <navigationItem key="navigationItem" title="James 1:1" id="9bu-wA-1kC">
                         <barButtonItem key="rightBarButtonItem" title="Help" id="c4K-J3-KPm">
@@ -219,11 +216,6 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
-                <tapGestureRecognizer id="CD4-AI-sRp">
-                    <connections>
-                        <action selector="endEditingOnTapOutside:" destination="BYZ-38-t0r" id="t98-IF-4o1"/>
-                    </connections>
-                </tapGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="1804" y="-384"/>
         </scene>
