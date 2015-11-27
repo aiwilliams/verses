@@ -20,11 +20,11 @@
                                 <rect key="frame" x="0.0" y="92" width="600" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="tCs-02-W21" id="IOC-Xd-Qd3">
-                                    <rect key="frame" x="0.0" y="0.0" width="567" height="43"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="567" height="43.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="0cj-8O-Q9W">
-                                            <rect key="frame" x="15" y="0.0" width="550" height="43"/>
+                                            <rect key="frame" x="15" y="0.0" width="550" height="43.5"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <animations/>
                                             <fontDescription key="fontDescription" type="system" pointSize="16"/>
@@ -131,12 +131,9 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" bounces="NO" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="4tE-Md-p5j">
-                                <rect key="frame" x="20" y="72" width="560" height="131"/>
+                                <rect key="frame" x="20" y="72" width="560" height="482"/>
                                 <animations/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="131" id="xbX-TA-QJC"/>
-                                </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences" returnKeyType="next"/>
                             </textView>
@@ -144,7 +141,7 @@
                                 <rect key="frame" x="20" y="530" width="560" height="21"/>
                                 <animations/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" adjustsImageWhenHighlighted="NO" adjustsImageWhenDisabled="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3I9-vX-2li">
@@ -172,7 +169,7 @@
                                 <rect key="frame" x="20" y="530" width="560" height="21"/>
                                 <animations/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
@@ -197,6 +194,7 @@
                             <constraint firstItem="7RQ-kb-Wq2" firstAttribute="centerX" secondItem="hwo-nT-Hzu" secondAttribute="centerX" id="mH3-Ca-hiP"/>
                             <constraint firstAttribute="trailingMargin" secondItem="3I9-vX-2li" secondAttribute="trailing" id="rxl-Xf-Oz6"/>
                             <constraint firstAttribute="leadingMargin" secondItem="hwo-nT-Hzu" secondAttribute="leading" id="wA5-Hn-zzW"/>
+                            <constraint firstItem="3I9-vX-2li" firstAttribute="top" secondItem="4tE-Md-p5j" secondAttribute="bottom" constant="8" id="wpY-54-jCx"/>
                         </constraints>
                         <connections>
                             <outletCollection property="gestureRecognizers" destination="CD4-AI-sRp" appends="YES" id="5ba-vb-uaF"/>
@@ -213,6 +211,7 @@
                         <outlet property="advancedHelpLabel" destination="zAa-MO-Bnm" id="Cbp-s1-h0J"/>
                         <outlet property="basicHelpLabel" destination="hwo-nT-Hzu" id="FRn-tb-Cdr"/>
                         <outlet property="distanceFromHelpToBottomLayoutGuide" destination="UtW-5q-1vF" id="ix7-hu-47f"/>
+                        <outlet property="distanceFromSubmissionButtonToTextView" destination="wpY-54-jCx" id="JPk-Tc-OYx"/>
                         <outlet property="helpButton" destination="c4K-J3-KPm" id="qH9-Zx-GJy"/>
                         <outlet property="intermediateHelpLabel" destination="7RQ-kb-Wq2" id="cxj-IQ-bc1"/>
                         <outlet property="submissionButton" destination="3I9-vX-2li" id="bEP-0R-Czr"/>

@@ -19,6 +19,7 @@ class VersePracticeController: UIViewController {
     @IBOutlet var basicHelpLabel: UILabel!
     @IBOutlet var intermediateHelpLabel: UILabel!
     @IBOutlet var advancedHelpLabel: UILabel!
+    @IBOutlet var distanceFromSubmissionButtonToTextView: NSLayoutConstraint!
     @IBOutlet var distanceFromHelpToBottomLayoutGuide: NSLayoutConstraint!
     @IBOutlet var verseEntryTextView: UITextView!
     @IBOutlet var submissionButton: UIButton!
@@ -104,6 +105,7 @@ class VersePracticeController: UIViewController {
         
         switch hintLevel {
         case 1:
+            distanceFromSubmissionButtonToTextView.constant = distanceFromSubmissionButtonToTextView.constant + basicHelpLabel.frame.height
             hideWordEndings(basicHelpLabel)
             UIView.animateWithDuration(1, animations: { self.basicHelpLabel.alpha = 1 })
         case 2:
