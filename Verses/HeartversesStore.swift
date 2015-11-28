@@ -4,45 +4,48 @@ import CoreData
 class HeartversesStore {
     
     func addVerse(book: NSManagedObject, chapter: Int, number: Int, text: String) {
-        let moc = self.managedObjectContext
-        let entity = NSEntityDescription.entityForName("Verse", inManagedObjectContext: moc)!
-        let verse = NSManagedObject(entity: entity, insertIntoManagedObjectContext: moc)
+        let verse = newObject("Verse")
         verse.setValue(book, forKey: "book")
         verse.setValue(chapter, forKey: "chapter")
         verse.setValue(number, forKey: "number")
         verse.setValue(text, forKey: "text")
-
-        do {
-            try moc.save()
-        } catch let error as NSError {
-            print("Could not save verse \(error), \(error.userInfo)")
-        }
+        self.saveContext()
     }
 
     func findBook(slug: String, translation: String) -> NSManagedObject {
-        var book: NSManagedObject! = nil
-        
-        let moc = self.managedObjectContext
-        let entity = NSEntityDescription.entityForName("Book", inManagedObjectContext: moc)!
+        let book = findObject("Book", format: "name == %@ and translation == %@", slug, translation)
+        if book.objectID.temporaryID {
+            book.setValue(slug, forKey: "name")
+            book.setValue(translation, forKey: "translation")
+            saveContext()
+        }
+        return book
+    }
 
+    func newObject(entity: NSEntityDescription) -> NSManagedObject {
+        return NSManagedObject(entity: entity, insertIntoManagedObjectContext: self.managedObjectContext)
+    }
+    
+    func newObject(entityName: String) -> NSManagedObject {
+        let entity = NSEntityDescription.entityForName(entityName, inManagedObjectContext: self.managedObjectContext)!
+        return newObject(entity)
+    }
+    
+    func findObject(entityName: String, format: String, _ arguments: AnyObject...) -> NSManagedObject {
+        let entity = NSEntityDescription.entityForName(entityName, inManagedObjectContext: self.managedObjectContext)!
         let fetchRequest = NSFetchRequest(entityName: entity.name!)
-        fetchRequest.predicate = NSPredicate(format: "name == %@ and translation == %@", slug, translation)
+        fetchRequest.predicate = NSPredicate(format: format, argumentArray: arguments)
         do {
-            let books = try moc.executeFetchRequest(fetchRequest)
-            if books.isEmpty {
-                book = NSManagedObject(entity: entity, insertIntoManagedObjectContext: moc)
-                book.setValue(slug, forKey: "name")
-                book.setValue(translation, forKey: "translation")
-            } else {
-                book = books.first as! NSManagedObject
+            let results = try self.managedObjectContext.executeFetchRequest(fetchRequest)
+            if !results.isEmpty {
+                return results.first as! NSManagedObject
             }
         } catch let error as NSError {
             print("Could not find book \(error), \(error.userInfo)")
         }
-
-        return book
+        return newObject(entity)
     }
-    
+
     lazy var applicationDocumentsDirectory: NSURL = {
         let urls = NSFileManager.defaultManager().URLsForDirectory(.DocumentDirectory, inDomains: .UserDomainMask)
         print(urls)
