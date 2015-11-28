@@ -7,6 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		FD0D0F201C0A31BC00EAF02A /* Heartverses.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = FD0D0F1E1C0A31BC00EAF02A /* Heartverses.xcdatamodeld */; };
+		FD0D0F311C0A387400EAF02A /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD0D0F301C0A387400EAF02A /* main.swift */; };
+		FD8180FE1C0A3ACD008AF2BA /* HeartversesStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD8180FD1C0A3ACD008AF2BA /* HeartversesStore.swift */; };
+		FD8180FF1C0A3ACD008AF2BA /* HeartversesStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD8180FD1C0A3ACD008AF2BA /* HeartversesStore.swift */; };
+		FD8181001C0A3D43008AF2BA /* Heartverses.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = FD0D0F1E1C0A31BC00EAF02A /* Heartverses.xcdatamodeld */; };
 		FDB61B8D1BF533D800F8C61D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDB61B8C1BF533D800F8C61D /* AppDelegate.swift */; };
 		FDB61B8F1BF533D800F8C61D /* VersePracticeController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDB61B8E1BF533D800F8C61D /* VersePracticeController.swift */; };
 		FDB61B921BF533D800F8C61D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FDB61B901BF533D800F8C61D /* Main.storyboard */; };
@@ -36,7 +41,23 @@
 		};
 /* End PBXContainerItemProxy section */
 
+/* Begin PBXCopyFilesBuildPhase section */
+		FD0D0F2C1C0A387400EAF02A /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = usr/share/man/man1;
+			dstSubfolderSpec = 16;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 1;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
+		FD0D0F1F1C0A31BC00EAF02A /* Heartverses.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Heartverses.xcdatamodel; sourceTree = "<group>"; };
+		FD0D0F2E1C0A387400EAF02A /* VersesSeed */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = VersesSeed; sourceTree = BUILT_PRODUCTS_DIR; };
+		FD0D0F301C0A387400EAF02A /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
+		FD8180FD1C0A3ACD008AF2BA /* HeartversesStore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HeartversesStore.swift; sourceTree = "<group>"; };
 		FDB61B891BF533D800F8C61D /* Verses.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Verses.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FDB61B8C1BF533D800F8C61D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		FDB61B8E1BF533D800F8C61D /* VersePracticeController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VersePracticeController.swift; sourceTree = "<group>"; };
@@ -56,6 +77,13 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		FD0D0F2B1C0A387400EAF02A /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		FDB61B861BF533D800F8C61D /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -80,12 +108,21 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		FD0D0F2F1C0A387400EAF02A /* VersesSeed */ = {
+			isa = PBXGroup;
+			children = (
+				FD0D0F301C0A387400EAF02A /* main.swift */,
+			);
+			path = VersesSeed;
+			sourceTree = "<group>";
+		};
 		FDB61B801BF533D800F8C61D = {
 			isa = PBXGroup;
 			children = (
 				FDB61B8B1BF533D800F8C61D /* Verses */,
 				FDB61BA31BF533D800F8C61D /* VersesTests */,
 				FDB61BAE1BF533D800F8C61D /* VersesUITests */,
+				FD0D0F2F1C0A387400EAF02A /* VersesSeed */,
 				FDB61B8A1BF533D800F8C61D /* Products */,
 			);
 			sourceTree = "<group>";
@@ -96,6 +133,7 @@
 				FDB61B891BF533D800F8C61D /* Verses.app */,
 				FDB61BA01BF533D800F8C61D /* VersesTests.xctest */,
 				FDB61BAB1BF533D800F8C61D /* VersesUITests.xctest */,
+				FD0D0F2E1C0A387400EAF02A /* VersesSeed */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -111,6 +149,8 @@
 				FDB61B961BF533D800F8C61D /* Assets.xcassets */,
 				FDB61B981BF533D800F8C61D /* LaunchScreen.storyboard */,
 				FDB61B9B1BF533D800F8C61D /* Info.plist */,
+				FD8180FD1C0A3ACD008AF2BA /* HeartversesStore.swift */,
+				FD0D0F1E1C0A31BC00EAF02A /* Heartverses.xcdatamodeld */,
 				FDB61B931BF533D800F8C61D /* Verses.xcdatamodeld */,
 			);
 			path = Verses;
@@ -137,6 +177,23 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		FD0D0F2D1C0A387400EAF02A /* VersesSeed */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = FD0D0F321C0A387400EAF02A /* Build configuration list for PBXNativeTarget "VersesSeed" */;
+			buildPhases = (
+				FD0D0F2A1C0A387400EAF02A /* Sources */,
+				FD0D0F2B1C0A387400EAF02A /* Frameworks */,
+				FD0D0F2C1C0A387400EAF02A /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = VersesSeed;
+			productName = "verses-seed";
+			productReference = FD0D0F2E1C0A387400EAF02A /* VersesSeed */;
+			productType = "com.apple.product-type.tool";
+		};
 		FDB61B881BF533D800F8C61D /* Verses */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = FDB61BB41BF533D800F8C61D /* Build configuration list for PBXNativeTarget "Verses" */;
@@ -200,6 +257,9 @@
 				LastUpgradeCheck = 0710;
 				ORGANIZATIONNAME = "The Williams Family";
 				TargetAttributes = {
+					FD0D0F2D1C0A387400EAF02A = {
+						CreatedOnToolsVersion = 7.1.1;
+					};
 					FDB61B881BF533D800F8C61D = {
 						CreatedOnToolsVersion = 7.1.1;
 						DevelopmentTeam = C8DJ6DMT5A;
@@ -230,6 +290,7 @@
 				FDB61B881BF533D800F8C61D /* Verses */,
 				FDB61B9F1BF533D800F8C61D /* VersesTests */,
 				FDB61BAA1BF533D800F8C61D /* VersesUITests */,
+				FD0D0F2D1C0A387400EAF02A /* VersesSeed */,
 			);
 		};
 /* End PBXProject section */
@@ -262,6 +323,16 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		FD0D0F2A1C0A387400EAF02A /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				FD8181001C0A3D43008AF2BA /* Heartverses.xcdatamodeld in Sources */,
+				FD8180FF1C0A3ACD008AF2BA /* HeartversesStore.swift in Sources */,
+				FD0D0F311C0A387400EAF02A /* main.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		FDB61B851BF533D800F8C61D /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -269,7 +340,9 @@
 				FDB61B8F1BF533D800F8C61D /* VersePracticeController.swift in Sources */,
 				FDB61BC01BF5457E00F8C61D /* AddVerseController.swift in Sources */,
 				FDB61B951BF533D800F8C61D /* Verses.xcdatamodeld in Sources */,
+				FD0D0F201C0A31BC00EAF02A /* Heartverses.xcdatamodeld in Sources */,
 				FDB61BBE1BF5410000F8C61D /* VersesIndexController.swift in Sources */,
+				FD8180FE1C0A3ACD008AF2BA /* HeartversesStore.swift in Sources */,
 				FDB61B8D1BF533D800F8C61D /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -325,6 +398,26 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		FD0D0F331C0A387400EAF02A /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "-";
+				MACOSX_DEPLOYMENT_TARGET = 10.11;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+			};
+			name = Debug;
+		};
+		FD0D0F341C0A387400EAF02A /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "-";
+				MACOSX_DEPLOYMENT_TARGET = 10.11;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+			};
+			name = Release;
+		};
 		FDB61BB21BF533D800F8C61D /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -485,6 +578,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		FD0D0F321C0A387400EAF02A /* Build configuration list for PBXNativeTarget "VersesSeed" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				FD0D0F331C0A387400EAF02A /* Debug */,
+				FD0D0F341C0A387400EAF02A /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		FDB61B841BF533D800F8C61D /* Build configuration list for PBXProject "Verses" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
@@ -524,6 +626,16 @@
 /* End XCConfigurationList section */
 
 /* Begin XCVersionGroup section */
+		FD0D0F1E1C0A31BC00EAF02A /* Heartverses.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				FD0D0F1F1C0A31BC00EAF02A /* Heartverses.xcdatamodel */,
+			);
+			currentVersion = FD0D0F1F1C0A31BC00EAF02A /* Heartverses.xcdatamodel */;
+			path = Heartverses.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
 		FDB61B931BF533D800F8C61D /* Verses.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (

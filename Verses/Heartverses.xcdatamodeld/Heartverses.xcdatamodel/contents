@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="9057" systemVersion="15A278b" minimumToolsVersion="Xcode 7.0">
+    <entity name="Book" syncable="YES">
+        <attribute name="name" attributeType="String" indexed="YES" syncable="YES"/>
+        <attribute name="translation" attributeType="String" indexed="YES" syncable="YES"/>
+        <relationship name="verses" optional="YES" toMany="YES" deletionRule="Nullify" ordered="YES" destinationEntity="Verse" inverseName="book" inverseEntity="Verse" syncable="YES"/>
+    </entity>
+    <entity name="Verse" syncable="YES">
+        <attribute name="chapter" attributeType="Integer 16" minValueString="1" maxValueString="150" indexed="YES" syncable="YES"/>
+        <attribute name="number" attributeType="Integer 16" minValueString="1" maxValueString="176" indexed="YES" syncable="YES"/>
+        <attribute name="text" attributeType="String" syncable="YES"/>
+        <relationship name="book" maxCount="1" deletionRule="Nullify" destinationEntity="Book" inverseName="verses" inverseEntity="Book" syncable="YES"/>
+    </entity>
+    <elements>
+        <element name="Book" positionX="-54" positionY="0" width="128" height="90"/>
+        <element name="Verse" positionX="-63" positionY="-18" width="128" height="105"/>
+    </elements>
+</model>

@@ -9,9 +9,19 @@
 			<key>orderHint</key>
 			<integer>0</integer>
 		</dict>
+		<key>VersesSeed.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>1</integer>
+		</dict>
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
+		<key>FD0D0F2D1C0A387400EAF02A</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
 		<key>FDB61B881BF533D800F8C61D</key>
 		<dict>
 			<key>primary</key>
