@@ -22,6 +22,9 @@
 		FDB61BB01BF533D800F8C61D /* VersesUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDB61BAF1BF533D800F8C61D /* VersesUITests.swift */; };
 		FDB61BBE1BF5410000F8C61D /* VersesIndexController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDB61BBD1BF5410000F8C61D /* VersesIndexController.swift */; };
 		FDB61BC01BF5457E00F8C61D /* AddVerseController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDB61BBF1BF5457E00F8C61D /* AddVerseController.swift */; };
+		FDC433F51C0E4D2000363A0C /* SwiftyJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDC433F41C0E4D2000363A0C /* SwiftyJSON.swift */; };
+		FDD3BC2E1C16251A00616976 /* Heartverses.sqlite in Resources */ = {isa = PBXBuildFile; fileRef = FDD3BC2D1C16251A00616976 /* Heartverses.sqlite */; };
+		FDD3BC301C16263B00616976 /* HeartversesAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDD3BC2F1C16263B00616976 /* HeartversesAPI.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -74,6 +77,9 @@
 		FDB61BB11BF533D800F8C61D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		FDB61BBD1BF5410000F8C61D /* VersesIndexController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VersesIndexController.swift; sourceTree = "<group>"; };
 		FDB61BBF1BF5457E00F8C61D /* AddVerseController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddVerseController.swift; sourceTree = "<group>"; };
+		FDC433F41C0E4D2000363A0C /* SwiftyJSON.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SwiftyJSON.swift; path = "../../../../../../Downloads/SwiftyJSON-master/Source/SwiftyJSON.swift"; sourceTree = "<group>"; };
+		FDD3BC2D1C16251A00616976 /* Heartverses.sqlite */ = {isa = PBXFileReference; lastKnownFileType = file; path = Heartverses.sqlite; sourceTree = "<group>"; };
+		FDD3BC2F1C16263B00616976 /* HeartversesAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HeartversesAPI.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -111,6 +117,7 @@
 		FD0D0F2F1C0A387400EAF02A /* VersesSeed */ = {
 			isa = PBXGroup;
 			children = (
+				FDC433F41C0E4D2000363A0C /* SwiftyJSON.swift */,
 				FD0D0F301C0A387400EAF02A /* main.swift */,
 			);
 			path = VersesSeed;
@@ -141,6 +148,7 @@
 		FDB61B8B1BF533D800F8C61D /* Verses */ = {
 			isa = PBXGroup;
 			children = (
+				FDD3BC2D1C16251A00616976 /* Heartverses.sqlite */,
 				FDB61B8C1BF533D800F8C61D /* AppDelegate.swift */,
 				FDB61B8E1BF533D800F8C61D /* VersePracticeController.swift */,
 				FDB61BBD1BF5410000F8C61D /* VersesIndexController.swift */,
@@ -152,6 +160,7 @@
 				FD8180FD1C0A3ACD008AF2BA /* HeartversesStore.swift */,
 				FD0D0F1E1C0A31BC00EAF02A /* Heartverses.xcdatamodeld */,
 				FDB61B931BF533D800F8C61D /* Verses.xcdatamodeld */,
+				FDD3BC2F1C16263B00616976 /* HeartversesAPI.swift */,
 			);
 			path = Verses;
 			sourceTree = "<group>";
@@ -302,6 +311,7 @@
 			files = (
 				FDB61B9A1BF533D800F8C61D /* LaunchScreen.storyboard in Resources */,
 				FDB61B971BF533D800F8C61D /* Assets.xcassets in Resources */,
+				FDD3BC2E1C16251A00616976 /* Heartverses.sqlite in Resources */,
 				FDB61B921BF533D800F8C61D /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -330,6 +340,7 @@
 				FD8181001C0A3D43008AF2BA /* Heartverses.xcdatamodeld in Sources */,
 				FD8180FF1C0A3ACD008AF2BA /* HeartversesStore.swift in Sources */,
 				FD0D0F311C0A387400EAF02A /* main.swift in Sources */,
+				FDC433F51C0E4D2000363A0C /* SwiftyJSON.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -342,6 +353,7 @@
 				FDB61B951BF533D800F8C61D /* Verses.xcdatamodeld in Sources */,
 				FD0D0F201C0A31BC00EAF02A /* Heartverses.xcdatamodeld in Sources */,
 				FDB61BBE1BF5410000F8C61D /* VersesIndexController.swift in Sources */,
+				FDD3BC301C16263B00616976 /* HeartversesAPI.swift in Sources */,
 				FD8180FE1C0A3ACD008AF2BA /* HeartversesStore.swift in Sources */,
 				FDB61B8D1BF533D800F8C61D /* AppDelegate.swift in Sources */,
 			);
