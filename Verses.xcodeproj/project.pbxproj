@@ -13,12 +13,13 @@
 		FD8180FF1C0A3ACD008AF2BA /* HeartversesStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD8180FD1C0A3ACD008AF2BA /* HeartversesStore.swift */; };
 		FD8181001C0A3D43008AF2BA /* Heartverses.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = FD0D0F1E1C0A31BC00EAF02A /* Heartverses.xcdatamodeld */; };
 		FD960EE51C17C7790007A096 /* SwiftyJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD960EE41C17C7790007A096 /* SwiftyJSON.swift */; };
+		FD960EE71C17C9790007A096 /* PassageParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD960EE61C17C9790007A096 /* PassageParser.swift */; };
+		FD960EE91C17CEFE0007A096 /* Passage.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD960EE81C17CEFE0007A096 /* Passage.swift */; };
 		FDB61B8D1BF533D800F8C61D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDB61B8C1BF533D800F8C61D /* AppDelegate.swift */; };
 		FDB61B8F1BF533D800F8C61D /* VersePracticeController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDB61B8E1BF533D800F8C61D /* VersePracticeController.swift */; };
 		FDB61B921BF533D800F8C61D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FDB61B901BF533D800F8C61D /* Main.storyboard */; };
 		FDB61B951BF533D800F8C61D /* Verses.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = FDB61B931BF533D800F8C61D /* Verses.xcdatamodeld */; };
 		FDB61B971BF533D800F8C61D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FDB61B961BF533D800F8C61D /* Assets.xcassets */; };
-		FDB61B9A1BF533D800F8C61D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FDB61B981BF533D800F8C61D /* LaunchScreen.storyboard */; };
 		FDB61BA51BF533D800F8C61D /* VersesTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDB61BA41BF533D800F8C61D /* VersesTests.swift */; };
 		FDB61BB01BF533D800F8C61D /* VersesUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDB61BAF1BF533D800F8C61D /* VersesUITests.swift */; };
 		FDB61BBE1BF5410000F8C61D /* VersesIndexController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDB61BBD1BF5410000F8C61D /* VersesIndexController.swift */; };
@@ -62,13 +63,14 @@
 		FD0D0F301C0A387400EAF02A /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
 		FD8180FD1C0A3ACD008AF2BA /* HeartversesStore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HeartversesStore.swift; sourceTree = "<group>"; };
 		FD960EE41C17C7790007A096 /* SwiftyJSON.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwiftyJSON.swift; sourceTree = "<group>"; };
+		FD960EE61C17C9790007A096 /* PassageParser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PassageParser.swift; sourceTree = "<group>"; };
+		FD960EE81C17CEFE0007A096 /* Passage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Passage.swift; sourceTree = "<group>"; };
 		FDB61B891BF533D800F8C61D /* Verses.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Verses.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FDB61B8C1BF533D800F8C61D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		FDB61B8E1BF533D800F8C61D /* VersePracticeController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VersePracticeController.swift; sourceTree = "<group>"; };
 		FDB61B911BF533D800F8C61D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		FDB61B941BF533D800F8C61D /* Verses.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Verses.xcdatamodel; sourceTree = "<group>"; };
 		FDB61B961BF533D800F8C61D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		FDB61B991BF533D800F8C61D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		FDB61B9B1BF533D800F8C61D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		FDB61BA01BF533D800F8C61D /* VersesTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = VersesTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		FDB61BA41BF533D800F8C61D /* VersesTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VersesTests.swift; sourceTree = "<group>"; };
@@ -155,12 +157,13 @@
 				FDB61BBF1BF5457E00F8C61D /* AddVerseController.swift */,
 				FDB61B901BF533D800F8C61D /* Main.storyboard */,
 				FDB61B961BF533D800F8C61D /* Assets.xcassets */,
-				FDB61B981BF533D800F8C61D /* LaunchScreen.storyboard */,
 				FDB61B9B1BF533D800F8C61D /* Info.plist */,
 				FD8180FD1C0A3ACD008AF2BA /* HeartversesStore.swift */,
 				FD0D0F1E1C0A31BC00EAF02A /* Heartverses.xcdatamodeld */,
 				FDB61B931BF533D800F8C61D /* Verses.xcdatamodeld */,
 				FDD3BC2F1C16263B00616976 /* HeartversesAPI.swift */,
+				FD960EE61C17C9790007A096 /* PassageParser.swift */,
+				FD960EE81C17CEFE0007A096 /* Passage.swift */,
 			);
 			path = Verses;
 			sourceTree = "<group>";
@@ -309,7 +312,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				FDB61B9A1BF533D800F8C61D /* LaunchScreen.storyboard in Resources */,
 				FDB61B971BF533D800F8C61D /* Assets.xcassets in Resources */,
 				FDD3BC2E1C16251A00616976 /* Heartverses.sqlite in Resources */,
 				FDB61B921BF533D800F8C61D /* Main.storyboard in Resources */,
@@ -348,8 +350,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FD960EE91C17CEFE0007A096 /* Passage.swift in Sources */,
 				FDB61B8F1BF533D800F8C61D /* VersePracticeController.swift in Sources */,
 				FDB61BC01BF5457E00F8C61D /* AddVerseController.swift in Sources */,
+				FD960EE71C17C9790007A096 /* PassageParser.swift in Sources */,
 				FDB61B951BF533D800F8C61D /* Verses.xcdatamodeld in Sources */,
 				FD0D0F201C0A31BC00EAF02A /* Heartverses.xcdatamodeld in Sources */,
 				FDB61BBE1BF5410000F8C61D /* VersesIndexController.swift in Sources */,
@@ -397,14 +401,6 @@
 				FDB61B911BF533D800F8C61D /* Base */,
 			);
 			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
-		FDB61B981BF533D800F8C61D /* LaunchScreen.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				FDB61B991BF533D800F8C61D /* Base */,
-			);
-			name = LaunchScreen.storyboard;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
