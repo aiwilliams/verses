@@ -25,8 +25,11 @@ class VersePracticeController: UIViewController {
     @IBOutlet var submissionButton: UIButton!
     @IBOutlet var helpButton: UIBarButtonItem!
     
+    var passage: NSManagedObject!
+    var verses: NSOrderedSet!
+    var activeVerse: NSManagedObject!
     var passageText: String!
-    var passageReference: String!
+
     var indexPath: NSIndexPath!
     var hintLevel: Int = 0
 
@@ -35,7 +38,15 @@ class VersePracticeController: UIViewController {
 
         self.automaticallyAdjustsScrollViewInsets = false
         
-        title = passageReference
+        verses = passage.valueForKey("verses") as! NSOrderedSet
+        activeVerse = verses.firstObject as! NSManagedObject
+        passageText = activeVerse.valueForKey("text") as! String
+
+        let book = activeVerse.valueForKey("book") as! String
+        let chapter = activeVerse.valueForKey("chapter") as! Int
+        let verse = activeVerse.valueForKey("number") as! Int
+
+        title = "\(book) \(chapter):\(verse)"
         basicHelpLabel.text = passageText
         intermediateHelpLabel.text = passageText
         advancedHelpLabel.text = passageText
