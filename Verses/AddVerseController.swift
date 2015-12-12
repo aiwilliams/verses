@@ -14,6 +14,10 @@ class AddVerseController: UIViewController {
     @IBOutlet var verseRequest: UITextField!
     @IBOutlet var errorLabel: UILabel!
     
+    let passageParser = PassageParser()
+    let API = HeartversesAPI(defaultTranslation: "kjv")
+    let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         errorLabel.hidden = true
@@ -24,22 +28,37 @@ class AddVerseController: UIViewController {
     }
 
     @IBAction func doneButtonPressed(sender: AnyObject) {
-        saveVerse(HeartversesAPI.parsePassage(verseRequest.text!), text: HeartversesAPI.fetchVerseText(verseRequest.text!))
+        let parsedPassage = passageParser.parse(verseRequest.text!)
+        let passage = API.fetchPassage(parsedPassage)
+        savePassage(passage)
         self.dismissViewControllerAnimated(true, completion: nil)
     }
     
-    func saveVerse(passage: String, text: String) {
-        let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
-        let moc = appDelegate.managedObjectContext
-        let entity = NSEntityDescription.entityForName("Passage", inManagedObjectContext: moc)
-        let verse = NSManagedObject(entity: entity!, insertIntoManagedObjectContext: moc)
-        verse.setValue(passage, forKey: "reference")
-        verse.setValue(text, forKey: "text")
+    func savePassage(passage: Passage) {
+        let entity = NSEntityDescription.entityForName("Passage", inManagedObjectContext: appDelegate.managedObjectContext)
+        let CDPassage = NSManagedObject(entity: entity!, insertIntoManagedObjectContext: appDelegate.managedObjectContext)
+        let verseSet = NSMutableOrderedSet()
+        for v in passage.verses {
+            let verse = convertVerseToNSManagedObject(v)
+            verseSet.addObject(verse)
+        }
+        CDPassage.setValue(verseSet, forKey: "verses")
         
         do {
-            try moc.save()
+            try appDelegate.managedObjectContext.save()
         } catch let error as NSError {
             print("Could not save \(error), \(error.userInfo)")
         }
+    }
+    
+    func convertVerseToNSManagedObject(verse: Verse) -> NSManagedObject {
+        let entity = NSEntityDescription.entityForName("Verse", inManagedObjectContext: appDelegate.managedObjectContext)
+        let nsmo = NSManagedObject(entity: entity!, insertIntoManagedObjectContext: appDelegate.managedObjectContext)
+        nsmo.setValue(verse.book, forKey: "book")
+        nsmo.setValue(verse.chapter, forKey: "chapter")
+        nsmo.setValue(verse.number, forKey: "number")
+        nsmo.setValue(verse.text, forKey: "text")
+
+        return nsmo
     }
 }

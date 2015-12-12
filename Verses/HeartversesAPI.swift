@@ -12,7 +12,26 @@ import CoreData
 var APIURL: String = "http://heartversesapi.herokuapp.com/api/v1"
 
 class HeartversesAPI {
-    static func fetchVerseText(rawPassage: String) -> String {
+    var translation: String!
+
+    init(defaultTranslation: String) {
+        self.translation = defaultTranslation
+    }
+
+    func fetchPassage(parsedPassage: ParsedPassage) -> Passage {
+        let store = HeartversesStore(sqliteURL: NSBundle.mainBundle().URLForResource("Heartverses", withExtension: "sqlite")!)
+        var passage = Passage(parsedPassage: parsedPassage)
+        
+        for v in parsedPassage.verse_start...parsedPassage.verse_end {
+            let fetchedVerse = store.findVerse(translation, bookSlug: parsedPassage.book, chapter: parsedPassage.chapter_start, number: parsedPassage.verse_start)
+            let verse = Verse(book: parsedPassage.book, chapter: parsedPassage.chapter_start, number: v, text: fetchedVerse.valueForKey("text") as! String)
+            passage.verses.append(verse)
+        }
+
+        return passage
+    }
+    
+    func fetchVerseText(rawPassage: String) -> String {
         let parsedPassage = parsePassage(rawPassage)
         let passageURL = URLStringFromPassage(parsedPassage)
         let verseURL = NSURL(string: APIURL + passageURL)!
@@ -38,7 +57,7 @@ class HeartversesAPI {
         return "failure"
     }
     
-    static func parsePassage(passage: String) -> String {
+    func parsePassage(passage: String) -> String {
         let parseURL = NSURL(string: APIURL + "/parse/" + removeSpacesFromRawPassage(passage))
         let parseData: NSData? = NSData(contentsOfURL: parseURL!)
         var parseJSON: AnyObject? = nil
@@ -64,12 +83,12 @@ class HeartversesAPI {
         return "failure"
     }
     
-    static private func URLStringFromPassage(passage: String) -> String {
+    private func URLStringFromPassage(passage: String) -> String {
         let comps = passage.componentsSeparatedByCharactersInSet(NSCharacterSet(charactersInString: " :"))
         return "/kjv/\(comps[0])/\(comps[1])/\(comps[2])"
     }
     
-    static private func removeSpacesFromRawPassage(rawPassage: String) -> String {
+    private func removeSpacesFromRawPassage(rawPassage: String) -> String {
         if let spacesRegex: NSRegularExpression = try? NSRegularExpression(pattern: " ", options: NSRegularExpressionOptions.CaseInsensitive) {
             return spacesRegex.stringByReplacingMatchesInString(rawPassage, options: NSMatchingOptions.ReportCompletion, range: NSMakeRange(0, rawPassage.characters.count), withTemplate: "")
         }

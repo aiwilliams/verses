@@ -3,6 +3,12 @@ import CoreData
 
 class HeartversesStore {
     
+    let url: NSURL
+    
+    init(sqliteURL: NSURL) {
+        url = sqliteURL
+    }
+    
     func addVerse(book: NSManagedObject, chapter: Int, number: Int, text: String) {
         let verse = newObject("Verse")
         verse.setValue(book, forKey: "book")
@@ -12,7 +18,7 @@ class HeartversesStore {
         self.saveContext()
     }
 
-    func findBook(slug: String, translation: String) -> NSManagedObject {
+    func findBook(translation: String, slug: String) -> NSManagedObject {
         let book = findObject("Book", format: "name == %@ and translation == %@", slug, translation)
         if book.objectID.temporaryID {
             book.setValue(slug, forKey: "name")
@@ -22,6 +28,12 @@ class HeartversesStore {
         return book
     }
 
+    func findVerse(translation: String, bookSlug: String, chapter: Int, number: Int) -> NSManagedObject {
+        let book = findBook(translation, slug: bookSlug)
+        let verse = findObject("Verse", format: "book == %@ and chapter == %@ and number == %@", book, chapter, number)
+        return verse
+    }
+    
     func newObject(entity: NSEntityDescription) -> NSManagedObject {
         return NSManagedObject(entity: entity, insertIntoManagedObjectContext: self.managedObjectContext)
     }
@@ -46,12 +58,6 @@ class HeartversesStore {
         return newObject(entity)
     }
 
-    lazy var applicationDocumentsDirectory: NSURL = {
-        let urls = NSFileManager.defaultManager().URLsForDirectory(.DocumentDirectory, inDomains: .UserDomainMask)
-        print(urls)
-        return urls[urls.count-1]
-    }()
-
     lazy var managedObjectModel: NSManagedObjectModel = {
         let modelURL = NSBundle.mainBundle().URLForResource("Heartverses", withExtension: "momd")!
         return NSManagedObjectModel(contentsOfURL: modelURL)!
@@ -59,10 +65,9 @@ class HeartversesStore {
     
     lazy var persistentStoreCoordinator: NSPersistentStoreCoordinator = {
         let coordinator = NSPersistentStoreCoordinator(managedObjectModel: self.managedObjectModel)
-        let url = self.applicationDocumentsDirectory.URLByAppendingPathComponent("Heartverses.sqlite")
         var failureReason = "There was an error creating or loading the application's saved data."
         do {
-            try coordinator.addPersistentStoreWithType(NSSQLiteStoreType, configuration: nil, URL: url, options: nil)
+            try coordinator.addPersistentStoreWithType(NSSQLiteStoreType, configuration: nil, URL: self.url, options: nil)
         } catch {
             var dict = [String: AnyObject]()
             dict[NSLocalizedDescriptionKey] = "Failed to initialize the application's saved data"

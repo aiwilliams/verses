@@ -1,7 +1,8 @@
 import Foundation
 import CoreData
 
-let store = HeartversesStore()
+let documentsDirectory = NSFileManager.defaultManager().URLsForDirectory(.DocumentDirectory, inDomains: .UserDomainMask).last!
+let store = HeartversesStore(sqliteURL: documentsDirectory.URLByAppendingPathComponent("Heartverses.sqlite"))
 let path = "/Users/isaacjw/Desktop/kjv_bible.json"
 
 var json: JSON!
@@ -21,7 +22,7 @@ for (index,object):(String, JSON) in json {
     switch object["model"] {
     case "bible.book":
         let bookSlug = object["fields"]["slug"].stringValue
-        books[object["pk"].intValue] = store.findBook(bookSlug, translation: translation)
+        books[object["pk"].intValue] = store.findBook(translation, slug: bookSlug)
     case "bible.chapter":
         chapters[object["pk"].intValue] = [object["fields"]["book"].intValue, object["fields"]["number"].intValue]
     case "bible.verse":
