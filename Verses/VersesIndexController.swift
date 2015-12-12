@@ -40,8 +40,8 @@ class VersesIndexController: UITableViewController {
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("verseCell")
-        let verse = passages[indexPath.row]
-        cell!.textLabel!.text = verse.valueForKey("reference") as? String
+        let passage = passages[indexPath.row]
+        cell!.textLabel!.text = passage.valueForKey("reference") as? String
         return cell!
     }
     

@@ -35,14 +35,15 @@ class AddVerseController: UIViewController {
     }
     
     func savePassage(passage: Passage) {
-        let entity = NSEntityDescription.entityForName("Passage", inManagedObjectContext: appDelegate.managedObjectContext)
-        let CDPassage = NSManagedObject(entity: entity!, insertIntoManagedObjectContext: appDelegate.managedObjectContext)
+        let entityDescription = NSEntityDescription.entityForName("Passage", inManagedObjectContext: appDelegate.managedObjectContext)
+        let managedObject = NSManagedObject(entity: entityDescription!, insertIntoManagedObjectContext: appDelegate.managedObjectContext)
         let verseSet = NSMutableOrderedSet()
         for v in passage.verses {
             let verse = convertVerseToNSManagedObject(v)
             verseSet.addObject(verse)
         }
-        CDPassage.setValue(verseSet, forKey: "verses")
+        managedObject.setValue(verseSet, forKey: "verses")
+        managedObject.setValue(passage.reference, forKey: "reference")
         
         do {
             try appDelegate.managedObjectContext.save()

@@ -23,4 +23,13 @@ struct Passage {
     init(parsedPassage: ParsedPassage) {
         self.parsedPassage = parsedPassage
     }
+    
+    var reference: String {
+        let comps = parsedPassage.book.componentsSeparatedByCharactersInSet(NSCharacterSet(charactersInString: "-"))
+        if comps.count == 2 {
+            return "\(comps[0]) \(comps[1].capitalizedString) \(parsedPassage.chapter_start):\(parsedPassage.verse_start)"
+        } else {
+            return "\(comps[0].capitalizedString) \(parsedPassage.chapter_start):\(parsedPassage.verse_start)"
+        }
+    }
 }
