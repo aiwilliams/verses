@@ -9,6 +9,10 @@
 /* Begin PBXBuildFile section */
 		FD0D0F201C0A31BC00EAF02A /* Heartverses.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = FD0D0F1E1C0A31BC00EAF02A /* Heartverses.xcdatamodeld */; };
 		FD0D0F311C0A387400EAF02A /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD0D0F301C0A387400EAF02A /* main.swift */; };
+		FD79BAE51C1BC45A00266A5A /* UserVerse+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD79BAE21C1BC45A00266A5A /* UserVerse+CoreDataProperties.swift */; };
+		FD79BAE61C1BC45A00266A5A /* UserVerse.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD79BAE31C1BC45A00266A5A /* UserVerse.swift */; };
+		FD79BAE71C1BC45A00266A5A /* UserPassage+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD79BAE41C1BC45A00266A5A /* UserPassage+CoreDataProperties.swift */; };
+		FD79BAE91C1BC4B600266A5A /* UserPassage.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD79BAE81C1BC4B600266A5A /* UserPassage.swift */; };
 		FD8180FE1C0A3ACD008AF2BA /* HeartversesStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD8180FD1C0A3ACD008AF2BA /* HeartversesStore.swift */; };
 		FD8180FF1C0A3ACD008AF2BA /* HeartversesStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD8180FD1C0A3ACD008AF2BA /* HeartversesStore.swift */; };
 		FD8181001C0A3D43008AF2BA /* Heartverses.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = FD0D0F1E1C0A31BC00EAF02A /* Heartverses.xcdatamodeld */; };
@@ -61,6 +65,10 @@
 		FD0D0F1F1C0A31BC00EAF02A /* Heartverses.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Heartverses.xcdatamodel; sourceTree = "<group>"; };
 		FD0D0F2E1C0A387400EAF02A /* VersesSeed */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = VersesSeed; sourceTree = BUILT_PRODUCTS_DIR; };
 		FD0D0F301C0A387400EAF02A /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
+		FD79BAE21C1BC45A00266A5A /* UserVerse+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UserVerse+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		FD79BAE31C1BC45A00266A5A /* UserVerse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserVerse.swift; sourceTree = "<group>"; };
+		FD79BAE41C1BC45A00266A5A /* UserPassage+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UserPassage+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		FD79BAE81C1BC4B600266A5A /* UserPassage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserPassage.swift; sourceTree = "<group>"; };
 		FD8180FD1C0A3ACD008AF2BA /* HeartversesStore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HeartversesStore.swift; sourceTree = "<group>"; };
 		FD960EE41C17C7790007A096 /* SwiftyJSON.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwiftyJSON.swift; sourceTree = "<group>"; };
 		FD960EE61C17C9790007A096 /* PassageParser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PassageParser.swift; sourceTree = "<group>"; };
@@ -164,6 +172,10 @@
 				FDD3BC2F1C16263B00616976 /* HeartversesAPI.swift */,
 				FD960EE61C17C9790007A096 /* PassageParser.swift */,
 				FD960EE81C17CEFE0007A096 /* Passage.swift */,
+				FD79BAE21C1BC45A00266A5A /* UserVerse+CoreDataProperties.swift */,
+				FD79BAE31C1BC45A00266A5A /* UserVerse.swift */,
+				FD79BAE41C1BC45A00266A5A /* UserPassage+CoreDataProperties.swift */,
+				FD79BAE81C1BC4B600266A5A /* UserPassage.swift */,
 			);
 			path = Verses;
 			sourceTree = "<group>";
@@ -351,14 +363,18 @@
 			buildActionMask = 2147483647;
 			files = (
 				FD960EE91C17CEFE0007A096 /* Passage.swift in Sources */,
+				FD79BAE51C1BC45A00266A5A /* UserVerse+CoreDataProperties.swift in Sources */,
 				FDB61B8F1BF533D800F8C61D /* VersePracticeController.swift in Sources */,
+				FD79BAE61C1BC45A00266A5A /* UserVerse.swift in Sources */,
 				FDB61BC01BF5457E00F8C61D /* AddVerseController.swift in Sources */,
+				FD79BAE91C1BC4B600266A5A /* UserPassage.swift in Sources */,
 				FD960EE71C17C9790007A096 /* PassageParser.swift in Sources */,
 				FDB61B951BF533D800F8C61D /* Verses.xcdatamodeld in Sources */,
 				FD0D0F201C0A31BC00EAF02A /* Heartverses.xcdatamodeld in Sources */,
 				FDB61BBE1BF5410000F8C61D /* VersesIndexController.swift in Sources */,
 				FDD3BC301C16263B00616976 /* HeartversesAPI.swift in Sources */,
 				FD8180FE1C0A3ACD008AF2BA /* HeartversesStore.swift in Sources */,
+				FD79BAE71C1BC45A00266A5A /* UserPassage+CoreDataProperties.swift in Sources */,
 				FDB61B8D1BF533D800F8C61D /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

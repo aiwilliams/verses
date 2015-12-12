@@ -35,15 +35,15 @@ class AddVerseController: UIViewController {
     }
     
     func savePassage(passage: Passage) {
-        let entityDescription = NSEntityDescription.entityForName("Passage", inManagedObjectContext: appDelegate.managedObjectContext)
-        let managedObject = NSManagedObject(entity: entityDescription!, insertIntoManagedObjectContext: appDelegate.managedObjectContext)
+        let entityDescription = NSEntityDescription.entityForName("UserPassage", inManagedObjectContext: appDelegate.managedObjectContext)!
+        let managedObject = UserPassage(entity: entityDescription, insertIntoManagedObjectContext: appDelegate.managedObjectContext)
         let verseSet = NSMutableOrderedSet()
         for v in passage.verses {
             let verse = convertVerseToNSManagedObject(v)
             verseSet.addObject(verse)
         }
-        managedObject.setValue(verseSet, forKey: "verses")
-        managedObject.setValue(passage.reference, forKey: "reference")
+        managedObject.verses = verseSet
+        managedObject.reference = passage.reference
         
         do {
             try appDelegate.managedObjectContext.save()
@@ -53,7 +53,7 @@ class AddVerseController: UIViewController {
     }
     
     func convertVerseToNSManagedObject(verse: Verse) -> NSManagedObject {
-        let entity = NSEntityDescription.entityForName("Verse", inManagedObjectContext: appDelegate.managedObjectContext)
+        let entity = NSEntityDescription.entityForName("UserVerse", inManagedObjectContext: appDelegate.managedObjectContext)
         let nsmo = NSManagedObject(entity: entity!, insertIntoManagedObjectContext: appDelegate.managedObjectContext)
         nsmo.setValue(verse.book, forKey: "book")
         nsmo.setValue(verse.chapter, forKey: "chapter")

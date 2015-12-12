@@ -71,13 +71,22 @@ class VersesTests: XCTestCase {
         XCTAssertEqual(19, result.verse_end)
     }
     
+    func testParseChapterNoVerse() {
+        let result = parser.parse("psalms 1")
+        XCTAssertEqual("psalms", result.book)
+        XCTAssertEqual(1, result.chapter_start)
+        XCTAssertEqual(1, result.chapter_end)
+        XCTAssertEqual(0, result.verse_start)
+        XCTAssertEqual(0, result.verse_end)
+    }
+    
     func testParseChapterRange() {
         let result = parser.parse("psalms 1-3")
         XCTAssertEqual("psalms", result.book)
         XCTAssertEqual(1, result.chapter_start)
         XCTAssertEqual(3, result.chapter_end)
-        XCTAssertEqual(1, result.verse_start)
-        XCTAssertEqual(1, result.verse_end)
+        XCTAssertEqual(0, result.verse_start)
+        XCTAssertEqual(0, result.verse_end)
     }
     
     func testParseIntoProperSlug() {
@@ -103,8 +112,8 @@ class VersesTests: XCTestCase {
         XCTAssertEqual("2-samuel", result.book)
         XCTAssertEqual(1, result.chapter_start)
         XCTAssertEqual(4, result.chapter_end)
-        XCTAssertEqual(1, result.verse_start)
-        XCTAssertEqual(1, result.verse_end)
+        XCTAssertEqual(0, result.verse_start)
+        XCTAssertEqual(0, result.verse_end)
     }
     
 }

@@ -34,18 +34,19 @@ class PassageParser {
 
         result.book = book
         result.chapter_start = Int(comps[0])!
-        if containsChaptersOnly(passage) {
-            print("chapter only")
+        if containsChapterRange(passage) {
             result.chapter_end = Int(comps[1])!
-            result.verse_start = 1
-            result.verse_end = 1
+            result.verse_start = 0
+            result.verse_end = 0
+        } else if containsChapterOnly(passage) {
+            result.chapter_end = Int(comps[0])!
+            result.verse_start = 0
+            result.verse_end = 0
         } else if containsVerseRange(passage) {
-            print("contains verse range")
             result.chapter_end = Int(comps[0])!
             result.verse_start = Int(comps[1])!
             result.verse_end = Int(comps[2])!
         } else {
-            print("single verse")
             result.chapter_end = Int(comps[0])!
             result.verse_start = Int(comps[1])!
             result.verse_end = Int(comps[1])!
@@ -62,8 +63,12 @@ class PassageParser {
         }
     }
     
-    func containsChaptersOnly(passage: String) -> Bool {
-        return passage.containsString("-") && !passage.containsString(":")
+    func containsChapterRange(passage: String) -> Bool {
+        return !passage.containsString(":") && passage.containsString("-")
+    }
+    
+    func containsChapterOnly(passage: String) -> Bool {
+        return !passage.containsString(":")
     }
     
     func containsVerseRange(passage: String) -> Bool {

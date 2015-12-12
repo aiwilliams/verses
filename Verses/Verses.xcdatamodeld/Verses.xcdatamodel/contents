@@ -1,18 +1,18 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="9057" systemVersion="15A278b" minimumToolsVersion="Automatic">
-    <entity name="Passage" syncable="YES">
+    <entity name="UserPassage" representedClassName=".UserPassage" syncable="YES">
         <attribute name="reference" optional="YES" attributeType="String" syncable="YES"/>
-        <relationship name="verses" toMany="YES" minCount="1" deletionRule="Nullify" ordered="YES" destinationEntity="Verse" inverseName="passage" inverseEntity="Verse" syncable="YES"/>
+        <relationship name="verses" toMany="YES" minCount="1" deletionRule="Nullify" ordered="YES" destinationEntity="UserVerse" inverseName="passage" inverseEntity="UserVerse" syncable="YES"/>
     </entity>
-    <entity name="Verse" syncable="YES">
+    <entity name="UserVerse" representedClassName=".UserVerse" syncable="YES">
         <attribute name="book" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="chapter" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
         <attribute name="number" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
         <attribute name="text" optional="YES" attributeType="String" syncable="YES"/>
-        <relationship name="passage" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Passage" inverseName="verses" inverseEntity="Passage" syncable="YES"/>
+        <relationship name="passage" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="UserPassage" inverseName="verses" inverseEntity="UserPassage" syncable="YES"/>
     </entity>
     <elements>
-        <element name="Passage" positionX="-63" positionY="-18" width="128" height="75"/>
-        <element name="Verse" positionX="-63" positionY="0" width="128" height="120"/>
+        <element name="UserPassage" positionX="-63" positionY="-18" width="128" height="75"/>
+        <element name="UserVerse" positionX="-63" positionY="0" width="128" height="120"/>
     </elements>
 </model>

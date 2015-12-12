@@ -25,11 +25,21 @@ struct Passage {
     }
     
     var reference: String {
+        var verses = "\(parsedPassage.chapter_start)"
+        if parsedPassage.chapter_start != parsedPassage.chapter_end {
+            verses = verses + ":\(parsedPassage.verse_start)-\(parsedPassage.chapter_end):\(parsedPassage.verse_end)"
+        } else {
+            verses = verses + ":\(parsedPassage.verse_start)"
+            if parsedPassage.verse_start != parsedPassage.verse_end {
+                verses = verses + "-\(parsedPassage.verse_end)"
+            }
+        }
+        
         let comps = parsedPassage.book.componentsSeparatedByCharactersInSet(NSCharacterSet(charactersInString: "-"))
         if comps.count == 2 {
-            return "\(comps[0]) \(comps[1].capitalizedString) \(parsedPassage.chapter_start):\(parsedPassage.verse_start)"
+            return "\(comps[0]) \(comps[1].capitalizedString) \(verses)"
         } else {
-            return "\(comps[0].capitalizedString) \(parsedPassage.chapter_start):\(parsedPassage.verse_start)"
+            return "\(comps[0].capitalizedString) \(verses)"
         }
     }
 }

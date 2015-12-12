@@ -11,7 +11,7 @@ import UIKit
 import CoreData
 
 class VersesIndexController: UITableViewController {
-    var passages = [NSManagedObject]()
+    var passages = [UserPassage]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -22,11 +22,11 @@ class VersesIndexController: UITableViewController {
 
         let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
         let moc = appDelegate.managedObjectContext
-        let fetchRequest = NSFetchRequest(entityName: "Passage")
+        let fetchRequest = NSFetchRequest(entityName: "UserPassage")
         
         do {
             let results = try moc.executeFetchRequest(fetchRequest)
-            passages = results as! [NSManagedObject]
+            passages = results as! [UserPassage]
         } catch let error as NSError {
             print("Could not fetch \(error), \(error.userInfo)")
         }
@@ -41,7 +41,7 @@ class VersesIndexController: UITableViewController {
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("verseCell")
         let passage = passages[indexPath.row]
-        cell!.textLabel!.text = passage.valueForKey("reference") as? String
+        cell!.textLabel!.text = passage.reference!
         return cell!
     }
     
@@ -49,7 +49,7 @@ class VersesIndexController: UITableViewController {
         if segue.identifier == "passagePracticeSegue" {
             let destinationViewController = segue.destinationViewController as! VersePracticeController
             let ip: NSIndexPath = self.tableView.indexPathForCell(sender as! UITableViewCell)!
-            let passage: NSManagedObject = self.passages[ip.row]
+            let passage: UserPassage = self.passages[ip.row]
             destinationViewController.passage = passage
         }
     }

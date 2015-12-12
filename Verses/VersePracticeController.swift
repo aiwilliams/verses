@@ -25,10 +25,9 @@ class VersePracticeController: UIViewController {
     @IBOutlet var submissionButton: UIButton!
     @IBOutlet var helpButton: UIBarButtonItem!
     
-    var passage: NSManagedObject!
+    var passage: UserPassage!
     var verses: NSOrderedSet!
-    var activeVerse: NSManagedObject!
-    var passageText: String!
+    var activeVerse: UserVerse!
 
     var indexPath: NSIndexPath!
     var hintLevel: Int = 0
@@ -39,17 +38,12 @@ class VersePracticeController: UIViewController {
         self.automaticallyAdjustsScrollViewInsets = false
         
         verses = passage.valueForKey("verses") as! NSOrderedSet
-        activeVerse = verses.firstObject as! NSManagedObject
-        passageText = activeVerse.valueForKey("text") as! String
+        activeVerse = verses.firstObject as! UserVerse
 
-        let book = activeVerse.valueForKey("book") as! String
-        let chapter = activeVerse.valueForKey("chapter") as! Int
-        let verse = activeVerse.valueForKey("number") as! Int
-
-        title = "\(book) \(chapter):\(verse)"
-        basicHelpLabel.text = passageText
-        intermediateHelpLabel.text = passageText
-        advancedHelpLabel.text = passageText
+        title = activeVerse.reference
+        basicHelpLabel.text = activeVerse.text
+        intermediateHelpLabel.text = activeVerse.text
+        advancedHelpLabel.text = activeVerse.text
         
         self.observeKeyboard()
         verseEntryTextView.becomeFirstResponder()
@@ -159,7 +153,7 @@ class VersePracticeController: UIViewController {
     }
 
     @IBAction func checkUserVerse(sender: UIButton) {
-        if normalizedString(verseEntryTextView.text.lowercaseString) == removePunctuation(passageText.lowercaseString) {
+        if normalizedString(verseEntryTextView.text.lowercaseString) == removePunctuation(activeVerse.text!.lowercaseString) {
             UIView.animateWithDuration(0.1, animations: {
                 self.submissionButton.backgroundColor = UIColor(red: 0.16, green: 0.75, blue: 0.09, alpha: 1)
                 self.submissionButton.setTitle("Great job!", forState: .Normal)
