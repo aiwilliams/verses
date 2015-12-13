@@ -22,10 +22,18 @@ class HeartversesAPI {
         let store = HeartversesStore(sqliteURL: NSBundle.mainBundle().URLForResource("Heartverses", withExtension: "sqlite")!)
         var passage = Passage(parsedPassage: parsedPassage)
         
-        for v in parsedPassage.verse_start...parsedPassage.verse_end {
-            let fetchedVerse = store.findVerse(translation, bookSlug: parsedPassage.book, chapter: parsedPassage.chapter_start, number: parsedPassage.verse_start)
-            let verse = Verse(book: parsedPassage.book, chapter: parsedPassage.chapter_start, number: v, text: fetchedVerse.valueForKey("text") as! String)
-            passage.verses.append(verse)
+        if parsedPassage.verse_start == 0 {
+            let fetchedVerses: [NSManagedObject] = store.findVersesInChapter(translation, bookSlug: parsedPassage.book, chapter: parsedPassage.chapter_start) as! [NSManagedObject]
+            for v in fetchedVerses {
+                let verse = Verse(book: parsedPassage.book, chapter: parsedPassage.chapter_start, number: v.valueForKey("number") as! Int, text: v.valueForKey("text") as! String)
+                passage.verses.append(verse)
+            }
+        } else {
+            for v in parsedPassage.verse_start...parsedPassage.verse_end {
+                let fetchedVerse = store.findVerse(translation, bookSlug: parsedPassage.book, chapter: parsedPassage.chapter_start, number: parsedPassage.verse_start)
+                let verse = Verse(book: parsedPassage.book, chapter: parsedPassage.chapter_start, number: v, text: fetchedVerse.valueForKey("text") as! String)
+                passage.verses.append(verse)
+            }
         }
 
         return passage

@@ -27,6 +27,22 @@ class HeartversesStore {
         }
         return book
     }
+    
+    func findVersesInChapter(translation: String, bookSlug: String, chapter: Int) -> [AnyObject] {
+        let book = findBook(translation, slug: bookSlug)
+        let entity = NSEntityDescription.entityForName("Verse", inManagedObjectContext: self.managedObjectContext)!
+        let fetchRequest = NSFetchRequest(entityName: entity.name!)
+        fetchRequest.predicate = NSPredicate(format: "book == %@ and chapter == %@", argumentArray: [book, chapter])
+        do {
+            let verses = try self.managedObjectContext.executeFetchRequest(fetchRequest)
+            if !verses.isEmpty {
+                return verses
+            }
+        } catch let error as NSError {
+            print("Could not find chapter. Error: \(error), \(error.userInfo)")
+        }
+        return []
+    }
 
     func findVerse(translation: String, bookSlug: String, chapter: Int, number: Int) -> NSManagedObject {
         let book = findBook(translation, slug: bookSlug)
