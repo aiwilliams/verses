@@ -28,6 +28,7 @@ class VersePracticeController: UIViewController {
     var passage: UserPassage!
     var verses: NSOrderedSet!
     var activeVerse: UserVerse!
+    var activeVerseIndex: Int!
 
     var indexPath: NSIndexPath!
     var hintLevel: Int = 0
@@ -39,11 +40,9 @@ class VersePracticeController: UIViewController {
         
         verses = passage.valueForKey("verses") as! NSOrderedSet
         activeVerse = verses.firstObject as! UserVerse
+        activeVerseIndex = 0
 
-        title = activeVerse.reference
-        basicHelpLabel.text = activeVerse.text
-        intermediateHelpLabel.text = activeVerse.text
-        advancedHelpLabel.text = activeVerse.text
+        self.reloadView()
         
         self.observeKeyboard()
         verseEntryTextView.becomeFirstResponder()
@@ -159,6 +158,17 @@ class VersePracticeController: UIViewController {
                 self.submissionButton.setTitle("Great job!", forState: .Normal)
                 self.submissionButton.layer.addAnimation(self.bounceAnimation(), forKey: "position")
             })
+            
+            if activeVerseIndex != (verses.count - 1) {
+                activeVerseIndex = activeVerseIndex + 1
+                activeVerse = verses[activeVerseIndex] as! UserVerse
+
+                let delay = 2.0 * Double(NSEC_PER_SEC)
+                let dispatchTime = dispatch_time(DISPATCH_TIME_NOW, Int64(delay))
+                dispatch_after(dispatchTime, dispatch_get_main_queue(), {
+                    self.reloadView()
+                })
+            }
         } else {
             UIView.animateWithDuration(0.1, animations: {
                 self.submissionButton.backgroundColor = UIColor(red: 0.59, green: 0.23, blue: 0.18, alpha: 1)
@@ -222,6 +232,27 @@ class VersePracticeController: UIViewController {
         animation.fromValue = NSValue(CGPoint: CGPointMake(self.submissionButton.center.x, self.submissionButton.center.y))
         animation.toValue = NSValue(CGPoint: CGPointMake(self.submissionButton.center.x, self.submissionButton.center.y - 10))
         return animation
+    }
+    
+    func reloadView() {
+        title = activeVerse.reference
+
+        basicHelpLabel.text = activeVerse.text
+        intermediateHelpLabel.text = activeVerse.text
+        advancedHelpLabel.text = activeVerse.text
+
+        hintLevel = 0
+        helpButton.enabled = true
+        basicHelpLabel.alpha = 0
+        intermediateHelpLabel.alpha = 0
+        advancedHelpLabel.alpha = 0
+
+        verseEntryTextView.text = ""
+        
+        UIView.animateWithDuration(0.1, animations: {
+            self.submissionButton.backgroundColor = UIColor(red:0.67, green:0.69, blue:0.08, alpha:1.0)
+            self.submissionButton.setTitle("Check it!", forState: .Normal)
+        })
     }
 }
 

@@ -30,7 +30,8 @@ class HeartversesAPI {
             }
         } else {
             for v in parsedPassage.verse_start...parsedPassage.verse_end {
-                let fetchedVerse = store.findVerse(translation, bookSlug: parsedPassage.book, chapter: parsedPassage.chapter_start, number: parsedPassage.verse_start)
+                let fetchedVerse = store.findVerse(translation, bookSlug: parsedPassage.book, chapter: parsedPassage.chapter_start, number: v)
+                print(fetchedVerse.valueForKey("text") as! String)
                 let verse = Verse(book: parsedPassage.book, chapter: parsedPassage.chapter_start, number: v, text: fetchedVerse.valueForKey("text") as! String)
                 passage.verses.append(verse)
             }

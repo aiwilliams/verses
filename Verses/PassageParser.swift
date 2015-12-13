@@ -21,7 +21,6 @@ class PassageParser {
         var result = ParsedPassage()
         var comps = passage.componentsSeparatedByCharactersInSet(NSCharacterSet(charactersInString: " :-"))
         var book: String!
-        print(comps)
 
         if hasNumberedBook(passage) {
             book = convertToSlug("\(comps[0]) \(comps[1])")
