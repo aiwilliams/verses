@@ -21,6 +21,7 @@ class AddVerseController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         errorLabel.hidden = true
+        verseRequest.becomeFirstResponder()
     }
 
     @IBAction func cancelButtonPressed(sender: AnyObject) {
