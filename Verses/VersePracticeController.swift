@@ -168,6 +168,8 @@ class VersePracticeController: UIViewController {
                 dispatch_after(dispatchTime, dispatch_get_main_queue(), {
                     self.reloadView()
                 })
+            } else {
+                self.displayCompletion()
             }
         } else {
             UIView.animateWithDuration(0.1, animations: {
@@ -253,6 +255,16 @@ class VersePracticeController: UIViewController {
             self.submissionButton.backgroundColor = UIColor(red:0.67, green:0.69, blue:0.08, alpha:1.0)
             self.submissionButton.setTitle("Check it!", forState: .Normal)
         })
+    }
+    
+    func displayCompletion() {
+        title = "Finish"
+        
+        basicHelpLabel.text = "Congratulations, you have completed this passage!"
+        intermediateHelpLabel.alpha = 0
+        advancedHelpLabel.alpha = 0
+        
+        verseEntryTextView.text = ""
     }
 }
 
