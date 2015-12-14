@@ -28,7 +28,9 @@
 		FDB61BB01BF533D800F8C61D /* VersesUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDB61BAF1BF533D800F8C61D /* VersesUITests.swift */; };
 		FDB61BBE1BF5410000F8C61D /* VersesIndexController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDB61BBD1BF5410000F8C61D /* VersesIndexController.swift */; };
 		FDB61BC01BF5457E00F8C61D /* AddVerseController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDB61BBF1BF5457E00F8C61D /* AddVerseController.swift */; };
-		FDD3BC2E1C16251A00616976 /* Heartverses.sqlite in Resources */ = {isa = PBXBuildFile; fileRef = FDD3BC2D1C16251A00616976 /* Heartverses.sqlite */; };
+		FDC7AE351C1F826200C5BDAC /* Heartverses.sqlite in Resources */ = {isa = PBXBuildFile; fileRef = FDD3BC2D1C16251A00616976 /* Heartverses.sqlite */; };
+		FDC7AE381C1F83CE00C5BDAC /* Heartverses.sqlite-shm in Resources */ = {isa = PBXBuildFile; fileRef = FDC7AE361C1F83CE00C5BDAC /* Heartverses.sqlite-shm */; };
+		FDC7AE391C1F83CE00C5BDAC /* Heartverses.sqlite-wal in Resources */ = {isa = PBXBuildFile; fileRef = FDC7AE371C1F83CE00C5BDAC /* Heartverses.sqlite-wal */; };
 		FDD3BC301C16263B00616976 /* HeartversesAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDD3BC2F1C16263B00616976 /* HeartversesAPI.swift */; };
 /* End PBXBuildFile section */
 
@@ -88,6 +90,8 @@
 		FDB61BB11BF533D800F8C61D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		FDB61BBD1BF5410000F8C61D /* VersesIndexController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VersesIndexController.swift; sourceTree = "<group>"; };
 		FDB61BBF1BF5457E00F8C61D /* AddVerseController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddVerseController.swift; sourceTree = "<group>"; };
+		FDC7AE361C1F83CE00C5BDAC /* Heartverses.sqlite-shm */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Heartverses.sqlite-shm"; sourceTree = "<group>"; };
+		FDC7AE371C1F83CE00C5BDAC /* Heartverses.sqlite-wal */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "Heartverses.sqlite-wal"; sourceTree = "<group>"; };
 		FDD3BC2D1C16251A00616976 /* Heartverses.sqlite */ = {isa = PBXFileReference; lastKnownFileType = file; path = Heartverses.sqlite; sourceTree = "<group>"; };
 		FDD3BC2F1C16263B00616976 /* HeartversesAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HeartversesAPI.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -159,6 +163,8 @@
 			isa = PBXGroup;
 			children = (
 				FDD3BC2D1C16251A00616976 /* Heartverses.sqlite */,
+				FDC7AE361C1F83CE00C5BDAC /* Heartverses.sqlite-shm */,
+				FDC7AE371C1F83CE00C5BDAC /* Heartverses.sqlite-wal */,
 				FDB61B8C1BF533D800F8C61D /* AppDelegate.swift */,
 				FDB61B8E1BF533D800F8C61D /* VersePracticeController.swift */,
 				FDB61BBD1BF5410000F8C61D /* VersesIndexController.swift */,
@@ -324,9 +330,11 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FDC7AE351C1F826200C5BDAC /* Heartverses.sqlite in Resources */,
 				FDB61B971BF533D800F8C61D /* Assets.xcassets in Resources */,
-				FDD3BC2E1C16251A00616976 /* Heartverses.sqlite in Resources */,
 				FDB61B921BF533D800F8C61D /* Main.storyboard in Resources */,
+				FDC7AE381C1F83CE00C5BDAC /* Heartverses.sqlite-shm in Resources */,
+				FDC7AE391C1F83CE00C5BDAC /* Heartverses.sqlite-wal in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
