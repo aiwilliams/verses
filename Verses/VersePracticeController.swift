@@ -42,7 +42,11 @@ class VersePracticeController: UIViewController {
         activeVerse = verses.firstObject as! UserVerse
         activeVerseIndex = 0
 
-        self.reloadView()
+        title = activeVerse.reference
+        
+        basicHelpLabel.text = activeVerse.text
+        intermediateHelpLabel.text = activeVerse.text
+        advancedHelpLabel.text = activeVerse.text
         
         self.observeKeyboard()
         verseEntryTextView.becomeFirstResponder()
@@ -166,7 +170,7 @@ class VersePracticeController: UIViewController {
                 let delay = 2.0 * Double(NSEC_PER_SEC)
                 let dispatchTime = dispatch_time(DISPATCH_TIME_NOW, Int64(delay))
                 dispatch_after(dispatchTime, dispatch_get_main_queue(), {
-                    self.reloadView()
+                    self.transitionToNextVerse()
                 })
             } else {
                 self.displayCompletion()
@@ -236,25 +240,30 @@ class VersePracticeController: UIViewController {
         return animation
     }
     
-    func reloadView() {
+    func transitionToNextVerse() {
+        let transitionTitleAnimation = CATransition()
+        transitionTitleAnimation.duration = 0.5
+        transitionTitleAnimation.type = kCATransitionFade
+        self.navigationController!.navigationBar.layer.addAnimation(transitionTitleAnimation, forKey: "fadeTitle")
         title = activeVerse.reference
-
-        basicHelpLabel.text = activeVerse.text
-        intermediateHelpLabel.text = activeVerse.text
-        advancedHelpLabel.text = activeVerse.text
+        
+        UIView.animateWithDuration(0.5, animations: {
+            self.basicHelpLabel.alpha = 0
+            self.intermediateHelpLabel.alpha = 0
+            self.advancedHelpLabel.alpha = 0
+            
+            self.submissionButton.backgroundColor = UIColor(red:0.67, green:0.69, blue:0.08, alpha:1.0)
+            self.submissionButton.setTitle("Check it!", forState: .Normal)
+        }, completion: { (animated: Bool) -> Void in
+            self.basicHelpLabel.text = self.activeVerse.text
+            self.intermediateHelpLabel.text = self.activeVerse.text
+            self.advancedHelpLabel.text = self.activeVerse.text
+        })
 
         hintLevel = 0
         helpButton.enabled = true
-        basicHelpLabel.alpha = 0
-        intermediateHelpLabel.alpha = 0
-        advancedHelpLabel.alpha = 0
 
-        verseEntryTextView.text = ""
-        
-        UIView.animateWithDuration(0.1, animations: {
-            self.submissionButton.backgroundColor = UIColor(red:0.67, green:0.69, blue:0.08, alpha:1.0)
-            self.submissionButton.setTitle("Check it!", forState: .Normal)
-        })
+        UIView.transitionWithView(verseEntryTextView, duration: 0.5, options: .TransitionCrossDissolve, animations: { self.verseEntryTextView.text = "" }, completion: nil)
     }
     
     func displayCompletion() {
