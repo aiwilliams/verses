@@ -13,17 +13,24 @@ var APIURL: String = "http://heartversesapi.herokuapp.com/api/v1"
 
 class HeartversesAPI {
     var translation: String!
+    
+    enum FetchError: ErrorType {
+        case PassageDoesNotExist
+    }
 
     init(defaultTranslation: String) {
         self.translation = defaultTranslation
     }
 
-    func fetchPassage(parsedPassage: ParsedPassage) -> Passage {
+    func fetchPassage(parsedPassage: ParsedPassage) throws -> Passage {
         let store = HeartversesStore(sqliteURL: NSBundle.mainBundle().URLForResource("Heartverses", withExtension: "sqlite")!)
         var passage = Passage(parsedPassage: parsedPassage)
         
         if parsedPassage.verse_start == 0 {
             let fetchedVerses: [NSManagedObject] = store.findVersesInChapter(translation, bookSlug: parsedPassage.book, chapter: parsedPassage.chapter_start) as! [NSManagedObject]
+            if fetchedVerses.isEmpty {
+                throw FetchError.PassageDoesNotExist
+            }
             for v in fetchedVerses {
                 let verse = Verse(book: parsedPassage.book, chapter: parsedPassage.chapter_start, number: v.valueForKey("number") as! Int, text: v.valueForKey("text") as! String)
                 passage.verses.append(verse)
@@ -31,6 +38,9 @@ class HeartversesAPI {
         } else {
             for v in parsedPassage.verse_start...parsedPassage.verse_end {
                 let fetchedVerse = store.findVerse(translation, bookSlug: parsedPassage.book, chapter: parsedPassage.chapter_start, number: v)
+                if fetchedVerse.objectID.temporaryID {
+                    throw FetchError.PassageDoesNotExist
+                }
                 let verse = Verse(book: parsedPassage.book, chapter: parsedPassage.chapter_start, number: v, text: fetchedVerse.valueForKey("text") as! String)
                 passage.verses.append(verse)
             }

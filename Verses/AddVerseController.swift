@@ -30,9 +30,17 @@ class AddVerseController: UIViewController {
 
     @IBAction func doneButtonPressed(sender: AnyObject) {
         let parsedPassage = passageParser.parse(verseRequest.text!)
-        let passage = API.fetchPassage(parsedPassage)
-        savePassage(passage)
-        self.dismissViewControllerAnimated(true, completion: nil)
+        do {
+            let passage = try API.fetchPassage(parsedPassage)
+            savePassage(passage)
+            self.dismissViewControllerAnimated(true, completion: nil)
+        } catch HeartversesAPI.FetchError.PassageDoesNotExist {
+            errorLabel.text = "That passage does not exist!"
+            errorLabel.hidden = false
+        } catch {
+            errorLabel.text = "Sorry, an unknown error ocurred."
+            errorLabel.hidden = false
+        }
     }
     
     func savePassage(passage: Passage) {
