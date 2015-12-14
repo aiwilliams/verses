@@ -1,8 +1,8 @@
 //
-//  Verse+CoreDataProperties.swift
+//  UserVerse+CoreDataProperties.swift
 //  Verses
 //
-//  Created by Isaac Williams on 12/11/15.
+//  Created by Isaac Williams on 12/14/15.
 //  Copyright © 2015 The Williams Family. All rights reserved.
 //
 //  Choose "Create NSManagedObject Subclass…" from the Core Data editor menu
@@ -18,6 +18,7 @@ extension UserVerse {
     @NSManaged var chapter: NSNumber?
     @NSManaged var number: NSNumber?
     @NSManaged var text: String?
-    @NSManaged var passage: NSManagedObject?
+    @NSManaged var views: NSNumber?
+    @NSManaged var passage: UserPassage?
 
 }

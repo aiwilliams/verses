@@ -63,11 +63,12 @@ class AddVerseController: UIViewController {
     
     func convertVerseToNSManagedObject(verse: Verse) -> NSManagedObject {
         let entity = NSEntityDescription.entityForName("UserVerse", inManagedObjectContext: appDelegate.managedObjectContext)
-        let nsmo = NSManagedObject(entity: entity!, insertIntoManagedObjectContext: appDelegate.managedObjectContext)
-        nsmo.setValue(verse.book, forKey: "book")
-        nsmo.setValue(verse.chapter, forKey: "chapter")
-        nsmo.setValue(verse.number, forKey: "number")
-        nsmo.setValue(verse.text, forKey: "text")
+        let nsmo = UserVerse(entity: entity!, insertIntoManagedObjectContext: appDelegate.managedObjectContext)
+        nsmo.book = verse.book
+        nsmo.chapter = verse.chapter
+        nsmo.number = verse.number
+        nsmo.text = verse.text
+        nsmo.views = 0
 
         return nsmo
     }

@@ -32,6 +32,8 @@ class VersePracticeController: UIViewController {
 
     var indexPath: NSIndexPath!
     var hintLevel: Int = 0
+    
+    let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -41,8 +43,13 @@ class VersePracticeController: UIViewController {
         verses = passage.valueForKey("verses") as! NSOrderedSet
         activeVerse = verses.firstObject as! UserVerse
         activeVerseIndex = 0
+        incrementActiveVerseViewCounter()
 
         title = activeVerse.reference
+        
+        if Int(activeVerse.views!) > 5 {
+            advancedHelpLabel.alpha = 0
+        }
         
         basicHelpLabel.text = activeVerse.text
         intermediateHelpLabel.text = activeVerse.text
@@ -166,6 +173,7 @@ class VersePracticeController: UIViewController {
             if activeVerseIndex != (verses.count - 1) {
                 activeVerseIndex = activeVerseIndex + 1
                 activeVerse = verses[activeVerseIndex] as! UserVerse
+                incrementActiveVerseViewCounter()
 
                 let delay = 2.0 * Double(NSEC_PER_SEC)
                 let dispatchTime = dispatch_time(DISPATCH_TIME_NOW, Int64(delay))
@@ -250,7 +258,9 @@ class VersePracticeController: UIViewController {
         UIView.animateWithDuration(0.5, animations: {
             self.basicHelpLabel.alpha = 0
             self.intermediateHelpLabel.alpha = 0
-            self.advancedHelpLabel.alpha = 0
+            if Int(self.activeVerse.views!) <= 5 {
+                self.advancedHelpLabel.alpha = 1
+            }
             
             self.submissionButton.backgroundColor = UIColor(red:0.67, green:0.69, blue:0.08, alpha:1.0)
             self.submissionButton.setTitle("Check it!", forState: .Normal)
@@ -270,10 +280,16 @@ class VersePracticeController: UIViewController {
         title = "Finish"
         
         basicHelpLabel.text = "Congratulations, you have completed this passage!"
+        basicHelpLabel.alpha = 1
         intermediateHelpLabel.alpha = 0
         advancedHelpLabel.alpha = 0
         
         verseEntryTextView.text = ""
+    }
+    
+    func incrementActiveVerseViewCounter() {
+        activeVerse.views = Int(activeVerse.views!) + 1
+        try! appDelegate.managedObjectContext.save()
     }
 }
 
