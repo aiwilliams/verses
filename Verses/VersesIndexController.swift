@@ -12,6 +12,7 @@ import CoreData
 
 class VersesIndexController: UITableViewController {
     var passages = [UserPassage]()
+    var deletePassageIndexPath: NSIndexPath!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -45,6 +46,14 @@ class VersesIndexController: UITableViewController {
         return cell!
     }
     
+    override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
+        if editingStyle == .Delete {
+            deletePassageIndexPath = indexPath
+            let passageToDelete = passages[indexPath.row]
+            confirmDeletionOf(passageToDelete)
+        }
+    }
+    
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if segue.identifier == "passagePracticeSegue" {
             let destinationViewController = segue.destinationViewController as! VersePracticeController
@@ -52,5 +61,42 @@ class VersesIndexController: UITableViewController {
             let passage: UserPassage = self.passages[ip.row]
             destinationViewController.passage = passage
         }
+    }
+    
+    func confirmDeletionOf(passage: UserPassage) {
+        let alert = UIAlertController(title: "Delete Passage", message: "Are you sure you want to delete \(passage.reference!)? This will permanently destroy any practice data!", preferredStyle: .ActionSheet)
+        
+        let deleteAction = UIAlertAction(title: "Delete, and I mean it!", style: .Destructive, handler: deletePassage)
+        let cancelAction = UIAlertAction(title: "Nevermind", style: .Cancel, handler: cancelDeletePassage)
+        
+        alert.addAction(deleteAction)
+        alert.addAction(cancelAction)
+        
+        self.presentViewController(alert, animated: true, completion: nil)
+    }
+    
+    func deletePassage(alertAction: UIAlertAction!) {
+        if let ip = deletePassageIndexPath {
+            let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+            appDelegate.managedObjectContext.deleteObject(passages[ip.row])
+            
+            do {
+                try appDelegate.managedObjectContext.save()
+            } catch let err as NSError {
+                print("Couldn't delete a passage. Error: \(err), \(err.userInfo)")
+            }
+
+            tableView.beginUpdates()
+
+            passages.removeAtIndex(ip.row)
+            tableView.deleteRowsAtIndexPaths([ip], withRowAnimation: .Automatic)
+            deletePassageIndexPath = nil
+
+            tableView.endUpdates()
+        }
+    }
+    
+    func cancelDeletePassage(alertAction: UIAlertAction!) {
+        deletePassageIndexPath = nil
     }
 }
