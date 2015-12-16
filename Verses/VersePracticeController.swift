@@ -15,6 +15,16 @@ extension Int : SequenceType {
     }
 }
 
+class passageCompletionSegue: UIStoryboardSegue {
+    override func perform() {
+        let navigationController = sourceViewController.navigationController!
+        var controllerStack = navigationController.viewControllers
+        let index = controllerStack.indexOf(sourceViewController)!
+        controllerStack.replaceRange(index...index, with: [destinationViewController])
+        navigationController.setViewControllers(controllerStack, animated: true)
+    }
+}
+
 class VersePracticeController: UIViewController {
     @IBOutlet var basicHelpLabel: UILabel!
     @IBOutlet var intermediateHelpLabel: UILabel!
@@ -189,7 +199,7 @@ class VersePracticeController: UIViewController {
                 self.submissionButton.setTitle("Try again!", forState: .Normal)
                 self.submissionButton.layer.addAnimation(self.shakeAnimation(), forKey: "position")
             })
-            let delay = 3.0 * Double(NSEC_PER_SEC)
+            let delay = 2.0 * Double(NSEC_PER_SEC)
             let dispatchTime = dispatch_time(DISPATCH_TIME_NOW, Int64(delay))
             dispatch_after(dispatchTime, dispatch_get_main_queue(), {
                 UIView.animateWithDuration(0.1, animations: {
@@ -277,14 +287,11 @@ class VersePracticeController: UIViewController {
     }
     
     func displayCompletion() {
-        title = "Finish"
-        
-        basicHelpLabel.text = "Congratulations, you have completed this passage!"
-        basicHelpLabel.alpha = 1
-        intermediateHelpLabel.alpha = 0
-        advancedHelpLabel.alpha = 0
-        
-        verseEntryTextView.text = ""
+        let delay = 2.0 * Double(NSEC_PER_SEC)
+        let dispatchTime = dispatch_time(DISPATCH_TIME_NOW, Int64(delay))
+        dispatch_after(dispatchTime, dispatch_get_main_queue(), {
+            self.performSegueWithIdentifier("completionSegue", sender: self)
+        })
     }
     
     func incrementActiveVerseViewCounter() {

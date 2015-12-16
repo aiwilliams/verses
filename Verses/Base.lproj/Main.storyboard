@@ -19,11 +19,11 @@
                                 <rect key="frame" x="0.0" y="92" width="600" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="tCs-02-W21" id="IOC-Xd-Qd3">
-                                    <rect key="frame" x="0.0" y="0.0" width="567" height="43.5"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="567" height="43"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="0cj-8O-Q9W">
-                                            <rect key="frame" x="15" y="0.0" width="550" height="43.5"/>
+                                            <rect key="frame" x="15" y="0.0" width="550" height="43"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                             <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
@@ -200,11 +200,44 @@
                         <outlet property="intermediateHelpLabel" destination="7RQ-kb-Wq2" id="cxj-IQ-bc1"/>
                         <outlet property="submissionButton" destination="3I9-vX-2li" id="bEP-0R-Czr"/>
                         <outlet property="verseEntryTextView" destination="4tE-Md-p5j" id="r9u-60-Tdz"/>
+                        <segue destination="Bo1-es-KM7" kind="custom" identifier="completionSegue" customClass="passageCompletionSegue" customModule="Verses" customModuleProvider="target" id="DHt-mp-MAZ"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1804" y="-384"/>
+        </scene>
+        <!--View Controller-->
+        <scene sceneID="Uo8-PM-PMX">
+            <objects>
+                <viewController id="Bo1-es-KM7" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="W55-wN-4et"/>
+                        <viewControllerLayoutGuide type="bottom" id="reV-3b-K96"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="fk7-Nd-YOE">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Congratulations! You have completed this passage." textAlignment="center" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hf3-BU-V1U">
+                                <rect key="frame" x="30" y="290" width="540" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="hf3-BU-V1U" firstAttribute="leading" secondItem="fk7-Nd-YOE" secondAttribute="leadingMargin" constant="10" id="Pad-B7-5sr"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="hf3-BU-V1U" secondAttribute="trailing" constant="10" id="dOj-8h-nCH"/>
+                            <constraint firstItem="hf3-BU-V1U" firstAttribute="centerY" secondItem="fk7-Nd-YOE" secondAttribute="centerY" id="yxb-TV-NNQ"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="EmD-x1-Qdw"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="8eM-Y3-oa0" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2574" y="-384"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="OyV-j4-JZG">
