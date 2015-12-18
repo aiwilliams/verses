@@ -44,6 +44,10 @@ class VersePracticeController: UIViewController {
     var hintLevel: Int = 0
     
     let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+    
+    let neutralSubmissionColor = UIColor(red:0.40, green:0.60, blue:1.00, alpha:1.0)
+    let successSubmissionColor = UIColor(red:0.27, green:0.83, blue:0.55, alpha:1.0)
+    let failureSubmissionColor = UIColor(red:1.00, green:0.35, blue:0.31, alpha:1.0)
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -175,7 +179,7 @@ class VersePracticeController: UIViewController {
     @IBAction func checkUserVerse(sender: UIButton) {
         if normalizedString(verseEntryTextView.text.lowercaseString) == removePunctuation(activeVerse.text!.lowercaseString) {
             UIView.animateWithDuration(0.1, animations: {
-                self.submissionButton.backgroundColor = UIColor(red: 0.16, green: 0.75, blue: 0.09, alpha: 1)
+                self.submissionButton.backgroundColor = self.successSubmissionColor
                 self.submissionButton.setTitle("Great job!", forState: .Normal)
                 self.submissionButton.layer.addAnimation(self.bounceAnimation(), forKey: "position")
             })
@@ -195,7 +199,7 @@ class VersePracticeController: UIViewController {
             }
         } else {
             UIView.animateWithDuration(0.1, animations: {
-                self.submissionButton.backgroundColor = UIColor(red: 0.59, green: 0.23, blue: 0.18, alpha: 1)
+                self.submissionButton.backgroundColor = self.failureSubmissionColor
                 self.submissionButton.setTitle("Try again!", forState: .Normal)
                 self.submissionButton.layer.addAnimation(self.shakeAnimation(), forKey: "position")
             })
@@ -203,7 +207,7 @@ class VersePracticeController: UIViewController {
             let dispatchTime = dispatch_time(DISPATCH_TIME_NOW, Int64(delay))
             dispatch_after(dispatchTime, dispatch_get_main_queue(), {
                 UIView.animateWithDuration(0.1, animations: {
-                    self.submissionButton.backgroundColor = UIColor(red:0.67, green:0.69, blue:0.08, alpha:1.0)
+                    self.submissionButton.backgroundColor = self.neutralSubmissionColor
                     self.submissionButton.setTitle("Check it!", forState: .Normal)
                 })
             })
@@ -268,7 +272,7 @@ class VersePracticeController: UIViewController {
                 self.advancedHelpLabel.alpha = 1
             }
             
-            self.submissionButton.backgroundColor = UIColor(red:0.67, green:0.69, blue:0.08, alpha:1.0)
+            self.submissionButton.backgroundColor = self.neutralSubmissionColor
             self.submissionButton.setTitle("Check it!", forState: .Normal)
         }, completion: { (animated: Bool) -> Void in
             self.basicHelpLabel.text = self.activeVerse.text
