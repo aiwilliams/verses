@@ -25,7 +25,7 @@ class passageCompletionSegue: UIStoryboardSegue {
     }
 }
 
-class VersePracticeController: UIViewController {
+class VersePracticeController: UIViewController, UITextViewDelegate {
     @IBOutlet var basicHelpLabel: UILabel!
     @IBOutlet var intermediateHelpLabel: UILabel!
     @IBOutlet var advancedHelpLabel: UILabel!
@@ -53,6 +53,7 @@ class VersePracticeController: UIViewController {
         super.viewDidLoad()
 
         self.automaticallyAdjustsScrollViewInsets = false
+        verseEntryTextView.delegate = self
         
         verses = passage.valueForKey("verses") as! NSOrderedSet
         activeVerse = verses.firstObject as! UserVerse
@@ -86,6 +87,12 @@ class VersePracticeController: UIViewController {
             hintLevel = 1
             hideWordEndings(basicHelpLabel)
             basicHelpLabel.alpha = 1
+        }
+    }
+    
+    func textViewDidChange(textView: UITextView) {
+        if normalizedString(textView.text.lowercaseString) == removePunctuation(activeVerse.text!.lowercaseString) {
+            displayVerseSuccessAndTransition()
         }
     }
     
@@ -193,40 +200,48 @@ class VersePracticeController: UIViewController {
 
     @IBAction func checkUserVerse(sender: UIButton) {
         if normalizedString(verseEntryTextView.text.lowercaseString) == removePunctuation(activeVerse.text!.lowercaseString) {
-            UIView.animateWithDuration(0.1, animations: {
-                self.submissionButton.backgroundColor = self.successSubmissionColor
-                self.submissionButton.setTitle("Great job!", forState: .Normal)
-                self.submissionButton.layer.addAnimation(self.bounceAnimation(), forKey: "position")
-            })
-            
-            if activeVerseIndex != (verses.count - 1) {
-                activeVerseIndex = activeVerseIndex + 1
-                activeVerse = verses[activeVerseIndex] as! UserVerse
-                incrementActiveVerseViewCounter()
-
-                let delay = 0.7 * Double(NSEC_PER_SEC)
-                let dispatchTime = dispatch_time(DISPATCH_TIME_NOW, Int64(delay))
-                dispatch_after(dispatchTime, dispatch_get_main_queue(), {
-                    self.transitionToNextVerse()
-                })
-            } else {
-                self.displayCompletion()
-            }
+            displayVerseSuccessAndTransition()
         } else {
-            UIView.animateWithDuration(0.1, animations: {
-                self.submissionButton.backgroundColor = self.failureSubmissionColor
-                self.submissionButton.setTitle("Try again!", forState: .Normal)
-                self.submissionButton.layer.addAnimation(self.shakeAnimation(), forKey: "position")
-            })
-            let delay = 2.0 * Double(NSEC_PER_SEC)
+            displayVerseFailure()
+        }
+    }
+    
+    func displayVerseSuccessAndTransition() {
+        UIView.animateWithDuration(0.1, animations: {
+            self.submissionButton.backgroundColor = self.successSubmissionColor
+            self.submissionButton.setTitle("Great job!", forState: .Normal)
+            self.submissionButton.layer.addAnimation(self.bounceAnimation(), forKey: "position")
+        })
+        
+        if activeVerseIndex != (verses.count - 1) {
+            activeVerseIndex = activeVerseIndex + 1
+            activeVerse = verses[activeVerseIndex] as! UserVerse
+            incrementActiveVerseViewCounter()
+            
+            let delay = 0.7 * Double(NSEC_PER_SEC)
             let dispatchTime = dispatch_time(DISPATCH_TIME_NOW, Int64(delay))
             dispatch_after(dispatchTime, dispatch_get_main_queue(), {
-                UIView.animateWithDuration(0.1, animations: {
-                    self.submissionButton.backgroundColor = self.neutralSubmissionColor
-                    self.submissionButton.setTitle("Check it!", forState: .Normal)
-                })
+                self.transitionToNextVerse()
             })
+        } else {
+            self.displayCompletion()
         }
+    }
+    
+    func displayVerseFailure() {
+        UIView.animateWithDuration(0.1, animations: {
+            self.submissionButton.backgroundColor = self.failureSubmissionColor
+            self.submissionButton.setTitle("Try again!", forState: .Normal)
+            self.submissionButton.layer.addAnimation(self.shakeAnimation(), forKey: "position")
+        })
+        let delay = 2.0 * Double(NSEC_PER_SEC)
+        let dispatchTime = dispatch_time(DISPATCH_TIME_NOW, Int64(delay))
+        dispatch_after(dispatchTime, dispatch_get_main_queue(), {
+            UIView.animateWithDuration(0.1, animations: {
+                self.submissionButton.backgroundColor = self.neutralSubmissionColor
+                self.submissionButton.setTitle("Check it!", forState: .Normal)
+            })
+        })
     }
     
     func normalizedString(text: String) -> String {
