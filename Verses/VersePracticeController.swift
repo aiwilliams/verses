@@ -259,10 +259,6 @@ class VersePracticeController: UIViewController {
     }
     
     func transitionToNextVerse() {
-        let transitionTitleAnimation = CATransition()
-        transitionTitleAnimation.duration = 0.5
-        transitionTitleAnimation.type = kCATransitionFade
-        self.navigationController!.navigationBar.layer.addAnimation(transitionTitleAnimation, forKey: "fadeTitle")
         title = activeVerse.reference
         
         UIView.animateWithDuration(0.5, animations: {
@@ -283,7 +279,12 @@ class VersePracticeController: UIViewController {
         hintLevel = 0
         helpButton.enabled = true
 
-        UIView.transitionWithView(verseEntryTextView, duration: 0.5, options: .TransitionCrossDissolve, animations: { self.verseEntryTextView.text = "" }, completion: nil)
+        let transitionVerseEntryTextViewAnimation = CATransition()
+        transitionVerseEntryTextViewAnimation.duration = 0.5
+        transitionVerseEntryTextViewAnimation.type = kCATransitionPush
+        transitionVerseEntryTextViewAnimation.subtype = kCATransitionFromRight
+        self.verseEntryTextView.layer.addAnimation(transitionVerseEntryTextViewAnimation, forKey: "pushTransition")
+        self.verseEntryTextView.text = ""
     }
     
     func displayCompletion() {
