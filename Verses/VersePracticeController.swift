@@ -61,10 +61,12 @@ class VersePracticeController: UIViewController {
 
         title = activeVerse.reference
         
-        if Int(activeVerse.views!) > 5 {
-            advancedHelpLabel.alpha = 0
+        if Int(activeVerse.views!) < 5 {
+            helpButton.enabled = false
+            advancedHelpLabel.alpha = 1
         }
         
+        helpButton.enabled = false
         basicHelpLabel.text = activeVerse.text
         intermediateHelpLabel.text = activeVerse.text
         advancedHelpLabel.text = activeVerse.text
