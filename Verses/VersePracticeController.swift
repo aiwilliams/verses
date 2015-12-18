@@ -204,7 +204,7 @@ class VersePracticeController: UIViewController {
                 activeVerse = verses[activeVerseIndex] as! UserVerse
                 incrementActiveVerseViewCounter()
 
-                let delay = 2.0 * Double(NSEC_PER_SEC)
+                let delay = 0.7 * Double(NSEC_PER_SEC)
                 let dispatchTime = dispatch_time(DISPATCH_TIME_NOW, Int64(delay))
                 dispatch_after(dispatchTime, dispatch_get_main_queue(), {
                     self.transitionToNextVerse()
