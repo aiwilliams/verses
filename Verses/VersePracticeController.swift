@@ -65,6 +65,14 @@ class VersePracticeController: UIViewController {
         intermediateHelpLabel.text = activeVerse.text
         advancedHelpLabel.text = activeVerse.text
         
+        exposeFreeHints()
+        
+        self.observeKeyboard()
+        verseEntryTextView.becomeFirstResponder()
+        submissionButton.layer.cornerRadius = 5
+    }
+    
+    func exposeFreeHints() {
         if Int(activeVerse.views!) <= 2 {
             helpButton.enabled = false
             advancedHelpLabel.alpha = 1
@@ -79,10 +87,6 @@ class VersePracticeController: UIViewController {
             hideWordEndings(basicHelpLabel)
             basicHelpLabel.alpha = 1
         }
-        
-        self.observeKeyboard()
-        verseEntryTextView.becomeFirstResponder()
-        submissionButton.layer.cornerRadius = 5
     }
     
     func hideWordEndings(label: UILabel) {
@@ -279,16 +283,16 @@ class VersePracticeController: UIViewController {
         UIView.animateWithDuration(0.5, animations: {
             self.basicHelpLabel.alpha = 0
             self.intermediateHelpLabel.alpha = 0
-            if Int(self.activeVerse.views!) <= 5 {
-                self.advancedHelpLabel.alpha = 1
-            }
+            self.advancedHelpLabel.alpha = 0
             
-            self.submissionButton.backgroundColor = self.neutralSubmissionColor
-            self.submissionButton.setTitle("Check it!", forState: .Normal)
-        }, completion: { (animated: Bool) -> Void in
             self.basicHelpLabel.text = self.activeVerse.text
             self.intermediateHelpLabel.text = self.activeVerse.text
             self.advancedHelpLabel.text = self.activeVerse.text
+            
+            self.exposeFreeHints()
+            
+            self.submissionButton.backgroundColor = self.neutralSubmissionColor
+            self.submissionButton.setTitle("Check it!", forState: .Normal)
         })
 
         hintLevel = 0
