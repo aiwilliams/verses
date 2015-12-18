@@ -61,15 +61,24 @@ class VersePracticeController: UIViewController {
 
         title = activeVerse.reference
         
-        if Int(activeVerse.views!) < 5 {
-            helpButton.enabled = false
-            advancedHelpLabel.alpha = 1
-        }
-        
-        helpButton.enabled = false
         basicHelpLabel.text = activeVerse.text
         intermediateHelpLabel.text = activeVerse.text
         advancedHelpLabel.text = activeVerse.text
+        
+        if Int(activeVerse.views!) <= 2 {
+            helpButton.enabled = false
+            advancedHelpLabel.alpha = 1
+        } else if Int(activeVerse.views!) > 2 && Int(activeVerse.views!) <= 5 {
+            hintLevel = 2
+            hideWordEndings(basicHelpLabel)
+            hideRandomWords(intermediateHelpLabel)
+            basicHelpLabel.alpha = 1
+            intermediateHelpLabel.alpha = 1
+        } else if Int(activeVerse.views!) > 5 && Int(activeVerse.views!) <= 10 {
+            hintLevel = 1
+            hideWordEndings(basicHelpLabel)
+            basicHelpLabel.alpha = 1
+        }
         
         self.observeKeyboard()
         verseEntryTextView.becomeFirstResponder()
@@ -149,7 +158,7 @@ class VersePracticeController: UIViewController {
             break
         }
     }
-    
+
     func observeKeyboard() {
         NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("keyboardWillChangeFrame:"), name: UIKeyboardWillChangeFrameNotification, object: nil)
         NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("keyboardWillHide:"), name: UIKeyboardWillHideNotification, object: nil)
