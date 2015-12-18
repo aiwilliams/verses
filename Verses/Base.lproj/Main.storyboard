@@ -6,7 +6,7 @@
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
-        <!--Your Verses-->
+        <!--Passages-->
         <scene sceneID="CoM-La-t7d">
             <objects>
                 <tableViewController id="a9H-Yp-Qkg" customClass="VersesIndexController" customModule="Verses" customModuleProvider="target" sceneMemberID="viewController">
@@ -41,7 +41,7 @@
                             <outlet property="delegate" destination="a9H-Yp-Qkg" id="3A3-Gv-q6m"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Your Verses" id="M3n-OS-hcW">
+                    <navigationItem key="navigationItem" title="Passages" id="M3n-OS-hcW">
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="gdH-VT-gFa">
                             <connections>
                                 <segue destination="BGj-au-I5m" kind="presentation" id="0Ne-2l-Wj0"/>
@@ -53,7 +53,7 @@
             </objects>
             <point key="canvasLocation" x="1106" y="-384"/>
         </scene>
-        <!--Add Verse-->
+        <!--Add Passage-->
         <scene sceneID="CNb-Vk-cAs">
             <objects>
                 <viewController id="2h5-9d-h6x" customClass="AddVerseController" customModule="Verses" customModuleProvider="target" sceneMemberID="viewController">
@@ -90,13 +90,13 @@
                             <constraint firstItem="C4L-vn-hkd" firstAttribute="top" secondItem="Gc0-q9-h3h" secondAttribute="bottom" constant="8" id="wli-8d-UMw"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="Add Verse" id="1nm-FY-ltn">
+                    <navigationItem key="navigationItem" title="Add Passage" id="1nm-FY-ltn">
                         <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="V53-e9-OUF">
                             <connections>
                                 <action selector="cancelButtonPressed:" destination="2h5-9d-h6x" id="Pay-V1-VTE"/>
                             </connections>
                         </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" style="done" systemItem="done" id="VNr-3j-xwV">
+                        <barButtonItem key="rightBarButtonItem" title="Add" style="done" id="VNr-3j-xwV">
                             <connections>
                                 <action selector="doneButtonPressed:" destination="2h5-9d-h6x" id="odB-Dj-Fft"/>
                             </connections>
