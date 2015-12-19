@@ -34,6 +34,7 @@ class VersePracticeController: UIViewController, UITextViewDelegate {
     @IBOutlet var verseEntryTextView: UITextView!
     @IBOutlet var submissionButton: UIButton!
     @IBOutlet var helpButton: UIBarButtonItem!
+    @IBOutlet var passageProgressView: UIProgressView!
     
     var passage: UserPassage!
     var verses: NSOrderedSet!
@@ -309,6 +310,8 @@ class VersePracticeController: UIViewController, UITextViewDelegate {
             self.submissionButton.backgroundColor = self.neutralSubmissionColor
             self.submissionButton.setTitle("Check it!", forState: .Normal)
         })
+        
+        self.passageProgressView.setProgress(Float(self.verses.indexOfObject(self.activeVerse)) / Float(self.verses.count), animated: true)
 
         hintLevel = 0
         helpButton.enabled = true
