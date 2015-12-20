@@ -32,24 +32,38 @@ class PassageParser {
         }
 
         result.book = book
-        result.chapter_start = Int(comps[0])!
-        if containsChapterRange(passage) {
-            result.chapter_end = Int(comps[1])!
-            result.verse_start = 0
-            result.verse_end = 0
-        } else if containsChapterOnly(passage) {
-            result.chapter_end = Int(comps[0])!
-            result.verse_start = 0
-            result.verse_end = 0
-        } else if containsVerseRange(passage) {
-            result.chapter_end = Int(comps[0])!
-            result.verse_start = Int(comps[1])!
-            result.verse_end = Int(comps[2])!
-        } else {
-            result.chapter_end = Int(comps[0])!
-            result.verse_start = Int(comps[1])!
-            result.verse_end = Int(comps[1])!
+        
+        var index = 0
+        for i in comps {
+            let x: Int? = Int(i)
+            if x == nil {
+                comps.removeAtIndex(index)
+            }
+            ++index
         }
+
+        print(comps)
+        if !comps.isEmpty {
+            result.chapter_start = Int(comps[0])!
+            if containsChapterRange(passage) {
+                result.chapter_end = Int(comps[1])!
+                result.verse_start = 0
+                result.verse_end = 0
+            } else if containsChapterOnly(passage) {
+                result.chapter_end = Int(comps[0])!
+                result.verse_start = 0
+                result.verse_end = 0
+            } else if containsVerseRange(passage) {
+                result.chapter_end = Int(comps[0])!
+                result.verse_start = Int(comps[1])!
+                result.verse_end = Int(comps[2])!
+            } else {
+                result.chapter_end = Int(comps[0])!
+                result.verse_start = Int(comps[1])!
+                result.verse_end = Int(comps[1])!
+            }
+        }
+
         return result
     }
     
@@ -67,16 +81,55 @@ class PassageParser {
     }
     
     func containsChapterOnly(passage: String) -> Bool {
-        return !passage.containsString(":")
+        var passageChars = passage.characters
+
+        for i in passageChars {
+            if i == ":" {
+                passageChars.removeFirst()
+                break
+            }
+            passageChars.removeFirst()
+        }
+
+        if passageChars.isEmpty {
+            return true
+        } else {
+            let passageStr = String(passageChars)
+            if Int(passageStr) == nil {
+                return true
+            }
+
+            return false
+        }
     }
     
     func containsVerseRange(passage: String) -> Bool {
-        return passage.containsString(":") && passage.containsString("-")
+        if !passage.containsString("-") {
+            return false
+        }
+
+        var passageChars = passage.characters
+        
+        for i in passageChars {
+            if i == "-" {
+                passageChars.removeFirst()
+                break
+            }
+            passageChars.removeFirst()
+        }
+        
+        if passageChars.isEmpty {
+            return false
+        } else {
+            return true
+        }
     }
     
     func hasNumberedBook(passage: String) -> Bool {
-        let zero = passage.componentsSeparatedByCharactersInSet(NSCharacterSet(charactersInString: " :-"))[0]
-        if (Int(zero) != nil) {
+        let comps = passage.componentsSeparatedByCharactersInSet(NSCharacterSet(charactersInString: " :-"))
+        if comps.count == 1 { return false }
+
+        if (Int(comps[0]) != nil) && (Int(comps[1]) == nil) {
             return true
         } else {
             return false

@@ -13,6 +13,7 @@ import CoreData
 class AddVerseController: UIViewController {
     @IBOutlet var verseRequest: UITextField!
     @IBOutlet var errorLabel: UILabel!
+    @IBOutlet var passagePreviewLabel: UILabel!
     
     let passageParser = PassageParser()
     let API = HeartversesAPI(defaultTranslation: "kjv")
@@ -21,7 +22,18 @@ class AddVerseController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         errorLabel.hidden = true
+        passagePreviewLabel.hidden = true
         verseRequest.becomeFirstResponder()
+        verseRequest.addTarget(self, action: "textFieldDidChange:", forControlEvents: .EditingChanged)
+    }
+    
+    func textFieldDidChange(notification: NSNotification) {
+        do {
+            let passage = try self.fetchPassage()
+            passagePreviewLabel.text = passage.verses.first!.text
+            passagePreviewLabel.hidden = false
+        } catch {
+        }
     }
 
     @IBAction func cancelButtonPressed(sender: AnyObject) {
@@ -29,9 +41,8 @@ class AddVerseController: UIViewController {
     }
 
     @IBAction func doneButtonPressed(sender: AnyObject) {
-        let parsedPassage = passageParser.parse(verseRequest.text!)
         do {
-            let passage = try API.fetchPassage(parsedPassage)
+            let passage = try self.fetchPassage()
             savePassage(passage)
             self.dismissViewControllerAnimated(true, completion: nil)
         } catch HeartversesAPI.FetchError.PassageDoesNotExist {
@@ -40,6 +51,17 @@ class AddVerseController: UIViewController {
         } catch {
             errorLabel.text = "Sorry, an unknown error ocurred."
             errorLabel.hidden = false
+        }
+    }
+    
+    func fetchPassage() throws -> Passage {
+        let parsedPassage = passageParser.parse(verseRequest.text!)
+        do {
+            let passage = try API.fetchPassage(parsedPassage)
+            return passage
+        } catch {
+            passagePreviewLabel.text = ""
+            throw HeartversesAPI.FetchError.PassageDoesNotExist
         }
     }
     

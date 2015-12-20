@@ -26,6 +26,8 @@ class HeartversesAPI {
         let store = HeartversesStore(sqliteURL: NSBundle.mainBundle().URLForResource("Heartverses", withExtension: "sqlite")!)
         var passage = Passage(parsedPassage: parsedPassage)
         
+        if parsedPassage.verse_start == -1 { throw FetchError.PassageDoesNotExist }
+        
         if parsedPassage.verse_start == 0 {
             let fetchedVerses: [NSManagedObject] = store.findVersesInChapter(translation, bookSlug: parsedPassage.book, chapter: parsedPassage.chapter_start) as! [NSManagedObject]
             if fetchedVerses.isEmpty {

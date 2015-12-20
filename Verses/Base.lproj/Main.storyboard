@@ -19,11 +19,11 @@
                                 <rect key="frame" x="0.0" y="92" width="600" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="tCs-02-W21" id="IOC-Xd-Qd3">
-                                    <rect key="frame" x="0.0" y="0.0" width="567" height="43"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="567" height="43.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="0cj-8O-Q9W">
-                                            <rect key="frame" x="15" y="0.0" width="550" height="43"/>
+                                            <rect key="frame" x="15" y="0.0" width="550" height="43.5"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                             <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
@@ -71,20 +71,32 @@
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Sorry! An error occurred while I was trying to fetch the verse. Try again?" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="C4L-vn-hkd">
-                                <rect key="frame" x="20" y="143" width="560" height="76"/>
+                                <rect key="frame" x="20" y="143" width="560" height="28"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="76" id="uH8-mN-7h4"/>
+                                    <constraint firstAttribute="height" constant="28" id="uH8-mN-7h4"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="In the beginning was the Word, and the Word was with God, and the Word was God." textAlignment="center" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="w8C-gT-PNW" userLabel="Passage Preview">
+                                <rect key="frame" x="20" y="173" width="560" height="74"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="74" id="EtO-rK-rpQ"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstAttribute="leadingMargin" secondItem="Gc0-q9-h3h" secondAttribute="leading" id="4fw-YI-HWU"/>
+                            <constraint firstAttribute="leadingMargin" secondItem="w8C-gT-PNW" secondAttribute="leading" id="BCt-Ta-f6J"/>
                             <constraint firstAttribute="trailingMargin" secondItem="Gc0-q9-h3h" secondAttribute="trailing" id="IM4-Tj-dc6"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="w8C-gT-PNW" secondAttribute="trailing" id="bmN-5v-1gh"/>
                             <constraint firstAttribute="leadingMargin" secondItem="C4L-vn-hkd" secondAttribute="leading" id="gI0-l7-1v5"/>
+                            <constraint firstItem="w8C-gT-PNW" firstAttribute="top" secondItem="C4L-vn-hkd" secondAttribute="bottom" constant="2" id="gae-3u-cY5"/>
                             <constraint firstItem="Gc0-q9-h3h" firstAttribute="top" secondItem="lAW-NV-pcT" secondAttribute="bottom" constant="41" id="tek-tl-7DT"/>
                             <constraint firstAttribute="trailingMargin" secondItem="C4L-vn-hkd" secondAttribute="trailing" id="wOE-vb-zDP"/>
                             <constraint firstItem="C4L-vn-hkd" firstAttribute="top" secondItem="Gc0-q9-h3h" secondAttribute="bottom" constant="8" id="wli-8d-UMw"/>
@@ -104,6 +116,7 @@
                     </navigationItem>
                     <connections>
                         <outlet property="errorLabel" destination="C4L-vn-hkd" id="azv-Fm-ByS"/>
+                        <outlet property="passagePreviewLabel" destination="w8C-gT-PNW" id="pyA-Uu-Xp0"/>
                         <outlet property="verseRequest" destination="Gc0-q9-h3h" id="1Wq-kh-3EC"/>
                     </connections>
                 </viewController>
