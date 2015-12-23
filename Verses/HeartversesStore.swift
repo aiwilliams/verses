@@ -5,6 +5,10 @@ class HeartversesStore {
     
     let url: NSURL
     
+    enum StoreError: ErrorType {
+        case PassageDoesNotExistInStore
+    }
+    
     init(sqliteURL: NSURL) {
         url = sqliteURL
     }
@@ -18,18 +22,21 @@ class HeartversesStore {
         self.saveContext()
     }
 
-    func findBook(translation: String, slug: String) -> NSManagedObject {
+    func findBook(translation: String, slug: String) throws -> NSManagedObject {
         let book = findObject("Book", format: "name == %@ and translation == %@", slug, translation)
         if book.objectID.temporaryID {
-            book.setValue(slug, forKey: "name")
-            book.setValue(translation, forKey: "translation")
-            saveContext()
+            throw StoreError.PassageDoesNotExistInStore
         }
         return book
     }
     
     func findVersesInChapter(translation: String, bookSlug: String, chapter: Int) -> [AnyObject] {
-        let book = findBook(translation, slug: bookSlug)
+        var book: NSManagedObject!
+        do {
+            book = try findBook(translation, slug: bookSlug)
+        } catch {
+            return []
+        }
         let entity = NSEntityDescription.entityForName("Verse", inManagedObjectContext: self.managedObjectContext)!
         let fetchRequest = NSFetchRequest(entityName: entity.name!)
         fetchRequest.predicate = NSPredicate(format: "book == %@ and chapter == %@", argumentArray: [book, chapter])
@@ -45,7 +52,12 @@ class HeartversesStore {
     }
 
     func findVerse(translation: String, bookSlug: String, chapter: Int, number: Int) -> NSManagedObject {
-        let book = findBook(translation, slug: bookSlug)
+        var book: NSManagedObject!
+        do {
+            book = try findBook(translation, slug: bookSlug)
+        } catch {
+            return NSManagedObject()
+        }
         let verse = findObject("Verse", format: "book == %@ and chapter == %@ and number == %@", book, chapter, number)
         return verse
     }
