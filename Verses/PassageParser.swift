@@ -8,6 +8,26 @@
 
 import Foundation
 
+class Regex {
+    let internalExpression: NSRegularExpression?
+    let pattern: String
+    
+    init(_ pattern: String) {
+        self.pattern = pattern
+        do {
+            self.internalExpression = try NSRegularExpression(pattern: pattern, options: NSRegularExpressionOptions.CaseInsensitive)
+        } catch {
+            self.internalExpression = nil
+            print("yo dawg i heard you like crashing the app")
+        }
+    }
+    
+    func test(input: String) -> Bool {
+        let matches = self.internalExpression!.matchesInString(input, options: NSMatchingOptions.WithTransparentBounds, range:NSMakeRange(0, input.characters.count))
+        return matches.count > 0
+    }
+}
+
 struct ParsedPassage {
     var book = "undefined"
     var chapter_start = -1
@@ -42,7 +62,6 @@ class PassageParser {
             ++index
         }
 
-        print(comps)
         if !comps.isEmpty {
             result.chapter_start = Int(comps[0])!
             if containsChapterRange(passage) {
@@ -57,7 +76,7 @@ class PassageParser {
                 result.chapter_end = Int(comps[0])!
                 result.verse_start = Int(comps[1])!
                 result.verse_end = Int(comps[2])!
-            } else {
+            } else if containsSingleVerse(passage) {
                 result.chapter_end = Int(comps[0])!
                 result.verse_start = Int(comps[1])!
                 result.verse_end = Int(comps[1])!
@@ -77,52 +96,19 @@ class PassageParser {
     }
     
     func containsChapterRange(passage: String) -> Bool {
-        return !passage.containsString(":") && passage.containsString("-")
+        return Regex("^\\d?[^\\d]+ \\d+-\\d+$").test(passage)
     }
     
     func containsChapterOnly(passage: String) -> Bool {
-        var passageChars = passage.characters
-
-        for i in passageChars {
-            if i == ":" {
-                passageChars.removeFirst()
-                break
-            }
-            passageChars.removeFirst()
-        }
-
-        if passageChars.isEmpty {
-            return true
-        } else {
-            let passageStr = String(passageChars)
-            if Int(passageStr) == nil {
-                return true
-            }
-
-            return false
-        }
+        return Regex("^\\d?[^\\d]+ \\d+$").test(passage)
     }
     
     func containsVerseRange(passage: String) -> Bool {
-        if !passage.containsString("-") {
-            return false
-        }
-
-        var passageChars = passage.characters
-        
-        for i in passageChars {
-            if i == "-" {
-                passageChars.removeFirst()
-                break
-            }
-            passageChars.removeFirst()
-        }
-        
-        if passageChars.isEmpty {
-            return false
-        } else {
-            return true
-        }
+        return Regex("^\\d?[^\\d]+ \\d+:\\d+-\\d+$").test(passage)
+    }
+    
+    func containsSingleVerse(passage: String) -> Bool {
+        return Regex("^\\d?[^\\d]+ \\d+:\\d+$").test(passage)
     }
     
     func hasNumberedBook(passage: String) -> Bool {
@@ -134,14 +120,5 @@ class PassageParser {
         } else {
             return false
         }
-    }
-    
-    func containsOnlyLetters(input: String) -> Bool {
-        for chr in input.characters {
-            if (!(chr >= "a" && chr <= "z") && !(chr >= "A" && chr <= "Z") ) {
-                return false
-            }
-        }
-        return true
     }
 }
