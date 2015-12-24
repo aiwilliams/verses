@@ -13,6 +13,7 @@ import CoreData
 class VersesIndexController: UITableViewController {
     var passages = [UserPassage]()
     var deletePassageIndexPath: NSIndexPath!
+    let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -40,20 +41,38 @@ class VersesIndexController: UITableViewController {
     }
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("verseCell")
+        let cell = tableView.dequeueReusableCellWithIdentifier("passageCell") as! PassageCell
         let passage = passages[indexPath.row]
-        cell!.textLabel!.text = passage.reference!
-        return cell!
-    }
-    
-    override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
-        if editingStyle == .Delete {
-            deletePassageIndexPath = indexPath
-            let passageToDelete = passages[indexPath.row]
-            confirmDeletionOf(passageToDelete)
+        cell.titleLabel.text = passage.reference
+        if passage.memorized!.boolValue {
+            cell.flagLabel.text = "⚑"
+        } else {
+            cell.flagLabel.text = "⚐"
         }
+        return cell
     }
     
+    override func tableView(tableView: UITableView, editActionsForRowAtIndexPath indexPath: NSIndexPath) -> [UITableViewRowAction]? {
+        let memorizeAction = UITableViewRowAction(style: .Normal, title: "Memorize", handler: { (action: UITableViewRowAction!, indexPath: NSIndexPath!) in
+            let passage = self.passages[indexPath.row]
+            let cell = tableView.cellForRowAtIndexPath(indexPath) as! PassageCell
+            passage.memorized = true
+            try! self.appDelegate.managedObjectContext.save()
+            cell.flagLabel.text = "⚑"
+            tableView.setEditing(false, animated: true)
+        })
+        memorizeAction.backgroundColor = UIColor(red:0.27, green:0.83, blue:0.55, alpha:1.0)
+        
+        let deleteAction = UITableViewRowAction(style: .Normal, title: "Delete", handler: { (action: UITableViewRowAction!, indexPath: NSIndexPath!) in
+            self.deletePassageIndexPath = indexPath
+            let passageToDelete = self.passages[indexPath.row]
+            self.confirmDeletionOf(passageToDelete)
+        })
+        deleteAction.backgroundColor = UIColor.redColor()
+        
+        return [deleteAction, memorizeAction]
+    }
+
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if segue.identifier == "passagePracticeSegue" {
             let destinationViewController = segue.destinationViewController as! VersePracticeController

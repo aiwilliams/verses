@@ -15,23 +15,42 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="verseCell" textLabel="0cj-8O-Q9W" style="IBUITableViewCellStyleDefault" id="tCs-02-W21">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="passageCell" id="tCs-02-W21" customClass="PassageCell" customModule="Verses" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="92" width="600" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="tCs-02-W21" id="IOC-Xd-Qd3">
-                                    <rect key="frame" x="0.0" y="0.0" width="567" height="43.5"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="567" height="43"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="0cj-8O-Q9W">
-                                            <rect key="frame" x="15" y="0.0" width="550" height="43.5"/>
-                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                            <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="⚐" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="exG-YY-Pmc">
+                                            <rect key="frame" x="21" y="4" width="26" height="35"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="29"/>
+                                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="John 1:1" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5zI-dG-4hC">
+                                            <rect key="frame" x="55" y="11" width="509" height="21"/>
+                                            <constraints>
+                                                <constraint firstAttribute="width" constant="509" id="NC8-IR-Akw"/>
+                                            </constraints>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                     </subviews>
+                                    <constraints>
+                                        <constraint firstItem="5zI-dG-4hC" firstAttribute="leading" secondItem="exG-YY-Pmc" secondAttribute="trailing" constant="8" id="6rV-QA-rb8"/>
+                                        <constraint firstAttribute="bottomMargin" secondItem="5zI-dG-4hC" secondAttribute="bottom" constant="3" id="SKa-wN-kUa"/>
+                                        <constraint firstItem="5zI-dG-4hC" firstAttribute="top" secondItem="IOC-Xd-Qd3" secondAttribute="topMargin" constant="3" id="Tqc-9y-9Sj"/>
+                                        <constraint firstItem="exG-YY-Pmc" firstAttribute="top" secondItem="IOC-Xd-Qd3" secondAttribute="topMargin" constant="-4" id="a0i-Ym-hbp"/>
+                                        <constraint firstItem="exG-YY-Pmc" firstAttribute="leading" secondItem="IOC-Xd-Qd3" secondAttribute="leadingMargin" constant="13" id="bAj-Ho-fp1"/>
+                                        <constraint firstItem="5zI-dG-4hC" firstAttribute="top" secondItem="IOC-Xd-Qd3" secondAttribute="topMargin" constant="3" id="kTz-Cf-PHx"/>
+                                        <constraint firstAttribute="bottomMargin" secondItem="exG-YY-Pmc" secondAttribute="bottom" constant="-4" id="wS9-wP-fnr"/>
+                                    </constraints>
                                 </tableViewCellContentView>
                                 <connections>
+                                    <outlet property="flagLabel" destination="exG-YY-Pmc" id="u0G-cJ-a6d"/>
+                                    <outlet property="titleLabel" destination="5zI-dG-4hC" id="hQm-qW-jdt"/>
                                     <segue destination="BYZ-38-t0r" kind="show" identifier="passagePracticeSegue" id="55G-9h-5rM"/>
                                 </connections>
                             </tableViewCell>
@@ -85,7 +104,7 @@
                                     <constraint firstAttribute="height" constant="74" id="EtO-rK-rpQ"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
@@ -244,7 +263,7 @@
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Congratulations! You have completed this passage." textAlignment="center" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hf3-BU-V1U">
                                 <rect key="frame" x="30" y="290" width="540" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>

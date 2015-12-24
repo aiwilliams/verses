@@ -2,7 +2,7 @@
 //  UserVerse+CoreDataProperties.swift
 //  Verses
 //
-//  Created by Isaac Williams on 12/14/15.
+//  Created by Isaac Williams on 12/24/15.
 //  Copyright © 2015 The Williams Family. All rights reserved.
 //
 //  Choose "Create NSManagedObject Subclass…" from the Core Data editor menu
