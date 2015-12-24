@@ -53,14 +53,25 @@ class VersesIndexController: UITableViewController {
     }
     
     override func tableView(tableView: UITableView, editActionsForRowAtIndexPath indexPath: NSIndexPath) -> [UITableViewRowAction]? {
-        let memorizeAction = UITableViewRowAction(style: .Normal, title: "Memorize", handler: { (action: UITableViewRowAction!, indexPath: NSIndexPath!) in
-            let passage = self.passages[indexPath.row]
-            let cell = tableView.cellForRowAtIndexPath(indexPath) as! PassageCell
-            passage.memorized = true
-            try! self.appDelegate.managedObjectContext.save()
-            cell.flagLabel.text = "⚑"
-            tableView.setEditing(false, animated: true)
-        })
+        let cell = tableView.cellForRowAtIndexPath(indexPath) as! PassageCell
+        let passage = self.passages[indexPath.row]
+
+        var memorizeAction: UITableViewRowAction!
+        if passage.memorized!.boolValue {
+            memorizeAction = UITableViewRowAction(style: .Normal, title: "Start over", handler: { (action: UITableViewRowAction!, indexPath: NSIndexPath!) in
+                passage.memorized = false
+                try! self.appDelegate.managedObjectContext.save()
+                cell.flagLabel.text = "⚐"
+                tableView.setEditing(false, animated: true)
+            })
+        } else {
+            memorizeAction = UITableViewRowAction(style: .Normal, title: "Memorize", handler: { (action: UITableViewRowAction!, indexPath: NSIndexPath!) in
+                passage.memorized = true
+                try! self.appDelegate.managedObjectContext.save()
+                cell.flagLabel.text = "⚑"
+                tableView.setEditing(false, animated: true)
+            })
+        }
         memorizeAction.backgroundColor = UIColor(red:0.27, green:0.83, blue:0.55, alpha:1.0)
         
         let deleteAction = UITableViewRowAction(style: .Normal, title: "Delete", handler: { (action: UITableViewRowAction!, indexPath: NSIndexPath!) in
