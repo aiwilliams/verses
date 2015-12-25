@@ -192,7 +192,7 @@
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" misplaced="YES" progressViewStyle="bar" translatesAutoresizingMaskIntoConstraints="NO" id="4Cv-Dh-ZJc" userLabel="Passage Progress View">
+                            <progressView opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" verticalHuggingPriority="750" progressViewStyle="bar" translatesAutoresizingMaskIntoConstraints="NO" id="4Cv-Dh-ZJc" userLabel="Passage Progress View">
                                 <rect key="frame" x="0.0" y="64" width="600" height="4"/>
                                 <color key="progressTintColor" red="0.40000000000000002" green="0.59999999999999998" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                             </progressView>
@@ -202,7 +202,6 @@
                         <constraints>
                             <constraint firstAttribute="trailingMargin" secondItem="hwo-nT-Hzu" secondAttribute="trailing" id="05A-ba-dPu"/>
                             <constraint firstItem="4Cv-Dh-ZJc" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="-20" id="0qU-hn-I5R"/>
-                            <constraint firstItem="4tE-Md-p5j" firstAttribute="top" secondItem="4Cv-Dh-ZJc" secondAttribute="bottom" constant="5" id="1MU-mO-Ats"/>
                             <constraint firstItem="zAa-MO-Bnm" firstAttribute="height" secondItem="hwo-nT-Hzu" secondAttribute="height" id="2gz-sd-Cv8"/>
                             <constraint firstItem="zAa-MO-Bnm" firstAttribute="centerX" secondItem="hwo-nT-Hzu" secondAttribute="centerX" id="3dG-rg-kS5"/>
                             <constraint firstItem="4tE-Md-p5j" firstAttribute="width" secondItem="hwo-nT-Hzu" secondAttribute="width" id="9I3-aV-WWA"/>
