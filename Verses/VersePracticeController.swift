@@ -297,6 +297,7 @@ class VersePracticeController: UIViewController, UITextViewDelegate {
     
     func transitionToNextVerse() {
         title = activeVerse.reference
+        verseEntryTextView.editable = true
         
         UIView.animateWithDuration(0.5, animations: {
             self.basicHelpLabel.alpha = 0
