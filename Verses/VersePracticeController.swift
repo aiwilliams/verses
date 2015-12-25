@@ -74,7 +74,7 @@ class VersePracticeController: UIViewController, UITextViewDelegate {
         submissionButton.layer.cornerRadius = 5
     }
     
-    func exposeFreeHints() {
+    func exposeFreeHints() { // perhaps should go into a text modifying class
         if Int(activeVerse.views!) <= 2 {
             helpButton.enabled = false
             advancedHelpLabel.alpha = 1
@@ -97,7 +97,7 @@ class VersePracticeController: UIViewController, UITextViewDelegate {
         }
     }
     
-    func hideWordEndings(label: UILabel) {
+    func hideWordEndings(label: UILabel) { // perhaps should go into a text modifying class
         let text = label.text!
         let attributed = NSMutableAttributedString(string: text)
         var index = 0
@@ -126,7 +126,7 @@ class VersePracticeController: UIViewController, UITextViewDelegate {
         label.attributedText = attributed
     }
     
-    func hideRandomWords(label: UILabel) {
+    func hideRandomWords(label: UILabel) { // perhaps should go into a text modifying class
         let text = label.text!
         let attributed = NSMutableAttributedString(string: text)
         var index = 0
@@ -208,6 +208,8 @@ class VersePracticeController: UIViewController, UITextViewDelegate {
     }
     
     func displayVerseSuccessAndTransition() {
+        verseEntryTextView.editable = false
+
         UIView.animateWithDuration(0.1, animations: {
             self.submissionButton.backgroundColor = self.successSubmissionColor
             self.submissionButton.setTitle("Great job!", forState: .Normal)
@@ -245,17 +247,17 @@ class VersePracticeController: UIViewController, UITextViewDelegate {
         })
     }
     
-    func normalizedString(text: String) -> String {
+    func normalizedString(text: String) -> String { // perhaps should go into a text modifying class
         let spelledOut = spellOutNumbers(text)
         let final = removePunctuation(spelledOut)
         return final
     }
     
-    func removePunctuation(text: String) -> String {
+    func removePunctuation(text: String) -> String { // perhaps should go into a text modifying class
         return text.componentsSeparatedByCharactersInSet(NSCharacterSet.letterCharacterSet().invertedSet).joinWithSeparator("")
     }
     
-    func spellOutNumbers(text: String) -> String {
+    func spellOutNumbers(text: String) -> String { // perhaps should go into a text modifying class
         var words: Array<String> = text.componentsSeparatedByString(" ")
         var index = 0
 

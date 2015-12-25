@@ -65,7 +65,7 @@ class AddVerseController: UIViewController {
         }
     }
     
-    func savePassage(passage: Passage) {
+    func savePassage(passage: Passage) {  // Maybe we should have a something that handles all Core Data interactions instead of always leaving it up to the controllers
         let entityDescription = NSEntityDescription.entityForName("UserPassage", inManagedObjectContext: appDelegate.managedObjectContext)!
         let managedObject = UserPassage(entity: entityDescription, insertIntoManagedObjectContext: appDelegate.managedObjectContext)
         let verseSet = NSMutableOrderedSet()
