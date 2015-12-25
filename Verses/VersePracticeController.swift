@@ -1,11 +1,3 @@
-//
-//  ViewController.swift
-//  Verses
-//
-//  Created by Isaac Williams on 11/12/15.
-//  Copyright © 2015 The Williams Family. All rights reserved.
-//
-
 import UIKit
 import CoreData
 
@@ -38,7 +30,9 @@ class VersePracticeController: UIViewController, UITextViewDelegate {
     
     var passage: UserPassage!
     var verses: NSOrderedSet!
+    
     var activeVerse: UserVerse!
+    var verseHelper: VerseHelper!
     var activeVerseIndex: Int!
 
     var indexPath: NSIndexPath!
@@ -57,7 +51,8 @@ class VersePracticeController: UIViewController, UITextViewDelegate {
         verseEntryTextView.delegate = self
         
         verses = passage.valueForKey("verses") as! NSOrderedSet
-        activeVerse = verses.firstObject as! UserVerse
+        
+        activateVerse(verses.firstObject as! UserVerse)
         activeVerseIndex = 0
         incrementActiveVerseViewCounter()
 
@@ -74,83 +69,34 @@ class VersePracticeController: UIViewController, UITextViewDelegate {
         submissionButton.layer.cornerRadius = 5
     }
     
-    func exposeFreeHints() { // perhaps should go into a text modifying class
+    func activateVerse(verse: UserVerse) {
+        activeVerse = verse
+        verseHelper = VerseHelper(verse: verse)
+    }
+    
+    func exposeFreeHints() {
         if Int(activeVerse.views!) <= 2 {
             helpButton.enabled = false
             advancedHelpLabel.alpha = 1
         } else if Int(activeVerse.views!) > 2 && Int(activeVerse.views!) <= 5 {
             hintLevel = 2
-            hideWordEndings(basicHelpLabel)
-            hideRandomWords(intermediateHelpLabel)
+            basicHelpLabel.attributedText = verseHelper.firstLetters()
+            intermediateHelpLabel.attributedText = verseHelper.randomWords()
             basicHelpLabel.alpha = 1
             intermediateHelpLabel.alpha = 1
         } else if Int(activeVerse.views!) > 5 && Int(activeVerse.views!) <= 10 {
             hintLevel = 1
-            hideWordEndings(basicHelpLabel)
+            basicHelpLabel.attributedText = verseHelper.firstLetters()
             basicHelpLabel.alpha = 1
         }
     }
     
     func textViewDidChange(textView: UITextView) {
-        if normalizedString(textView.text.lowercaseString) == removePunctuation(activeVerse.text!.lowercaseString) {
+        if verseHelper.roughlyMatches(textView.text) {
             displayVerseSuccessAndTransition()
         }
     }
     
-    func hideWordEndings(label: UILabel) { // perhaps should go into a text modifying class
-        let text = label.text!
-        let attributed = NSMutableAttributedString(string: text)
-        var index = 0
-        var secondCharIndexes = [1]
-        for _ in text.characters {
-            if index < 3 {
-                ++index
-                continue
-            }
-            let backTwo = text.startIndex.advancedBy(index - 2)
-            if text.characters[backTwo] == " " {
-                secondCharIndexes.append(index)
-            }
-            ++index
-        }
-        
-        var nextIndex = 1
-        for i in secondCharIndexes {
-            if nextIndex == secondCharIndexes.count {
-                attributed.setAttributes([NSForegroundColorAttributeName:UIColor.clearColor()], range: NSMakeRange(i, text.characters.count - i))
-                break
-            }
-            attributed.setAttributes([NSForegroundColorAttributeName:UIColor.clearColor()], range: NSMakeRange(i, (secondCharIndexes[nextIndex] - 2) - i))
-            ++nextIndex
-        }
-        label.attributedText = attributed
-    }
-    
-    func hideRandomWords(label: UILabel) { // perhaps should go into a text modifying class
-        let text = label.text!
-        let attributed = NSMutableAttributedString(string: text)
-        var index = 0
-        var lastSeenSpaceIndex = 0
-        var ranges: Array<NSRange> = Array<NSRange>()
-        for char in text.characters {
-            if char == " " {
-                ranges.append(NSMakeRange(lastSeenSpaceIndex, index - lastSeenSpaceIndex))
-                lastSeenSpaceIndex = index
-            }
-            ++index
-        }
-        
-        for _ in ranges.count / 3 {
-            let randomIndex = Int(arc4random_uniform(UInt32(ranges.count)))
-            ranges.removeAtIndex(randomIndex)
-        }
-
-        for range in ranges {
-            attributed.setAttributes([NSForegroundColorAttributeName:UIColor.clearColor()], range: range)
-        }
-        
-        label.attributedText = attributed
-    }
 
     @IBAction func helpButtonPressed(sender: AnyObject) {
         hintLevel++
@@ -158,10 +104,10 @@ class VersePracticeController: UIViewController, UITextViewDelegate {
         switch hintLevel {
         case 1:
             distanceFromSubmissionButtonToTextView.constant = distanceFromSubmissionButtonToTextView.constant + basicHelpLabel.frame.height
-            hideWordEndings(basicHelpLabel)
+            basicHelpLabel.attributedText = verseHelper.firstLetters()
             UIView.animateWithDuration(1, animations: { self.basicHelpLabel.alpha = 1 })
         case 2:
-            hideRandomWords(intermediateHelpLabel)
+            intermediateHelpLabel.attributedText = verseHelper.randomWords()
             UIView.animateWithDuration(1, animations: { self.intermediateHelpLabel.alpha = 1 })
         case 3:
             UIView.animateWithDuration(1, animations: { self.advancedHelpLabel.alpha = 1})
@@ -200,7 +146,7 @@ class VersePracticeController: UIViewController, UITextViewDelegate {
     }
 
     @IBAction func checkUserVerse(sender: UIButton) {
-        if normalizedString(verseEntryTextView.text.lowercaseString) == removePunctuation(activeVerse.text!.lowercaseString) {
+        if verseHelper.roughlyMatches(verseEntryTextView.text) {
             displayVerseSuccessAndTransition()
         } else {
             displayVerseFailure()
@@ -218,7 +164,7 @@ class VersePracticeController: UIViewController, UITextViewDelegate {
         
         if activeVerseIndex != (verses.count - 1) {
             activeVerseIndex = activeVerseIndex + 1
-            activeVerse = verses[activeVerseIndex] as! UserVerse
+            activateVerse(verses[activeVerseIndex] as! UserVerse)
             incrementActiveVerseViewCounter()
             
             let delay = 0.7 * Double(NSEC_PER_SEC)
@@ -246,35 +192,7 @@ class VersePracticeController: UIViewController, UITextViewDelegate {
             })
         })
     }
-    
-    func normalizedString(text: String) -> String { // perhaps should go into a text modifying class
-        let spelledOut = spellOutNumbers(text)
-        let final = removePunctuation(spelledOut)
-        return final
-    }
-    
-    func removePunctuation(text: String) -> String { // perhaps should go into a text modifying class
-        return text.componentsSeparatedByCharactersInSet(NSCharacterSet.letterCharacterSet().invertedSet).joinWithSeparator("")
-    }
-    
-    func spellOutNumbers(text: String) -> String { // perhaps should go into a text modifying class
-        var words: Array<String> = text.componentsSeparatedByString(" ")
-        var index = 0
-
-        for word in words {
-            if let numberWord: NSInteger = Int(word) {
-                let formatter = NSNumberFormatter()
-                formatter.numberStyle = .SpellOutStyle
-                let formattedNumber = formatter.stringFromNumber(numberWord)
-                words.removeAtIndex(index)
-                words.insert(formattedNumber!, atIndex: index)
-            }
-            ++index
-        }
-
-        return words.joinWithSeparator(" ")
-    }
-    
+        
     func shakeAnimation() -> CABasicAnimation {
         let animation = CABasicAnimation(keyPath: "position")
         animation.duration = 0.07

@@ -20,6 +20,7 @@
 		FD960EE71C17C9790007A096 /* PassageParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD960EE61C17C9790007A096 /* PassageParser.swift */; };
 		FD960EE91C17CEFE0007A096 /* Passage.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD960EE81C17CEFE0007A096 /* Passage.swift */; };
 		FDAFD8FB1C2C585A002F4FF5 /* PassageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDAFD8FA1C2C585A002F4FF5 /* PassageCell.swift */; };
+		FDAFD8FE1C2DAB1C002F4FF5 /* VerseHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDAFD8FD1C2DAB1C002F4FF5 /* VerseHelper.swift */; };
 		FDB61B8D1BF533D800F8C61D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDB61B8C1BF533D800F8C61D /* AppDelegate.swift */; };
 		FDB61B8F1BF533D800F8C61D /* VersePracticeController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDB61B8E1BF533D800F8C61D /* VersePracticeController.swift */; };
 		FDB61B921BF533D800F8C61D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FDB61B901BF533D800F8C61D /* Main.storyboard */; };
@@ -77,6 +78,7 @@
 		FD960EE61C17C9790007A096 /* PassageParser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PassageParser.swift; sourceTree = "<group>"; };
 		FD960EE81C17CEFE0007A096 /* Passage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Passage.swift; sourceTree = "<group>"; };
 		FDAFD8FA1C2C585A002F4FF5 /* PassageCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PassageCell.swift; sourceTree = "<group>"; };
+		FDAFD8FD1C2DAB1C002F4FF5 /* VerseHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VerseHelper.swift; sourceTree = "<group>"; };
 		FDB61B891BF533D800F8C61D /* Verses.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Verses.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FDB61B8C1BF533D800F8C61D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		FDB61B8E1BF533D800F8C61D /* VersePracticeController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VersePracticeController.swift; sourceTree = "<group>"; };
@@ -171,6 +173,7 @@
 				FDB61B8E1BF533D800F8C61D /* VersePracticeController.swift */,
 				FDB61BBD1BF5410000F8C61D /* VersesIndexController.swift */,
 				FDB61BBF1BF5457E00F8C61D /* AddVerseController.swift */,
+				FDAFD8FD1C2DAB1C002F4FF5 /* VerseHelper.swift */,
 				FDB61B901BF533D800F8C61D /* Main.storyboard */,
 				FDB61B961BF533D800F8C61D /* Assets.xcassets */,
 				FDB61B9B1BF533D800F8C61D /* Info.plist */,
@@ -378,6 +381,7 @@
 				FDB61B8F1BF533D800F8C61D /* VersePracticeController.swift in Sources */,
 				FD79BAE61C1BC45A00266A5A /* UserVerse.swift in Sources */,
 				FDB61BC01BF5457E00F8C61D /* AddVerseController.swift in Sources */,
+				FDAFD8FE1C2DAB1C002F4FF5 /* VerseHelper.swift in Sources */,
 				FD79BAE91C1BC4B600266A5A /* UserPassage.swift in Sources */,
 				FD960EE71C17C9790007A096 /* PassageParser.swift in Sources */,
 				FDAFD8FB1C2C585A002F4FF5 /* PassageCell.swift in Sources */,
