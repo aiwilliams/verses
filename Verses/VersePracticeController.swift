@@ -21,10 +21,10 @@ class VersePracticeController: UIViewController, UITextViewDelegate {
     @IBOutlet var basicHelpLabel: UILabel!
     @IBOutlet var intermediateHelpLabel: UILabel!
     @IBOutlet var advancedHelpLabel: UILabel!
-    @IBOutlet var distanceFromSubmissionButtonToTextView: NSLayoutConstraint!
+    @IBOutlet var submissionLabel: UILabel!
+    @IBOutlet var distanceFromSubmissionLabelToTextView: NSLayoutConstraint!
     @IBOutlet var distanceFromHelpToBottomLayoutGuide: NSLayoutConstraint!
     @IBOutlet var verseEntryTextView: UITextView!
-    @IBOutlet var submissionButton: UIButton!
     @IBOutlet var helpButton: UIBarButtonItem!
     @IBOutlet var passageProgressView: UIProgressView!
     
@@ -34,6 +34,8 @@ class VersePracticeController: UIViewController, UITextViewDelegate {
     var activeVerse: UserVerse!
     var verseHelper: VerseHelper!
     var activeVerseIndex: Int!
+
+    var submissionTimer: NSTimer!
 
     var indexPath: NSIndexPath!
     var hintLevel: Int = 0
@@ -66,7 +68,16 @@ class VersePracticeController: UIViewController, UITextViewDelegate {
         
         self.observeKeyboard()
         verseEntryTextView.becomeFirstResponder()
-        submissionButton.layer.cornerRadius = 5
+
+        submissionTimer = NSTimer.scheduledTimerWithTimeInterval(4.5, target: self, selector: "userTimedOut", userInfo: nil, repeats: true)
+    }
+    
+    func userTimedOut() {
+        UIView.animateWithDuration(0.5, animations: {
+            self.submissionLabel.text = "Still there?"
+            self.submissionLabel.textColor = self.neutralSubmissionColor
+            self.submissionLabel.alpha = 1
+        })
     }
     
     func activateVerse(verse: UserVerse) {
@@ -91,19 +102,31 @@ class VersePracticeController: UIViewController, UITextViewDelegate {
         }
     }
     
-    func textViewDidChange(textView: UITextView) {
-        if verseHelper.roughlyMatches(textView.text) {
-            displayVerseSuccessAndTransition()
-        }
+    func resetSubmissionTimer() {
+        submissionTimer.invalidate()
+        submissionTimer = NSTimer.scheduledTimerWithTimeInterval(4.5, target: self, selector: "userTimedOut", userInfo: nil, repeats: true)
     }
     
+    func textViewDidChange(textView: UITextView) {
+        resetSubmissionTimer()
+        UIView.animateWithDuration(0.5, animations: { self.submissionLabel.alpha = 0 })
+        if verseHelper.roughlyMatches(textView.text) {
+            submissionTimer.invalidate()
+            let delay = 0.7 * Double(NSEC_PER_SEC)
+            let dispatchTime = dispatch_time(DISPATCH_TIME_NOW, Int64(delay))
+            dispatch_after(dispatchTime, dispatch_get_main_queue(), {
+                self.displayVerseSuccessAndTransition()
+            })
+        }
+    }
 
     @IBAction func helpButtonPressed(sender: AnyObject) {
+        resetSubmissionTimer()
         hintLevel++
         
         switch hintLevel {
         case 1:
-            distanceFromSubmissionButtonToTextView.constant = distanceFromSubmissionButtonToTextView.constant + basicHelpLabel.frame.height
+            distanceFromSubmissionLabelToTextView.constant = distanceFromSubmissionLabelToTextView.constant + basicHelpLabel.frame.height
             basicHelpLabel.attributedText = verseHelper.firstLetters()
             UIView.animateWithDuration(1, animations: { self.basicHelpLabel.alpha = 1 })
         case 2:
@@ -129,7 +152,7 @@ class VersePracticeController: UIViewController, UITextViewDelegate {
         let keyboardFrame: CGRect = frame.CGRectValue
         let height: CGFloat = keyboardFrame.size.height
         
-        self.distanceFromHelpToBottomLayoutGuide.constant = height + submissionButton.frame.size.height + 20
+        self.distanceFromHelpToBottomLayoutGuide.constant = height + submissionLabel.frame.size.height + 20
         UIView.animateWithDuration(animationDuration!, animations: {
             self.view.layoutIfNeeded()
         })
@@ -139,7 +162,7 @@ class VersePracticeController: UIViewController, UITextViewDelegate {
         let info: NSDictionary = notification.userInfo!
         let animationDuration = info.objectForKey(UIKeyboardAnimationDurationUserInfoKey)?.doubleValue
         
-        self.distanceFromHelpToBottomLayoutGuide.constant = submissionButton.frame.size.height + 20
+        self.distanceFromHelpToBottomLayoutGuide.constant = submissionLabel.frame.size.height + 20
         UIView.animateWithDuration(animationDuration!, animations: {
             self.view.layoutIfNeeded()
         })
@@ -157,9 +180,10 @@ class VersePracticeController: UIViewController, UITextViewDelegate {
         verseEntryTextView.editable = false
 
         UIView.animateWithDuration(0.1, animations: {
-            self.submissionButton.backgroundColor = self.successSubmissionColor
-            self.submissionButton.setTitle("Great job!", forState: .Normal)
-            self.submissionButton.layer.addAnimation(self.bounceAnimation(), forKey: "position")
+            self.submissionLabel.alpha = 1
+            self.submissionLabel.textColor = self.successSubmissionColor
+            self.submissionLabel.text = "Great job!"
+            self.submissionLabel.layer.addAnimation(self.bounceAnimation(), forKey: "position")
         })
         
         if activeVerseIndex != (verses.count - 1) {
@@ -179,16 +203,16 @@ class VersePracticeController: UIViewController, UITextViewDelegate {
     
     func displayVerseFailure() {
         UIView.animateWithDuration(0.1, animations: {
-            self.submissionButton.backgroundColor = self.failureSubmissionColor
-            self.submissionButton.setTitle("Try again!", forState: .Normal)
-            self.submissionButton.layer.addAnimation(self.shakeAnimation(), forKey: "position")
+            self.submissionLabel.alpha = 1
+            self.submissionLabel.textColor = self.failureSubmissionColor
+            self.submissionLabel.text = "Try again!"
+            self.submissionLabel.layer.addAnimation(self.shakeAnimation(), forKey: "position")
         })
         let delay = 2.0 * Double(NSEC_PER_SEC)
         let dispatchTime = dispatch_time(DISPATCH_TIME_NOW, Int64(delay))
         dispatch_after(dispatchTime, dispatch_get_main_queue(), {
             UIView.animateWithDuration(0.1, animations: {
-                self.submissionButton.backgroundColor = self.neutralSubmissionColor
-                self.submissionButton.setTitle("Check it!", forState: .Normal)
+                self.submissionLabel.alpha = 0
             })
         })
     }
@@ -198,8 +222,8 @@ class VersePracticeController: UIViewController, UITextViewDelegate {
         animation.duration = 0.07
         animation.repeatCount = 4
         animation.autoreverses = true
-        animation.fromValue = NSValue(CGPoint: CGPointMake(self.submissionButton.center.x - 10, self.submissionButton.center.y))
-        animation.toValue = NSValue(CGPoint: CGPointMake(self.submissionButton.center.x + 10, self.submissionButton.center.y))
+        animation.fromValue = NSValue(CGPoint: CGPointMake(self.submissionLabel.center.x - 10, self.submissionLabel.center.y))
+        animation.toValue = NSValue(CGPoint: CGPointMake(self.submissionLabel.center.x + 10, self.submissionLabel.center.y))
         return animation
     }
     
@@ -208,8 +232,8 @@ class VersePracticeController: UIViewController, UITextViewDelegate {
         animation.duration = 0.11
         animation.repeatCount = 1
         animation.autoreverses = true
-        animation.fromValue = NSValue(CGPoint: CGPointMake(self.submissionButton.center.x, self.submissionButton.center.y))
-        animation.toValue = NSValue(CGPoint: CGPointMake(self.submissionButton.center.x, self.submissionButton.center.y - 10))
+        animation.fromValue = NSValue(CGPoint: CGPointMake(self.submissionLabel.center.x, self.submissionLabel.center.y))
+        animation.toValue = NSValue(CGPoint: CGPointMake(self.submissionLabel.center.x, self.submissionLabel.center.y - 10))
         return animation
     }
     
@@ -227,9 +251,6 @@ class VersePracticeController: UIViewController, UITextViewDelegate {
             self.advancedHelpLabel.text = self.activeVerse.text
             
             self.exposeFreeHints()
-            
-            self.submissionButton.backgroundColor = self.neutralSubmissionColor
-            self.submissionButton.setTitle("Check it!", forState: .Normal)
         })
         
         self.passageProgressView.setProgress(Float(self.verses.indexOfObject(self.activeVerse)) / Float(self.verses.count), animated: true)
@@ -243,6 +264,14 @@ class VersePracticeController: UIViewController, UITextViewDelegate {
         transitionVerseEntryTextViewAnimation.subtype = kCATransitionFromRight
         self.verseEntryTextView.layer.addAnimation(transitionVerseEntryTextViewAnimation, forKey: "pushTransition")
         self.verseEntryTextView.text = ""
+        self.verseEntryTextView.becomeFirstResponder()
+        
+        let delay = 0.7 * Double(NSEC_PER_SEC)
+        let dispatchTime = dispatch_time(DISPATCH_TIME_NOW, Int64(delay))
+        dispatch_after(dispatchTime, dispatch_get_main_queue(), {
+            self.resetSubmissionTimer()
+            UIView.animateWithDuration(0.5, animations: { self.submissionLabel.alpha = 0 })
+        })
     }
     
     func displayCompletion() {
