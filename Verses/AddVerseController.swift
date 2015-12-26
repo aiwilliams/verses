@@ -59,9 +59,12 @@ class AddVerseController: UIViewController {
         do {
             let passage = try API.fetchPassage(parsedPassage)
             return passage
-        } catch {
+        } catch HeartversesAPI.FetchError.PassageDoesNotExist {
             passagePreviewLabel.text = ""
             throw HeartversesAPI.FetchError.PassageDoesNotExist
+        } catch HeartversesAPI.FetchError.InvalidVerseRange {
+            passagePreviewLabel.text = ""
+            throw HeartversesAPI.FetchError.InvalidVerseRange
         }
     }
     

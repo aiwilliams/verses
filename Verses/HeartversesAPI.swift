@@ -16,6 +16,7 @@ class HeartversesAPI {
     
     enum FetchError: ErrorType {
         case PassageDoesNotExist
+        case InvalidVerseRange
     }
 
     init(defaultTranslation: String) {
@@ -38,6 +39,7 @@ class HeartversesAPI {
                 passage.verses.append(verse)
             }
         } else {
+            if parsedPassage.verse_end < parsedPassage.verse_start { throw FetchError.InvalidVerseRange }
             for v in parsedPassage.verse_start...parsedPassage.verse_end {
                 let fetchedVerse = store.findVerse(translation, bookSlug: parsedPassage.book, chapter: parsedPassage.chapter_start, number: v)
                 if fetchedVerse.objectID.temporaryID {
