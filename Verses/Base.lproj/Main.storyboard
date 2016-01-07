@@ -227,6 +227,7 @@
                         <outlet property="advancedHelpLabel" destination="zAa-MO-Bnm" id="Cbp-s1-h0J"/>
                         <outlet property="basicHelpLabel" destination="hwo-nT-Hzu" id="FRn-tb-Cdr"/>
                         <outlet property="distanceFromHelpToBottomLayoutGuide" destination="UtW-5q-1vF" id="ix7-hu-47f"/>
+                        <outlet property="distanceFromSubmissionLabelToBottomLayoutGuide" destination="PhQ-Tx-ogj" id="rId-7N-DbM"/>
                         <outlet property="distanceFromSubmissionLabelToTextView" destination="0Zd-ah-zVh" id="hPf-RA-fZ6"/>
                         <outlet property="helpButton" destination="c4K-J3-KPm" id="qH9-Zx-GJy"/>
                         <outlet property="intermediateHelpLabel" destination="7RQ-kb-Wq2" id="cxj-IQ-bc1"/>

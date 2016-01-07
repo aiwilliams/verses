@@ -23,6 +23,7 @@ class VersePracticeController: UIViewController, UITextViewDelegate {
     @IBOutlet var advancedHelpLabel: UILabel!
     @IBOutlet var submissionLabel: UILabel!
     @IBOutlet var distanceFromSubmissionLabelToTextView: NSLayoutConstraint!
+    @IBOutlet var distanceFromSubmissionLabelToBottomLayoutGuide: NSLayoutConstraint!
     @IBOutlet var distanceFromHelpToBottomLayoutGuide: NSLayoutConstraint!
     @IBOutlet var verseEntryTextView: UITextView!
     @IBOutlet var helpButton: UIBarButtonItem!
@@ -64,10 +65,12 @@ class VersePracticeController: UIViewController, UITextViewDelegate {
         intermediateHelpLabel.text = activeVerse.text
         advancedHelpLabel.text = activeVerse.text
         
-        exposeFreeHints()
-        
         self.observeKeyboard()
         verseEntryTextView.becomeFirstResponder()
+        
+        if Int(activeVerse.views!) <= 10 {
+            exposeFreeHints()
+        }
 
         submissionTimer = NSTimer.scheduledTimerWithTimeInterval(4.5, target: self, selector: "userTimedOut", userInfo: nil, repeats: true)
     }
@@ -86,6 +89,10 @@ class VersePracticeController: UIViewController, UITextViewDelegate {
     }
     
     func exposeFreeHints() {
+        print(advancedHelpLabel)
+        print(advancedHelpLabel.frame.height)
+        distanceFromSubmissionLabelToTextView.constant = distanceFromSubmissionLabelToTextView.constant + advancedHelpLabel.frame.height
+
         if Int(activeVerse.views!) <= 2 {
             helpButton.enabled = false
             advancedHelpLabel.alpha = 1
@@ -126,6 +133,8 @@ class VersePracticeController: UIViewController, UITextViewDelegate {
         
         switch hintLevel {
         case 1:
+            print(advancedHelpLabel)
+            print(advancedHelpLabel.frame.height)
             distanceFromSubmissionLabelToTextView.constant = distanceFromSubmissionLabelToTextView.constant + basicHelpLabel.frame.height
             basicHelpLabel.attributedText = verseHelper.firstLetters()
             UIView.animateWithDuration(1, animations: { self.basicHelpLabel.alpha = 1 })
@@ -152,7 +161,8 @@ class VersePracticeController: UIViewController, UITextViewDelegate {
         let keyboardFrame: CGRect = frame.CGRectValue
         let height: CGFloat = keyboardFrame.size.height
         
-        self.distanceFromHelpToBottomLayoutGuide.constant = height + submissionLabel.frame.size.height + 20
+        self.distanceFromHelpToBottomLayoutGuide.constant = height + submissionLabel.frame.size.height + 40
+        self.distanceFromSubmissionLabelToBottomLayoutGuide.constant = height + 20
         UIView.animateWithDuration(animationDuration!, animations: {
             self.view.layoutIfNeeded()
         })
@@ -166,14 +176,6 @@ class VersePracticeController: UIViewController, UITextViewDelegate {
         UIView.animateWithDuration(animationDuration!, animations: {
             self.view.layoutIfNeeded()
         })
-    }
-
-    @IBAction func checkUserVerse(sender: UIButton) {
-        if verseHelper.roughlyMatches(verseEntryTextView.text) {
-            displayVerseSuccessAndTransition()
-        } else {
-            displayVerseFailure()
-        }
     }
     
     func displayVerseSuccessAndTransition() {
