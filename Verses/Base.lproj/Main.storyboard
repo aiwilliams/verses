@@ -161,20 +161,14 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences" autocorrectionType="no" spellCheckingType="no"/>
                             </textView>
-                            <label opaque="NO" userInteractionEnabled="NO" alpha="0.0" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="J, a s o G a o t L J C, T t t t i t D: G." textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zAa-MO-Bnm" userLabel="Advanced Help Label">
-                                <rect key="frame" x="20" y="530" width="560" height="21"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                             <label opaque="NO" userInteractionEnabled="NO" alpha="0.0" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="J, a s o G a o t L J C, T t t t i t D: G." textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hwo-nT-Hzu" userLabel="Basic Help Label">
-                                <rect key="frame" x="20" y="530" width="560" height="21"/>
+                                <rect key="frame" x="20" y="559" width="560" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" alpha="0.0" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7RQ-kb-Wq2" userLabel="Intermediate Help Label">
-                                <rect key="frame" x="20" y="530" width="560" height="21"/>
+                                <rect key="frame" x="20" y="559" width="560" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
@@ -184,7 +178,13 @@
                                 <color key="progressTintColor" red="0.40000000000000002" green="0.59999999999999998" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                             </progressView>
                             <label opaque="NO" userInteractionEnabled="NO" alpha="0.0" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mOy-O3-OK1">
-                                <rect key="frame" x="20" y="571" width="560" height="21"/>
+                                <rect key="frame" x="20" y="562" width="560" height="30"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" alpha="0.0" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="J, a s o G a o t L J C, T t t t i t D: G." textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zAa-MO-Bnm" userLabel="Advanced Help Label">
+                                <rect key="frame" x="20" y="559" width="560" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
@@ -194,7 +194,7 @@
                         <gestureRecognizers/>
                         <constraints>
                             <constraint firstAttribute="trailingMargin" secondItem="hwo-nT-Hzu" secondAttribute="trailing" id="05A-ba-dPu"/>
-                            <constraint firstItem="mOy-O3-OK1" firstAttribute="top" secondItem="4tE-Md-p5j" secondAttribute="bottom" constant="17" id="0Zd-ah-zVh"/>
+                            <constraint firstItem="mOy-O3-OK1" firstAttribute="top" secondItem="4tE-Md-p5j" secondAttribute="bottom" constant="8" id="0Zd-ah-zVh"/>
                             <constraint firstItem="4Cv-Dh-ZJc" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="-20" id="0qU-hn-I5R"/>
                             <constraint firstItem="zAa-MO-Bnm" firstAttribute="height" secondItem="hwo-nT-Hzu" secondAttribute="height" id="2gz-sd-Cv8"/>
                             <constraint firstItem="zAa-MO-Bnm" firstAttribute="centerX" secondItem="hwo-nT-Hzu" secondAttribute="centerX" id="3dG-rg-kS5"/>
@@ -203,7 +203,7 @@
                             <constraint firstItem="7RQ-kb-Wq2" firstAttribute="width" secondItem="hwo-nT-Hzu" secondAttribute="width" id="LAb-SP-xnP"/>
                             <constraint firstItem="7RQ-kb-Wq2" firstAttribute="height" secondItem="hwo-nT-Hzu" secondAttribute="height" id="M6c-fD-SHE"/>
                             <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="mOy-O3-OK1" secondAttribute="bottom" constant="8" id="PhQ-Tx-ogj"/>
-                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="hwo-nT-Hzu" secondAttribute="bottom" constant="49" id="UtW-5q-1vF"/>
+                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="hwo-nT-Hzu" secondAttribute="bottom" constant="20" id="UtW-5q-1vF"/>
                             <constraint firstItem="7RQ-kb-Wq2" firstAttribute="bottom" secondItem="hwo-nT-Hzu" secondAttribute="bottom" id="WvR-hw-xsG"/>
                             <constraint firstItem="zAa-MO-Bnm" firstAttribute="width" secondItem="hwo-nT-Hzu" secondAttribute="width" id="XBA-Ah-Q1Y"/>
                             <constraint firstItem="4Cv-Dh-ZJc" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" id="YDL-75-RuB"/>
@@ -211,6 +211,7 @@
                             <constraint firstAttribute="leadingMargin" secondItem="mOy-O3-OK1" secondAttribute="leading" id="hDe-8J-1hL"/>
                             <constraint firstItem="4tE-Md-p5j" firstAttribute="centerX" secondItem="hwo-nT-Hzu" secondAttribute="centerX" id="jp9-8W-apc"/>
                             <constraint firstItem="7RQ-kb-Wq2" firstAttribute="centerX" secondItem="hwo-nT-Hzu" secondAttribute="centerX" id="mH3-Ca-hiP"/>
+                            <constraint firstItem="mOy-O3-OK1" firstAttribute="top" secondItem="hwo-nT-Hzu" secondAttribute="bottom" constant="-18" id="mH4-79-i95"/>
                             <constraint firstAttribute="trailingMargin" secondItem="4Cv-Dh-ZJc" secondAttribute="trailing" constant="-20" id="ptY-p7-kF3"/>
                             <constraint firstAttribute="leadingMargin" secondItem="hwo-nT-Hzu" secondAttribute="leading" id="wA5-Hn-zzW"/>
                             <constraint firstAttribute="trailingMargin" secondItem="mOy-O3-OK1" secondAttribute="trailing" id="xrR-Zb-wte"/>
@@ -228,6 +229,7 @@
                         <outlet property="basicHelpLabel" destination="hwo-nT-Hzu" id="FRn-tb-Cdr"/>
                         <outlet property="distanceFromHelpToBottomLayoutGuide" destination="UtW-5q-1vF" id="ix7-hu-47f"/>
                         <outlet property="distanceFromSubmissionLabelToBottomLayoutGuide" destination="PhQ-Tx-ogj" id="rId-7N-DbM"/>
+                        <outlet property="distanceFromSubmissionLabelToHelpLabel" destination="mH4-79-i95" id="5Jc-qP-m1Z"/>
                         <outlet property="distanceFromSubmissionLabelToTextView" destination="0Zd-ah-zVh" id="hPf-RA-fZ6"/>
                         <outlet property="helpButton" destination="c4K-J3-KPm" id="qH9-Zx-GJy"/>
                         <outlet property="intermediateHelpLabel" destination="7RQ-kb-Wq2" id="cxj-IQ-bc1"/>

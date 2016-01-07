@@ -25,6 +25,7 @@ class VersePracticeController: UIViewController, UITextViewDelegate {
     @IBOutlet var distanceFromSubmissionLabelToTextView: NSLayoutConstraint!
     @IBOutlet var distanceFromSubmissionLabelToBottomLayoutGuide: NSLayoutConstraint!
     @IBOutlet var distanceFromHelpToBottomLayoutGuide: NSLayoutConstraint!
+    @IBOutlet var distanceFromSubmissionLabelToHelpLabel: NSLayoutConstraint!
     @IBOutlet var verseEntryTextView: UITextView!
     @IBOutlet var helpButton: UIBarButtonItem!
     @IBOutlet var passageProgressView: UIProgressView!
@@ -76,11 +77,16 @@ class VersePracticeController: UIViewController, UITextViewDelegate {
     }
     
     func userTimedOut() {
-        UIView.animateWithDuration(0.5, animations: {
-            self.submissionLabel.text = "Still there?"
-            self.submissionLabel.textColor = self.neutralSubmissionColor
-            self.submissionLabel.alpha = 1
-        })
+        if submissionLabel.alpha == 0 {
+            distanceFromSubmissionLabelToHelpLabel.constant = distanceFromSubmissionLabelToHelpLabel.constant + submissionLabel.frame.height + 10
+            distanceFromHelpToBottomLayoutGuide.constant = distanceFromHelpToBottomLayoutGuide.constant + submissionLabel.frame.height + 10
+            UIView.animateWithDuration(0.5, animations: {
+                self.submissionLabel.text = "Still there?"
+                self.submissionLabel.textColor = self.neutralSubmissionColor
+                self.submissionLabel.alpha = 1
+                self.view.layoutIfNeeded()
+            })
+        }
     }
     
     func activateVerse(verse: UserVerse) {
@@ -116,7 +122,11 @@ class VersePracticeController: UIViewController, UITextViewDelegate {
     
     func textViewDidChange(textView: UITextView) {
         resetSubmissionTimer()
-        UIView.animateWithDuration(0.5, animations: { self.submissionLabel.alpha = 0 })
+        if submissionLabel.alpha == 1 {
+            distanceFromSubmissionLabelToHelpLabel.constant = distanceFromSubmissionLabelToHelpLabel.constant - submissionLabel.frame.height - 10
+            distanceFromHelpToBottomLayoutGuide.constant = distanceFromHelpToBottomLayoutGuide.constant - submissionLabel.frame.height - 10
+        }
+        UIView.animateWithDuration(0.5, animations: { self.submissionLabel.alpha = 0; self.view.layoutIfNeeded() })
         if verseHelper.roughlyMatches(textView.text) {
             submissionTimer.invalidate()
             let delay = 0.7 * Double(NSEC_PER_SEC)
@@ -161,7 +171,7 @@ class VersePracticeController: UIViewController, UITextViewDelegate {
         let keyboardFrame: CGRect = frame.CGRectValue
         let height: CGFloat = keyboardFrame.size.height
         
-        self.distanceFromHelpToBottomLayoutGuide.constant = height + submissionLabel.frame.size.height + 40
+        self.distanceFromHelpToBottomLayoutGuide.constant = height + 20
         self.distanceFromSubmissionLabelToBottomLayoutGuide.constant = height + 20
         UIView.animateWithDuration(animationDuration!, animations: {
             self.view.layoutIfNeeded()
