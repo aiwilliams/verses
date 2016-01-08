@@ -129,6 +129,7 @@ class VersePracticeController: UIViewController, UITextViewDelegate {
             distanceFromSubmissionLabelToHelpLabel.constant = distanceFromSubmissionLabelToHelpLabel.constant - submissionLabel.frame.height - 10
             distanceFromHelpToBottomLayoutGuide.constant = distanceFromHelpToBottomLayoutGuide.constant - submissionLabel.frame.height - 10
             UIView.animateWithDuration(0.5, animations: { self.submissionLabel.alpha = 0; self.view.layoutIfNeeded() })
+            submissionTextVisible = false
         }
 
         if verseHelper.roughlyMatches(textView.text) {
@@ -194,25 +195,72 @@ class VersePracticeController: UIViewController, UITextViewDelegate {
     
     func displayVerseSuccessAndTransition() {
         UIView.animateWithDuration(0.1, animations: {
-            self.submissionLabel.alpha = 1
-            self.submissionLabel.textColor = self.successSubmissionColor
-            self.submissionLabel.text = "Great job!"
-            self.submissionLabel.layer.addAnimation(self.bounceAnimation(), forKey: "position")
+            self.basicHelpLabel.alpha = 0
+            self.intermediateHelpLabel.alpha = 0
+            self.advancedHelpLabel.alpha = 0
+        }, completion: { (animated: Bool) -> Void in
+            UIView.animateWithDuration(0.1, animations: {
+                self.submissionLabel.alpha = 1
+                self.submissionLabel.textColor = self.successSubmissionColor
+                self.submissionLabel.text = "Great job!"
+                self.submissionLabel.layer.addAnimation(self.bounceAnimation(), forKey: "position")
+            })
+            
+            if self.activeVerseIndex != (self.verses.count - 1) {
+                self.activeVerseIndex = self.activeVerseIndex + 1
+                self.activateVerse(self.verses[self.activeVerseIndex] as! UserVerse)
+                self.incrementActiveVerseViewCounter()
+                
+                let delay = 0.7 * Double(NSEC_PER_SEC)
+                let dispatchTime = dispatch_time(DISPATCH_TIME_NOW, Int64(delay))
+                dispatch_after(dispatchTime, dispatch_get_main_queue(), {
+                    self.transitionToNextVerse()
+                })
+            } else {
+                self.displayCompletion()
+            }
+        })
+    }
+    
+    func displayCompletion() {
+        let delay = 2.0 * Double(NSEC_PER_SEC)
+        let dispatchTime = dispatch_time(DISPATCH_TIME_NOW, Int64(delay))
+        dispatch_after(dispatchTime, dispatch_get_main_queue(), {
+            self.performSegueWithIdentifier("completionSegue", sender: self)
+        })
+    }
+    
+    func transitionToNextVerse() {
+        title = activeVerse.reference
+        verseEntryTextView.editable = true
+        
+        UIView.animateWithDuration(0.5, animations: {
+            self.basicHelpLabel.text = self.activeVerse.text
+            self.intermediateHelpLabel.text = self.activeVerse.text
+            self.advancedHelpLabel.text = self.activeVerse.text
+            
+            self.exposeFreeHints()
         })
         
-        if activeVerseIndex != (verses.count - 1) {
-            activeVerseIndex = activeVerseIndex + 1
-            activateVerse(verses[activeVerseIndex] as! UserVerse)
-            incrementActiveVerseViewCounter()
-            
-            let delay = 0.7 * Double(NSEC_PER_SEC)
-            let dispatchTime = dispatch_time(DISPATCH_TIME_NOW, Int64(delay))
-            dispatch_after(dispatchTime, dispatch_get_main_queue(), {
-                self.transitionToNextVerse()
-            })
-        } else {
-            self.displayCompletion()
-        }
+        self.passageProgressView.setProgress(Float(self.verses.indexOfObject(self.activeVerse)) / Float(self.verses.count), animated: true)
+        
+        hintLevel = 0
+        helpButton.enabled = true
+        
+        let transitionVerseEntryTextViewAnimation = CATransition()
+        transitionVerseEntryTextViewAnimation.duration = 0.5
+        transitionVerseEntryTextViewAnimation.type = kCATransitionPush
+        transitionVerseEntryTextViewAnimation.subtype = kCATransitionFromRight
+        self.verseEntryTextView.layer.addAnimation(transitionVerseEntryTextViewAnimation, forKey: "pushTransition")
+        self.verseEntryTextView.text = ""
+        self.verseEntryTextView.becomeFirstResponder()
+        
+        let delay = 0.7 * Double(NSEC_PER_SEC)
+        let dispatchTime = dispatch_time(DISPATCH_TIME_NOW, Int64(delay))
+        dispatch_after(dispatchTime, dispatch_get_main_queue(), {
+            self.resetSubmissionTimer()
+            UIView.animateWithDuration(0.5, animations: { self.submissionLabel.alpha = 0 })
+        })
     }
     
     func displayVerseFailure() {
@@ -249,51 +297,6 @@ class VersePracticeController: UIViewController, UITextViewDelegate {
         animation.fromValue = NSValue(CGPoint: CGPointMake(self.submissionLabel.center.x, self.submissionLabel.center.y))
         animation.toValue = NSValue(CGPoint: CGPointMake(self.submissionLabel.center.x, self.submissionLabel.center.y - 10))
         return animation
-    }
-    
-    func transitionToNextVerse() {
-        title = activeVerse.reference
-        verseEntryTextView.editable = true
-        
-        UIView.animateWithDuration(0.5, animations: {
-            self.basicHelpLabel.alpha = 0
-            self.intermediateHelpLabel.alpha = 0
-            self.advancedHelpLabel.alpha = 0
-            
-            self.basicHelpLabel.text = self.activeVerse.text
-            self.intermediateHelpLabel.text = self.activeVerse.text
-            self.advancedHelpLabel.text = self.activeVerse.text
-            
-            self.exposeFreeHints()
-        })
-        
-        self.passageProgressView.setProgress(Float(self.verses.indexOfObject(self.activeVerse)) / Float(self.verses.count), animated: true)
-
-        hintLevel = 0
-        helpButton.enabled = true
-
-        let transitionVerseEntryTextViewAnimation = CATransition()
-        transitionVerseEntryTextViewAnimation.duration = 0.5
-        transitionVerseEntryTextViewAnimation.type = kCATransitionPush
-        transitionVerseEntryTextViewAnimation.subtype = kCATransitionFromRight
-        self.verseEntryTextView.layer.addAnimation(transitionVerseEntryTextViewAnimation, forKey: "pushTransition")
-        self.verseEntryTextView.text = ""
-        self.verseEntryTextView.becomeFirstResponder()
-        
-        let delay = 0.7 * Double(NSEC_PER_SEC)
-        let dispatchTime = dispatch_time(DISPATCH_TIME_NOW, Int64(delay))
-        dispatch_after(dispatchTime, dispatch_get_main_queue(), {
-            self.resetSubmissionTimer()
-            UIView.animateWithDuration(0.5, animations: { self.submissionLabel.alpha = 0 })
-        })
-    }
-    
-    func displayCompletion() {
-        let delay = 2.0 * Double(NSEC_PER_SEC)
-        let dispatchTime = dispatch_time(DISPATCH_TIME_NOW, Int64(delay))
-        dispatch_after(dispatchTime, dispatch_get_main_queue(), {
-            self.performSegueWithIdentifier("completionSegue", sender: self)
-        })
     }
     
     func incrementActiveVerseViewCounter() {
