@@ -79,8 +79,8 @@ class VersePracticeController: UIViewController, UITextViewDelegate {
     
     func userTimedOut() {
         if submissionTextVisible == false {
-            distanceFromSubmissionLabelToHelpLabel.constant = distanceFromSubmissionLabelToHelpLabel.constant + submissionLabel.frame.height + 10
-            distanceFromHelpToBottomLayoutGuide.constant = distanceFromHelpToBottomLayoutGuide.constant + submissionLabel.frame.height + 10
+            distanceFromSubmissionLabelToHelpLabel.constant = distanceFromSubmissionLabelToHelpLabel.constant + submissionLabel.frame.height + 8
+            distanceFromHelpToBottomLayoutGuide.constant = distanceFromHelpToBottomLayoutGuide.constant + submissionLabel.frame.height + 8
             UIView.animateWithDuration(0.5, animations: {
                 self.submissionLabel.text = "Still there?"
                 self.submissionLabel.textColor = self.neutralSubmissionColor
@@ -126,8 +126,8 @@ class VersePracticeController: UIViewController, UITextViewDelegate {
         resetSubmissionTimer()
 
         if submissionTextVisible == true {
-            distanceFromSubmissionLabelToHelpLabel.constant = distanceFromSubmissionLabelToHelpLabel.constant - submissionLabel.frame.height - 10
-            distanceFromHelpToBottomLayoutGuide.constant = distanceFromHelpToBottomLayoutGuide.constant - submissionLabel.frame.height - 10
+            distanceFromSubmissionLabelToHelpLabel.constant = distanceFromSubmissionLabelToHelpLabel.constant - submissionLabel.frame.height - 8
+            distanceFromHelpToBottomLayoutGuide.constant = distanceFromHelpToBottomLayoutGuide.constant - submissionLabel.frame.height - 8
             UIView.animateWithDuration(0.5, animations: { self.submissionLabel.alpha = 0; self.view.layoutIfNeeded() })
             submissionTextVisible = false
         }
@@ -187,7 +187,13 @@ class VersePracticeController: UIViewController, UITextViewDelegate {
         let info: NSDictionary = notification.userInfo!
         let animationDuration = info.objectForKey(UIKeyboardAnimationDurationUserInfoKey)?.doubleValue
         
-        self.distanceFromHelpToBottomLayoutGuide.constant = submissionLabel.frame.size.height + 20
+        if submissionTextVisible {
+            distanceFromHelpToBottomLayoutGuide.constant = submissionLabel.frame.height + 8
+        } else {
+            self.distanceFromHelpToBottomLayoutGuide.constant = 8
+        }
+
+        self.distanceFromSubmissionLabelToBottomLayoutGuide.constant = 8
         UIView.animateWithDuration(animationDuration!, animations: {
             self.view.layoutIfNeeded()
         })
