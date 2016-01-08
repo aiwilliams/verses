@@ -38,6 +38,7 @@ class VersePracticeController: UIViewController, UITextViewDelegate {
     var activeVerseIndex: Int!
 
     var submissionTimer: NSTimer!
+    var submissionTextVisible = false
 
     var indexPath: NSIndexPath!
     var hintLevel: Int = 0
@@ -77,7 +78,7 @@ class VersePracticeController: UIViewController, UITextViewDelegate {
     }
     
     func userTimedOut() {
-        if submissionLabel.alpha == 0 {
+        if submissionTextVisible == false {
             distanceFromSubmissionLabelToHelpLabel.constant = distanceFromSubmissionLabelToHelpLabel.constant + submissionLabel.frame.height + 10
             distanceFromHelpToBottomLayoutGuide.constant = distanceFromHelpToBottomLayoutGuide.constant + submissionLabel.frame.height + 10
             UIView.animateWithDuration(0.5, animations: {
@@ -86,6 +87,7 @@ class VersePracticeController: UIViewController, UITextViewDelegate {
                 self.submissionLabel.alpha = 1
                 self.view.layoutIfNeeded()
             })
+            submissionTextVisible = true
         }
     }
     
@@ -122,11 +124,13 @@ class VersePracticeController: UIViewController, UITextViewDelegate {
     
     func textViewDidChange(textView: UITextView) {
         resetSubmissionTimer()
-        if submissionLabel.alpha == 1 {
+
+        if submissionTextVisible == true {
             distanceFromSubmissionLabelToHelpLabel.constant = distanceFromSubmissionLabelToHelpLabel.constant - submissionLabel.frame.height - 10
             distanceFromHelpToBottomLayoutGuide.constant = distanceFromHelpToBottomLayoutGuide.constant - submissionLabel.frame.height - 10
+            UIView.animateWithDuration(0.5, animations: { self.submissionLabel.alpha = 0; self.view.layoutIfNeeded() })
         }
-        UIView.animateWithDuration(0.5, animations: { self.submissionLabel.alpha = 0; self.view.layoutIfNeeded() })
+
         if verseHelper.roughlyMatches(textView.text) {
             submissionTimer.invalidate()
             let delay = 0.7 * Double(NSEC_PER_SEC)
@@ -189,8 +193,6 @@ class VersePracticeController: UIViewController, UITextViewDelegate {
     }
     
     func displayVerseSuccessAndTransition() {
-        verseEntryTextView.editable = false
-
         UIView.animateWithDuration(0.1, animations: {
             self.submissionLabel.alpha = 1
             self.submissionLabel.textColor = self.successSubmissionColor
