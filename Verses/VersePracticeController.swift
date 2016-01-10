@@ -21,7 +21,7 @@ class VersePracticeController: UIViewController, UITextViewDelegate {
     @IBOutlet var basicHelpLabel: UILabel!
     @IBOutlet var intermediateHelpLabel: UILabel!
     @IBOutlet var advancedHelpLabel: UILabel!
-    @IBOutlet var submissionLabel: UILabel!
+    @IBOutlet var promptLabel: UILabel!
     @IBOutlet var verseEntryTextView: UITextView!
     @IBOutlet var helpButton: UIBarButtonItem!
     @IBOutlet var passageProgressView: UIProgressView!
@@ -37,17 +37,16 @@ class VersePracticeController: UIViewController, UITextViewDelegate {
     var verseHelper: VerseHelper!
     var activeVerseIndex: Int!
 
-    var submissionTimer: NSTimer!
-    var submissionTextVisible = false
+    var promptTimer: NSTimer!
+    var promptTextVisible = false
 
     var indexPath: NSIndexPath!
     var hintLevel: Int = 0
     
     let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
     
-    let neutralSubmissionColor = UIColor(red:0.40, green:0.60, blue:1.00, alpha:1.0)
-    let successSubmissionColor = UIColor(red:0.27, green:0.83, blue:0.55, alpha:1.0)
-    let failureSubmissionColor = UIColor(red:1.00, green:0.35, blue:0.31, alpha:1.0)
+    let neutralPromptColor = UIColor(red:0.40, green:0.60, blue:1.00, alpha:1.0)
+    let successPromptColor = UIColor(red:0.27, green:0.83, blue:0.55, alpha:1.0)
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -75,22 +74,22 @@ class VersePracticeController: UIViewController, UITextViewDelegate {
             exposeFreeHints()
         }
 
-        submissionTimer = NSTimer.scheduledTimerWithTimeInterval(4.5, target: self, selector: "userTimedOut", userInfo: nil, repeats: true)
+        promptTimer = NSTimer.scheduledTimerWithTimeInterval(4.5, target: self, selector: "userTimedOut", userInfo: nil, repeats: true)
     }
     
     func userTimedOut() {
-        submissionTimer.invalidate()
-        basicHelpLabelToBottomLayoutGuide.constant = basicHelpLabelToBottomLayoutGuide.constant + submissionLabel.frame.height + 5
-        verseEntryTextViewToBottomLayoutGuide.constant = verseEntryTextViewToBottomLayoutGuide.constant + submissionLabel.frame.height + 5
+        promptTimer.invalidate()
+        basicHelpLabelToBottomLayoutGuide.constant = basicHelpLabelToBottomLayoutGuide.constant + promptLabel.frame.height + 5
+        verseEntryTextViewToBottomLayoutGuide.constant = verseEntryTextViewToBottomLayoutGuide.constant + promptLabel.frame.height + 5
 
-        if submissionTextVisible == false {
+        if promptTextVisible == false {
             UIView.animateWithDuration(0.5, animations: {
-                self.submissionLabel.text = "Still there?"
-                self.submissionLabel.textColor = self.neutralSubmissionColor
-                self.submissionLabel.alpha = 1
+                self.promptLabel.text = "Still there?"
+                self.promptLabel.textColor = self.neutralPromptColor
+                self.promptLabel.alpha = 1
                 self.view.layoutIfNeeded()
             })
-            submissionTextVisible = true
+            promptTextVisible = true
         }
     }
     
@@ -118,19 +117,19 @@ class VersePracticeController: UIViewController, UITextViewDelegate {
         }
     }
     
-    func resetSubmissionTimer() {
-        submissionTimer.invalidate()
-        submissionTimer = NSTimer.scheduledTimerWithTimeInterval(4.5, target: self, selector: "userTimedOut", userInfo: nil, repeats: true)
+    func resetPromptTimer() {
+        promptTimer.invalidate()
+        promptTimer = NSTimer.scheduledTimerWithTimeInterval(4.5, target: self, selector: "userTimedOut", userInfo: nil, repeats: true)
     }
     
     func hidePrompt() {
-        resetSubmissionTimer()
+        resetPromptTimer()
         
-        if submissionTextVisible == true {
-            basicHelpLabelToBottomLayoutGuide.constant = basicHelpLabelToBottomLayoutGuide.constant - submissionLabel.frame.height
-            verseEntryTextViewToBottomLayoutGuide.constant = verseEntryTextViewToBottomLayoutGuide.constant - submissionLabel.frame.height
-            UIView.animateWithDuration(0.5, animations: { self.submissionLabel.alpha = 0; self.view.layoutIfNeeded() })
-            submissionTextVisible = false
+        if promptTextVisible == true {
+            basicHelpLabelToBottomLayoutGuide.constant = basicHelpLabelToBottomLayoutGuide.constant - promptLabel.frame.height
+            verseEntryTextViewToBottomLayoutGuide.constant = verseEntryTextViewToBottomLayoutGuide.constant - promptLabel.frame.height
+            UIView.animateWithDuration(0.5, animations: { self.promptLabel.alpha = 0; self.view.layoutIfNeeded() })
+            promptTextVisible = false
         }
     }
     
@@ -138,7 +137,7 @@ class VersePracticeController: UIViewController, UITextViewDelegate {
         hidePrompt()
 
         if verseHelper.roughlyMatches(textView.text) {
-            submissionTimer.invalidate()
+            promptTimer.invalidate()
             let delay = 0.7 * Double(NSEC_PER_SEC)
             let dispatchTime = dispatch_time(DISPATCH_TIME_NOW, Int64(delay))
             dispatch_after(dispatchTime, dispatch_get_main_queue(), {
@@ -196,8 +195,8 @@ class VersePracticeController: UIViewController, UITextViewDelegate {
 
         basicHelpLabelToBottomLayoutGuide.constant = 8
 
-        if submissionTextVisible {
-            basicHelpLabelToBottomLayoutGuide.constant = basicHelpLabelToBottomLayoutGuide.constant + submissionLabel.frame.height
+        if promptTextVisible {
+            basicHelpLabelToBottomLayoutGuide.constant = basicHelpLabelToBottomLayoutGuide.constant + promptLabel.frame.height
         }
 
         promptLabelToBottomLayoutGuide.constant = 8
@@ -215,10 +214,10 @@ class VersePracticeController: UIViewController, UITextViewDelegate {
             self.advancedHelpLabel.alpha = 0
         }, completion: { (animated: Bool) -> Void in
             UIView.animateWithDuration(0.1, animations: {
-                self.submissionLabel.alpha = 1
-                self.submissionLabel.textColor = self.successSubmissionColor
-                self.submissionLabel.text = "Great job!"
-                self.submissionLabel.layer.addAnimation(self.bounceAnimation(), forKey: "position")
+                self.promptLabel.alpha = 1
+                self.promptLabel.textColor = self.successPromptColor
+                self.promptLabel.text = "Great job!"
+                self.promptLabel.layer.addAnimation(self.bounceAnimation(), forKey: "position")
             })
             
             if self.activeVerseIndex != (self.verses.count - 1) {
@@ -273,35 +272,9 @@ class VersePracticeController: UIViewController, UITextViewDelegate {
         let delay = 0.7 * Double(NSEC_PER_SEC)
         let dispatchTime = dispatch_time(DISPATCH_TIME_NOW, Int64(delay))
         dispatch_after(dispatchTime, dispatch_get_main_queue(), {
-            self.resetSubmissionTimer()
-            UIView.animateWithDuration(0.5, animations: { self.submissionLabel.alpha = 0 })
+            self.resetPromptTimer()
+            UIView.animateWithDuration(0.5, animations: { self.promptLabel.alpha = 0 })
         })
-    }
-    
-    func displayVerseFailure() {
-        UIView.animateWithDuration(0.1, animations: {
-            self.submissionLabel.alpha = 1
-            self.submissionLabel.textColor = self.failureSubmissionColor
-            self.submissionLabel.text = "Try again!"
-            self.submissionLabel.layer.addAnimation(self.shakeAnimation(), forKey: "position")
-        })
-        let delay = 2.0 * Double(NSEC_PER_SEC)
-        let dispatchTime = dispatch_time(DISPATCH_TIME_NOW, Int64(delay))
-        dispatch_after(dispatchTime, dispatch_get_main_queue(), {
-            UIView.animateWithDuration(0.1, animations: {
-                self.submissionLabel.alpha = 0
-            })
-        })
-    }
-        
-    func shakeAnimation() -> CABasicAnimation {
-        let animation = CABasicAnimation(keyPath: "position")
-        animation.duration = 0.07
-        animation.repeatCount = 4
-        animation.autoreverses = true
-        animation.fromValue = NSValue(CGPoint: CGPointMake(self.submissionLabel.center.x - 10, self.submissionLabel.center.y))
-        animation.toValue = NSValue(CGPoint: CGPointMake(self.submissionLabel.center.x + 10, self.submissionLabel.center.y))
-        return animation
     }
     
     func bounceAnimation() -> CABasicAnimation {
@@ -309,8 +282,8 @@ class VersePracticeController: UIViewController, UITextViewDelegate {
         animation.duration = 0.11
         animation.repeatCount = 1
         animation.autoreverses = true
-        animation.fromValue = NSValue(CGPoint: CGPointMake(self.submissionLabel.center.x, self.submissionLabel.center.y))
-        animation.toValue = NSValue(CGPoint: CGPointMake(self.submissionLabel.center.x, self.submissionLabel.center.y - 10))
+        animation.fromValue = NSValue(CGPoint: CGPointMake(self.promptLabel.center.x, self.promptLabel.center.y))
+        animation.toValue = NSValue(CGPoint: CGPointMake(self.promptLabel.center.x, self.promptLabel.center.y - 10))
         return animation
     }
     
