@@ -123,15 +123,19 @@ class VersePracticeController: UIViewController, UITextViewDelegate {
         submissionTimer = NSTimer.scheduledTimerWithTimeInterval(4.5, target: self, selector: "userTimedOut", userInfo: nil, repeats: true)
     }
     
-    func textViewDidChange(textView: UITextView) {
+    func hidePrompt() {
         resetSubmissionTimer()
-
+        
         if submissionTextVisible == true {
             basicHelpLabelToBottomLayoutGuide.constant = basicHelpLabelToBottomLayoutGuide.constant - submissionLabel.frame.height
             verseEntryTextViewToBottomLayoutGuide.constant = verseEntryTextViewToBottomLayoutGuide.constant - submissionLabel.frame.height
             UIView.animateWithDuration(0.5, animations: { self.submissionLabel.alpha = 0; self.view.layoutIfNeeded() })
             submissionTextVisible = false
         }
+    }
+    
+    func textViewDidChange(textView: UITextView) {
+        hidePrompt()
 
         if verseHelper.roughlyMatches(textView.text) {
             submissionTimer.invalidate()
@@ -144,7 +148,7 @@ class VersePracticeController: UIViewController, UITextViewDelegate {
     }
 
     @IBAction func helpButtonPressed(sender: AnyObject) {
-        resetSubmissionTimer()
+        hidePrompt()
         hintLevel++
 
         verseEntryTextViewToBottomLayoutGuide.constant = verseEntryTextViewToBottomLayoutGuide.constant + basicHelpLabel.intrinsicContentSize().height
