@@ -263,18 +263,13 @@ class VersePracticeController: UIViewController, UITextViewDelegate {
         
         let transitionVerseEntryTextViewAnimation = CATransition()
         transitionVerseEntryTextViewAnimation.duration = 0.5
-        transitionVerseEntryTextViewAnimation.type = kCATransitionPush
-        transitionVerseEntryTextViewAnimation.subtype = kCATransitionFromRight
+        transitionVerseEntryTextViewAnimation.type = kCATransitionFade
         self.verseEntryTextView.layer.addAnimation(transitionVerseEntryTextViewAnimation, forKey: "pushTransition")
+        UIView.animateWithDuration(0.5, animations: { self.promptLabel.alpha = 0 })
+
         self.verseEntryTextView.text = ""
         self.verseEntryTextView.becomeFirstResponder()
-        
-        let delay = 0.7 * Double(NSEC_PER_SEC)
-        let dispatchTime = dispatch_time(DISPATCH_TIME_NOW, Int64(delay))
-        dispatch_after(dispatchTime, dispatch_get_main_queue(), {
-            self.resetPromptTimer()
-            UIView.animateWithDuration(0.5, animations: { self.promptLabel.alpha = 0 })
-        })
+        self.resetPromptTimer()
     }
     
     func bounceAnimation() -> CABasicAnimation {
