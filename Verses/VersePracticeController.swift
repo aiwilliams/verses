@@ -22,14 +22,14 @@ class VersePracticeController: UIViewController, UITextViewDelegate {
     @IBOutlet var intermediateHelpLabel: UILabel!
     @IBOutlet var advancedHelpLabel: UILabel!
     @IBOutlet var submissionLabel: UILabel!
-    @IBOutlet var distanceFromSubmissionLabelToTextView: NSLayoutConstraint!
-    @IBOutlet var distanceFromSubmissionLabelToBottomLayoutGuide: NSLayoutConstraint!
-    @IBOutlet var distanceFromHelpToBottomLayoutGuide: NSLayoutConstraint!
-    @IBOutlet var distanceFromSubmissionLabelToHelpLabel: NSLayoutConstraint!
     @IBOutlet var verseEntryTextView: UITextView!
     @IBOutlet var helpButton: UIBarButtonItem!
     @IBOutlet var passageProgressView: UIProgressView!
     
+    @IBOutlet var basicHelpLabelToBottomLayoutGuide: NSLayoutConstraint!
+    @IBOutlet var promptLabelToBottomLayoutGuide: NSLayoutConstraint!
+    @IBOutlet var verseEntryTextViewToBottomLayoutGuide: NSLayoutConstraint!
+
     var passage: UserPassage!
     var verses: NSOrderedSet!
     
@@ -69,7 +69,8 @@ class VersePracticeController: UIViewController, UITextViewDelegate {
         
         self.observeKeyboard()
         verseEntryTextView.becomeFirstResponder()
-        
+
+        self.view.layoutIfNeeded()
         if Int(activeVerse.views!) <= 10 {
             exposeFreeHints()
         }
@@ -78,9 +79,11 @@ class VersePracticeController: UIViewController, UITextViewDelegate {
     }
     
     func userTimedOut() {
+        submissionTimer.invalidate()
+        basicHelpLabelToBottomLayoutGuide.constant = basicHelpLabelToBottomLayoutGuide.constant + submissionLabel.frame.height + 5
+        verseEntryTextViewToBottomLayoutGuide.constant = verseEntryTextViewToBottomLayoutGuide.constant + submissionLabel.frame.height + 5
+
         if submissionTextVisible == false {
-            distanceFromSubmissionLabelToHelpLabel.constant = distanceFromSubmissionLabelToHelpLabel.constant + submissionLabel.frame.height + 8
-            distanceFromHelpToBottomLayoutGuide.constant = distanceFromHelpToBottomLayoutGuide.constant + submissionLabel.frame.height + 8
             UIView.animateWithDuration(0.5, animations: {
                 self.submissionLabel.text = "Still there?"
                 self.submissionLabel.textColor = self.neutralSubmissionColor
@@ -97,9 +100,7 @@ class VersePracticeController: UIViewController, UITextViewDelegate {
     }
     
     func exposeFreeHints() {
-        print(advancedHelpLabel)
-        print(advancedHelpLabel.frame.height)
-        distanceFromSubmissionLabelToTextView.constant = distanceFromSubmissionLabelToTextView.constant + advancedHelpLabel.frame.height
+        verseEntryTextViewToBottomLayoutGuide.constant = verseEntryTextViewToBottomLayoutGuide.constant + basicHelpLabel.intrinsicContentSize().height
 
         if Int(activeVerse.views!) <= 2 {
             helpButton.enabled = false
@@ -126,8 +127,8 @@ class VersePracticeController: UIViewController, UITextViewDelegate {
         resetSubmissionTimer()
 
         if submissionTextVisible == true {
-            distanceFromSubmissionLabelToHelpLabel.constant = distanceFromSubmissionLabelToHelpLabel.constant - submissionLabel.frame.height - 8
-            distanceFromHelpToBottomLayoutGuide.constant = distanceFromHelpToBottomLayoutGuide.constant - submissionLabel.frame.height - 8
+            basicHelpLabelToBottomLayoutGuide.constant = basicHelpLabelToBottomLayoutGuide.constant - submissionLabel.frame.height
+            verseEntryTextViewToBottomLayoutGuide.constant = verseEntryTextViewToBottomLayoutGuide.constant - submissionLabel.frame.height
             UIView.animateWithDuration(0.5, animations: { self.submissionLabel.alpha = 0; self.view.layoutIfNeeded() })
             submissionTextVisible = false
         }
@@ -145,12 +146,12 @@ class VersePracticeController: UIViewController, UITextViewDelegate {
     @IBAction func helpButtonPressed(sender: AnyObject) {
         resetSubmissionTimer()
         hintLevel++
+
+        verseEntryTextViewToBottomLayoutGuide.constant = verseEntryTextViewToBottomLayoutGuide.constant + basicHelpLabel.intrinsicContentSize().height
+        self.view.layoutIfNeeded()
         
         switch hintLevel {
         case 1:
-            print(advancedHelpLabel)
-            print(advancedHelpLabel.frame.height)
-            distanceFromSubmissionLabelToTextView.constant = distanceFromSubmissionLabelToTextView.constant + basicHelpLabel.frame.height
             basicHelpLabel.attributedText = verseHelper.firstLetters()
             UIView.animateWithDuration(1, animations: { self.basicHelpLabel.alpha = 1 })
         case 2:
@@ -175,9 +176,11 @@ class VersePracticeController: UIViewController, UITextViewDelegate {
         let animationDuration = info.objectForKey(UIKeyboardAnimationDurationUserInfoKey)?.doubleValue
         let keyboardFrame: CGRect = frame.CGRectValue
         let height: CGFloat = keyboardFrame.size.height
-        
-        self.distanceFromHelpToBottomLayoutGuide.constant = height + 20
-        self.distanceFromSubmissionLabelToBottomLayoutGuide.constant = height + 20
+
+        basicHelpLabelToBottomLayoutGuide.constant = basicHelpLabelToBottomLayoutGuide.constant + height
+        promptLabelToBottomLayoutGuide.constant = promptLabelToBottomLayoutGuide.constant + height
+        verseEntryTextViewToBottomLayoutGuide.constant = verseEntryTextViewToBottomLayoutGuide.constant + height
+
         UIView.animateWithDuration(animationDuration!, animations: {
             self.view.layoutIfNeeded()
         })
@@ -186,14 +189,16 @@ class VersePracticeController: UIViewController, UITextViewDelegate {
     func keyboardWillHide(notification: NSNotification) {
         let info: NSDictionary = notification.userInfo!
         let animationDuration = info.objectForKey(UIKeyboardAnimationDurationUserInfoKey)?.doubleValue
-        
+
+        basicHelpLabelToBottomLayoutGuide.constant = 8
+
         if submissionTextVisible {
-            distanceFromHelpToBottomLayoutGuide.constant = submissionLabel.frame.height + 8
-        } else {
-            self.distanceFromHelpToBottomLayoutGuide.constant = 8
+            basicHelpLabelToBottomLayoutGuide.constant = basicHelpLabelToBottomLayoutGuide.constant + submissionLabel.frame.height
         }
 
-        self.distanceFromSubmissionLabelToBottomLayoutGuide.constant = 8
+        promptLabelToBottomLayoutGuide.constant = 8
+        verseEntryTextViewToBottomLayoutGuide.constant = basicHelpLabel.intrinsicContentSize().height + 8
+
         UIView.animateWithDuration(animationDuration!, animations: {
             self.view.layoutIfNeeded()
         })
