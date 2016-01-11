@@ -179,10 +179,6 @@
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <progressView opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" verticalHuggingPriority="750" fixedFrame="YES" progressViewStyle="bar" translatesAutoresizingMaskIntoConstraints="NO" id="4Cv-Dh-ZJc" userLabel="Passage Progress View">
-                                <rect key="frame" x="0.0" y="0.0" width="0.0" height="3"/>
-                                <color key="progressTintColor" red="0.40000000000000002" green="0.59999999999999998" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                            </progressView>
                             <label opaque="NO" userInteractionEnabled="NO" alpha="0.0" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mOy-O3-OK1" userLabel="Prompt Label">
                                 <rect key="frame" x="20" y="562" width="560" height="30"/>
                                 <constraints>
@@ -192,14 +188,19 @@
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" progressViewStyle="bar" translatesAutoresizingMaskIntoConstraints="NO" id="mVz-c2-GaJ">
+                                <rect key="frame" x="0.0" y="64" width="600" height="3"/>
+                            </progressView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <gestureRecognizers/>
                         <constraints>
+                            <constraint firstItem="mVz-c2-GaJ" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="-20" id="0gc-P3-vZd"/>
                             <constraint firstAttribute="trailingMargin" secondItem="4tE-Md-p5j" secondAttribute="trailing" id="0zE-yI-NqD"/>
                             <constraint firstItem="7RQ-kb-Wq2" firstAttribute="centerX" secondItem="hwo-nT-Hzu" secondAttribute="centerX" id="2LG-xD-KYM"/>
                             <constraint firstItem="7RQ-kb-Wq2" firstAttribute="centerY" secondItem="hwo-nT-Hzu" secondAttribute="centerY" id="2ee-WS-G3K"/>
                             <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="4tE-Md-p5j" secondAttribute="bottom" constant="8" id="9YC-ek-Ikh"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="mVz-c2-GaJ" secondAttribute="trailing" constant="-20" id="HAD-Sn-RDn"/>
                             <constraint firstItem="zAa-MO-Bnm" firstAttribute="height" secondItem="hwo-nT-Hzu" secondAttribute="height" id="LaB-1Z-1RU"/>
                             <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="hwo-nT-Hzu" secondAttribute="bottom" constant="8" id="MH4-aP-9uI"/>
                             <constraint firstItem="zAa-MO-Bnm" firstAttribute="width" secondItem="hwo-nT-Hzu" secondAttribute="width" id="Mgk-rR-QSn"/>
@@ -209,6 +210,7 @@
                             <constraint firstItem="4tE-Md-p5j" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="8" id="VGb-vj-uA6"/>
                             <constraint firstAttribute="trailingMargin" secondItem="hwo-nT-Hzu" secondAttribute="trailing" id="W36-KH-vfe"/>
                             <constraint firstAttribute="leadingMargin" secondItem="hwo-nT-Hzu" secondAttribute="leading" id="cdg-Ry-Kg7"/>
+                            <constraint firstItem="mVz-c2-GaJ" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" id="eBG-6q-wRG"/>
                             <constraint firstItem="7RQ-kb-Wq2" firstAttribute="height" secondItem="hwo-nT-Hzu" secondAttribute="height" id="gVB-Hz-FI5"/>
                             <constraint firstAttribute="leadingMargin" secondItem="mOy-O3-OK1" secondAttribute="leading" id="s9f-4t-OHZ"/>
                             <constraint firstAttribute="trailingMargin" secondItem="mOy-O3-OK1" secondAttribute="trailing" id="vZ0-EQ-w27"/>
@@ -229,7 +231,7 @@
                         <outlet property="basicHelpLabelToBottomLayoutGuide" destination="MH4-aP-9uI" id="6H4-vA-sky"/>
                         <outlet property="helpButton" destination="c4K-J3-KPm" id="qH9-Zx-GJy"/>
                         <outlet property="intermediateHelpLabel" destination="7RQ-kb-Wq2" id="cxj-IQ-bc1"/>
-                        <outlet property="passageProgressView" destination="4Cv-Dh-ZJc" id="JdG-hd-gLd"/>
+                        <outlet property="passageProgressView" destination="mVz-c2-GaJ" id="Mdw-pK-nAW"/>
                         <outlet property="promptLabel" destination="mOy-O3-OK1" id="42i-uQ-YpY"/>
                         <outlet property="promptLabelToBottomLayoutGuide" destination="SW2-P4-wb6" id="PSJ-Nv-S3X"/>
                         <outlet property="verseEntryTextView" destination="4tE-Md-p5j" id="r9u-60-Tdz"/>
