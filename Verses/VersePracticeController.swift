@@ -42,8 +42,7 @@ class VersePracticeController: UIViewController, UITextViewDelegate {
     
     var verseEntryTextViewEnabled = true
 
-    var indexPath: NSIndexPath!
-    var hintLevel: Int = 0
+    var helpLevel: Int = 0
     
     let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
     
@@ -73,7 +72,7 @@ class VersePracticeController: UIViewController, UITextViewDelegate {
 
         self.view.layoutIfNeeded()
         if Int(activeVerse.views!) <= 10 {
-            exposeFreeHints()
+            exposeFreeHelp()
         }
 
         promptTimer = NSTimer.scheduledTimerWithTimeInterval(4.5, target: self, selector: "userTimedOut", userInfo: nil, repeats: true)
@@ -100,20 +99,22 @@ class VersePracticeController: UIViewController, UITextViewDelegate {
         verseHelper = VerseHelper(verse: verse)
     }
     
-    func exposeFreeHints() {
+    func exposeFreeHelp() {
         verseEntryTextViewToBottomLayoutGuide.constant = verseEntryTextViewToBottomLayoutGuide.constant + basicHelpLabel.intrinsicContentSize().height
 
         if Int(activeVerse.views!) <= 2 {
             helpButton.enabled = false
             advancedHelpLabel.alpha = 1
         } else if Int(activeVerse.views!) > 2 && Int(activeVerse.views!) <= 5 {
-            hintLevel = 2
+            helpButton.enabled = true
+            helpLevel = 2
             basicHelpLabel.attributedText = verseHelper.firstLetters()
             intermediateHelpLabel.attributedText = verseHelper.randomWords()
             basicHelpLabel.alpha = 1
             intermediateHelpLabel.alpha = 1
         } else if Int(activeVerse.views!) > 5 && Int(activeVerse.views!) <= 10 {
-            hintLevel = 1
+            helpButton.enabled = true
+            helpLevel = 1
             basicHelpLabel.attributedText = verseHelper.firstLetters()
             basicHelpLabel.alpha = 1
         }
@@ -155,12 +156,12 @@ class VersePracticeController: UIViewController, UITextViewDelegate {
     @IBAction func helpButtonPressed(sender: AnyObject) {
         resetPromptTimer()
         hidePrompt()
-        hintLevel++
+        helpLevel++
 
         verseEntryTextViewToBottomLayoutGuide.constant = verseEntryTextViewToBottomLayoutGuide.constant + basicHelpLabel.intrinsicContentSize().height
         self.view.layoutIfNeeded()
         
-        switch hintLevel {
+        switch helpLevel {
         case 1:
             basicHelpLabel.attributedText = verseHelper.firstLetters()
             UIView.animateWithDuration(1, animations: { self.basicHelpLabel.alpha = 1 })
@@ -259,16 +260,13 @@ class VersePracticeController: UIViewController, UITextViewDelegate {
             self.basicHelpLabel.text = self.activeVerse.text
             self.intermediateHelpLabel.text = self.activeVerse.text
             self.advancedHelpLabel.text = self.activeVerse.text
-            
-            self.exposeFreeHints()
+
+            self.exposeFreeHelp()
             
             self.verseEntryTextViewEnabled = true
         })
         
         self.passageProgressView.setProgress(Float(self.verses.indexOfObject(self.activeVerse)) / Float(self.verses.count), animated: true)
-        
-        hintLevel = 0
-        helpButton.enabled = true
         
         let transitionVerseEntryTextViewAnimation = CATransition()
         transitionVerseEntryTextViewAnimation.duration = 0.5
