@@ -100,6 +100,7 @@ class VersePracticeController: UIViewController, UITextViewDelegate {
     }
     
     func exposeFreeHelp() {
+        verseEntryTextViewToBottomLayoutGuide.constant = 8
         verseEntryTextViewToBottomLayoutGuide.constant = verseEntryTextViewToBottomLayoutGuide.constant + basicHelpLabel.intrinsicContentSize().height
 
         if Int(activeVerse.views!) <= 2 {
@@ -127,8 +128,8 @@ class VersePracticeController: UIViewController, UITextViewDelegate {
     
     func hidePrompt() {
         if promptTextVisible == true {
-            basicHelpLabelToBottomLayoutGuide.constant = basicHelpLabelToBottomLayoutGuide.constant - promptLabel.frame.height
-            verseEntryTextViewToBottomLayoutGuide.constant = verseEntryTextViewToBottomLayoutGuide.constant - promptLabel.frame.height
+            basicHelpLabelToBottomLayoutGuide.constant = basicHelpLabelToBottomLayoutGuide.constant - promptLabel.frame.height - 5
+            verseEntryTextViewToBottomLayoutGuide.constant = verseEntryTextViewToBottomLayoutGuide.constant - promptLabel.frame.height - 5
             UIView.animateWithDuration(0.5, animations: { self.promptLabel.alpha = 0; self.view.layoutIfNeeded() })
             promptTextVisible = false
         }
