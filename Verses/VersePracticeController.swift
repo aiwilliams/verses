@@ -25,7 +25,7 @@ class VersePracticeController: UIViewController, UITextViewDelegate {
     @IBOutlet var verseEntryTextView: UITextView!
     @IBOutlet var helpButton: UIBarButtonItem!
     @IBOutlet var passageProgressView: UIProgressView!
-    
+
     @IBOutlet var basicHelpLabelToBottomLayoutGuide: NSLayoutConstraint!
     @IBOutlet var promptLabelToBottomLayoutGuide: NSLayoutConstraint!
     @IBOutlet var verseEntryTextViewToBottomLayoutGuide: NSLayoutConstraint!
@@ -39,6 +39,8 @@ class VersePracticeController: UIViewController, UITextViewDelegate {
 
     var promptTimer: NSTimer!
     var promptTextVisible = false
+    
+    var verseEntryTextViewEnabled = true
 
     var indexPath: NSIndexPath!
     var hintLevel: Int = 0
@@ -123,8 +125,6 @@ class VersePracticeController: UIViewController, UITextViewDelegate {
     }
     
     func hidePrompt() {
-        resetPromptTimer()
-        
         if promptTextVisible == true {
             basicHelpLabelToBottomLayoutGuide.constant = basicHelpLabelToBottomLayoutGuide.constant - promptLabel.frame.height
             verseEntryTextViewToBottomLayoutGuide.constant = verseEntryTextViewToBottomLayoutGuide.constant - promptLabel.frame.height
@@ -133,20 +133,27 @@ class VersePracticeController: UIViewController, UITextViewDelegate {
         }
     }
     
+    func textView(textView: UITextView, shouldChangeTextInRange range: NSRange, replacementText text: String) -> Bool {
+        return verseEntryTextViewEnabled
+    }
+    
     func textViewDidChange(textView: UITextView) {
+        resetPromptTimer()
         hidePrompt()
 
-        if verseHelper.roughlyMatches(textView.text) {
-            promptTimer.invalidate()
+        if self.verseHelper.roughlyMatches(textView.text) {
+            verseEntryTextViewEnabled = false
             let delay = 0.7 * Double(NSEC_PER_SEC)
             let dispatchTime = dispatch_time(DISPATCH_TIME_NOW, Int64(delay))
             dispatch_after(dispatchTime, dispatch_get_main_queue(), {
+                self.promptTimer.invalidate()
                 self.displayVerseSuccessAndTransition()
             })
         }
     }
 
     @IBAction func helpButtonPressed(sender: AnyObject) {
+        resetPromptTimer()
         hidePrompt()
         hintLevel++
 
@@ -254,6 +261,8 @@ class VersePracticeController: UIViewController, UITextViewDelegate {
             self.advancedHelpLabel.text = self.activeVerse.text
             
             self.exposeFreeHints()
+            
+            self.verseEntryTextViewEnabled = true
         })
         
         self.passageProgressView.setProgress(Float(self.verses.indexOfObject(self.activeVerse)) / Float(self.verses.count), animated: true)
@@ -267,9 +276,9 @@ class VersePracticeController: UIViewController, UITextViewDelegate {
         self.verseEntryTextView.layer.addAnimation(transitionVerseEntryTextViewAnimation, forKey: "pushTransition")
         UIView.animateWithDuration(0.5, animations: { self.promptLabel.alpha = 0 })
 
-        self.verseEntryTextView.text = ""
-        self.verseEntryTextView.becomeFirstResponder()
-        self.resetPromptTimer()
+        verseEntryTextView.text = ""
+        verseEntryTextView.becomeFirstResponder()
+        resetPromptTimer()
     }
     
     func bounceAnimation() -> CABasicAnimation {
