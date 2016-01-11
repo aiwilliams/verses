@@ -233,6 +233,7 @@ class VersePracticeController: UIViewController, UITextViewDelegate {
                 self.activeVerseIndex = self.activeVerseIndex + 1
                 self.activateVerse(self.verses[self.activeVerseIndex] as! UserVerse)
                 self.incrementActiveVerseViewCounter()
+                self.passageProgressView.setProgress(Float(self.verses.indexOfObject(self.activeVerse)) / Float(self.verses.count), animated: true)
                 
                 let delay = 0.7 * Double(NSEC_PER_SEC)
                 let dispatchTime = dispatch_time(DISPATCH_TIME_NOW, Int64(delay))
@@ -240,6 +241,7 @@ class VersePracticeController: UIViewController, UITextViewDelegate {
                     self.transitionToNextVerse()
                 })
             } else {
+                self.passageProgressView.setProgress(1, animated: true)
                 self.displayCompletion()
             }
         })
@@ -266,8 +268,6 @@ class VersePracticeController: UIViewController, UITextViewDelegate {
             
             self.verseEntryTextViewEnabled = true
         })
-        
-        self.passageProgressView.setProgress(Float(self.verses.indexOfObject(self.activeVerse)) / Float(self.verses.count), animated: true)
         
         let transitionVerseEntryTextViewAnimation = CATransition()
         transitionVerseEntryTextViewAnimation.duration = 0.5
