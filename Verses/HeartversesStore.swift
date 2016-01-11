@@ -51,12 +51,12 @@ class HeartversesStore {
         return []
     }
 
-    func findVerse(translation: String, bookSlug: String, chapter: Int, number: Int) -> NSManagedObject {
+    func findVerse(translation: String, bookSlug: String, chapter: Int, number: Int) throws -> NSManagedObject {
         var book: NSManagedObject!
         do {
             book = try findBook(translation, slug: bookSlug)
         } catch {
-            return NSManagedObject()
+            throw StoreError.PassageDoesNotExistInStore
         }
         let verse = findObject("Verse", format: "book == %@ and chapter == %@ and number == %@", book, chapter, number)
         return verse

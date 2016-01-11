@@ -41,10 +41,17 @@ class HeartversesAPI {
         } else {
             if parsedPassage.verse_end < parsedPassage.verse_start { throw FetchError.InvalidVerseRange }
             for v in parsedPassage.verse_start...parsedPassage.verse_end {
-                let fetchedVerse = store.findVerse(translation, bookSlug: parsedPassage.book, chapter: parsedPassage.chapter_start, number: v)
+                var fetchedVerse: NSManagedObject!
+                do {
+                    fetchedVerse = try store.findVerse(translation, bookSlug: parsedPassage.book, chapter: parsedPassage.chapter_start, number: v)
+                } catch HeartversesStore.StoreError.PassageDoesNotExistInStore {
+                    throw FetchError.PassageDoesNotExist
+                }
+
                 if fetchedVerse.objectID.temporaryID {
                     throw FetchError.PassageDoesNotExist
                 }
+
                 let verse = Verse(book: parsedPassage.book, chapter: parsedPassage.chapter_start, number: v, text: fetchedVerse.valueForKey("text") as! String)
                 passage.verses.append(verse)
             }
