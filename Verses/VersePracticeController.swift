@@ -76,6 +76,10 @@ class VersePracticeController: UIViewController, UITextViewDelegate {
         }
 
         promptTimer = NSTimer.scheduledTimerWithTimeInterval(4.5, target: self, selector: "userTimedOut", userInfo: nil, repeats: true)
+
+        if verses.count == 1 {
+            passageProgressView.hidden = true
+        }
     }
     
     func userTimedOut() {
@@ -248,7 +252,7 @@ class VersePracticeController: UIViewController, UITextViewDelegate {
     }
     
     func displayCompletion() {
-        let delay = 2.0 * Double(NSEC_PER_SEC)
+        let delay = 1.0 * Double(NSEC_PER_SEC)
         let dispatchTime = dispatch_time(DISPATCH_TIME_NOW, Int64(delay))
         dispatch_after(dispatchTime, dispatch_get_main_queue(), {
             self.performSegueWithIdentifier("completionSegue", sender: self)
