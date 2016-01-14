@@ -36,6 +36,8 @@ class VersePracticeController: UIViewController, UITextViewDelegate {
     var activeVerse: UserVerse!
     var verseHelper: VerseHelper!
     var activeVerseIndex: Int!
+    
+    var constraintsHelper: PracticeViewConstraintsHelper!
 
     var promptTimer: NSTimer!
     var promptTextVisible = false
@@ -69,6 +71,8 @@ class VersePracticeController: UIViewController, UITextViewDelegate {
         
         self.observeKeyboard()
         verseEntryTextView.becomeFirstResponder()
+        
+        constraintsHelper = PracticeViewConstraintsHelper(helpLabel: basicHelpLabel, promptLabel: promptLabel)
 
         self.view.layoutIfNeeded()
         if Int(activeVerse.views!) <= 10 {
@@ -82,10 +86,16 @@ class VersePracticeController: UIViewController, UITextViewDelegate {
         }
     }
     
+    func updateConstraints() {
+        basicHelpLabelToBottomLayoutGuide.constant = CGFloat(constraintsHelper.basicHelpLabelToBottomLayoutGuide)
+        verseEntryTextViewToBottomLayoutGuide.constant = CGFloat(constraintsHelper.verseEntryTextViewToBottomLayoutGuide)
+        promptLabelToBottomLayoutGuide.constant = CGFloat(constraintsHelper.promptLabelToBottomLayoutGuide)
+    }
+    
     func userTimedOut() {
         promptTimer.invalidate()
-        basicHelpLabelToBottomLayoutGuide.constant = basicHelpLabelToBottomLayoutGuide.constant + promptLabel.frame.height + 5
-        verseEntryTextViewToBottomLayoutGuide.constant = verseEntryTextViewToBottomLayoutGuide.constant + promptLabel.frame.height + 5
+        constraintsHelper.showPrompt()
+        updateConstraints()
 
         if promptTextVisible == false {
             UIView.animateWithDuration(0.5, animations: {
@@ -104,13 +114,14 @@ class VersePracticeController: UIViewController, UITextViewDelegate {
     }
     
     func exposeFreeHelp() {
-        verseEntryTextViewToBottomLayoutGuide.constant = 8
-        verseEntryTextViewToBottomLayoutGuide.constant = verseEntryTextViewToBottomLayoutGuide.constant + basicHelpLabel.intrinsicContentSize().height
-
         if Int(activeVerse.views!) <= 2 {
+            constraintsHelper.showHelp()
+            updateConstraints()
             helpButton.enabled = false
             advancedHelpLabel.alpha = 1
         } else if Int(activeVerse.views!) > 2 && Int(activeVerse.views!) <= 5 {
+            constraintsHelper.showHelp()
+            updateConstraints()
             helpButton.enabled = true
             helpLevel = 2
             basicHelpLabel.attributedText = verseHelper.firstLetters()
@@ -118,6 +129,8 @@ class VersePracticeController: UIViewController, UITextViewDelegate {
             basicHelpLabel.alpha = 1
             intermediateHelpLabel.alpha = 1
         } else if Int(activeVerse.views!) > 5 && Int(activeVerse.views!) <= 10 {
+            constraintsHelper.showHelp()
+            updateConstraints()
             helpButton.enabled = true
             helpLevel = 1
             basicHelpLabel.attributedText = verseHelper.firstLetters()
@@ -131,9 +144,9 @@ class VersePracticeController: UIViewController, UITextViewDelegate {
     }
     
     func hidePrompt() {
-        if promptTextVisible == true {
-            basicHelpLabelToBottomLayoutGuide.constant = basicHelpLabelToBottomLayoutGuide.constant - promptLabel.frame.height - 5
-            verseEntryTextViewToBottomLayoutGuide.constant = verseEntryTextViewToBottomLayoutGuide.constant - promptLabel.frame.height - 5
+        if promptTextVisible {
+            constraintsHelper.hidePrompt()
+            updateConstraints()
             UIView.animateWithDuration(0.5, animations: { self.promptLabel.alpha = 0; self.view.layoutIfNeeded() })
             promptTextVisible = false
         }
@@ -163,8 +176,10 @@ class VersePracticeController: UIViewController, UITextViewDelegate {
         hidePrompt()
         helpLevel++
 
-        verseEntryTextViewToBottomLayoutGuide.constant = verseEntryTextViewToBottomLayoutGuide.constant + basicHelpLabel.intrinsicContentSize().height
-        self.view.layoutIfNeeded()
+        if basicHelpLabel.alpha == 0 {
+            constraintsHelper.showHelp()
+            updateConstraints()
+        }
         
         switch helpLevel {
         case 1:
@@ -193,9 +208,8 @@ class VersePracticeController: UIViewController, UITextViewDelegate {
         let keyboardFrame: CGRect = frame.CGRectValue
         let height: CGFloat = keyboardFrame.size.height
 
-        basicHelpLabelToBottomLayoutGuide.constant = basicHelpLabelToBottomLayoutGuide.constant + height
-        promptLabelToBottomLayoutGuide.constant = promptLabelToBottomLayoutGuide.constant + height
-        verseEntryTextViewToBottomLayoutGuide.constant = verseEntryTextViewToBottomLayoutGuide.constant + height
+        constraintsHelper.keyboardWillChangeFrame(height, promptVisible: promptTextVisible, hintVisible: basicHelpLabel.alpha == 1)
+        updateConstraints()
 
         UIView.animateWithDuration(animationDuration!, animations: {
             self.view.layoutIfNeeded()
@@ -206,14 +220,8 @@ class VersePracticeController: UIViewController, UITextViewDelegate {
         let info: NSDictionary = notification.userInfo!
         let animationDuration = info.objectForKey(UIKeyboardAnimationDurationUserInfoKey)?.doubleValue
 
-        basicHelpLabelToBottomLayoutGuide.constant = 8
-
-        if promptTextVisible {
-            basicHelpLabelToBottomLayoutGuide.constant = basicHelpLabelToBottomLayoutGuide.constant + promptLabel.frame.height
-        }
-
-        promptLabelToBottomLayoutGuide.constant = 8
-        verseEntryTextViewToBottomLayoutGuide.constant = basicHelpLabel.intrinsicContentSize().height + 8
+        constraintsHelper.keyboardWillHide(promptTextVisible, hintVisible: basicHelpLabel.alpha == 1)
+        updateConstraints()
 
         UIView.animateWithDuration(animationDuration!, animations: {
             self.view.layoutIfNeeded()
@@ -268,6 +276,7 @@ class VersePracticeController: UIViewController, UITextViewDelegate {
             self.intermediateHelpLabel.text = self.activeVerse.text
             self.advancedHelpLabel.text = self.activeVerse.text
 
+            self.constraintsHelper = PracticeViewConstraintsHelper(helpLabel: self.basicHelpLabel, promptLabel: self.promptLabel)
             self.exposeFreeHelp()
             
             self.verseEntryTextViewEnabled = true
