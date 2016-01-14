@@ -40,7 +40,6 @@ class VersePracticeController: UIViewController, UITextViewDelegate {
     var constraintsHelper: PracticeViewConstraintsHelper!
 
     var promptTimer: NSTimer!
-    var promptTextVisible = false
     
     var verseEntryTextViewEnabled = true
 
@@ -97,14 +96,13 @@ class VersePracticeController: UIViewController, UITextViewDelegate {
         constraintsHelper.showPrompt()
         updateConstraints()
 
-        if promptTextVisible == false {
+        if promptLabel.alpha == 0 {
             UIView.animateWithDuration(0.5, animations: {
                 self.promptLabel.text = "Still there?"
                 self.promptLabel.textColor = self.neutralPromptColor
                 self.promptLabel.alpha = 1
                 self.view.layoutIfNeeded()
             })
-            promptTextVisible = true
         }
     }
     
@@ -144,11 +142,10 @@ class VersePracticeController: UIViewController, UITextViewDelegate {
     }
     
     func hidePrompt() {
-        if promptTextVisible {
+        if promptLabel.alpha == 1 {
             constraintsHelper.hidePrompt()
             updateConstraints()
             UIView.animateWithDuration(0.5, animations: { self.promptLabel.alpha = 0; self.view.layoutIfNeeded() })
-            promptTextVisible = false
         }
     }
     
@@ -208,7 +205,7 @@ class VersePracticeController: UIViewController, UITextViewDelegate {
         let keyboardFrame: CGRect = frame.CGRectValue
         let height: CGFloat = keyboardFrame.size.height
 
-        constraintsHelper.keyboardWillChangeFrame(height, promptVisible: promptTextVisible, hintVisible: basicHelpLabel.alpha == 1)
+        constraintsHelper.keyboardWillChangeFrame(height, promptVisible: promptLabel.alpha == 1, hintVisible: basicHelpLabel.alpha == 1)
         updateConstraints()
 
         UIView.animateWithDuration(animationDuration!, animations: {
@@ -220,7 +217,7 @@ class VersePracticeController: UIViewController, UITextViewDelegate {
         let info: NSDictionary = notification.userInfo!
         let animationDuration = info.objectForKey(UIKeyboardAnimationDurationUserInfoKey)?.doubleValue
 
-        constraintsHelper.keyboardWillHide(promptTextVisible, hintVisible: basicHelpLabel.alpha == 1)
+        constraintsHelper.keyboardWillHide(promptLabel.alpha == 1, hintVisible: basicHelpLabel.alpha == 1)
         updateConstraints()
 
         UIView.animateWithDuration(animationDuration!, animations: {
