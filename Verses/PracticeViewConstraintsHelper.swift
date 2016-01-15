@@ -10,50 +10,58 @@ import Foundation
 import UIKit
 
 public class PracticeViewConstraintsHelper {
-    var basicHelpLabelToBottomLayoutGuide = 8
-    var promptLabelToBottomLayoutGuide = 8
-    var verseEntryTextViewToBottomLayoutGuide = 8
+    var basicHelpLabelToBottomLayoutGuide: NSLayoutConstraint!
+    var promptLabelToBottomLayoutGuide: NSLayoutConstraint!
+    var verseEntryTextViewToBottomLayoutGuide: NSLayoutConstraint!
+
     var basicHelpLabel: UILabel!
     var promptLabel: UILabel!
-    
-    init(helpLabel: UILabel, promptLabel: UILabel) {
+
+    init(helpLabel: UILabel, promptLabel: UILabel, basicHelpLabelToBottomLayoutGuide: NSLayoutConstraint, promptLabelToBottomLayoutGuide: NSLayoutConstraint, verseEntryTextViewToBottomLayoutGuide: NSLayoutConstraint) {
         self.basicHelpLabel = helpLabel
         self.promptLabel = promptLabel
+        self.basicHelpLabelToBottomLayoutGuide = basicHelpLabelToBottomLayoutGuide
+        self.promptLabelToBottomLayoutGuide = promptLabelToBottomLayoutGuide
+        self.verseEntryTextViewToBottomLayoutGuide = verseEntryTextViewToBottomLayoutGuide
+        
+        self.basicHelpLabelToBottomLayoutGuide.constant = 8
+        self.promptLabelToBottomLayoutGuide.constant = 8
+        self.verseEntryTextViewToBottomLayoutGuide.constant = 8
     }
     
     func showHelp() {
-        verseEntryTextViewToBottomLayoutGuide = verseEntryTextViewToBottomLayoutGuide + Int(basicHelpLabel.intrinsicContentSize().height)
+        verseEntryTextViewToBottomLayoutGuide.constant = verseEntryTextViewToBottomLayoutGuide.constant + basicHelpLabel.intrinsicContentSize().height
     }
     
     func showPrompt() {
-        basicHelpLabelToBottomLayoutGuide = basicHelpLabelToBottomLayoutGuide + Int(promptLabel.frame.height)
-        verseEntryTextViewToBottomLayoutGuide = verseEntryTextViewToBottomLayoutGuide + Int(promptLabel.frame.height)
+        basicHelpLabelToBottomLayoutGuide.constant = basicHelpLabelToBottomLayoutGuide.constant + promptLabel.frame.height
+        verseEntryTextViewToBottomLayoutGuide.constant = verseEntryTextViewToBottomLayoutGuide.constant + promptLabel.frame.height
     }
     
     func hidePrompt() {
-        basicHelpLabelToBottomLayoutGuide = basicHelpLabelToBottomLayoutGuide - Int(promptLabel.frame.height)
-        verseEntryTextViewToBottomLayoutGuide = verseEntryTextViewToBottomLayoutGuide - Int(promptLabel.frame.height)
+        basicHelpLabelToBottomLayoutGuide.constant = basicHelpLabelToBottomLayoutGuide.constant - promptLabel.frame.height
+        verseEntryTextViewToBottomLayoutGuide.constant = verseEntryTextViewToBottomLayoutGuide.constant - promptLabel.frame.height
     }
     
     func keyboardWillChangeFrame(keyboardHeight: CGFloat, promptVisible: Bool, hintVisible: Bool) {
-        verseEntryTextViewToBottomLayoutGuide = 8 + Int(keyboardHeight)
-        if hintVisible { verseEntryTextViewToBottomLayoutGuide = verseEntryTextViewToBottomLayoutGuide + Int(basicHelpLabel.frame.height) }
-        if promptVisible { verseEntryTextViewToBottomLayoutGuide = verseEntryTextViewToBottomLayoutGuide + Int(promptLabel.frame.height) }
+        verseEntryTextViewToBottomLayoutGuide.constant = 8 + keyboardHeight
+        if hintVisible { verseEntryTextViewToBottomLayoutGuide.constant = verseEntryTextViewToBottomLayoutGuide.constant + basicHelpLabel.frame.height }
+        if promptVisible { verseEntryTextViewToBottomLayoutGuide.constant = verseEntryTextViewToBottomLayoutGuide.constant + promptLabel.frame.height }
 
-        basicHelpLabelToBottomLayoutGuide = 8 + Int(keyboardHeight)
-        if promptVisible { basicHelpLabelToBottomLayoutGuide = basicHelpLabelToBottomLayoutGuide + Int(promptLabel.frame.height) }
+        basicHelpLabelToBottomLayoutGuide.constant = 8 + keyboardHeight
+        if promptVisible { basicHelpLabelToBottomLayoutGuide.constant = basicHelpLabelToBottomLayoutGuide.constant + promptLabel.frame.height }
 
-        promptLabelToBottomLayoutGuide = 8 + Int(keyboardHeight)
+        promptLabelToBottomLayoutGuide.constant = 8 + keyboardHeight
     }
     
     func keyboardWillHide(promptVisible: Bool, hintVisible: Bool) {
-        verseEntryTextViewToBottomLayoutGuide = 8
-        if promptVisible { verseEntryTextViewToBottomLayoutGuide = verseEntryTextViewToBottomLayoutGuide + Int(promptLabel.frame.height) }
-        if hintVisible { verseEntryTextViewToBottomLayoutGuide = verseEntryTextViewToBottomLayoutGuide + Int(basicHelpLabel.frame.height) }
+        verseEntryTextViewToBottomLayoutGuide.constant = 8
+        if promptVisible { verseEntryTextViewToBottomLayoutGuide.constant = verseEntryTextViewToBottomLayoutGuide.constant + promptLabel.frame.height }
+        if hintVisible { verseEntryTextViewToBottomLayoutGuide.constant = verseEntryTextViewToBottomLayoutGuide.constant + basicHelpLabel.frame.height }
 
-        basicHelpLabelToBottomLayoutGuide = 8
-        if promptVisible { basicHelpLabelToBottomLayoutGuide = basicHelpLabelToBottomLayoutGuide + Int(promptLabel.frame.height) }
+        basicHelpLabelToBottomLayoutGuide.constant = 8
+        if promptVisible { basicHelpLabelToBottomLayoutGuide.constant = basicHelpLabelToBottomLayoutGuide.constant + promptLabel.frame.height }
 
-        promptLabelToBottomLayoutGuide = 8
+        promptLabelToBottomLayoutGuide.constant = 8
     }
 }
