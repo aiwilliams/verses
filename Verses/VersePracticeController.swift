@@ -193,7 +193,7 @@ class VersePracticeController: UIViewController, UITextViewDelegate {
         let keyboardFrame: CGRect = frame.CGRectValue
         let height: CGFloat = keyboardFrame.size.height
 
-        constraintsHelper.keyboardWillChangeFrame(height, promptVisible: promptLabel.alpha == 1, hintVisible: basicHelpLabel.alpha == 1)
+        constraintsHelper.keyboardWillChangeFrame(height, promptVisible: promptLabel.alpha == 1, hintVisible: basicHelpLabel.alpha == 1 || advancedHelpLabel.alpha == 1)
 
         UIView.animateWithDuration(animationDuration!, animations: {
             self.view.layoutIfNeeded()
@@ -204,7 +204,7 @@ class VersePracticeController: UIViewController, UITextViewDelegate {
         let info: NSDictionary = notification.userInfo!
         let animationDuration = info.objectForKey(UIKeyboardAnimationDurationUserInfoKey)?.doubleValue
 
-        constraintsHelper.keyboardWillHide(promptLabel.alpha == 1, hintVisible: basicHelpLabel.alpha == 1)
+        constraintsHelper.keyboardWillHide(promptLabel.alpha == 1, hintVisible: basicHelpLabel.alpha == 1 || advancedHelpLabel.alpha == 1)
 
         UIView.animateWithDuration(animationDuration!, animations: {
             self.view.layoutIfNeeded()
