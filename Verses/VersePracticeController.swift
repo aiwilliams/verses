@@ -78,7 +78,7 @@ class VersePracticeController: UIViewController, UITextViewDelegate {
             exposeFreeHelp()
         }
 
-        promptTimer = NSTimer.scheduledTimerWithTimeInterval(4.5, target: self, selector: "userTimedOut", userInfo: nil, repeats: true)
+        resetPromptTimer()
 
         if verses.count == 1 {
             passageProgressView.hidden = true
@@ -98,7 +98,7 @@ class VersePracticeController: UIViewController, UITextViewDelegate {
             promptTimer.invalidate()
 
             let fadeAnimation = CATransition()
-            fadeAnimation.type = kCATransitionReveal
+            fadeAnimation.type = kCATransitionFade
             fadeAnimation.duration = 0.5
             promptLabel.layer.addAnimation(fadeAnimation, forKey: "kCATransitionFade")
             self.promptLabel.text = "Try a hint!"
@@ -136,8 +136,8 @@ class VersePracticeController: UIViewController, UITextViewDelegate {
     }
     
     func resetPromptTimer() {
-        promptTimer.invalidate()
-        promptTimer = NSTimer.scheduledTimerWithTimeInterval(4.5, target: self, selector: "userTimedOut", userInfo: nil, repeats: true)
+        if let t = promptTimer { t.invalidate() }
+        promptTimer = NSTimer.scheduledTimerWithTimeInterval(6, target: self, selector: "userTimedOut", userInfo: nil, repeats: true)
     }
     
     func hidePrompt() {
