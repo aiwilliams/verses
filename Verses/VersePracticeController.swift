@@ -86,16 +86,25 @@ class VersePracticeController: UIViewController, UITextViewDelegate {
     }
     
     func userTimedOut() {
-        promptTimer.invalidate()
-        constraintsHelper.showPrompt()
-
         if promptLabel.alpha == 0 {
+            constraintsHelper.showPrompt()
             UIView.animateWithDuration(0.5, animations: {
                 self.promptLabel.text = "Still there?"
                 self.promptLabel.textColor = self.neutralPromptColor
                 self.promptLabel.alpha = 1
                 self.view.layoutIfNeeded()
             })
+        } else if promptLabel.alpha == 1 {
+            promptTimer.invalidate()
+
+            let fadeAnimation = CATransition()
+            fadeAnimation.type = kCATransitionReveal
+            fadeAnimation.duration = 0.5
+            promptLabel.layer.addAnimation(fadeAnimation, forKey: "kCATransitionFade")
+            self.promptLabel.text = "Try a hint!"
+
+            let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: "helpButtonPressed:")
+            self.promptLabel.addGestureRecognizer(tapGestureRecognizer)
         }
     }
     
