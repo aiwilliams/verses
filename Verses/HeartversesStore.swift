@@ -26,6 +26,10 @@ class HeartversesStore {
         let book = findObject("Book", format: "name == %@ and translation == %@", slug, translation)
         if book.objectID.temporaryID {
             throw StoreError.PassageDoesNotExistInStore
+            // Eventually, we want to have the below code instead of the throw. See https://github.com/aiwilliams/verses/issues/65
+            // book.setValue(slug, forKey: "name")
+            // book.setValue(translation, forKey: "translation")
+            //  saveContext()
         }
         return book
     }

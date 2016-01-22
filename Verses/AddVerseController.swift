@@ -14,20 +14,24 @@ class AddVerseController: UIViewController {
     @IBOutlet var verseRequest: UITextField!
     @IBOutlet var errorLabel: UILabel!
     @IBOutlet var passagePreviewLabel: UILabel!
+    @IBOutlet var translationSegment: UISegmentedControl!
     
     let passageParser = PassageParser()
-    let API = HeartversesAPI(defaultTranslation: "kjv")
+    let API = HeartversesAPI()
     let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+    
+    let translations: [Int: String] = [0: "kjv", 1: "nkjv"]
     
     override func viewDidLoad() {
         super.viewDidLoad()
         errorLabel.hidden = true
         passagePreviewLabel.hidden = true
         verseRequest.becomeFirstResponder()
-        verseRequest.addTarget(self, action: "textFieldDidChange:", forControlEvents: .EditingChanged)
+        verseRequest.addTarget(self, action: "updateVersePreview", forControlEvents: .EditingChanged)
+        translationSegment.addTarget(self, action: "updateVersePreview", forControlEvents: .ValueChanged)
     }
     
-    func textFieldDidChange(notification: NSNotification) {
+    func updateVersePreview() {
         do {
             let passage = try self.fetchPassage()
             passagePreviewLabel.text = passage.verses.first!.text
@@ -57,7 +61,7 @@ class AddVerseController: UIViewController {
     func fetchPassage() throws -> Passage {
         let parsedPassage = passageParser.parse(verseRequest.text!)
         do {
-            let passage = try API.fetchPassage(parsedPassage)
+            let passage = try API.fetchPassage(parsedPassage, translation: translations[translationSegment.selectedSegmentIndex]!)
             return passage
         } catch HeartversesAPI.FetchError.PassageDoesNotExist {
             passagePreviewLabel.text = ""

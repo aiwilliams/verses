@@ -19,7 +19,7 @@
                                 <rect key="frame" x="0.0" y="92" width="600" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="tCs-02-W21" id="IOC-Xd-Qd3">
-                                    <rect key="frame" x="0.0" y="0.0" width="567" height="44"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="567" height="43"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="⚐" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="exG-YY-Pmc">
@@ -107,15 +107,25 @@
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="gjS-ue-5zf">
+                                <rect key="frame" x="20" y="255" width="560" height="29"/>
+                                <segments>
+                                    <segment title="KJV"/>
+                                    <segment title="NKJV"/>
+                                </segments>
+                            </segmentedControl>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstItem="gjS-ue-5zf" firstAttribute="top" secondItem="w8C-gT-PNW" secondAttribute="bottom" constant="8" id="1V7-fz-dsC"/>
                             <constraint firstAttribute="leadingMargin" secondItem="Gc0-q9-h3h" secondAttribute="leading" id="4fw-YI-HWU"/>
                             <constraint firstAttribute="leadingMargin" secondItem="w8C-gT-PNW" secondAttribute="leading" id="BCt-Ta-f6J"/>
                             <constraint firstAttribute="trailingMargin" secondItem="Gc0-q9-h3h" secondAttribute="trailing" id="IM4-Tj-dc6"/>
                             <constraint firstAttribute="trailingMargin" secondItem="w8C-gT-PNW" secondAttribute="trailing" id="bmN-5v-1gh"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="gjS-ue-5zf" secondAttribute="trailing" id="dne-CX-Plt"/>
                             <constraint firstAttribute="leadingMargin" secondItem="C4L-vn-hkd" secondAttribute="leading" id="gI0-l7-1v5"/>
                             <constraint firstItem="w8C-gT-PNW" firstAttribute="top" secondItem="C4L-vn-hkd" secondAttribute="bottom" constant="2" id="gae-3u-cY5"/>
+                            <constraint firstAttribute="leadingMargin" secondItem="gjS-ue-5zf" secondAttribute="leading" id="kPQ-XQ-4zY"/>
                             <constraint firstItem="Gc0-q9-h3h" firstAttribute="top" secondItem="lAW-NV-pcT" secondAttribute="bottom" constant="41" id="tek-tl-7DT"/>
                             <constraint firstAttribute="trailingMargin" secondItem="C4L-vn-hkd" secondAttribute="trailing" id="wOE-vb-zDP"/>
                             <constraint firstItem="C4L-vn-hkd" firstAttribute="top" secondItem="Gc0-q9-h3h" secondAttribute="bottom" constant="8" id="wli-8d-UMw"/>
@@ -136,6 +146,7 @@
                     <connections>
                         <outlet property="errorLabel" destination="C4L-vn-hkd" id="azv-Fm-ByS"/>
                         <outlet property="passagePreviewLabel" destination="w8C-gT-PNW" id="pyA-Uu-Xp0"/>
+                        <outlet property="translationSegment" destination="gjS-ue-5zf" id="rx1-Vz-oJe"/>
                         <outlet property="verseRequest" destination="Gc0-q9-h3h" id="1Wq-kh-3EC"/>
                     </connections>
                 </viewController>

@@ -12,18 +12,12 @@ import CoreData
 var APIURL: String = "http://heartversesapi.herokuapp.com/api/v1"
 
 class HeartversesAPI {
-    var translation: String!
-    
     enum FetchError: ErrorType {
         case PassageDoesNotExist
         case InvalidVerseRange
     }
 
-    init(defaultTranslation: String) {
-        self.translation = defaultTranslation
-    }
-
-    func fetchPassage(parsedPassage: ParsedPassage) throws -> Passage {
+    func fetchPassage(parsedPassage: ParsedPassage, translation: String="kjv") throws -> Passage {
         let store = HeartversesStore(sqliteURL: NSBundle.mainBundle().URLForResource("Heartverses", withExtension: "sqlite")!)
         var passage = Passage(parsedPassage: parsedPassage)
         
