@@ -42,6 +42,7 @@ class VersePracticeController: UIViewController, UITextViewDelegate {
     var promptTimer: NSTimer!
     
     var verseEntryTextViewEnabled = true
+    var keyboardHeight: CGFloat = 0
 
     var helpLevel: Int = 0
     
@@ -71,7 +72,7 @@ class VersePracticeController: UIViewController, UITextViewDelegate {
         self.observeKeyboard()
         verseEntryTextView.becomeFirstResponder()
         
-        constraintsHelper = PracticeViewConstraintsHelper(helpLabel: basicHelpLabel, promptLabel: promptLabel, basicHelpLabelToBottomLayoutGuide: basicHelpLabelToBottomLayoutGuide, promptLabelToBottomLayoutGuide: promptLabelToBottomLayoutGuide, verseEntryTextViewToBottomLayoutGuide: verseEntryTextViewToBottomLayoutGuide)
+        constraintsHelper = PracticeViewConstraintsHelper(helpLabel: basicHelpLabel, promptLabel: promptLabel, basicHelpLabelToBottomLayoutGuide: basicHelpLabelToBottomLayoutGuide, promptLabelToBottomLayoutGuide: promptLabelToBottomLayoutGuide, verseEntryTextViewToBottomLayoutGuide: verseEntryTextViewToBottomLayoutGuide, keyboardHeight: self.keyboardHeight)
 
         self.view.layoutIfNeeded()
         if Int(activeVerse.views!) <= 10 {
@@ -193,6 +194,16 @@ class VersePracticeController: UIViewController, UITextViewDelegate {
     func observeKeyboard() {
         NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("keyboardWillChangeFrame:"), name: UIKeyboardWillChangeFrameNotification, object: nil)
         NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("keyboardWillHide:"), name: UIKeyboardWillHideNotification, object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("keyboardWillShow:"), name: UIKeyboardWillShowNotification, object: nil)
+    }
+    
+    func keyboardWillShow(notification: NSNotification) {
+        let info: NSDictionary = notification.userInfo!
+        let frame = info.objectForKey(UIKeyboardFrameEndUserInfoKey)!
+        let keyboardFrame: CGRect = frame.CGRectValue
+        let height: CGFloat = keyboardFrame.size.height
+        
+        keyboardHeight = height
     }
     
     func keyboardWillChangeFrame(notification: NSNotification) {
@@ -250,7 +261,7 @@ class VersePracticeController: UIViewController, UITextViewDelegate {
             }
         })
     }
-    
+
     func displayCompletion() {
         let delay = 1.0 * Double(NSEC_PER_SEC)
         let dispatchTime = dispatch_time(DISPATCH_TIME_NOW, Int64(delay))
@@ -258,7 +269,7 @@ class VersePracticeController: UIViewController, UITextViewDelegate {
             self.performSegueWithIdentifier("completionSegue", sender: self)
         })
     }
-    
+
     func transitionToNextVerse() {
         title = activeVerse.reference
         verseEntryTextView.editable = true
@@ -268,7 +279,7 @@ class VersePracticeController: UIViewController, UITextViewDelegate {
             self.intermediateHelpLabel.text = self.activeVerse.text
             self.advancedHelpLabel.text = self.activeVerse.text
 
-            self.constraintsHelper = PracticeViewConstraintsHelper(helpLabel: self.basicHelpLabel, promptLabel: self.promptLabel, basicHelpLabelToBottomLayoutGuide: self.basicHelpLabelToBottomLayoutGuide, promptLabelToBottomLayoutGuide: self.promptLabelToBottomLayoutGuide, verseEntryTextViewToBottomLayoutGuide: self.verseEntryTextViewToBottomLayoutGuide)
+            self.constraintsHelper = PracticeViewConstraintsHelper(helpLabel: self.basicHelpLabel, promptLabel: self.promptLabel, basicHelpLabelToBottomLayoutGuide: self.basicHelpLabelToBottomLayoutGuide, promptLabelToBottomLayoutGuide: self.promptLabelToBottomLayoutGuide, verseEntryTextViewToBottomLayoutGuide: self.verseEntryTextViewToBottomLayoutGuide, keyboardHeight: self.keyboardHeight)
             self.exposeFreeHelp()
             
             self.verseEntryTextViewEnabled = true
@@ -284,7 +295,7 @@ class VersePracticeController: UIViewController, UITextViewDelegate {
         verseEntryTextView.becomeFirstResponder()
         resetPromptTimer()
     }
-    
+
     func bounceAnimation() -> CABasicAnimation {
         let animation = CABasicAnimation(keyPath: "position")
         animation.duration = 0.11

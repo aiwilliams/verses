@@ -17,16 +17,16 @@ public class PracticeViewConstraintsHelper {
     var basicHelpLabel: UILabel!
     var promptLabel: UILabel!
 
-    init(helpLabel: UILabel, promptLabel: UILabel, basicHelpLabelToBottomLayoutGuide: NSLayoutConstraint, promptLabelToBottomLayoutGuide: NSLayoutConstraint, verseEntryTextViewToBottomLayoutGuide: NSLayoutConstraint) {
+    init(helpLabel: UILabel, promptLabel: UILabel, basicHelpLabelToBottomLayoutGuide: NSLayoutConstraint, promptLabelToBottomLayoutGuide: NSLayoutConstraint, verseEntryTextViewToBottomLayoutGuide: NSLayoutConstraint, keyboardHeight: CGFloat) {
         self.basicHelpLabel = helpLabel
         self.promptLabel = promptLabel
         self.basicHelpLabelToBottomLayoutGuide = basicHelpLabelToBottomLayoutGuide
         self.promptLabelToBottomLayoutGuide = promptLabelToBottomLayoutGuide
         self.verseEntryTextViewToBottomLayoutGuide = verseEntryTextViewToBottomLayoutGuide
         
-        self.basicHelpLabelToBottomLayoutGuide.constant = 8
-        self.promptLabelToBottomLayoutGuide.constant = 8
-        self.verseEntryTextViewToBottomLayoutGuide.constant = 8
+        self.basicHelpLabelToBottomLayoutGuide.constant = 8 + keyboardHeight
+        self.promptLabelToBottomLayoutGuide.constant = 8 + keyboardHeight
+        self.verseEntryTextViewToBottomLayoutGuide.constant = 8 + keyboardHeight
     }
     
     func showHelp() {
