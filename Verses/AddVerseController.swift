@@ -14,21 +14,25 @@ class AddVerseController: UIViewController {
     @IBOutlet var verseRequest: UITextField!
     @IBOutlet var errorLabel: UILabel!
     @IBOutlet var passagePreviewLabel: UILabel!
-    @IBOutlet var translationSegment: UISegmentedControl!
+    @IBOutlet var translationLabel: UILabel!
     
     let passageParser = PassageParser()
     let API = HeartversesAPI()
     let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
     
-    let translations: [Int: String] = [0: "kjv", 1: "nkjv"]
+    let userDefaults = NSUserDefaults.standardUserDefaults()
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         errorLabel.hidden = true
         passagePreviewLabel.hidden = true
+        
         verseRequest.becomeFirstResponder()
         verseRequest.addTarget(self, action: "updateVersePreview", forControlEvents: .EditingChanged)
-        translationSegment.addTarget(self, action: "updateVersePreview", forControlEvents: .ValueChanged)
+
+        let preferredTranslation = userDefaults.stringForKey("preferredBibleTranslation")!
+        translationLabel.text = "Translation: \(preferredTranslation) (change in Settings)"
     }
     
     func updateVersePreview() {
@@ -61,7 +65,8 @@ class AddVerseController: UIViewController {
     func fetchPassage() throws -> Passage {
         let parsedPassage = passageParser.parse(verseRequest.text!)
         do {
-            let passage = try API.fetchPassage(parsedPassage, translation: translations[translationSegment.selectedSegmentIndex]!)
+            let preferredTranslation = userDefaults.stringForKey("preferredBibleTranslation")!
+            let passage = try API.fetchPassage(parsedPassage, translation: preferredTranslation.lowercaseString)
             return passage
         } catch HeartversesAPI.FetchError.PassageDoesNotExist {
             passagePreviewLabel.text = ""
