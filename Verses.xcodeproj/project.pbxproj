@@ -12,6 +12,7 @@
 		FD0EFD891C52E21C00BC83A6 /* Heartverses.sqlite-shm in Resources */ = {isa = PBXBuildFile; fileRef = FD0EFD871C52E21C00BC83A6 /* Heartverses.sqlite-shm */; };
 		FD0EFD8A1C52E21C00BC83A6 /* Heartverses.sqlite-wal in Resources */ = {isa = PBXBuildFile; fileRef = FD0EFD881C52E21C00BC83A6 /* Heartverses.sqlite-wal */; };
 		FD0EFD8C1C55756900BC83A6 /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = FD0EFD8B1C55756900BC83A6 /* Settings.bundle */; };
+		FD0EFD8E1C56BC3300BC83A6 /* IntroductionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD0EFD8D1C56BC3300BC83A6 /* IntroductionViewController.swift */; };
 		FD79BAE51C1BC45A00266A5A /* UserVerse+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD79BAE21C1BC45A00266A5A /* UserVerse+CoreDataProperties.swift */; };
 		FD79BAE61C1BC45A00266A5A /* UserVerse.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD79BAE31C1BC45A00266A5A /* UserVerse.swift */; };
 		FD79BAE71C1BC45A00266A5A /* UserPassage+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD79BAE41C1BC45A00266A5A /* UserPassage+CoreDataProperties.swift */; };
@@ -75,6 +76,7 @@
 		FD0EFD871C52E21C00BC83A6 /* Heartverses.sqlite-shm */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Heartverses.sqlite-shm"; sourceTree = "<group>"; };
 		FD0EFD881C52E21C00BC83A6 /* Heartverses.sqlite-wal */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Heartverses.sqlite-wal"; sourceTree = "<group>"; };
 		FD0EFD8B1C55756900BC83A6 /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; name = Settings.bundle; path = Verses/Settings.bundle; sourceTree = "<group>"; };
+		FD0EFD8D1C56BC3300BC83A6 /* IntroductionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IntroductionViewController.swift; sourceTree = "<group>"; };
 		FD79BAE21C1BC45A00266A5A /* UserVerse+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UserVerse+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		FD79BAE31C1BC45A00266A5A /* UserVerse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserVerse.swift; sourceTree = "<group>"; };
 		FD79BAE41C1BC45A00266A5A /* UserPassage+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UserPassage+CoreDataProperties.swift"; sourceTree = "<group>"; };
@@ -177,6 +179,7 @@
 				FD0EFD871C52E21C00BC83A6 /* Heartverses.sqlite-shm */,
 				FD0EFD881C52E21C00BC83A6 /* Heartverses.sqlite-wal */,
 				FDB61B8C1BF533D800F8C61D /* AppDelegate.swift */,
+				FD0EFD8D1C56BC3300BC83A6 /* IntroductionViewController.swift */,
 				FDB61B8E1BF533D800F8C61D /* VersePracticeController.swift */,
 				FDB61BBD1BF5410000F8C61D /* VersesIndexController.swift */,
 				FDB61BBF1BF5457E00F8C61D /* AddVerseController.swift */,
@@ -390,6 +393,7 @@
 				FD79BAE51C1BC45A00266A5A /* UserVerse+CoreDataProperties.swift in Sources */,
 				FDB61B8F1BF533D800F8C61D /* VersePracticeController.swift in Sources */,
 				FD79BAE61C1BC45A00266A5A /* UserVerse.swift in Sources */,
+				FD0EFD8E1C56BC3300BC83A6 /* IntroductionViewController.swift in Sources */,
 				FDB61BC01BF5457E00F8C61D /* AddVerseController.swift in Sources */,
 				FDAFD8FE1C2DAB1C002F4FF5 /* VerseHelper.swift in Sources */,
 				FDDF4EC51C459EEC00B2A831 /* PracticeViewConstraintsHelper.swift in Sources */,

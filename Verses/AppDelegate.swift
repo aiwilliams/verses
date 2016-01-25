@@ -16,8 +16,26 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
+        let userDefaults = NSUserDefaults.standardUserDefaults()
         let defaultDefaults: Dictionary<String, AnyObject> = ["preferredBibleTranslation": "KJV"]
-        NSUserDefaults.standardUserDefaults().registerDefaults(defaultDefaults)
+        userDefaults.registerDefaults(defaultDefaults)
+        
+        self.window = UIWindow(frame: UIScreen.mainScreen().bounds)
+        let mainStoryboard = UIStoryboard(name: "Main", bundle: nil)
+        
+        if !userDefaults.boolForKey("hasLaunchedOnce") {
+            userDefaults.setBool(true, forKey: "hasLaunchedOnce")
+
+            let introductionController = mainStoryboard.instantiateViewControllerWithIdentifier("IntroductionViewController") as! IntroductionViewController
+            
+            self.window?.rootViewController = introductionController
+            self.window?.makeKeyAndVisible()
+        } else {
+            let versesIndexController = mainStoryboard.instantiateViewControllerWithIdentifier("VersesIndexController")
+
+            self.window?.rootViewController = versesIndexController
+            self.window?.makeKeyAndVisible()
+        }
 
         return true
     }
