@@ -43,6 +43,7 @@ class VersePracticeController: UIViewController, UITextViewDelegate {
     
     var verseEntryTextViewEnabled = true
     var keyboardHeight: CGFloat = 0
+    var verseCompleted = false
 
     var helpLevel: Int = 0
     
@@ -58,7 +59,7 @@ class VersePracticeController: UIViewController, UITextViewDelegate {
         verseEntryTextView.delegate = self
         
         verses = passage.valueForKey("verses") as! NSOrderedSet
-        
+
         activateVerse(verses.firstObject as! UserVerse)
         activeVerseIndex = 0
         incrementActiveVerseViewCounter()
@@ -149,6 +150,12 @@ class VersePracticeController: UIViewController, UITextViewDelegate {
     }
     
     func textView(textView: UITextView, shouldChangeTextInRange range: NSRange, replacementText text: String) -> Bool {
+        if verseCompleted {
+            if self.verseHelper.roughlyMatches("\(textView.text)\(text)") {
+                return true
+            }
+        }
+
         return verseEntryTextViewEnabled
     }
     
@@ -156,14 +163,17 @@ class VersePracticeController: UIViewController, UITextViewDelegate {
         resetPromptTimer()
         hidePrompt()
 
-        if self.verseHelper.roughlyMatches(textView.text) {
-            verseEntryTextViewEnabled = false
-            let delay = 0.7 * Double(NSEC_PER_SEC)
-            let dispatchTime = dispatch_time(DISPATCH_TIME_NOW, Int64(delay))
-            dispatch_after(dispatchTime, dispatch_get_main_queue(), {
-                self.promptTimer.invalidate()
-                self.displayVerseSuccessAndTransition()
-            })
+        if !verseCompleted {
+            if self.verseHelper.roughlyMatches(textView.text) {
+                verseEntryTextViewEnabled = false
+                verseCompleted = true
+                let delay = 2 * Double(NSEC_PER_SEC)
+                let dispatchTime = dispatch_time(DISPATCH_TIME_NOW, Int64(delay))
+                dispatch_after(dispatchTime, dispatch_get_main_queue(), {
+                    self.promptTimer.invalidate()
+                    self.displayVerseSuccessAndTransition()
+                })
+            }
         }
     }
 
@@ -294,6 +304,7 @@ class VersePracticeController: UIViewController, UITextViewDelegate {
         verseEntryTextView.text = ""
         verseEntryTextView.becomeFirstResponder()
         resetPromptTimer()
+        verseCompleted = false
     }
 
     func bounceAnimation() -> CABasicAnimation {
