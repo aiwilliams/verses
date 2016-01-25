@@ -31,16 +31,14 @@ class AddVerseController: UIViewController {
         verseRequest.becomeFirstResponder()
         verseRequest.addTarget(self, action: "updateVersePreview", forControlEvents: .EditingChanged)
 
-        let preferredTranslation = userDefaults.stringForKey("preferredBibleTranslation")!
-        translationLabel.text = "Translation: \(preferredTranslation) (change in Settings)"
+        updateTranslationDisclosure()
         
         NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("viewWillEnterForeground"), name: UIApplicationWillEnterForegroundNotification, object: nil)
     }
     
     func viewWillEnterForeground() {
         updateVersePreview()
-        let preferredTranslation = userDefaults.stringForKey("preferredBibleTranslation")!
-        translationLabel.text = "Translation: \(preferredTranslation) (change in Settings)"
+        updateTranslationDisclosure()
     }
 
     func updateVersePreview() {
@@ -50,6 +48,11 @@ class AddVerseController: UIViewController {
             passagePreviewLabel.hidden = false
         } catch {
         }
+    }
+    
+    func updateTranslationDisclosure() {
+        let preferredTranslation = userDefaults.stringForKey("preferredBibleTranslation")!
+        translationLabel.text = "Translation: \(preferredTranslation)"
     }
 
     @IBAction func cancelButtonPressed(sender: AnyObject) {
@@ -69,7 +72,11 @@ class AddVerseController: UIViewController {
             errorLabel.hidden = false
         }
     }
-    
+
+    @IBAction func launchSettings(sender: UIButton) {
+        UIApplication.sharedApplication().openURL(NSURL(string: UIApplicationOpenSettingsURLString)!)
+    }
+
     func fetchPassage() throws -> Passage {
         let parsedPassage = passageParser.parse(verseRequest.text!)
         do {

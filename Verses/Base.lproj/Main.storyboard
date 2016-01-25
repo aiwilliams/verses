@@ -107,27 +107,41 @@
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Translation: KJV (change in Settings)" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UcY-r7-gwV">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Translation: KJV" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UcY-r7-gwV">
                                 <rect key="frame" x="20" y="255" width="560" height="18"/>
+                                <gestureRecognizers/>
                                 <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="deviceRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Gwq-N0-XlK">
+                                <rect key="frame" x="20" y="276" width="560" height="18"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="18" id="n77-Pk-Qwl"/>
+                                </constraints>
+                                <state key="normal" title="(change in Settings)"/>
+                                <connections>
+                                    <action selector="launchSettings:" destination="2h5-9d-h6x" eventType="touchUpInside" id="QvM-bI-aXf"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstAttribute="leadingMargin" secondItem="Gc0-q9-h3h" secondAttribute="leading" id="4fw-YI-HWU"/>
-                            <constraint firstAttribute="leadingMargin" secondItem="w8C-gT-PNW" secondAttribute="leading" id="BCt-Ta-f6J"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="UcY-r7-gwV" secondAttribute="trailing" id="HQK-TN-s0e"/>
+                            <constraint firstAttribute="leadingMargin" secondItem="UcY-r7-gwV" secondAttribute="leading" id="905-Bp-0wE"/>
+                            <constraint firstItem="UcY-r7-gwV" firstAttribute="top" secondItem="w8C-gT-PNW" secondAttribute="bottom" constant="8" id="9Mp-7z-Vly"/>
                             <constraint firstAttribute="trailingMargin" secondItem="Gc0-q9-h3h" secondAttribute="trailing" id="IM4-Tj-dc6"/>
-                            <constraint firstItem="UcY-r7-gwV" firstAttribute="leading" secondItem="MFU-DV-FGZ" secondAttribute="leadingMargin" id="MNv-Cl-orz"/>
-                            <constraint firstItem="UcY-r7-gwV" firstAttribute="top" secondItem="w8C-gT-PNW" secondAttribute="bottom" constant="8" id="ZQN-JI-beD"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="w8C-gT-PNW" secondAttribute="trailing" id="bmN-5v-1gh"/>
+                            <constraint firstItem="Gwq-N0-XlK" firstAttribute="top" secondItem="UcY-r7-gwV" secondAttribute="bottom" constant="3" id="JcC-lV-nMQ"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="UcY-r7-gwV" secondAttribute="trailing" id="beN-Uu-61i"/>
+                            <constraint firstAttribute="leadingMargin" secondItem="w8C-gT-PNW" secondAttribute="leading" id="dWz-kR-e4w"/>
                             <constraint firstAttribute="leadingMargin" secondItem="C4L-vn-hkd" secondAttribute="leading" id="gI0-l7-1v5"/>
-                            <constraint firstItem="w8C-gT-PNW" firstAttribute="top" secondItem="C4L-vn-hkd" secondAttribute="bottom" constant="2" id="gae-3u-cY5"/>
+                            <constraint firstAttribute="leadingMargin" secondItem="Gwq-N0-XlK" secondAttribute="leading" id="gNg-V1-BTK"/>
                             <constraint firstItem="Gc0-q9-h3h" firstAttribute="top" secondItem="lAW-NV-pcT" secondAttribute="bottom" constant="41" id="tek-tl-7DT"/>
+                            <constraint firstItem="w8C-gT-PNW" firstAttribute="top" secondItem="C4L-vn-hkd" secondAttribute="bottom" constant="2" id="tnk-Xm-DRa"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="w8C-gT-PNW" secondAttribute="trailing" id="uFJ-rU-04b"/>
                             <constraint firstAttribute="trailingMargin" secondItem="C4L-vn-hkd" secondAttribute="trailing" id="wOE-vb-zDP"/>
                             <constraint firstItem="C4L-vn-hkd" firstAttribute="top" secondItem="Gc0-q9-h3h" secondAttribute="bottom" constant="8" id="wli-8d-UMw"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="Gwq-N0-XlK" secondAttribute="trailing" id="yCQ-IU-vaD"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Add Passage" id="1nm-FY-ltn">
