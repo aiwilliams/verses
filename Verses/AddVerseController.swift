@@ -33,8 +33,16 @@ class AddVerseController: UIViewController {
 
         let preferredTranslation = userDefaults.stringForKey("preferredBibleTranslation")!
         translationLabel.text = "Translation: \(preferredTranslation) (change in Settings)"
+        
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("viewWillEnterForeground"), name: UIApplicationWillEnterForegroundNotification, object: nil)
     }
     
+    func viewWillEnterForeground() {
+        updateVersePreview()
+        let preferredTranslation = userDefaults.stringForKey("preferredBibleTranslation")!
+        translationLabel.text = "Translation: \(preferredTranslation) (change in Settings)"
+    }
+
     func updateVersePreview() {
         do {
             let passage = try self.fetchPassage()
