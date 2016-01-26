@@ -167,7 +167,7 @@ class VersePracticeController: UIViewController, UITextViewDelegate {
             if self.verseHelper.roughlyMatches(textView.text) {
                 verseEntryTextViewEnabled = false
                 verseCompleted = true
-                let delay = 2 * Double(NSEC_PER_SEC)
+                let delay = 0.7 * Double(NSEC_PER_SEC)
                 let dispatchTime = dispatch_time(DISPATCH_TIME_NOW, Int64(delay))
                 dispatch_after(dispatchTime, dispatch_get_main_queue(), {
                     self.promptTimer.invalidate()
