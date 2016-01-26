@@ -14,6 +14,7 @@ var APIURL: String = "http://heartversesapi.herokuapp.com/api/v1"
 class HeartversesAPI {
     enum FetchError: ErrorType {
         case PassageDoesNotExist
+        case AmbiguousBookName
         case InvalidVerseRange
     }
 
@@ -21,6 +22,7 @@ class HeartversesAPI {
         let store = HeartversesStore(sqliteURL: NSBundle.mainBundle().URLForResource("Heartverses", withExtension: "sqlite")!)
         var passage = Passage(parsedPassage: parsedPassage)
         
+        if parsedPassage.book == "ambiguous" { throw FetchError.AmbiguousBookName }
         if parsedPassage.verse_start == -1 { throw FetchError.PassageDoesNotExist }
         
         if parsedPassage.verse_start == 0 {
