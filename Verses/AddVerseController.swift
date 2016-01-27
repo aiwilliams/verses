@@ -46,15 +46,6 @@ class AddVerseController: UIViewController {
             let passage = try self.fetchPassage()
             passagePreviewLabel.text = passage.verses.first!.text
             passagePreviewLabel.hidden = false
-        } catch HeartversesAPI.FetchError.AmbiguousBookName {
-            passagePreviewLabel.text = "That book title is ambiguous."
-            passagePreviewLabel.hidden = false
-        } catch HeartversesAPI.FetchError.InvalidVerseRange {
-            passagePreviewLabel.text = "That verse range is invalid."
-            passagePreviewLabel.hidden = false
-        } catch HeartversesAPI.FetchError.PassageDoesNotExist {
-            passagePreviewLabel.text = "That passage does not exist."
-            passagePreviewLabel.hidden = false
         } catch {
         }
     }
