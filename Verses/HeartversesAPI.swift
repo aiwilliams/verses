@@ -15,34 +15,39 @@ class HeartversesAPI {
     enum FetchError: ErrorType {
         case PassageDoesNotExist
         case AmbiguousBookName
-        case InvalidVerseRange
+        case InvalidRange
+    }
+    
+    func validatePassage(parsedPassage: ParsedPassage) -> (valid: Bool, error: ErrorType?) {
+        if parsedPassage.book == "ambiguous" { return (false, FetchError.AmbiguousBookName) }
+        if parsedPassage.verse_end > parsedPassage.verse_start { return (false, FetchError.InvalidRange) }
+        if parsedPassage.chapter_end > parsedPassage.chapter_start { return (false, FetchError.InvalidRange) }
+        if parsedPassage.chapter_start < 1 { return (false, FetchError.PassageDoesNotExist) }
+        if parsedPassage.verse_start < 0 { return (false, FetchError.PassageDoesNotExist) }
+        
+        return (true, nil)
     }
 
     func fetchPassage(parsedPassage: ParsedPassage, translation: String="kjv") throws -> Passage {
+        let (valid, error) = validatePassage(parsedPassage)
+        print("valid: \(valid), reason: \(error)")
+        if !valid {
+            throw error!
+        }
+
         let store = HeartversesStore(sqliteURL: NSBundle.mainBundle().URLForResource("Heartverses", withExtension: "sqlite")!)
         var passage = Passage(parsedPassage: parsedPassage)
         
-        if parsedPassage.book == "ambiguous" { throw FetchError.AmbiguousBookName }
-        if parsedPassage.verse_start == -1 { throw FetchError.PassageDoesNotExist }
-        
         if parsedPassage.verse_start == 0 {
             let fetchedVerses: [NSManagedObject] = store.findVersesInChapter(translation, bookSlug: parsedPassage.book, chapter: parsedPassage.chapter_start) as! [NSManagedObject]
-            if fetchedVerses.isEmpty {
-                throw FetchError.PassageDoesNotExist
-            }
+
             for v in fetchedVerses {
                 let verse = Verse(book: parsedPassage.book, chapter: parsedPassage.chapter_start, number: v.valueForKey("number") as! Int, text: v.valueForKey("text") as! String)
                 passage.verses.append(verse)
             }
         } else {
-            if parsedPassage.verse_end < parsedPassage.verse_start { throw FetchError.InvalidVerseRange }
             for v in parsedPassage.verse_start...parsedPassage.verse_end {
-                var fetchedVerse: NSManagedObject!
-                do {
-                    fetchedVerse = try store.findVerse(translation, bookSlug: parsedPassage.book, chapter: parsedPassage.chapter_start, number: v)
-                } catch HeartversesStore.StoreError.PassageDoesNotExistInStore {
-                    throw FetchError.PassageDoesNotExist
-                }
+                let fetchedVerse = store.findVerse(translation, bookSlug: parsedPassage.book, chapter: parsedPassage.chapter_start, number: v)
 
                 if fetchedVerse.objectID.temporaryID {
                     throw FetchError.PassageDoesNotExist

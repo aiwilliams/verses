@@ -22,25 +22,18 @@ class HeartversesStore {
         self.saveContext()
     }
 
-    func findBook(translation: String, slug: String) throws -> NSManagedObject {
+    func findBook(translation: String, slug: String) -> NSManagedObject {
         let book = findObject("Book", format: "name == %@ and translation == %@", slug, translation)
         if book.objectID.temporaryID {
-            throw StoreError.PassageDoesNotExistInStore
-            // Eventually, we want to have the below code instead of the throw. See https://github.com/aiwilliams/verses/issues/65
-            // book.setValue(slug, forKey: "name")
-            // book.setValue(translation, forKey: "translation")
-            //  saveContext()
+            book.setValue(slug, forKey: "name")
+            book.setValue(translation, forKey: "translation")
+            saveContext()
         }
         return book
     }
     
     func findVersesInChapter(translation: String, bookSlug: String, chapter: Int) -> [AnyObject] {
-        var book: NSManagedObject!
-        do {
-            book = try findBook(translation, slug: bookSlug)
-        } catch {
-            return []
-        }
+        let book = findBook(translation, slug: bookSlug)
         let entity = NSEntityDescription.entityForName("Verse", inManagedObjectContext: self.managedObjectContext)!
         let fetchRequest = NSFetchRequest(entityName: entity.name!)
         fetchRequest.predicate = NSPredicate(format: "book == %@ and chapter == %@", argumentArray: [book, chapter])
@@ -55,13 +48,9 @@ class HeartversesStore {
         return []
     }
 
-    func findVerse(translation: String, bookSlug: String, chapter: Int, number: Int) throws -> NSManagedObject {
-        var book: NSManagedObject!
-        do {
-            book = try findBook(translation, slug: bookSlug)
-        } catch {
-            throw StoreError.PassageDoesNotExistInStore
-        }
+    func findVerse(translation: String, bookSlug: String, chapter: Int, number: Int) -> NSManagedObject {
+        let book = findBook(translation, slug: bookSlug)
+
         let verse = findObject("Verse", format: "book == %@ and chapter == %@ and number == %@", book, chapter, number)
         return verse
     }

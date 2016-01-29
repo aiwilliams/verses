@@ -92,8 +92,8 @@ class AddVerseController: UIViewController {
             return passage
         } catch HeartversesAPI.FetchError.PassageDoesNotExist {
             throw HeartversesAPI.FetchError.PassageDoesNotExist
-        } catch HeartversesAPI.FetchError.InvalidVerseRange {
-            throw HeartversesAPI.FetchError.InvalidVerseRange
+        } catch HeartversesAPI.FetchError.InvalidRange {
+            throw HeartversesAPI.FetchError.InvalidRange
         }
     }
     
