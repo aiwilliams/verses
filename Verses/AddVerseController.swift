@@ -47,6 +47,7 @@ class AddVerseController: UIViewController {
             passagePreviewLabel.text = passage.verses.first!.text
             passagePreviewLabel.hidden = false
         } catch {
+            passagePreviewLabel.hidden = true
         }
     }
     

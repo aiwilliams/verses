@@ -38,6 +38,8 @@ struct ParsedPassage {
 
 class PassageParser {
     let slugs = ["genesis", "exodus", "leviticus", "numbers", "deuteronomy", "joshua", "judges", "ruth", "1-samuel", "2-samuel", "1-kings", "2-kings", "1-chronicles", "2-chronicles", "ezra", "nehemiah", "esther", "job", "psalms", "proverbs", "ecclesiastes", "song-of-solomon", "isaiah", "jeremiah", "lamentations", "ezekiel", "daniel", "hosea", "joel", "amos", "obadiah", "jonah", "micah", "nahum", "habakkuk", "zephaniah", "haggai", "zechariah", "malachi", "matthew", "mark", "luke", "john", "acts", "romans", "1-corinthians", "2-corinthians", "galatians", "ephesians", "philippians", "colossians", "1-thessalonians", "2-thessalonians", "1-timothy", "2-timothy", "titus", "philemon", "hebrews", "james", "1-peter", "2-peter", "1-john", "2-john", "3-john", "jude", "revelation"]
+    
+    let conventionalAbbrevs: [String: String] = ["jn": "john", "jo": "john", "phil": "philippians"]
 
     func parse(passage: String) -> ParsedPassage {
         var result = ParsedPassage()
@@ -89,27 +91,25 @@ class PassageParser {
     }
     
     func convertToSlug(bookName: String) -> String {
-        for i in slugs {
-            if i == bookName.lowercaseString {
-                return i
-            }
+        for (abbrev, slug) in conventionalAbbrevs {
+            if abbrev == bookName.lowercaseString { return slug }
         }
         
         var wildcardBookName = ""
         let bookNameComps = bookName.componentsSeparatedByCharactersInSet(NSCharacterSet(charactersInString: " "))
         
         for char in bookNameComps.joinWithSeparator("-").characters {
-            wildcardBookName.append(Character("."))
-            wildcardBookName.append(Character("?"))
+            wildcardBookName.append(Character(".")); wildcardBookName.append(Character("?"))
             wildcardBookName.append(char)
         }
-        wildcardBookName.append(Character("."))
-        wildcardBookName.append(Character("?"))
+        wildcardBookName.append(Character(".")); wildcardBookName.append(Character("?"))
         
         let reg = Regex(wildcardBookName)
         
         var possibleSlugs: Array<String> = []
         for i in slugs {
+            if i == bookName.lowercaseString { return i }
+
             if reg.test(i) {
                 possibleSlugs += [i]
             }
