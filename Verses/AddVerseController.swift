@@ -25,8 +25,8 @@ class AddVerseController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        errorLabel.hidden = true
-        passagePreviewLabel.hidden = true
+        errorLabel.alpha = 0
+        passagePreviewLabel.alpha = 0
         
         verseRequest.becomeFirstResponder()
         verseRequest.addTarget(self, action: "updateVersePreview", forControlEvents: .EditingChanged)
@@ -45,9 +45,9 @@ class AddVerseController: UIViewController {
         do {
             let passage = try self.fetchPassage()
             passagePreviewLabel.text = passage.verses.first!.text
-            passagePreviewLabel.hidden = false
+            UIView.animateWithDuration(0.3, animations: { self.passagePreviewLabel.alpha = 1 })
         } catch {
-            passagePreviewLabel.hidden = true
+            UIView.animateWithDuration(0.3, animations: { self.passagePreviewLabel.alpha = 0 })
         }
     }
     
@@ -67,11 +67,17 @@ class AddVerseController: UIViewController {
             self.dismissViewControllerAnimated(true, completion: nil)
         } catch HeartversesAPI.FetchError.PassageDoesNotExist {
             errorLabel.text = "That passage does not exist!"
-            errorLabel.hidden = false
+            UIView.animateWithDuration(0.7, animations: { self.errorLabel.alpha = 1 })
+            NSTimer.scheduledTimerWithTimeInterval(2.5, target: self, selector: Selector("hideErrorLabel"), userInfo: nil, repeats: false)
         } catch {
             errorLabel.text = "Sorry, an unknown error ocurred."
-            errorLabel.hidden = false
+            UIView.animateWithDuration(0.7, animations: { self.errorLabel.alpha = 1 })
+            NSTimer.scheduledTimerWithTimeInterval(2.5, target: self, selector: Selector("hideErrorLabel"), userInfo: nil, repeats: false)
         }
+    }
+    
+    func hideErrorLabel() {
+        UIView.animateWithDuration(0.7, animations: { self.errorLabel.alpha = 0 })
     }
 
     @IBAction func launchSettings(sender: UIButton) {
@@ -85,10 +91,8 @@ class AddVerseController: UIViewController {
             let passage = try API.fetchPassage(parsedPassage, translation: preferredTranslation.lowercaseString)
             return passage
         } catch HeartversesAPI.FetchError.PassageDoesNotExist {
-            passagePreviewLabel.text = ""
             throw HeartversesAPI.FetchError.PassageDoesNotExist
         } catch HeartversesAPI.FetchError.InvalidVerseRange {
-            passagePreviewLabel.text = ""
             throw HeartversesAPI.FetchError.InvalidVerseRange
         }
     }

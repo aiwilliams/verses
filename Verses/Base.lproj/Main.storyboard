@@ -19,7 +19,7 @@
                                 <rect key="frame" x="0.0" y="92" width="600" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="tCs-02-W21" id="IOC-Xd-Qd3">
-                                    <rect key="frame" x="0.0" y="0.0" width="567" height="43"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="567" height="43.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="⚐" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="exG-YY-Pmc">
@@ -85,21 +85,12 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Gc0-q9-h3h">
-                                <rect key="frame" x="20" y="105" width="560" height="30"/>
+                                <rect key="frame" x="20" y="123" width="560" height="30"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Sorry! An error occurred while I was trying to fetch the verse. Try again?" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="C4L-vn-hkd">
-                                <rect key="frame" x="20" y="143" width="560" height="28"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="28" id="uH8-mN-7h4"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="In the beginning was the Word, and the Word was with God, and the Word was God." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="w8C-gT-PNW" userLabel="Passage Preview">
-                                <rect key="frame" x="20" y="173" width="560" height="74"/>
+                                <rect key="frame" x="20" y="153" width="560" height="74"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="74" id="EtO-rK-rpQ"/>
                                 </constraints>
@@ -108,41 +99,72 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Translation: KJV" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UcY-r7-gwV">
-                                <rect key="frame" x="20" y="255" width="560" height="18"/>
+                                <rect key="frame" x="20" y="72" width="560" height="18"/>
                                 <gestureRecognizers/>
                                 <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="deviceRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Gwq-N0-XlK">
-                                <rect key="frame" x="20" y="276" width="560" height="18"/>
+                                <rect key="frame" x="20" y="91" width="560" height="18"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="18" id="n77-Pk-Qwl"/>
+                                    <constraint firstAttribute="height" constant="18" id="qd8-A7-RoX"/>
                                 </constraints>
                                 <state key="normal" title="(change in Settings)"/>
+                                <variation key="default">
+                                    <mask key="constraints">
+                                        <exclude reference="n77-Pk-Qwl"/>
+                                    </mask>
+                                </variation>
                                 <connections>
                                     <action selector="launchSettings:" destination="2h5-9d-h6x" eventType="touchUpInside" id="QvM-bI-aXf"/>
                                 </connections>
                             </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Sorry! An error occurred while I was trying to fetch the verse. Try again?" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="C4L-vn-hkd">
+                                <rect key="frame" x="20" y="224" width="560" height="28"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="28" id="uH8-mN-7h4"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" red="0.96470588239999999" green="0.32156862749999998" blue="0.32156862749999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstItem="UcY-r7-gwV" firstAttribute="top" secondItem="lAW-NV-pcT" secondAttribute="bottom" constant="8" id="1PG-hA-B4Y"/>
                             <constraint firstAttribute="leadingMargin" secondItem="Gc0-q9-h3h" secondAttribute="leading" id="4fw-YI-HWU"/>
                             <constraint firstAttribute="leadingMargin" secondItem="UcY-r7-gwV" secondAttribute="leading" id="905-Bp-0wE"/>
                             <constraint firstItem="UcY-r7-gwV" firstAttribute="top" secondItem="w8C-gT-PNW" secondAttribute="bottom" constant="8" id="9Mp-7z-Vly"/>
                             <constraint firstAttribute="trailingMargin" secondItem="Gc0-q9-h3h" secondAttribute="trailing" id="IM4-Tj-dc6"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="UcY-r7-gwV" secondAttribute="trailing" id="Iyb-Kw-X6K"/>
                             <constraint firstItem="Gwq-N0-XlK" firstAttribute="top" secondItem="UcY-r7-gwV" secondAttribute="bottom" constant="3" id="JcC-lV-nMQ"/>
+                            <constraint firstAttribute="leadingMargin" secondItem="Gwq-N0-XlK" secondAttribute="leading" id="JiI-Ls-W0F"/>
+                            <constraint firstItem="Gwq-N0-XlK" firstAttribute="top" secondItem="UcY-r7-gwV" secondAttribute="bottom" constant="1" id="Ouk-9P-yjd"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="Gwq-N0-XlK" secondAttribute="trailing" id="U64-5z-hqu"/>
+                            <constraint firstAttribute="leadingMargin" secondItem="UcY-r7-gwV" secondAttribute="leading" id="XrP-bq-5cq"/>
                             <constraint firstAttribute="trailingMargin" secondItem="UcY-r7-gwV" secondAttribute="trailing" id="beN-Uu-61i"/>
                             <constraint firstAttribute="leadingMargin" secondItem="w8C-gT-PNW" secondAttribute="leading" id="dWz-kR-e4w"/>
+                            <constraint firstItem="Gc0-q9-h3h" firstAttribute="top" secondItem="Gwq-N0-XlK" secondAttribute="bottom" constant="14" id="eqw-tD-0kU"/>
                             <constraint firstAttribute="leadingMargin" secondItem="C4L-vn-hkd" secondAttribute="leading" id="gI0-l7-1v5"/>
                             <constraint firstAttribute="leadingMargin" secondItem="Gwq-N0-XlK" secondAttribute="leading" id="gNg-V1-BTK"/>
-                            <constraint firstItem="Gc0-q9-h3h" firstAttribute="top" secondItem="lAW-NV-pcT" secondAttribute="bottom" constant="41" id="tek-tl-7DT"/>
-                            <constraint firstItem="w8C-gT-PNW" firstAttribute="top" secondItem="C4L-vn-hkd" secondAttribute="bottom" constant="2" id="tnk-Xm-DRa"/>
+                            <constraint firstItem="w8C-gT-PNW" firstAttribute="top" secondItem="Gc0-q9-h3h" secondAttribute="bottom" id="lIs-Cg-Bif"/>
+                            <constraint firstItem="C4L-vn-hkd" firstAttribute="top" secondItem="w8C-gT-PNW" secondAttribute="bottom" constant="-3" id="t5M-Z8-gIs"/>
                             <constraint firstAttribute="trailingMargin" secondItem="w8C-gT-PNW" secondAttribute="trailing" id="uFJ-rU-04b"/>
                             <constraint firstAttribute="trailingMargin" secondItem="C4L-vn-hkd" secondAttribute="trailing" id="wOE-vb-zDP"/>
-                            <constraint firstItem="C4L-vn-hkd" firstAttribute="top" secondItem="Gc0-q9-h3h" secondAttribute="bottom" constant="8" id="wli-8d-UMw"/>
                             <constraint firstAttribute="trailingMargin" secondItem="Gwq-N0-XlK" secondAttribute="trailing" id="yCQ-IU-vaD"/>
                         </constraints>
+                        <variation key="default">
+                            <mask key="constraints">
+                                <exclude reference="905-Bp-0wE"/>
+                                <exclude reference="9Mp-7z-Vly"/>
+                                <exclude reference="beN-Uu-61i"/>
+                                <exclude reference="JcC-lV-nMQ"/>
+                                <exclude reference="gNg-V1-BTK"/>
+                                <exclude reference="yCQ-IU-vaD"/>
+                            </mask>
+                        </variation>
                     </view>
                     <navigationItem key="navigationItem" title="Add Passage" id="1nm-FY-ltn">
                         <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="V53-e9-OUF">
