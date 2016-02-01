@@ -46,24 +46,22 @@ class PassageParser {
         var comps = passage.componentsSeparatedByCharactersInSet(NSCharacterSet(charactersInString: " :-"))
         var book: String!
 
-        print(passage)
-        print(containsTwoTokenName(passage))
-        print(containsTripleWordName(passage))
-        if containsTwoTokenName(passage) {
-            book = convertToSlug("\(comps[0]) \(comps[1])")
-            comps.removeAtIndex(0); comps.removeAtIndex(0)
-        } else if containsTripleWordName(passage) {
+        if containsTripleTokenName(passage) {
             book = convertToSlug("\(comps[0]) \(comps[1]) \(comps[2])")
             comps.removeAtIndex(0); comps.removeAtIndex(0); comps.removeAtIndex(0)
-        } else {
+        } else if containsTwoTokenName(passage) {
+            book = convertToSlug("\(comps[0]) \(comps[1])")
+            comps.removeAtIndex(0); comps.removeAtIndex(0)
+        } else if containsSingleTokenName(passage) {
             book = convertToSlug(comps[0])
             comps.removeAtIndex(0)
+        } else {
+            return result
         }
 
         result.book = book
         
         var index = 0
-        print(comps)
         for i in comps {
             let x: Int? = Int(i)
             if x == nil {
@@ -144,11 +142,15 @@ class PassageParser {
         return Regex("^\\d?[^\\d]+ \\d+:\\d+$").test(passage)
     }
     
+    func containsSingleTokenName(passage: String) -> Bool {
+        return Regex("^[\\w]+ ?(\\d{1,3})?(:\\d+)?(-\\d+)?$").test(passage)
+    }
+    
     func containsTwoTokenName(passage: String) -> Bool {
         return Regex("^[\\d\\w]+ [A-Za-z]+ ?(\\d{1,3})?(:\\d+)?(-\\d+)?$").test(passage)
     }
     
-    func containsTripleWordName(passage: String) -> Bool {
-        return Regex("^[\\w]+ [\\w]+ [\\w]+ ?(\\d{1,3})?(:\\d+)?(-\\d+)?$").test(passage)
+    func containsTripleTokenName(passage: String) -> Bool {
+        return Regex("^[A-Za-z]+ [A-Za-z]+ [A-Za-z]+ ?(\\d{1,3})?(:\\d+)?(-\\d+)?$").test(passage)
     }
 }
