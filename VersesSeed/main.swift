@@ -13,8 +13,10 @@ func convertToSlug(bookName: String) -> String {
     let comps = bookName.componentsSeparatedByCharactersInSet(NSCharacterSet(charactersInString: " "))
     if comps.count == 1 {
         return comps[0].lowercaseString
-    } else {
+    } else if comps.count == 2 {
         return "\(comps[0])-\(comps[1].lowercaseString)"
+    } else {
+        return "\(comps[0].lowercaseString)-\(comps[1].lowercaseString)-\(comps[2].lowercaseString)"
     }
 }
 

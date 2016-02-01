@@ -20,8 +20,8 @@ class HeartversesAPI {
     
     func validatePassage(parsedPassage: ParsedPassage) -> (valid: Bool, error: ErrorType?) {
         if parsedPassage.book == "ambiguous" { return (false, FetchError.AmbiguousBookName) }
-        if parsedPassage.verse_end > parsedPassage.verse_start { return (false, FetchError.InvalidRange) }
-        if parsedPassage.chapter_end > parsedPassage.chapter_start { return (false, FetchError.InvalidRange) }
+        if parsedPassage.verse_start > parsedPassage.verse_end { return (false, FetchError.InvalidRange) }
+        if parsedPassage.chapter_start > parsedPassage.chapter_end { return (false, FetchError.InvalidRange) }
         if parsedPassage.chapter_start < 1 { return (false, FetchError.PassageDoesNotExist) }
         if parsedPassage.verse_start < 0 { return (false, FetchError.PassageDoesNotExist) }
         
@@ -30,7 +30,6 @@ class HeartversesAPI {
 
     func fetchPassage(parsedPassage: ParsedPassage, translation: String="kjv") throws -> Passage {
         let (valid, error) = validatePassage(parsedPassage)
-        print("valid: \(valid), reason: \(error)")
         if !valid {
             throw error!
         }

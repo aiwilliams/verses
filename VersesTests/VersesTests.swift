@@ -187,4 +187,49 @@ class VersesTests: XCTestCase {
         XCTAssertEqual(4, result.verse_start)
         XCTAssertEqual(4, result.verse_end)
     }
+    
+    func testSongOfSolomon() {
+        let result = parser.parse("song of solomon 4:4")
+        XCTAssertEqual("song-of-solomon", result.book)
+        XCTAssertEqual(4, result.chapter_start)
+        XCTAssertEqual(4, result.chapter_end)
+        XCTAssertEqual(4, result.verse_start)
+        XCTAssertEqual(4, result.verse_end)
+    }
+    
+    func testSongOfSolomonSlang() {
+        let result = parser.parse("song 4:4")
+        XCTAssertEqual("song-of-solomon", result.book)
+        XCTAssertEqual(4, result.chapter_start)
+        XCTAssertEqual(4, result.chapter_end)
+        XCTAssertEqual(4, result.verse_start)
+        XCTAssertEqual(4, result.verse_end)
+    }
+    
+    func testSongOfSolomonSlangVariation2() {
+        let result = parser.parse("sos 4:4")
+        XCTAssertEqual("song-of-solomon", result.book)
+        XCTAssertEqual(4, result.chapter_start)
+        XCTAssertEqual(4, result.chapter_end)
+        XCTAssertEqual(4, result.verse_start)
+        XCTAssertEqual(4, result.verse_end)
+    }
+    
+    func testSongOfSolomonSlangVariation3() {
+        let result = parser.parse("song of 4:4")
+        XCTAssertEqual("song-of-solomon", result.book)
+        XCTAssertEqual(4, result.chapter_start)
+        XCTAssertEqual(4, result.chapter_end)
+        XCTAssertEqual(4, result.verse_start)
+        XCTAssertEqual(4, result.verse_end)
+    }
+    
+    func testSongOfSolomonVerseRange() {
+        let result = parser.parse("song of solomon 4:4-5")
+        XCTAssertEqual("song-of-solomon", result.book)
+        XCTAssertEqual(4, result.chapter_start)
+        XCTAssertEqual(4, result.chapter_end)
+        XCTAssertEqual(4, result.verse_start)
+        XCTAssertEqual(5, result.verse_end)
+    }
 }

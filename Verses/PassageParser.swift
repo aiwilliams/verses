@@ -39,17 +39,22 @@ struct ParsedPassage {
 class PassageParser {
     let slugs = ["genesis", "exodus", "leviticus", "numbers", "deuteronomy", "joshua", "judges", "ruth", "1-samuel", "2-samuel", "1-kings", "2-kings", "1-chronicles", "2-chronicles", "ezra", "nehemiah", "esther", "job", "psalms", "proverbs", "ecclesiastes", "song-of-solomon", "isaiah", "jeremiah", "lamentations", "ezekiel", "daniel", "hosea", "joel", "amos", "obadiah", "jonah", "micah", "nahum", "habakkuk", "zephaniah", "haggai", "zechariah", "malachi", "matthew", "mark", "luke", "john", "acts", "romans", "1-corinthians", "2-corinthians", "galatians", "ephesians", "philippians", "colossians", "1-thessalonians", "2-thessalonians", "1-timothy", "2-timothy", "titus", "philemon", "hebrews", "james", "1-peter", "2-peter", "1-john", "2-john", "3-john", "jude", "revelation"]
     
-    let conventionalAbbrevs: [String: String] = ["jn": "john", "jo": "john", "phil": "philippians"]
+    let conventionalAbbrevs: [String: String] = ["sos": "song-of-solomon", "jn": "john", "jo": "john", "phil": "philippians"]
 
     func parse(passage: String) -> ParsedPassage {
         var result = ParsedPassage()
         var comps = passage.componentsSeparatedByCharactersInSet(NSCharacterSet(charactersInString: " :-"))
         var book: String!
 
-        if hasNumberedBook(passage) {
+        print(passage)
+        print(containsTwoTokenName(passage))
+        print(containsTripleWordName(passage))
+        if containsTwoTokenName(passage) {
             book = convertToSlug("\(comps[0]) \(comps[1])")
-            comps.removeAtIndex(0)
-            comps.removeAtIndex(0)
+            comps.removeAtIndex(0); comps.removeAtIndex(0)
+        } else if containsTripleWordName(passage) {
+            book = convertToSlug("\(comps[0]) \(comps[1]) \(comps[2])")
+            comps.removeAtIndex(0); comps.removeAtIndex(0); comps.removeAtIndex(0)
         } else {
             book = convertToSlug(comps[0])
             comps.removeAtIndex(0)
@@ -58,6 +63,7 @@ class PassageParser {
         result.book = book
         
         var index = 0
+        print(comps)
         for i in comps {
             let x: Int? = Int(i)
             if x == nil {
@@ -138,14 +144,11 @@ class PassageParser {
         return Regex("^\\d?[^\\d]+ \\d+:\\d+$").test(passage)
     }
     
-    func hasNumberedBook(passage: String) -> Bool {
-        let comps = passage.componentsSeparatedByCharactersInSet(NSCharacterSet(charactersInString: " :-"))
-        if comps.count == 1 { return false }
-
-        if (Int(comps[0]) != nil) && (Int(comps[1]) == nil) {
-            return true
-        } else {
-            return false
-        }
+    func containsTwoTokenName(passage: String) -> Bool {
+        return Regex("^[\\d\\w]+ [A-Za-z]+ ?(\\d{1,3})?(:\\d+)?(-\\d+)?$").test(passage)
+    }
+    
+    func containsTripleWordName(passage: String) -> Bool {
+        return Regex("^[\\w]+ [\\w]+ [\\w]+ ?(\\d{1,3})?(:\\d+)?(-\\d+)?$").test(passage)
     }
 }
