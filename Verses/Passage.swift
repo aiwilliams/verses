@@ -15,25 +15,35 @@ struct Verse {
     let text: String
 }
 
-struct Passage {
+public struct Passage {
     let parsedPassage: ParsedPassage
     
     var verses = Array<Verse>()
+    
+    var chapter_start: Int!
+    var chapter_end: Int!
+    var verse_start: Int!
+    var verse_end: Int!
 
     init(parsedPassage: ParsedPassage) {
         self.parsedPassage = parsedPassage
+        
+        self.chapter_start = parsedPassage.chapter_start
+        self.chapter_end = parsedPassage.chapter_end
+        self.verse_start = parsedPassage.verse_start
+        self.verse_end = parsedPassage.verse_end
     }
     
     var reference: String {
-        var verses = "\(parsedPassage.chapter_start)"
+        var verses = String(self.chapter_start)
         
-        if parsedPassage.verse_start != 0 {
-            if parsedPassage.chapter_start != parsedPassage.chapter_end {
-                verses = verses + ":\(parsedPassage.verse_start)-\(parsedPassage.chapter_end):\(parsedPassage.verse_end)"
+        if self.verse_start != 0 {
+            if self.chapter_start != self.chapter_end {
+                verses = verses + ":\(self.verse_start)-\(self.chapter_end):\(self.verse_end)"
             } else {
-                verses = verses + ":\(parsedPassage.verse_start)"
-                if parsedPassage.verse_start != parsedPassage.verse_end {
-                    verses = verses + "-\(parsedPassage.verse_end)"
+                verses = verses + ":\(self.verse_start)"
+                if self.verse_start != self.verse_end {
+                    verses = verses + "-\(self.verse_end)"
                 }
             }
         }

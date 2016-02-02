@@ -35,22 +35,22 @@ class HeartversesAPI {
         let store = HeartversesStore(sqliteURL: NSBundle.mainBundle().URLForResource("Heartverses", withExtension: "sqlite")!)
         var passage = Passage(parsedPassage: parsedPassage)
         
+        let fetchedVerses: [NSManagedObject] = store.findVersesInChapter(translation, bookSlug: parsedPassage.book, chapter: parsedPassage.chapter_start) as! [NSManagedObject]
+        if fetchedVerses.isEmpty { throw FetchError.PassageDoesNotExist }
+        
         if parsedPassage.verse_start == 0 {
-            let fetchedVerses: [NSManagedObject] = store.findVersesInChapter(translation, bookSlug: parsedPassage.book, chapter: parsedPassage.chapter_start) as! [NSManagedObject]
-            
-            if fetchedVerses.isEmpty { throw FetchError.PassageDoesNotExist }
-
             for v in fetchedVerses {
                 let verse = Verse(book: parsedPassage.book, chapter: parsedPassage.chapter_start, number: v.valueForKey("number") as! Int, text: v.valueForKey("text") as! String)
                 passage.verses.append(verse)
             }
         } else {
-            for v in parsedPassage.verse_start...parsedPassage.verse_end {
-                let fetchedVerse = store.findVerse(translation, bookSlug: parsedPassage.book, chapter: parsedPassage.chapter_start, number: v)
+            for i in 0...(parsedPassage.verse_end - 1) {
+                if i >= fetchedVerses.count {
+                    passage.verse_end = i
+                    break
+                }
 
-                if fetchedVerse.objectID.temporaryID { throw FetchError.PassageDoesNotExist }
-
-                let verse = Verse(book: parsedPassage.book, chapter: parsedPassage.chapter_start, number: v, text: fetchedVerse.valueForKey("text") as! String)
+                let verse = Verse(book: parsedPassage.book, chapter: parsedPassage.chapter_start, number: i+1, text: fetchedVerses[i].valueForKey("text") as! String)
                 passage.verses.append(verse)
             }
         }
