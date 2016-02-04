@@ -61,7 +61,6 @@ class VersesIndexController: UITableViewController {
             self.selectPassageIndexPath = indexPath
             self.performSegueWithIdentifier("verseSelectSegue", sender: self)
         })
-        // selectAction.backgroundColor = UIColor(red: <#T##CGFloat#>, green: <#T##CGFloat#>, blue: <#T##CGFloat#>, alpha: <#T##CGFloat#>)
 
         var memorizeAction: UITableViewRowAction!
         if passage.memorized!.boolValue {
@@ -88,7 +87,11 @@ class VersesIndexController: UITableViewController {
         })
         deleteAction.backgroundColor = UIColor(red:1.00, green:0.35, blue:0.31, alpha:1.0)
         
-        return [deleteAction, memorizeAction, selectAction]
+        if passage.verses!.count != 1 {
+            return [deleteAction, memorizeAction, selectAction]
+        } else {
+            return [deleteAction, memorizeAction]
+        }
     }
 
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {

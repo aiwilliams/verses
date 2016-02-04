@@ -53,8 +53,6 @@ class HeartversesAPI {
                 let verse = Verse(book: parsedPassage.book, chapter: parsedPassage.chapter_start, number: i, text: fetchedVerses[i-1].valueForKey("text") as! String)
                 passage.verses.append(verse)
             }
-            print("")
-            print(passage)
         }
 
         return passage
