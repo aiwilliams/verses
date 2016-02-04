@@ -44,15 +44,17 @@ class HeartversesAPI {
                 passage.verses.append(verse)
             }
         } else {
-            for i in 0...(parsedPassage.verse_end - 1) {
+            for i in parsedPassage.verse_start...parsedPassage.verse_end {
                 if i >= fetchedVerses.count {
                     passage.verse_end = i
                     break
                 }
 
-                let verse = Verse(book: parsedPassage.book, chapter: parsedPassage.chapter_start, number: i+1, text: fetchedVerses[i].valueForKey("text") as! String)
+                let verse = Verse(book: parsedPassage.book, chapter: parsedPassage.chapter_start, number: i, text: fetchedVerses[i-1].valueForKey("text") as! String)
                 passage.verses.append(verse)
             }
+            print("")
+            print(passage)
         }
 
         return passage
