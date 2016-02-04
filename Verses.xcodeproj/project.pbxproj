@@ -13,6 +13,7 @@
 		FD0EFD8A1C52E21C00BC83A6 /* Heartverses.sqlite-wal in Resources */ = {isa = PBXBuildFile; fileRef = FD0EFD881C52E21C00BC83A6 /* Heartverses.sqlite-wal */; };
 		FD0EFD8C1C55756900BC83A6 /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = FD0EFD8B1C55756900BC83A6 /* Settings.bundle */; };
 		FD0EFD8E1C56BC3300BC83A6 /* IntroductionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD0EFD8D1C56BC3300BC83A6 /* IntroductionViewController.swift */; };
+		FD74643A1C63F6A500A22266 /* VerseCompletionController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD7464391C63F6A500A22266 /* VerseCompletionController.swift */; };
 		FD79BAE51C1BC45A00266A5A /* UserVerse+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD79BAE21C1BC45A00266A5A /* UserVerse+CoreDataProperties.swift */; };
 		FD79BAE61C1BC45A00266A5A /* UserVerse.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD79BAE31C1BC45A00266A5A /* UserVerse.swift */; };
 		FD79BAE71C1BC45A00266A5A /* UserPassage+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD79BAE41C1BC45A00266A5A /* UserPassage+CoreDataProperties.swift */; };
@@ -79,6 +80,7 @@
 		FD0EFD881C52E21C00BC83A6 /* Heartverses.sqlite-wal */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Heartverses.sqlite-wal"; sourceTree = "<group>"; };
 		FD0EFD8B1C55756900BC83A6 /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; name = Settings.bundle; path = Verses/Settings.bundle; sourceTree = "<group>"; };
 		FD0EFD8D1C56BC3300BC83A6 /* IntroductionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IntroductionViewController.swift; sourceTree = "<group>"; };
+		FD7464391C63F6A500A22266 /* VerseCompletionController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VerseCompletionController.swift; sourceTree = "<group>"; };
 		FD79BAE21C1BC45A00266A5A /* UserVerse+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UserVerse+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		FD79BAE31C1BC45A00266A5A /* UserVerse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserVerse.swift; sourceTree = "<group>"; };
 		FD79BAE41C1BC45A00266A5A /* UserPassage+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UserPassage+CoreDataProperties.swift"; sourceTree = "<group>"; };
@@ -190,6 +192,7 @@
 				FDAFD8FD1C2DAB1C002F4FF5 /* VerseHelper.swift */,
 				FDD25BEC1C62BFE400254082 /* VerseSelectController.swift */,
 				FDDF4EC41C459EEC00B2A831 /* PracticeViewConstraintsHelper.swift */,
+				FD7464391C63F6A500A22266 /* VerseCompletionController.swift */,
 				FDB61B901BF533D800F8C61D /* Main.storyboard */,
 				FDB61B961BF533D800F8C61D /* Assets.xcassets */,
 				FDB61B9B1BF533D800F8C61D /* Info.plist */,
@@ -396,6 +399,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				FD960EE91C17CEFE0007A096 /* Passage.swift in Sources */,
+				FD74643A1C63F6A500A22266 /* VerseCompletionController.swift in Sources */,
 				FD79BAE51C1BC45A00266A5A /* UserVerse+CoreDataProperties.swift in Sources */,
 				FDB61B8F1BF533D800F8C61D /* VersePracticeController.swift in Sources */,
 				FD79BAE61C1BC45A00266A5A /* UserVerse.swift in Sources */,

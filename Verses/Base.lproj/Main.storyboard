@@ -195,7 +195,7 @@
         <!--James 1:1-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="VersePracticeController" customModule="Verses" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="versePracticeController" id="BYZ-38-t0r" customClass="VersePracticeController" customModule="Verses" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="y3c-jy-aDJ"/>
                         <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
@@ -346,10 +346,10 @@
             </objects>
             <point key="canvasLocation" x="1810" y="403"/>
         </scene>
-        <!--View Controller-->
+        <!--Verse Completion Controller-->
         <scene sceneID="Uo8-PM-PMX">
             <objects>
-                <viewController id="Bo1-es-KM7" sceneMemberID="viewController">
+                <viewController id="Bo1-es-KM7" customClass="VerseCompletionController" customModule="Verses" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="W55-wN-4et"/>
                         <viewControllerLayoutGuide type="bottom" id="reV-3b-K96"/>
@@ -364,15 +364,33 @@
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fQo-Mg-Gx8">
+                                <rect key="frame" x="241" y="346" width="119" height="30"/>
+                                <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="119" id="rbf-t1-DjY"/>
+                                </constraints>
+                                <state key="normal" title="Practice Again">
+                                    <color key="titleColor" red="0.99618560079999996" green="0.99250870940000002" blue="1" alpha="1" colorSpace="deviceRGB"/>
+                                </state>
+                                <connections>
+                                    <action selector="practiceAgain:" destination="Bo1-es-KM7" eventType="touchUpInside" id="Aae-Hu-hEx"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="hf3-BU-V1U" firstAttribute="leading" secondItem="fk7-Nd-YOE" secondAttribute="leadingMargin" constant="10" id="Pad-B7-5sr"/>
+                            <constraint firstItem="fQo-Mg-Gx8" firstAttribute="centerX" secondItem="fk7-Nd-YOE" secondAttribute="centerX" id="aGQ-AZ-vsX"/>
                             <constraint firstAttribute="trailingMargin" secondItem="hf3-BU-V1U" secondAttribute="trailing" constant="10" id="dOj-8h-nCH"/>
+                            <constraint firstItem="fQo-Mg-Gx8" firstAttribute="top" secondItem="hf3-BU-V1U" secondAttribute="bottom" constant="35" id="mlc-kq-bir"/>
                             <constraint firstItem="hf3-BU-V1U" firstAttribute="centerY" secondItem="fk7-Nd-YOE" secondAttribute="centerY" id="yxb-TV-NNQ"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="EmD-x1-Qdw"/>
+                    <connections>
+                        <outlet property="practiceAgainButton" destination="fQo-Mg-Gx8" id="It7-gz-yGU"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="8eM-Y3-oa0" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -476,7 +494,6 @@
         <!--Navigation Controller-->
         <scene sceneID="irC-Le-hF9">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="qhk-vO-fpU" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="hpI-hS-xrU" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="CJm-uc-CFN">
@@ -488,6 +505,7 @@
                         <segue destination="CJk-OQ-4xL" kind="relationship" relationship="rootViewController" id="D1h-W2-UsC"/>
                     </connections>
                 </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="qhk-vO-fpU" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1118" y="403"/>
         </scene>

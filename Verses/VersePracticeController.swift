@@ -323,5 +323,12 @@ class VersePracticeController: UIViewController, UITextViewDelegate {
         activeVerse.views = Int(activeVerse.views!) + 1
         try! appDelegate.managedObjectContext.save()
     }
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if segue.identifier == "completionSegue" {
+            let destinationViewController = segue.destinationViewController as! VerseCompletionController
+            destinationViewController.practicedPassage = self.passage
+        }
+    }
 }
 
