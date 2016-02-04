@@ -58,7 +58,9 @@ class VersePracticeController: UIViewController, UITextViewDelegate {
         self.automaticallyAdjustsScrollViewInsets = false
         verseEntryTextView.delegate = self
         
-        verses = passage.valueForKey("verses") as! NSOrderedSet
+        if passage != nil {
+            verses = passage.valueForKey("verses") as! NSOrderedSet
+        }
 
         activateVerse(verses.firstObject as! UserVerse)
         activeVerseIndex = 0

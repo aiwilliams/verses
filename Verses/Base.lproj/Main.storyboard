@@ -19,7 +19,7 @@
                                 <rect key="frame" x="0.0" y="92" width="600" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="tCs-02-W21" id="IOC-Xd-Qd3">
-                                    <rect key="frame" x="0.0" y="0.0" width="567" height="43.5"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="567" height="43"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="⚐" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="exG-YY-Pmc">
@@ -67,6 +67,9 @@
                             </connections>
                         </barButtonItem>
                     </navigationItem>
+                    <connections>
+                        <segue destination="hpI-hS-xrU" kind="presentation" identifier="verseSelectSegue" id="ZsL-vN-nxT"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="vOE-NK-sVH" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -289,6 +292,60 @@
             </objects>
             <point key="canvasLocation" x="1804" y="-384"/>
         </scene>
+        <!--Select Verses-->
+        <scene sceneID="BpW-3F-PJD">
+            <objects>
+                <tableViewController id="CJk-OQ-4xL" customClass="VerseSelectController" customModule="Verses" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" showsSelectionImmediatelyOnTouchBegin="NO" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="Bjc-Cu-dLB">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="verseCell" id="U2k-8g-KR7" customClass="VerseCell" customModule="Verses" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="92" width="600" height="44"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="U2k-8g-KR7" id="86C-h6-45o">
+                                    <rect key="frame" x="0.0" y="0.0" width="600" height="43"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="James 1:1" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gX1-Ch-OFx">
+                                            <rect key="frame" x="16" y="11" width="568" height="21"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                </tableViewCellContentView>
+                                <connections>
+                                    <outlet property="versePassageLabel" destination="gX1-Ch-OFx" id="YPy-rg-sFD"/>
+                                </connections>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="CJk-OQ-4xL" id="DSu-a6-qys"/>
+                            <outlet property="delegate" destination="CJk-OQ-4xL" id="aen-21-0ij"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" title="Select Verses" id="jsD-E5-EdG">
+                        <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="Kmp-hg-Tbm">
+                            <connections>
+                                <action selector="cancelVerseSelect:" destination="CJk-OQ-4xL" id="K2v-n0-GJz"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" title="Practice" style="done" id="T7t-Or-GJ2">
+                            <connections>
+                                <action selector="continueToPractice:" destination="CJk-OQ-4xL" id="o3D-ZR-R3V"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <segue destination="BYZ-38-t0r" kind="show" identifier="practiceSegue" id="ABg-UG-OXy"/>
+                    </connections>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="723-2o-RhE" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1810" y="403"/>
+        </scene>
         <!--View Controller-->
         <scene sceneID="Uo8-PM-PMX">
             <objects>
@@ -416,5 +473,26 @@
             </objects>
             <point key="canvasLocation" x="1485" y="-1098"/>
         </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="irC-Le-hF9">
+            <objects>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="qhk-vO-fpU" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="hpI-hS-xrU" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="CJm-uc-CFN">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="CJk-OQ-4xL" kind="relationship" relationship="rootViewController" id="D1h-W2-UsC"/>
+                    </connections>
+                </navigationController>
+            </objects>
+            <point key="canvasLocation" x="1118" y="403"/>
+        </scene>
     </scenes>
+    <inferredMetricsTieBreakers>
+        <segue reference="ABg-UG-OXy"/>
+    </inferredMetricsTieBreakers>
 </document>

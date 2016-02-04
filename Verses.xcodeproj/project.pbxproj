@@ -36,6 +36,8 @@
 		FDB61BC01BF5457E00F8C61D /* AddVerseController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDB61BBF1BF5457E00F8C61D /* AddVerseController.swift */; };
 		FDC7AE351C1F826200C5BDAC /* Heartverses.sqlite in Resources */ = {isa = PBXBuildFile; fileRef = FDD3BC2D1C16251A00616976 /* Heartverses.sqlite */; };
 		FDCEE2121C45B3FB00792D8B /* PracticeViewConstraintsHelperTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDCEE2111C45B3FB00792D8B /* PracticeViewConstraintsHelperTests.swift */; };
+		FDD25BED1C62BFE400254082 /* VerseSelectController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDD25BEC1C62BFE400254082 /* VerseSelectController.swift */; };
+		FDD25BEF1C62C24600254082 /* VerseCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDD25BEE1C62C24600254082 /* VerseCell.swift */; };
 		FDD3BC301C16263B00616976 /* HeartversesAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDD3BC2F1C16263B00616976 /* HeartversesAPI.swift */; };
 		FDDF4EC51C459EEC00B2A831 /* PracticeViewConstraintsHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDDF4EC41C459EEC00B2A831 /* PracticeViewConstraintsHelper.swift */; };
 /* End PBXBuildFile section */
@@ -103,6 +105,8 @@
 		FDB61BBD1BF5410000F8C61D /* VersesIndexController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VersesIndexController.swift; sourceTree = "<group>"; };
 		FDB61BBF1BF5457E00F8C61D /* AddVerseController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddVerseController.swift; sourceTree = "<group>"; };
 		FDCEE2111C45B3FB00792D8B /* PracticeViewConstraintsHelperTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PracticeViewConstraintsHelperTests.swift; sourceTree = "<group>"; };
+		FDD25BEC1C62BFE400254082 /* VerseSelectController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VerseSelectController.swift; sourceTree = "<group>"; };
+		FDD25BEE1C62C24600254082 /* VerseCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VerseCell.swift; sourceTree = "<group>"; };
 		FDD3BC2D1C16251A00616976 /* Heartverses.sqlite */ = {isa = PBXFileReference; lastKnownFileType = file; path = Heartverses.sqlite; sourceTree = "<group>"; };
 		FDD3BC2F1C16263B00616976 /* HeartversesAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HeartversesAPI.swift; sourceTree = "<group>"; };
 		FDDF4EC41C459EEC00B2A831 /* PracticeViewConstraintsHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PracticeViewConstraintsHelper.swift; sourceTree = "<group>"; };
@@ -184,6 +188,7 @@
 				FDB61BBD1BF5410000F8C61D /* VersesIndexController.swift */,
 				FDB61BBF1BF5457E00F8C61D /* AddVerseController.swift */,
 				FDAFD8FD1C2DAB1C002F4FF5 /* VerseHelper.swift */,
+				FDD25BEC1C62BFE400254082 /* VerseSelectController.swift */,
 				FDDF4EC41C459EEC00B2A831 /* PracticeViewConstraintsHelper.swift */,
 				FDB61B901BF533D800F8C61D /* Main.storyboard */,
 				FDB61B961BF533D800F8C61D /* Assets.xcassets */,
@@ -199,6 +204,7 @@
 				FD79BAE41C1BC45A00266A5A /* UserPassage+CoreDataProperties.swift */,
 				FD79BAE81C1BC4B600266A5A /* UserPassage.swift */,
 				FDAFD8FA1C2C585A002F4FF5 /* PassageCell.swift */,
+				FDD25BEE1C62C24600254082 /* VerseCell.swift */,
 			);
 			path = Verses;
 			sourceTree = "<group>";
@@ -393,8 +399,10 @@
 				FD79BAE51C1BC45A00266A5A /* UserVerse+CoreDataProperties.swift in Sources */,
 				FDB61B8F1BF533D800F8C61D /* VersePracticeController.swift in Sources */,
 				FD79BAE61C1BC45A00266A5A /* UserVerse.swift in Sources */,
+				FDD25BED1C62BFE400254082 /* VerseSelectController.swift in Sources */,
 				FD0EFD8E1C56BC3300BC83A6 /* IntroductionViewController.swift in Sources */,
 				FDB61BC01BF5457E00F8C61D /* AddVerseController.swift in Sources */,
+				FDD25BEF1C62C24600254082 /* VerseCell.swift in Sources */,
 				FDAFD8FE1C2DAB1C002F4FF5 /* VerseHelper.swift in Sources */,
 				FDDF4EC51C459EEC00B2A831 /* PracticeViewConstraintsHelper.swift in Sources */,
 				FD79BAE91C1BC4B600266A5A /* UserPassage.swift in Sources */,

@@ -13,6 +13,7 @@ import CoreData
 class VersesIndexController: UITableViewController {
     var passages = [UserPassage]()
     var deletePassageIndexPath: NSIndexPath!
+    var selectPassageIndexPath: NSIndexPath!
     let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
     
     override func viewDidLoad() {
@@ -55,6 +56,12 @@ class VersesIndexController: UITableViewController {
     override func tableView(tableView: UITableView, editActionsForRowAtIndexPath indexPath: NSIndexPath) -> [UITableViewRowAction]? {
         let cell = tableView.cellForRowAtIndexPath(indexPath) as! PassageCell
         let passage = self.passages[indexPath.row]
+        
+        let selectAction = UITableViewRowAction(style: .Normal, title: "Select", handler: { (action: UITableViewRowAction!, indexPath: NSIndexPath!) in
+            self.selectPassageIndexPath = indexPath
+            self.performSegueWithIdentifier("verseSelectSegue", sender: self)
+        })
+        // selectAction.backgroundColor = UIColor(red: <#T##CGFloat#>, green: <#T##CGFloat#>, blue: <#T##CGFloat#>, alpha: <#T##CGFloat#>)
 
         var memorizeAction: UITableViewRowAction!
         if passage.memorized!.boolValue {
@@ -81,7 +88,7 @@ class VersesIndexController: UITableViewController {
         })
         deleteAction.backgroundColor = UIColor(red:1.00, green:0.35, blue:0.31, alpha:1.0)
         
-        return [deleteAction, memorizeAction]
+        return [deleteAction, memorizeAction, selectAction]
     }
 
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
@@ -89,6 +96,11 @@ class VersesIndexController: UITableViewController {
             let destinationViewController = segue.destinationViewController as! VersePracticeController
             let ip: NSIndexPath = self.tableView.indexPathForCell(sender as! UITableViewCell)!
             let passage: UserPassage = self.passages[ip.row]
+            destinationViewController.passage = passage
+        } else if segue.identifier == "verseSelectSegue" {
+            let destinationNavController = segue.destinationViewController as! UINavigationController
+            let destinationViewController = destinationNavController.topViewController as! VerseSelectController
+            let passage: UserPassage = self.passages[selectPassageIndexPath.row]
             destinationViewController.passage = passage
         }
     }
