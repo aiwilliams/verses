@@ -10,7 +10,7 @@ import Foundation
 import UIKit
 
 class VerseCompletionController: UIViewController {
-    var practicedPassage: UserPassage!
+    var practicedVerses: NSOrderedSet!
 
     @IBOutlet var practiceAgainButton: UIButton!
 
@@ -30,7 +30,7 @@ class VerseCompletionController: UIViewController {
         for controller in self.navigationController!.viewControllers {
             if controller.isKindOfClass(VersePracticeController) {
                 let destination = controller as! VersePracticeController
-                destination.passage = practicedPassage
+                destination.verses = practicedVerses
 
                 self.navigationController!.popToViewController(controller, animated: true)
                 break

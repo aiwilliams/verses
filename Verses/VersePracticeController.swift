@@ -327,7 +327,7 @@ class VersePracticeController: UIViewController, UITextViewDelegate {
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if segue.identifier == "completionSegue" {
             let destinationViewController = segue.destinationViewController as! VerseCompletionController
-            destinationViewController.practicedPassage = self.passage
+            destinationViewController.practicedVerses = self.verses
         }
     }
 }
