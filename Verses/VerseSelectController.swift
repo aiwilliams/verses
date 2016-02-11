@@ -21,6 +21,11 @@ class VerseSelectController: UITableViewController {
         let cell = tableView.dequeueReusableCellWithIdentifier("verseCell") as! VerseCell
         let verse = passage.verses![indexPath.row] as! UserVerse
         cell.versePassageLabel.text = verse.reference
+        if !selectedVerses.contains(verse) {
+            cell.accessoryType = .None
+        } else {
+            cell.accessoryType = .Checkmark
+        }
         return cell
     }
     
