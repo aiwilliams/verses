@@ -30,7 +30,6 @@ class VersePracticeController: UIViewController, UITextViewDelegate {
     @IBOutlet var promptLabelToBottomLayoutGuide: NSLayoutConstraint!
     @IBOutlet var verseEntryTextViewToBottomLayoutGuide: NSLayoutConstraint!
 
-    var passage: UserPassage!
     var verses: NSOrderedSet!
     
     var activeVerse: UserVerse!
@@ -57,10 +56,6 @@ class VersePracticeController: UIViewController, UITextViewDelegate {
 
         self.automaticallyAdjustsScrollViewInsets = false
         verseEntryTextView.delegate = self
-        
-        if passage != nil {
-            verses = passage.valueForKey("verses") as! NSOrderedSet
-        }
 
         activateVerse(verses.firstObject as! UserVerse)
         activeVerseIndex = 0

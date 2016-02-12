@@ -12,6 +12,7 @@ import UIKit
 class VerseSelectController: UITableViewController {
     var passage: UserPassage!
     var selectedVerses: Array<UserVerse> = []
+    var dismissalHandler: ((Array<UserVerse>)->Void)!
 
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return passage.verses!.count
@@ -21,11 +22,13 @@ class VerseSelectController: UITableViewController {
         let cell = tableView.dequeueReusableCellWithIdentifier("verseCell") as! VerseCell
         let verse = passage.verses![indexPath.row] as! UserVerse
         cell.versePassageLabel.text = verse.reference
+
         if !selectedVerses.contains(verse) {
             cell.accessoryType = .None
         } else {
             cell.accessoryType = .Checkmark
         }
+
         return cell
     }
     
@@ -50,7 +53,11 @@ class VerseSelectController: UITableViewController {
     }
 
     @IBAction func continueToPractice(sender: UIBarButtonItem) {
-        self.performSegueWithIdentifier("practiceSegue", sender: self)
+        self.dismissViewControllerAnimated(true, completion: {
+            if self.dismissalHandler != nil {
+                self.dismissalHandler(self.selectedVerses)
+            }
+        })
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {

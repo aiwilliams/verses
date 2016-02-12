@@ -14,6 +14,7 @@ class VersesIndexController: UITableViewController {
     var passages = [UserPassage]()
     var deletePassageIndexPath: NSIndexPath!
     var selectPassageIndexPath: NSIndexPath!
+    var selectedVerses: [UserVerse]!
     let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
     
     override func viewDidLoad() {
@@ -59,7 +60,14 @@ class VersesIndexController: UITableViewController {
         
         let selectAction = UITableViewRowAction(style: .Normal, title: "Select", handler: { (action: UITableViewRowAction!, indexPath: NSIndexPath!) in
             self.selectPassageIndexPath = indexPath
-            self.performSegueWithIdentifier("verseSelectSegue", sender: self)
+            let destination = self.storyboard!.instantiateViewControllerWithIdentifier("selectVerses") as! VerseSelectController
+            let navigationController = UINavigationController(rootViewController: destination)
+            destination.passage = passage
+            destination.dismissalHandler = { (verses: Array<UserVerse>) -> Void in
+                self.selectedVerses = verses
+                self.performSegueWithIdentifier("passagePracticeSegue", sender: self)
+            }
+            self.presentViewController(navigationController, animated: true, completion: nil)
         })
 
         var memorizeAction: UITableViewRowAction!
@@ -97,9 +105,21 @@ class VersesIndexController: UITableViewController {
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if segue.identifier == "passagePracticeSegue" {
             let destinationViewController = segue.destinationViewController as! VersePracticeController
-            let ip: NSIndexPath = self.tableView.indexPathForCell(sender as! UITableViewCell)!
+            var ip: NSIndexPath = NSIndexPath()
+            
+            if selectPassageIndexPath == nil {
+                ip = self.tableView.indexPathForCell(sender as! UITableViewCell)!
+            } else {
+                ip = selectPassageIndexPath
+            }
+            
             let passage: UserPassage = self.passages[ip.row]
-            destinationViewController.passage = passage
+            
+            if selectedVerses == nil {
+                destinationViewController.verses = passage.verses!
+            } else {
+                destinationViewController.verses = NSOrderedSet(array: self.selectedVerses)
+            }
         } else if segue.identifier == "verseSelectSegue" {
             let destinationNavController = segue.destinationViewController as! UINavigationController
             let destinationViewController = destinationNavController.topViewController as! VerseSelectController
