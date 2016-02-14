@@ -37,8 +37,6 @@ class VersePracticeController: UIViewController, UITextViewDelegate {
     var activeVerseIndex: Int!
     
     var constraintsHelper: PracticeViewConstraintsHelper!
-
-    var promptTimer: NSTimer!
     
     var verseEntryTextViewEnabled = true
     var keyboardHeight: CGFloat = 0
@@ -77,33 +75,8 @@ class VersePracticeController: UIViewController, UITextViewDelegate {
             exposeFreeHelp()
         }
 
-        resetPromptTimer()
-
         if verses.count == 1 {
             passageProgressView.hidden = true
-        }
-    }
-    
-    func userTimedOut() {
-        if promptLabel.alpha == 0 {
-            constraintsHelper.showPrompt()
-            UIView.animateWithDuration(0.5, animations: {
-                self.promptLabel.text = "Still there?"
-                self.promptLabel.textColor = self.neutralPromptColor
-                self.promptLabel.alpha = 1
-                self.view.layoutIfNeeded()
-            })
-        } else if promptLabel.alpha == 1 {
-            promptTimer.invalidate()
-
-            let fadeAnimation = CATransition()
-            fadeAnimation.type = kCATransitionFade
-            fadeAnimation.duration = 0.5
-            promptLabel.layer.addAnimation(fadeAnimation, forKey: "kCATransitionFade")
-            self.promptLabel.text = "Try a hint!"
-
-            let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: "helpButtonPressed:")
-            self.promptLabel.addGestureRecognizer(tapGestureRecognizer)
         }
     }
     
@@ -134,11 +107,6 @@ class VersePracticeController: UIViewController, UITextViewDelegate {
         }
     }
     
-    func resetPromptTimer() {
-        if let t = promptTimer { t.invalidate() }
-        promptTimer = NSTimer.scheduledTimerWithTimeInterval(6, target: self, selector: "userTimedOut", userInfo: nil, repeats: true)
-    }
-    
     func hidePrompt() {
         if promptLabel.alpha == 1 {
             constraintsHelper.hidePrompt()
@@ -157,9 +125,6 @@ class VersePracticeController: UIViewController, UITextViewDelegate {
     }
     
     func textViewDidChange(textView: UITextView) {
-        resetPromptTimer()
-        hidePrompt()
-
         if !verseCompleted {
             if self.verseHelper.roughlyMatches(textView.text) {
                 verseEntryTextViewEnabled = false
@@ -167,7 +132,6 @@ class VersePracticeController: UIViewController, UITextViewDelegate {
                 let delay = 0.7 * Double(NSEC_PER_SEC)
                 let dispatchTime = dispatch_time(DISPATCH_TIME_NOW, Int64(delay))
                 dispatch_after(dispatchTime, dispatch_get_main_queue(), {
-                    self.promptTimer.invalidate()
                     self.displayVerseSuccessAndTransition()
                 })
             }
@@ -175,8 +139,6 @@ class VersePracticeController: UIViewController, UITextViewDelegate {
     }
 
     @IBAction func helpButtonPressed(sender: AnyObject) {
-        resetPromptTimer()
-        hidePrompt()
         helpLevel++
 
         if basicHelpLabel.alpha == 0 {
@@ -300,7 +262,6 @@ class VersePracticeController: UIViewController, UITextViewDelegate {
 
         verseEntryTextView.text = ""
         verseEntryTextView.becomeFirstResponder()
-        resetPromptTimer()
         verseCompleted = false
     }
 
