@@ -55,7 +55,12 @@ class VerseSelectController: UITableViewController {
     @IBAction func continueToPractice(sender: UIBarButtonItem) {
         self.dismissViewControllerAnimated(true, completion: {
             if self.dismissalHandler != nil {
-                self.dismissalHandler(self.selectedVerses)
+                var practiceVerses: Array<UserVerse> = []
+                for verse in self.passage.verses! {
+                    let v = verse as! UserVerse
+                    if self.selectedVerses.contains(v) { practiceVerses.append(v) }
+                }
+                self.dismissalHandler(practiceVerses)
             }
         })
     }
