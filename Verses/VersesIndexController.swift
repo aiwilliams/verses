@@ -14,7 +14,6 @@ class VersesIndexController: UITableViewController {
     var passages = [UserPassage]()
     var deletePassageIndexPath: NSIndexPath!
     var selectPassageIndexPath: NSIndexPath!
-    var selectedVerses: [UserVerse]!
     var selectedPassage: UserPassage!
     let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
     
@@ -62,17 +61,25 @@ class VersesIndexController: UITableViewController {
         let cell = tableView.cellForRowAtIndexPath(indexPath) as! PassageCell
         let passage = self.passages[indexPath.row]
         
+        let clearSelectionAction = UITableViewRowAction(style: .Normal, title: "Clear", handler: { (action: UITableViewRowAction!, indexPath: NSIndexPath!) in
+            self.passages[indexPath.row].selectedVerses = nil
+            try! self.appDelegate.managedObjectContext.save()
+            tableView.setEditing(false, animated: true)
+        })
+        
         let selectAction = UITableViewRowAction(style: .Normal, title: "Select", handler: { (action: UITableViewRowAction!, indexPath: NSIndexPath!) in
             self.selectPassageIndexPath = indexPath
             let destination = self.storyboard!.instantiateViewControllerWithIdentifier("selectVerses") as! VerseSelectController
             let navigationController = UINavigationController(rootViewController: destination)
             destination.passage = passage
             destination.dismissalHandler = { (verses: Array<UserVerse>) -> Void in
-                self.selectedVerses = verses
+                passage.selectedVerses = NSOrderedSet(array: verses)
+                try! self.appDelegate.managedObjectContext.save()
                 self.performSegueWithIdentifier("passagePracticeSegue", sender: self)
             }
             self.presentViewController(navigationController, animated: true, completion: nil)
         })
+        selectAction.backgroundColor = UIColor(red: 143.0/255.0, green: 116.0/255.0, blue: 251.0/255.0, alpha: 1)
 
         var memorizeAction: UITableViewRowAction!
         if passage.memorized!.boolValue {
@@ -100,7 +107,7 @@ class VersesIndexController: UITableViewController {
         deleteAction.backgroundColor = UIColor(red:1.00, green:0.35, blue:0.31, alpha:1.0)
         
         if passage.verses!.count != 1 {
-            return [deleteAction, memorizeAction, selectAction]
+            return [deleteAction, memorizeAction, selectAction, clearSelectionAction]
         } else {
             return [deleteAction, memorizeAction]
         }
@@ -119,13 +126,12 @@ class VersesIndexController: UITableViewController {
             
             self.selectedPassage = self.passages[ip.row]
             
-            if selectedVerses == nil {
+            if selectedPassage.selectedVerses?.count == 0 {
                 destinationViewController.verses = self.selectedPassage.verses!
             } else {
-                destinationViewController.verses = NSOrderedSet(array: self.selectedVerses)
+                destinationViewController.verses = selectedPassage.selectedVerses!
             }
-            
-            selectedVerses = nil
+            selectPassageIndexPath = nil
         } else if segue.identifier == "verseSelectSegue" {
             let destinationNavController = segue.destinationViewController as! UINavigationController
             let destinationViewController = destinationNavController.topViewController as! VerseSelectController
@@ -180,10 +186,12 @@ class VersesIndexController: UITableViewController {
         for controller in self.navigationController!.viewControllers {
             if controller.isKindOfClass(VersePracticeController) {
                 let destination = controller as! VersePracticeController
-                if selectedVerses == nil {
+                let passage = self.passages[self.passages.indexOf(self.selectedPassage)!]
+
+                if passage.selectedVerses == nil {
                     destination.verses = selectedPassage.verses!
                 } else {
-                    destination.verses = NSOrderedSet(array: selectedVerses)
+                    destination.verses = passage.selectedVerses
                 }
                 
                 self.navigationController!.popToViewController(destination, animated: true)
