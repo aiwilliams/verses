@@ -15,10 +15,14 @@ class VersesIndexController: UITableViewController {
     var deletePassageIndexPath: NSIndexPath!
     var selectPassageIndexPath: NSIndexPath!
     var selectedVerses: [UserVerse]!
+    var selectedPassage: UserPassage!
     let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("practiceAgain"), name: "practiceAgain", object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("continueToNextPassage"), name: "continueToNextPassage", object: nil)
     }
     
     override func viewWillAppear(animated: Bool) {
@@ -113,13 +117,15 @@ class VersesIndexController: UITableViewController {
                 ip = selectPassageIndexPath
             }
             
-            let passage: UserPassage = self.passages[ip.row]
+            self.selectedPassage = self.passages[ip.row]
             
             if selectedVerses == nil {
-                destinationViewController.verses = passage.verses!
+                destinationViewController.verses = self.selectedPassage.verses!
             } else {
                 destinationViewController.verses = NSOrderedSet(array: self.selectedVerses)
             }
+            
+            selectedVerses = nil
         } else if segue.identifier == "verseSelectSegue" {
             let destinationNavController = segue.destinationViewController as! UINavigationController
             let destinationViewController = destinationNavController.topViewController as! VerseSelectController
@@ -163,5 +169,52 @@ class VersesIndexController: UITableViewController {
     
     func cancelDeletePassage(alertAction: UIAlertAction!) {
         deletePassageIndexPath = nil
+    }
+    
+    func practiceAgain() {
+        let pvc = self.storyboard!.instantiateViewControllerWithIdentifier("versePracticeController")
+        var controllerStack = self.navigationController!.viewControllers
+        controllerStack.insert(pvc, atIndex: 1)
+        self.navigationController!.setViewControllers(controllerStack, animated: true)
+        
+        for controller in self.navigationController!.viewControllers {
+            if controller.isKindOfClass(VersePracticeController) {
+                let destination = controller as! VersePracticeController
+                if selectedVerses == nil {
+                    destination.verses = selectedPassage.verses!
+                } else {
+                    destination.verses = NSOrderedSet(array: selectedVerses)
+                }
+                
+                self.navigationController!.popToViewController(destination, animated: true)
+                break
+            }
+        }
+    }
+    
+    func continueToNextPassage() {
+        let pvc = self.storyboard!.instantiateViewControllerWithIdentifier("versePracticeController")
+        var controllerStack = self.navigationController!.viewControllers
+        controllerStack.insert(pvc, atIndex: 1)
+        self.navigationController!.setViewControllers(controllerStack, animated: true)
+        
+        for controller in self.navigationController!.viewControllers {
+            if controller.isKindOfClass(VersePracticeController) {
+                let destination = controller as! VersePracticeController
+                let index = self.passages.indexOf(self.selectedPassage)
+
+                if index! + 1 >= (self.passages.count) {
+                    self.navigationController!.popToRootViewControllerAnimated(true)
+                    break
+                }
+
+                let passage = self.passages[index! + 1]
+                self.selectedPassage = passage
+                destination.verses = passage.verses
+                
+                self.navigationController!.popToViewController(destination, animated: true)
+                break
+            }
+        }
     }
 }
