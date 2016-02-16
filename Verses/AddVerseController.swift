@@ -66,14 +66,23 @@ class AddVerseController: UIViewController {
             savePassage(passage)
             self.dismissViewControllerAnimated(true, completion: nil)
         } catch HeartversesAPI.FetchError.PassageDoesNotExist {
-            errorLabel.text = "That passage does not exist!"
-            UIView.animateWithDuration(0.7, animations: { self.errorLabel.alpha = 1 })
-            NSTimer.scheduledTimerWithTimeInterval(2.5, target: self, selector: Selector("hideErrorLabel"), userInfo: nil, repeats: false)
+            errorLabel.text = "That passage does not exist."
+            displayErrorLabel()
+        } catch HeartversesAPI.FetchError.AmbiguousBookName {
+            errorLabel.text = "That book name is ambiguous."
+            displayErrorLabel()
+        } catch HeartversesAPI.FetchError.InvalidRange {
+            errorLabel.text = "That range of verses is out of bounds."
+            displayErrorLabel()
         } catch {
             errorLabel.text = "Sorry, an unknown error ocurred."
-            UIView.animateWithDuration(0.7, animations: { self.errorLabel.alpha = 1 })
-            NSTimer.scheduledTimerWithTimeInterval(2.5, target: self, selector: Selector("hideErrorLabel"), userInfo: nil, repeats: false)
+            displayErrorLabel()
         }
+    }
+    
+    func displayErrorLabel() {
+        UIView.animateWithDuration(0.7, animations: { self.errorLabel.alpha = 1 })
+        NSTimer.scheduledTimerWithTimeInterval(2.5, target: self, selector: Selector("hideErrorLabel"), userInfo: nil, repeats: false)
     }
     
     func hideErrorLabel() {

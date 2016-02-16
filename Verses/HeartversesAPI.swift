@@ -55,6 +55,8 @@ class HeartversesAPI {
             }
         }
 
+        if passage.verses.isEmpty { throw FetchError.PassageDoesNotExist }
+
         return passage
     }
     
