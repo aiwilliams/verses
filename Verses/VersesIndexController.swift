@@ -61,13 +61,13 @@ class VersesIndexController: UITableViewController {
         let cell = tableView.cellForRowAtIndexPath(indexPath) as! PassageCell
         let passage = self.passages[indexPath.row]
         
-        let clearSelectionAction = UITableViewRowAction(style: .Normal, title: "Clear", handler: { (action: UITableViewRowAction!, indexPath: NSIndexPath!) in
+        let clearSelectionAction = UITableViewRowAction(style: .Normal, title: "☒", handler: { (action: UITableViewRowAction!, indexPath: NSIndexPath!) in
             self.passages[indexPath.row].selectedVerses = nil
             try! self.appDelegate.managedObjectContext.save()
             tableView.setEditing(false, animated: true)
         })
         
-        let selectAction = UITableViewRowAction(style: .Normal, title: "Select", handler: { (action: UITableViewRowAction!, indexPath: NSIndexPath!) in
+        let selectAction = UITableViewRowAction(style: .Normal, title: "☑︎", handler: { (action: UITableViewRowAction!, indexPath: NSIndexPath!) in
             self.selectPassageIndexPath = indexPath
             let destination = self.storyboard!.instantiateViewControllerWithIdentifier("selectVerses") as! VerseSelectController
             let navigationController = UINavigationController(rootViewController: destination)
@@ -83,14 +83,14 @@ class VersesIndexController: UITableViewController {
 
         var memorizeAction: UITableViewRowAction!
         if passage.memorized!.boolValue {
-            memorizeAction = UITableViewRowAction(style: .Normal, title: "Start over", handler: { (action: UITableViewRowAction!, indexPath: NSIndexPath!) in
+            memorizeAction = UITableViewRowAction(style: .Normal, title: "⚐", handler: { (action: UITableViewRowAction!, indexPath: NSIndexPath!) in
                 passage.memorized = false
                 try! self.appDelegate.managedObjectContext.save()
                 cell.flagLabel.text = "⚐"
                 tableView.setEditing(false, animated: true)
             })
         } else {
-            memorizeAction = UITableViewRowAction(style: .Normal, title: "Memorize", handler: { (action: UITableViewRowAction!, indexPath: NSIndexPath!) in
+            memorizeAction = UITableViewRowAction(style: .Normal, title: "⚑", handler: { (action: UITableViewRowAction!, indexPath: NSIndexPath!) in
                 passage.memorized = true
                 try! self.appDelegate.managedObjectContext.save()
                 cell.flagLabel.text = "⚑"
@@ -99,7 +99,7 @@ class VersesIndexController: UITableViewController {
         }
         memorizeAction.backgroundColor = UIColor(red:0.27, green:0.83, blue:0.55, alpha:1.0)
         
-        let deleteAction = UITableViewRowAction(style: .Normal, title: "Delete", handler: { (action: UITableViewRowAction!, indexPath: NSIndexPath!) in
+        let deleteAction = UITableViewRowAction(style: .Normal, title: "✕", handler: { (action: UITableViewRowAction!, indexPath: NSIndexPath!) in
             self.deletePassageIndexPath = indexPath
             let passageToDelete = self.passages[indexPath.row]
             self.confirmDeletionOf(passageToDelete)
