@@ -37,6 +37,7 @@ class HeartversesAPI {
         
         let fetchedVerses: [NSManagedObject] = store.findVersesInChapter(translation, bookSlug: parsedPassage.book, chapter: parsedPassage.chapter_start) as! [NSManagedObject]
         if fetchedVerses.isEmpty { throw FetchError.PassageDoesNotExist }
+        if (parsedPassage.verse_start == 1 && parsedPassage.verse_end >= fetchedVerses.count) { passage.verse_start = 0; passage.verse_end = 0 }
         
         if parsedPassage.verse_start == 0 {
             for v in fetchedVerses {
