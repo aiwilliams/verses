@@ -188,7 +188,7 @@ class VersesIndexController: UITableViewController {
                 let destination = controller as! VersePracticeController
                 let passage = self.passages[self.passages.indexOf(self.selectedPassage)!]
 
-                if passage.selectedVerses == nil {
+                if passage.selectedVerses?.count == 0 {
                     destination.verses = selectedPassage.verses!
                 } else {
                     destination.verses = passage.selectedVerses
