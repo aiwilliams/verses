@@ -46,8 +46,8 @@ class HeartversesAPI {
             }
         } else {
             for i in parsedPassage.verse_start...parsedPassage.verse_end {
-                if i >= fetchedVerses.count {
-                    passage.verse_end = i
+                if i > fetchedVerses.count {
+                    passage.verse_end = i - 1
                     break
                 }
 
