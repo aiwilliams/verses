@@ -57,61 +57,6 @@ class VersesIndexController: UITableViewController {
         return cell
     }
     
-    override func tableView(tableView: UITableView, editActionsForRowAtIndexPath indexPath: NSIndexPath) -> [UITableViewRowAction]? {
-        let cell = tableView.cellForRowAtIndexPath(indexPath) as! PassageCell
-        let passage = self.passages[indexPath.row]
-        
-        let clearSelectionAction = UITableViewRowAction(style: .Normal, title: "☒", handler: { (action: UITableViewRowAction!, indexPath: NSIndexPath!) in
-            self.passages[indexPath.row].selectedVerses = nil
-            try! self.appDelegate.managedObjectContext.save()
-            tableView.setEditing(false, animated: true)
-        })
-        
-        let selectAction = UITableViewRowAction(style: .Normal, title: "☑︎", handler: { (action: UITableViewRowAction!, indexPath: NSIndexPath!) in
-            self.selectPassageIndexPath = indexPath
-            let destination = self.storyboard!.instantiateViewControllerWithIdentifier("selectVerses") as! VerseSelectController
-            let navigationController = UINavigationController(rootViewController: destination)
-            destination.passage = passage
-            destination.dismissalHandler = { (verses: Array<UserVerse>) -> Void in
-                passage.selectedVerses = NSOrderedSet(array: verses)
-                try! self.appDelegate.managedObjectContext.save()
-                self.performSegueWithIdentifier("passagePracticeSegue", sender: self)
-            }
-            self.presentViewController(navigationController, animated: true, completion: nil)
-        })
-        selectAction.backgroundColor = UIColor(red: 143.0/255.0, green: 116.0/255.0, blue: 251.0/255.0, alpha: 1)
-
-        var memorizeAction: UITableViewRowAction!
-        if passage.memorized!.boolValue {
-            memorizeAction = UITableViewRowAction(style: .Normal, title: "⚐", handler: { (action: UITableViewRowAction!, indexPath: NSIndexPath!) in
-                passage.memorized = false
-                try! self.appDelegate.managedObjectContext.save()
-                cell.flagLabel.text = "⚐"
-                tableView.setEditing(false, animated: true)
-            })
-        } else {
-            memorizeAction = UITableViewRowAction(style: .Normal, title: "⚑", handler: { (action: UITableViewRowAction!, indexPath: NSIndexPath!) in
-                passage.memorized = true
-                try! self.appDelegate.managedObjectContext.save()
-                cell.flagLabel.text = "⚑"
-                tableView.setEditing(false, animated: true)
-            })
-        }
-        memorizeAction.backgroundColor = UIColor(red:0.27, green:0.83, blue:0.55, alpha:1.0)
-        
-        let deleteAction = UITableViewRowAction(style: .Normal, title: "✕", handler: { (action: UITableViewRowAction!, indexPath: NSIndexPath!) in
-            self.deletePassageIndexPath = indexPath
-            let passageToDelete = self.passages[indexPath.row]
-            self.confirmDeletionOf(passageToDelete)
-        })
-        deleteAction.backgroundColor = UIColor(red:1.00, green:0.35, blue:0.31, alpha:1.0)
-        
-        if passage.verses!.count != 1 {
-            return [deleteAction, memorizeAction, selectAction, clearSelectionAction]
-        } else {
-            return [deleteAction, memorizeAction]
-        }
-    }
 
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if segue.identifier == "passagePracticeSegue" {
@@ -140,11 +85,88 @@ class VersesIndexController: UITableViewController {
         }
     }
     
+    override func tableView(tableView: UITableView, editActionsForRowAtIndexPath indexPath: NSIndexPath) -> [UITableViewRowAction]? {
+        let cell = tableView.cellForRowAtIndexPath(indexPath) as! PassageCell
+        let passage = self.passages[indexPath.row]
+        
+        let moreAction = UITableViewRowAction(style: .Normal, title: "More", handler: { (action: UITableViewRowAction!, indexPath: NSIndexPath!) in
+            self.displayMoreOptions(indexPath)
+        })
+        
+        var memorizeAction: UITableViewRowAction!
+        if passage.memorized!.boolValue {
+            memorizeAction = UITableViewRowAction(style: .Normal, title: "⚐", handler: { (action: UITableViewRowAction!, indexPath: NSIndexPath!) in
+                passage.memorized = false
+                try! self.appDelegate.managedObjectContext.save()
+                cell.flagLabel.text = "⚐"
+                tableView.setEditing(false, animated: true)
+            })
+        } else {
+            memorizeAction = UITableViewRowAction(style: .Normal, title: "⚑", handler: { (action: UITableViewRowAction!, indexPath: NSIndexPath!) in
+                passage.memorized = true
+                try! self.appDelegate.managedObjectContext.save()
+                cell.flagLabel.text = "⚑"
+                tableView.setEditing(false, animated: true)
+            })
+        }
+        memorizeAction.backgroundColor = UIColor(red:0.27, green:0.83, blue:0.55, alpha:1.0)
+        
+        let deleteAction = UITableViewRowAction(style: .Normal, title: "✕", handler: { (action: UITableViewRowAction!, indexPath: NSIndexPath!) in
+            self.deletePassageIndexPath = indexPath
+            let passageToDelete = self.passages[indexPath.row]
+            self.confirmDeletionOf(passageToDelete)
+        })
+        deleteAction.backgroundColor = UIColor(red:1.00, green:0.35, blue:0.31, alpha:1.0)
+        
+        if passage.verses!.count != 1 {
+            return [deleteAction, memorizeAction, moreAction]
+        } else {
+            return [deleteAction, memorizeAction]
+        }
+    }
+    
+    func displayMoreOptions(indexPath: NSIndexPath) {
+        let passage = self.passages[indexPath.row]
+
+        let alert = UIAlertController(title: nil, message: nil, preferredStyle: .ActionSheet)
+
+        let selectAction = UIAlertAction(title: "Select Verses", style: .Default, handler: { (alertAction: UIAlertAction) in
+            self.selectPassageIndexPath = indexPath
+            let destination = self.storyboard!.instantiateViewControllerWithIdentifier("selectVerses") as! VerseSelectController
+            let navigationController = UINavigationController(rootViewController: destination)
+            destination.passage = passage
+            destination.dismissalHandler = { (verses: Array<UserVerse>) -> Void in
+                passage.selectedVerses = NSOrderedSet(array: verses)
+                try! self.appDelegate.managedObjectContext.save()
+                self.performSegueWithIdentifier("passagePracticeSegue", sender: self)
+            }
+            self.presentViewController(navigationController, animated: true, completion: nil)
+        })
+
+        let clearAction = UIAlertAction(title: "Clear Selection", style: .Destructive, handler: { (alertAction: UIAlertAction) in
+            self.passages[indexPath.row].selectedVerses = nil
+            try! self.appDelegate.managedObjectContext.save()
+            self.tableView.setEditing(false, animated: true)
+        })
+        
+        let cancelAction = UIAlertAction(title: "Cancel", style: .Cancel, handler: { (alertAction: UIAlertAction) in
+            self.tableView.setEditing(false, animated: true)
+        })
+        
+        alert.addAction(selectAction)
+        if passage.selectedVerses?.count != 0 { alert.addAction(clearAction) }
+        alert.addAction(cancelAction)
+        
+        self.presentViewController(alert, animated: true, completion: nil)
+    }
+
     func confirmDeletionOf(passage: UserPassage) {
         let alert = UIAlertController(title: "Delete Passage", message: "Are you sure you want to delete \(passage.reference!)? This will permanently destroy any practice data!", preferredStyle: .ActionSheet)
         
         let deleteAction = UIAlertAction(title: "Delete, and I mean it!", style: .Destructive, handler: deletePassage)
-        let cancelAction = UIAlertAction(title: "Nevermind", style: .Cancel, handler: cancelDeletePassage)
+        let cancelAction = UIAlertAction(title: "Nevermind", style: .Cancel, handler: { (alertAction: UIAlertAction) in
+            self.deletePassageIndexPath = nil
+        })
         
         alert.addAction(deleteAction)
         alert.addAction(cancelAction)
@@ -171,10 +193,6 @@ class VersesIndexController: UITableViewController {
 
             tableView.endUpdates()
         }
-    }
-    
-    func cancelDeletePassage(alertAction: UIAlertAction!) {
-        deletePassageIndexPath = nil
     }
     
     func practiceAgain() {
