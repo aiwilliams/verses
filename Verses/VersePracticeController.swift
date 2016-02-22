@@ -32,6 +32,8 @@ class VersePracticeController: UIViewController, UITextViewDelegate {
 
     var verses: NSOrderedSet!
     
+    var nextPassageExists: Bool!
+    
     var activeVerse: UserVerse!
     var verseHelper: VerseHelper!
     var activeVerseIndex: Int!
@@ -283,7 +285,12 @@ class VersePracticeController: UIViewController, UITextViewDelegate {
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if segue.identifier == "completionSegue" {
             let destinationViewController = segue.destinationViewController as! VerseCompletionController
-            destinationViewController.practicedVerses = self.verses
+            
+            if !nextPassageExists {
+                destinationViewController.nextPassageExists = false
+            } else {
+                destinationViewController.nextPassageExists = true
+            }
         }
     }
 }

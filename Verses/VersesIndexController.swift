@@ -76,6 +76,13 @@ class VersesIndexController: UITableViewController {
             } else {
                 destinationViewController.verses = selectedPassage.selectedVerses!
             }
+            
+            if ip.row + 1 >= (self.passages.count) {
+                destinationViewController.nextPassageExists = false
+            } else {
+                destinationViewController.nextPassageExists = true
+            }
+
             selectPassageIndexPath = nil
         } else if segue.identifier == "verseSelectSegue" {
             let destinationNavController = segue.destinationViewController as! UINavigationController

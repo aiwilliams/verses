@@ -10,12 +10,17 @@ import Foundation
 import UIKit
 
 class VerseCompletionController: UIViewController {
-    var practicedVerses: NSOrderedSet!
+    var nextPassageExists: Bool!
 
     @IBOutlet var practiceAgainButton: UIButton!
+    @IBOutlet var nextPassageButton: UIButton!
 
     override func viewDidLoad() {
         super.viewDidLoad()
+
+        if !nextPassageExists {
+            nextPassageButton.hidden = true
+        }
     }
     
     @IBAction func practiceAgain(sender: UIButton) {

@@ -398,6 +398,7 @@
                     </view>
                     <navigationItem key="navigationItem" id="EmD-x1-Qdw"/>
                     <connections>
+                        <outlet property="nextPassageButton" destination="lhu-fl-1aK" id="99x-ph-Ya2"/>
                         <outlet property="practiceAgainButton" destination="fQo-Mg-Gx8" id="It7-gz-yGU"/>
                     </connections>
                 </viewController>
