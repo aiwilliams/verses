@@ -211,12 +211,19 @@ class VersesIndexController: UITableViewController {
         for controller in self.navigationController!.viewControllers {
             if controller.isKindOfClass(VersePracticeController) {
                 let destination = controller as! VersePracticeController
-                let passage = self.passages[self.passages.indexOf(self.selectedPassage)!]
+                let index = self.passages.indexOf(self.selectedPassage)
+                let passage = self.passages[index!]
 
                 if passage.selectedVerses?.count == 0 {
                     destination.verses = selectedPassage.verses!
                 } else {
                     destination.verses = passage.selectedVerses
+                }
+
+                if index! + 2 >= (self.passages.count) {
+                    destination.nextPassageExists = false
+                } else {
+                    destination.nextPassageExists = true
                 }
                 
                 self.navigationController!.popToViewController(destination, animated: true)
@@ -239,6 +246,12 @@ class VersesIndexController: UITableViewController {
                 if index! + 1 >= (self.passages.count) {
                     self.navigationController!.popToRootViewControllerAnimated(true)
                     break
+                }
+                
+                if index! + 2 >= (self.passages.count) {
+                    destination.nextPassageExists = false
+                } else {
+                    destination.nextPassageExists = true
                 }
 
                 let passage = self.passages[index! + 1]
