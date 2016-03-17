@@ -31,9 +31,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             self.window?.rootViewController = introductionController
             self.window?.makeKeyAndVisible()
         } else {
-            let versesIndexController = mainStoryboard.instantiateViewControllerWithIdentifier("VersesIndexController")
+            let homeTabBarController = mainStoryboard.instantiateViewControllerWithIdentifier("HomeTabBarController")
 
-            self.window?.rootViewController = versesIndexController
+            self.window?.rootViewController = homeTabBarController
             self.window?.makeKeyAndVisible()
         }
 
@@ -85,7 +85,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let url = self.applicationDocumentsDirectory.URLByAppendingPathComponent("SingleViewCoreData.sqlite")
         var failureReason = "There was an error creating or loading the application's saved data."
         do {
-            try coordinator.addPersistentStoreWithType(NSSQLiteStoreType, configuration: nil, URL: url, options: nil)
+            let options: [NSObject: AnyObject] = [NSMigratePersistentStoresAutomaticallyOption: true, NSInferMappingModelAutomaticallyOption: true]
+            try coordinator.addPersistentStoreWithType(NSSQLiteStoreType, configuration: nil, URL: url, options: options)
         } catch {
             // Report any error we got.
             var dict = [String: AnyObject]()

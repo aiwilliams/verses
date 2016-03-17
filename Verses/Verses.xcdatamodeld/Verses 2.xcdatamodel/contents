@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="9525" systemVersion="15A278b" minimumToolsVersion="Automatic">
+    <entity name="Reminder" syncable="YES">
+        <attribute name="on" attributeType="Boolean" defaultValueString="YES" syncable="YES"/>
+        <attribute name="time" attributeType="Date" syncable="YES"/>
+    </entity>
+    <entity name="UserPassage" representedClassName=".UserPassage" syncable="YES">
+        <attribute name="memorized" attributeType="Boolean" defaultValueString="NO" syncable="YES"/>
+        <attribute name="reference" attributeType="String" syncable="YES"/>
+        <relationship name="selectedVerses" optional="YES" toMany="YES" minCount="1" deletionRule="Nullify" ordered="YES" destinationEntity="UserVerse" syncable="YES"/>
+        <relationship name="verses" toMany="YES" minCount="1" deletionRule="Nullify" ordered="YES" destinationEntity="UserVerse" inverseName="passage" inverseEntity="UserVerse" syncable="YES"/>
+    </entity>
+    <entity name="UserVerse" representedClassName=".UserVerse" syncable="YES">
+        <attribute name="book" attributeType="String" syncable="YES"/>
+        <attribute name="chapter" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <attribute name="number" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <attribute name="text" attributeType="String" syncable="YES"/>
+        <attribute name="views" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <relationship name="passage" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="UserPassage" inverseName="verses" inverseEntity="UserPassage" syncable="YES"/>
+    </entity>
+    <elements>
+        <element name="UserPassage" positionX="-63" positionY="-18" width="128" height="105"/>
+        <element name="UserVerse" positionX="-63" positionY="0" width="128" height="135"/>
+        <element name="Reminder" positionX="-54" positionY="45" width="128" height="75"/>
+    </elements>
+</model>

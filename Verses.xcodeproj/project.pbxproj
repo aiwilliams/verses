@@ -21,6 +21,9 @@
 		FD8180FE1C0A3ACD008AF2BA /* HeartversesStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD8180FD1C0A3ACD008AF2BA /* HeartversesStore.swift */; };
 		FD8180FF1C0A3ACD008AF2BA /* HeartversesStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD8180FD1C0A3ACD008AF2BA /* HeartversesStore.swift */; };
 		FD8181001C0A3D43008AF2BA /* Heartverses.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = FD0D0F1E1C0A31BC00EAF02A /* Heartverses.xcdatamodeld */; };
+		FD895C0C1C974C04009A2F08 /* RemindersController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD895C0B1C974C04009A2F08 /* RemindersController.swift */; };
+		FD8E97AB1C9B4DBB001A4D22 /* ReminderCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD8E97AA1C9B4DBB001A4D22 /* ReminderCell.swift */; };
+		FD8E97AE1C9B539A001A4D22 /* AddReminderController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD8E97AD1C9B539A001A4D22 /* AddReminderController.swift */; };
 		FD960EE51C17C7790007A096 /* SwiftyJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD960EE41C17C7790007A096 /* SwiftyJSON.swift */; };
 		FD960EE71C17C9790007A096 /* PassageParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD960EE61C17C9790007A096 /* PassageParser.swift */; };
 		FD960EE91C17CEFE0007A096 /* Passage.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD960EE81C17CEFE0007A096 /* Passage.swift */; };
@@ -86,6 +89,10 @@
 		FD79BAE41C1BC45A00266A5A /* UserPassage+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UserPassage+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		FD79BAE81C1BC4B600266A5A /* UserPassage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserPassage.swift; sourceTree = "<group>"; };
 		FD8180FD1C0A3ACD008AF2BA /* HeartversesStore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HeartversesStore.swift; sourceTree = "<group>"; };
+		FD895C0B1C974C04009A2F08 /* RemindersController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RemindersController.swift; sourceTree = "<group>"; };
+		FD8E97AA1C9B4DBB001A4D22 /* ReminderCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReminderCell.swift; sourceTree = "<group>"; };
+		FD8E97AC1C9B522A001A4D22 /* Verses 2.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "Verses 2.xcdatamodel"; sourceTree = "<group>"; };
+		FD8E97AD1C9B539A001A4D22 /* AddReminderController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddReminderController.swift; sourceTree = "<group>"; };
 		FD960EE41C17C7790007A096 /* SwiftyJSON.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwiftyJSON.swift; sourceTree = "<group>"; };
 		FD960EE61C17C9790007A096 /* PassageParser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PassageParser.swift; sourceTree = "<group>"; };
 		FD960EE81C17CEFE0007A096 /* Passage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Passage.swift; sourceTree = "<group>"; };
@@ -189,6 +196,8 @@
 				FDB61B8E1BF533D800F8C61D /* VersePracticeController.swift */,
 				FDB61BBD1BF5410000F8C61D /* VersesIndexController.swift */,
 				FDB61BBF1BF5457E00F8C61D /* AddVerseController.swift */,
+				FD895C0B1C974C04009A2F08 /* RemindersController.swift */,
+				FD8E97AD1C9B539A001A4D22 /* AddReminderController.swift */,
 				FDAFD8FD1C2DAB1C002F4FF5 /* VerseHelper.swift */,
 				FDD25BEC1C62BFE400254082 /* VerseSelectController.swift */,
 				FDDF4EC41C459EEC00B2A831 /* PracticeViewConstraintsHelper.swift */,
@@ -208,6 +217,7 @@
 				FD79BAE81C1BC4B600266A5A /* UserPassage.swift */,
 				FDAFD8FA1C2C585A002F4FF5 /* PassageCell.swift */,
 				FDD25BEE1C62C24600254082 /* VerseCell.swift */,
+				FD8E97AA1C9B4DBB001A4D22 /* ReminderCell.swift */,
 			);
 			path = Verses;
 			sourceTree = "<group>";
@@ -403,9 +413,11 @@
 				FD79BAE51C1BC45A00266A5A /* UserVerse+CoreDataProperties.swift in Sources */,
 				FDB61B8F1BF533D800F8C61D /* VersePracticeController.swift in Sources */,
 				FD79BAE61C1BC45A00266A5A /* UserVerse.swift in Sources */,
+				FD895C0C1C974C04009A2F08 /* RemindersController.swift in Sources */,
 				FDD25BED1C62BFE400254082 /* VerseSelectController.swift in Sources */,
 				FD0EFD8E1C56BC3300BC83A6 /* IntroductionViewController.swift in Sources */,
 				FDB61BC01BF5457E00F8C61D /* AddVerseController.swift in Sources */,
+				FD8E97AE1C9B539A001A4D22 /* AddReminderController.swift in Sources */,
 				FDD25BEF1C62C24600254082 /* VerseCell.swift in Sources */,
 				FDAFD8FE1C2DAB1C002F4FF5 /* VerseHelper.swift in Sources */,
 				FDDF4EC51C459EEC00B2A831 /* PracticeViewConstraintsHelper.swift in Sources */,
@@ -414,6 +426,7 @@
 				FDAFD8FB1C2C585A002F4FF5 /* PassageCell.swift in Sources */,
 				FDB61B951BF533D800F8C61D /* Verses.xcdatamodeld in Sources */,
 				FD0D0F201C0A31BC00EAF02A /* Heartverses.xcdatamodeld in Sources */,
+				FD8E97AB1C9B4DBB001A4D22 /* ReminderCell.swift in Sources */,
 				FDB61BBE1BF5410000F8C61D /* VersesIndexController.swift in Sources */,
 				FDD3BC301C16263B00616976 /* HeartversesAPI.swift in Sources */,
 				FD8180FE1C0A3ACD008AF2BA /* HeartversesStore.swift in Sources */,
@@ -709,9 +722,10 @@
 		FDB61B931BF533D800F8C61D /* Verses.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
+				FD8E97AC1C9B522A001A4D22 /* Verses 2.xcdatamodel */,
 				FDB61B941BF533D800F8C61D /* Verses.xcdatamodel */,
 			);
-			currentVersion = FDB61B941BF533D800F8C61D /* Verses.xcdatamodel */;
+			currentVersion = FD8E97AC1C9B522A001A4D22 /* Verses 2.xcdatamodel */;
 			path = Verses.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;
