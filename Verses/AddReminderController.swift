@@ -19,6 +19,7 @@ class AddReminderController: UIViewController {
     
     @IBAction func doneButtonPressed(sender: UIBarButtonItem) {
         saveReminder()
+        scheduleReminder()
         self.dismissViewControllerAnimated(true, completion: nil)
     }
     
@@ -33,5 +34,23 @@ class AddReminderController: UIViewController {
         } catch let error as NSError {
             print("Could not save \(error), \(error.userInfo)")
         }
+    }
+    
+    func scheduleReminder() {
+        guard let settings = UIApplication.sharedApplication().currentUserNotificationSettings() else { return }
+
+        if settings.types == .None {
+            let ac = UIAlertController(title: "Can't schedule", message: "We don't have permission to schedule notifications! Please allow it in your Settings.", preferredStyle: .Alert)
+            ac.addAction(UIAlertAction(title: "OK", style: .Default, handler: nil))
+            presentViewController(ac, animated: true, completion: nil)
+            return
+        }
+
+        let notif = UILocalNotification()
+        notif.fireDate = reminderTimePicker.date
+        notif.alertBody = "It's time to memorize!"
+        notif.soundName = UILocalNotificationDefaultSoundName
+        notif.repeatInterval = .Day
+        UIApplication.sharedApplication().scheduleLocalNotification(notif)
     }
 }

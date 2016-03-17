@@ -53,5 +53,30 @@ class RemindersController: UITableViewController {
         let reminder = reminders[sender.tag]
         reminder.setValue(sender.on, forKey: "on")
         try! appDelegate.managedObjectContext.save()
+        
+        UIApplication.sharedApplication().cancelAllLocalNotifications()
+        for r in reminders {
+            if r.valueForKey("on") as! Bool {
+                scheduleReminder(r)
+            }
+        }
+    }
+    
+    func scheduleReminder(reminder: NSManagedObject) {
+        guard let settings = UIApplication.sharedApplication().currentUserNotificationSettings() else { return }
+        
+        if settings.types == .None {
+            let ac = UIAlertController(title: "Can't schedule", message: "We don't have permission to schedule notifications! Please allow it in your Settings.", preferredStyle: .Alert)
+            ac.addAction(UIAlertAction(title: "OK", style: .Default, handler: nil))
+            presentViewController(ac, animated: true, completion: nil)
+            return
+        }
+        
+        let notif = UILocalNotification()
+        notif.fireDate = reminder.valueForKey("time") as? NSDate
+        notif.alertBody = "It's time to memorize!"
+        notif.soundName = UILocalNotificationDefaultSoundName
+        notif.repeatInterval = .Day
+        UIApplication.sharedApplication().scheduleLocalNotification(notif)
     }
 }

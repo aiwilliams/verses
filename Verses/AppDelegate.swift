@@ -36,6 +36,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             self.window?.rootViewController = homeTabBarController
             self.window?.makeKeyAndVisible()
         }
+        
+        let notificationSettings = UIUserNotificationSettings(forTypes: [.Alert, .Sound], categories: nil)
+        UIApplication.sharedApplication().registerUserNotificationSettings(notificationSettings)
 
         return true
     }
