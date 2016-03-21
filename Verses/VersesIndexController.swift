@@ -83,6 +83,8 @@ class VersesIndexController: UITableViewController {
             }
 
             selectPassageIndexPath = nil
+
+            destinationViewController.hidesBottomBarWhenPushed = true
         } else if segue.identifier == "verseSelectSegue" {
             let destinationNavController = segue.destinationViewController as! UINavigationController
             let destinationViewController = destinationNavController.topViewController as! VerseSelectController

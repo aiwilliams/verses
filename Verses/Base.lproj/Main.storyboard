@@ -204,35 +204,35 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" horizontalCompressionResistancePriority="1000" verticalCompressionResistancePriority="1000" misplaced="YES" bounces="NO" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="4tE-Md-p5j">
-                                <rect key="frame" x="20" y="72" width="560" height="520"/>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" horizontalCompressionResistancePriority="1000" verticalCompressionResistancePriority="1000" bounces="NO" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="4tE-Md-p5j">
+                                <rect key="frame" x="20" y="72" width="560" height="471"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences" autocorrectionType="yes" spellCheckingType="no"/>
                             </textView>
-                            <label opaque="NO" userInteractionEnabled="NO" alpha="0.0" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="J, a s o G a o t L J C, T t t t i t D: G." textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zAa-MO-Bnm" userLabel="Advanced Help Label">
+                            <label opaque="NO" userInteractionEnabled="NO" alpha="0.0" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="J, a s o G a o t L J C, T t t t i t D: G." textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zAa-MO-Bnm" userLabel="Advanced Help Label">
                                 <rect key="frame" x="20" y="571" width="560" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" alpha="0.0" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="J, a s o G a o t L J C, T t t t i t D: G." textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hwo-nT-Hzu" userLabel="Basic Help Label">
+                            <label opaque="NO" userInteractionEnabled="NO" alpha="0.0" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7RQ-kb-Wq2" userLabel="Intermediate Help Label">
                                 <rect key="frame" x="20" y="571" width="560" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" alpha="0.0" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7RQ-kb-Wq2" userLabel="Intermediate Help Label">
-                                <rect key="frame" x="20" y="571" width="560" height="21"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <label opaque="NO" alpha="0.0" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mOy-O3-OK1" userLabel="Prompt Label">
-                                <rect key="frame" x="20" y="562" width="560" height="30"/>
+                            <label opaque="NO" alpha="0.0" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mOy-O3-OK1" userLabel="Prompt Label">
+                                <rect key="frame" x="20" y="513" width="560" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="30" id="nOw-Vj-GWc"/>
                                 </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" alpha="0.0" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="J, a s o G a o t L J C, T t t t i t D: G." textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hwo-nT-Hzu" userLabel="Basic Help Label">
+                                <rect key="frame" x="20" y="571" width="560" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
@@ -248,10 +248,10 @@
                             <constraint firstAttribute="trailingMargin" secondItem="4tE-Md-p5j" secondAttribute="trailing" id="0zE-yI-NqD"/>
                             <constraint firstItem="7RQ-kb-Wq2" firstAttribute="centerX" secondItem="hwo-nT-Hzu" secondAttribute="centerX" id="2LG-xD-KYM"/>
                             <constraint firstItem="7RQ-kb-Wq2" firstAttribute="centerY" secondItem="hwo-nT-Hzu" secondAttribute="centerY" id="2ee-WS-G3K"/>
+                            <constraint firstAttribute="bottomMargin" secondItem="hwo-nT-Hzu" secondAttribute="bottom" constant="8" id="5QT-T0-TJT"/>
                             <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="4tE-Md-p5j" secondAttribute="bottom" constant="8" id="9YC-ek-Ikh"/>
                             <constraint firstAttribute="trailingMargin" secondItem="mVz-c2-GaJ" secondAttribute="trailing" constant="-20" id="HAD-Sn-RDn"/>
                             <constraint firstItem="zAa-MO-Bnm" firstAttribute="height" secondItem="hwo-nT-Hzu" secondAttribute="height" id="LaB-1Z-1RU"/>
-                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="hwo-nT-Hzu" secondAttribute="bottom" constant="8" id="MH4-aP-9uI"/>
                             <constraint firstItem="zAa-MO-Bnm" firstAttribute="width" secondItem="hwo-nT-Hzu" secondAttribute="width" id="Mgk-rR-QSn"/>
                             <constraint firstItem="7RQ-kb-Wq2" firstAttribute="width" secondItem="hwo-nT-Hzu" secondAttribute="width" id="NXF-KJ-kDD"/>
                             <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="mOy-O3-OK1" secondAttribute="bottom" constant="8" id="SW2-P4-wb6"/>
@@ -277,7 +277,7 @@
                     <connections>
                         <outlet property="advancedHelpLabel" destination="zAa-MO-Bnm" id="Cbp-s1-h0J"/>
                         <outlet property="basicHelpLabel" destination="hwo-nT-Hzu" id="FRn-tb-Cdr"/>
-                        <outlet property="basicHelpLabelToBottomLayoutGuide" destination="MH4-aP-9uI" id="6H4-vA-sky"/>
+                        <outlet property="basicHelpLabelToBottomLayoutGuide" destination="5QT-T0-TJT" id="IFd-gx-NLO"/>
                         <outlet property="helpButton" destination="c4K-J3-KPm" id="qH9-Zx-GJy"/>
                         <outlet property="intermediateHelpLabel" destination="7RQ-kb-Wq2" id="cxj-IQ-bc1"/>
                         <outlet property="passageProgressView" destination="mVz-c2-GaJ" id="Mdw-pK-nAW"/>
