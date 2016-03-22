@@ -29,17 +29,23 @@
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="John 1:1" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5zI-dG-4hC">
-                                            <rect key="frame" x="55" y="11" width="509" height="21"/>
+                                            <rect key="frame" x="83" y="11" width="481" height="21"/>
                                             <constraints>
-                                                <constraint firstAttribute="width" constant="509" id="NC8-IR-Akw"/>
+                                                <constraint firstAttribute="width" constant="481" id="NC8-IR-Akw"/>
                                             </constraints>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="☑︎" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LpS-KZ-TRM">
+                                            <rect key="frame" x="55" y="5" width="26" height="34"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="25"/>
+                                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
                                     </subviews>
                                     <constraints>
-                                        <constraint firstItem="5zI-dG-4hC" firstAttribute="leading" secondItem="exG-YY-Pmc" secondAttribute="trailing" constant="8" id="6rV-QA-rb8"/>
+                                        <constraint firstItem="5zI-dG-4hC" firstAttribute="leading" secondItem="exG-YY-Pmc" secondAttribute="trailing" constant="36" id="6rV-QA-rb8"/>
                                         <constraint firstAttribute="bottomMargin" secondItem="5zI-dG-4hC" secondAttribute="bottom" constant="3" id="SKa-wN-kUa"/>
                                         <constraint firstItem="5zI-dG-4hC" firstAttribute="top" secondItem="IOC-Xd-Qd3" secondAttribute="topMargin" constant="3" id="Tqc-9y-9Sj"/>
                                         <constraint firstItem="exG-YY-Pmc" firstAttribute="top" secondItem="IOC-Xd-Qd3" secondAttribute="topMargin" constant="-4" id="a0i-Ym-hbp"/>
@@ -49,7 +55,9 @@
                                     </constraints>
                                 </tableViewCellContentView>
                                 <connections>
+                                    <outlet property="distanceFromFlagToTitle" destination="6rV-QA-rb8" id="KjL-QN-yiv"/>
                                     <outlet property="flagLabel" destination="exG-YY-Pmc" id="u0G-cJ-a6d"/>
+                                    <outlet property="selectionLabel" destination="LpS-KZ-TRM" id="jrU-Uh-94w"/>
                                     <outlet property="titleLabel" destination="5zI-dG-4hC" id="hQm-qW-jdt"/>
                                     <segue destination="BYZ-38-t0r" kind="show" identifier="passagePracticeSegue" id="55G-9h-5rM"/>
                                 </connections>

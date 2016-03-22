@@ -29,14 +29,14 @@ class VersesIndexController: UITableViewController {
 
         let moc = appDelegate.managedObjectContext
         let fetchRequest = NSFetchRequest(entityName: "UserPassage")
-        
+
         do {
             let results = try moc.executeFetchRequest(fetchRequest)
             passages = results as! [UserPassage]
         } catch let error as NSError {
             print("Could not fetch \(error), \(error.userInfo)")
         }
-        
+
         self.tableView.reloadData()
     }
     
@@ -48,11 +48,21 @@ class VersesIndexController: UITableViewController {
         let cell = tableView.dequeueReusableCellWithIdentifier("passageCell") as! PassageCell
         let passage = passages[indexPath.row]
         cell.titleLabel.text = passage.reference
-        if passage.memorized!.boolValue {
+
+        if passage.memorized!.boolValue == true {
             cell.flagLabel.text = "⚑"
         } else {
             cell.flagLabel.text = "⚐"
         }
+
+        if passage.selectedVerses?.count == 0 {
+            cell.selectionLabel.hidden = true
+            cell.distanceFromFlagToTitle.constant = 10
+        } else {
+            cell.selectionLabel.hidden = false
+            cell.distanceFromFlagToTitle.constant = 40
+        }
+
         return cell
     }
     
@@ -154,7 +164,12 @@ class VersesIndexController: UITableViewController {
         let clearAction = UIAlertAction(title: "Clear Selection", style: .Destructive, handler: { (alertAction: UIAlertAction) in
             self.passages[indexPath.row].selectedVerses = nil
             try! self.appDelegate.managedObjectContext.save()
+            CATransaction.begin()
+            CATransaction.setCompletionBlock({
+                self.tableView.reloadRowsAtIndexPaths([indexPath], withRowAnimation: .Automatic)
+            })
             self.tableView.setEditing(false, animated: true)
+            CATransaction.commit()
         })
         
         let cancelAction = UIAlertAction(title: "Cancel", style: .Cancel, handler: { (alertAction: UIAlertAction) in
