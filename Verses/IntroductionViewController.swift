@@ -41,10 +41,10 @@ class IntroductionViewController: UIViewController, UIPickerViewDelegate, UIPick
         NSUserDefaults.standardUserDefaults().setValue(translationChoices[translationPicker.selectedRowInComponent(0)], forKey: "preferredBibleTranslation")
 
         let mainStoryboard = UIStoryboard(name: "Main", bundle: nil)
-        let versesIndexController = mainStoryboard.instantiateViewControllerWithIdentifier("VersesIndexController")
+        let homeTabController = mainStoryboard.instantiateViewControllerWithIdentifier("HomeTabBarController")
         
         UIView.transitionWithView(UIApplication.sharedApplication().keyWindow!, duration: 0.5, options: UIViewAnimationOptions.TransitionFlipFromLeft, animations: {
-            UIApplication.sharedApplication().keyWindow?.rootViewController = versesIndexController
+            UIApplication.sharedApplication().keyWindow?.rootViewController = homeTabController
         }, completion: nil)
     }
 }
