@@ -49,11 +49,32 @@ class RemindersController: UITableViewController {
         return cell
     }
     
+    override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
+        if editingStyle == .Delete {
+            let reminder = reminders[indexPath.row]
+            let moc = appDelegate.managedObjectContext
+            moc.deleteObject(reminder)
+            try! moc.save()
+            
+            tableView.beginUpdates()
+
+            reminders.removeAtIndex(indexPath.row)
+            tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Automatic)
+            rescheduleReminders()
+
+            tableView.endUpdates()
+        }
+    }
+    
     func reminderSwitchChanged(sender: UISwitch) {
         let reminder = reminders[sender.tag]
         reminder.setValue(sender.on, forKey: "on")
         try! appDelegate.managedObjectContext.save()
         
+        rescheduleReminders()
+    }
+    
+    func rescheduleReminders() {
         UIApplication.sharedApplication().cancelAllLocalNotifications()
         for r in reminders {
             if r.valueForKey("on") as! Bool {
