@@ -3,17 +3,17 @@ import CoreData
 
 class HeartversesStore {
     
-    let url: NSURL
+    let url: URL
     
-    enum StoreError: ErrorType {
-        case PassageDoesNotExistInStore
+    enum StoreError: Error {
+        case passageDoesNotExistInStore
     }
     
-    init(sqliteURL: NSURL) {
+    init(sqliteURL: URL) {
         url = sqliteURL
     }
     
-    func addVerse(book: NSManagedObject, chapter: Int, number: Int, text: String) {
+    func addVerse(_ book: NSManagedObject, chapter: Int, number: Int, text: String) {
         let verse = newObject("Verse")
         verse.setValue(book, forKey: "book")
         verse.setValue(chapter, forKey: "chapter")
@@ -22,9 +22,9 @@ class HeartversesStore {
         self.saveContext()
     }
 
-    func findBook(translation: String, slug: String) -> NSManagedObject {
-        let book = findObject("Book", format: "name == %@ and translation == %@", slug, translation)
-        if book.objectID.temporaryID {
+    func findBook(_ translation: String, slug: String) -> NSManagedObject {
+        let book = findObject("Book", format: "name == %@ and translation == %@", slug as AnyObject, translation as AnyObject)
+        if book.objectID.isTemporaryID {
             book.setValue(slug, forKey: "name")
             book.setValue(translation, forKey: "translation")
             saveContext()
@@ -32,15 +32,15 @@ class HeartversesStore {
         return book
     }
     
-    func findVersesInChapter(translation: String, bookSlug: String, chapter: Int) -> [AnyObject] {
+    func findVersesInChapter(_ translation: String, bookSlug: String, chapter: Int) -> [AnyObject] {
         let book = findBook(translation, slug: bookSlug)
-        let entity = NSEntityDescription.entityForName("Verse", inManagedObjectContext: self.managedObjectContext)!
-        let fetchRequest = NSFetchRequest(entityName: entity.name!)
+        let entity = NSEntityDescription.entity(forEntityName: "Verse", in: self.managedObjectContext)!
+        let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: entity.name!)
         fetchRequest.predicate = NSPredicate(format: "book == %@ and chapter == %@", argumentArray: [book, chapter])
         do {
-            let verses = try self.managedObjectContext.executeFetchRequest(fetchRequest)
+            let verses = try self.managedObjectContext.fetch(fetchRequest)
             if !verses.isEmpty {
-                return verses
+                return verses as [AnyObject]
             }
         } catch let error as NSError {
             print("Could not find chapter. Error: \(error), \(error.userInfo)")
@@ -48,28 +48,28 @@ class HeartversesStore {
         return []
     }
 
-    func findVerse(translation: String, bookSlug: String, chapter: Int, number: Int) -> NSManagedObject {
+    func findVerse(_ translation: String, bookSlug: String, chapter: Int, number: Int) -> NSManagedObject {
         let book = findBook(translation, slug: bookSlug)
 
-        let verse = findObject("Verse", format: "book == %@ and chapter == %@ and number == %@", book, chapter, number)
+        let verse = findObject("Verse", format: "book == %@ and chapter == %@ and number == %@", book, chapter as AnyObject, number as AnyObject)
         return verse
     }
     
-    func newObject(entity: NSEntityDescription) -> NSManagedObject {
-        return NSManagedObject(entity: entity, insertIntoManagedObjectContext: self.managedObjectContext)
+    func newObject(_ entity: NSEntityDescription) -> NSManagedObject {
+        return NSManagedObject(entity: entity, insertInto: self.managedObjectContext)
     }
     
-    func newObject(entityName: String) -> NSManagedObject {
-        let entity = NSEntityDescription.entityForName(entityName, inManagedObjectContext: self.managedObjectContext)!
+    func newObject(_ entityName: String) -> NSManagedObject {
+        let entity = NSEntityDescription.entity(forEntityName: entityName, in: self.managedObjectContext)!
         return newObject(entity)
     }
     
-    func findObject(entityName: String, format: String, _ arguments: AnyObject...) -> NSManagedObject {
-        let entity = NSEntityDescription.entityForName(entityName, inManagedObjectContext: self.managedObjectContext)!
-        let fetchRequest = NSFetchRequest(entityName: entity.name!)
+    func findObject(_ entityName: String, format: String, _ arguments: AnyObject...) -> NSManagedObject {
+        let entity = NSEntityDescription.entity(forEntityName: entityName, in: self.managedObjectContext)!
+        let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: entity.name!)
         fetchRequest.predicate = NSPredicate(format: format, argumentArray: arguments)
         do {
-            let results = try self.managedObjectContext.executeFetchRequest(fetchRequest)
+            let results = try self.managedObjectContext.fetch(fetchRequest)
             if !results.isEmpty {
                 return results.first as! NSManagedObject
             }
@@ -80,19 +80,19 @@ class HeartversesStore {
     }
 
     lazy var managedObjectModel: NSManagedObjectModel = {
-        let modelURL = NSBundle.mainBundle().URLForResource("Heartverses", withExtension: "momd")!
-        return NSManagedObjectModel(contentsOfURL: modelURL)!
+        let modelURL = Bundle.main.url(forResource: "Heartverses", withExtension: "momd")!
+        return NSManagedObjectModel(contentsOf: modelURL)!
     }()
     
     lazy var persistentStoreCoordinator: NSPersistentStoreCoordinator = {
         let coordinator = NSPersistentStoreCoordinator(managedObjectModel: self.managedObjectModel)
         var failureReason = "There was an error creating or loading the application's saved data."
         do {
-            try coordinator.addPersistentStoreWithType(NSSQLiteStoreType, configuration: nil, URL: self.url, options: [NSReadOnlyPersistentStoreOption: true])
+            try coordinator.addPersistentStore(ofType: NSSQLiteStoreType, configurationName: nil, at: self.url, options: [NSReadOnlyPersistentStoreOption: true])
         } catch {
             var dict = [String: AnyObject]()
-            dict[NSLocalizedDescriptionKey] = "Failed to initialize the application's saved data"
-            dict[NSLocalizedFailureReasonErrorKey] = failureReason
+            dict[NSLocalizedDescriptionKey] = "Failed to initialize the application's saved data" as AnyObject
+            dict[NSLocalizedFailureReasonErrorKey] = failureReason as AnyObject
             
             dict[NSUnderlyingErrorKey] = error as NSError
             let wrappedError = NSError(domain: "YOUR_ERROR_DOMAIN", code: 9999, userInfo: dict)
@@ -107,7 +107,7 @@ class HeartversesStore {
     
     lazy var managedObjectContext: NSManagedObjectContext = {
         let coordinator = self.persistentStoreCoordinator
-        var managedObjectContext = NSManagedObjectContext(concurrencyType: .MainQueueConcurrencyType)
+        var managedObjectContext = NSManagedObjectContext(concurrencyType: .mainQueueConcurrencyType)
         managedObjectContext.persistentStoreCoordinator = coordinator
         return managedObjectContext
     }()

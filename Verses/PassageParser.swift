@@ -15,15 +15,15 @@ class Regex {
     init(_ pattern: String) {
         self.pattern = pattern
         do {
-            self.internalExpression = try NSRegularExpression(pattern: pattern, options: NSRegularExpressionOptions.CaseInsensitive)
+            self.internalExpression = try NSRegularExpression(pattern: pattern, options: NSRegularExpression.Options.caseInsensitive)
         } catch {
             self.internalExpression = nil
             print("yo dawg i heard you like crashing the app")
         }
     }
     
-    func test(input: String) -> Bool {
-        let matches = self.internalExpression!.matchesInString(input, options: NSMatchingOptions.WithTransparentBounds, range:NSMakeRange(0, input.characters.count))
+    func test(_ input: String) -> Bool {
+        let matches = self.internalExpression!.matches(in: input, options: NSRegularExpression.MatchingOptions.withTransparentBounds, range:NSMakeRange(0, input.characters.count))
         return matches.count > 0
     }
 }
@@ -41,20 +41,20 @@ class PassageParser {
     
     let conventionalAbbrevs: [String: String] = ["sos": "song-of-solomon", "jn": "john", "jo": "john", "phil": "philippians", "eph": "ephesians"]
 
-    func parse(passage: String) -> ParsedPassage {
+    func parse(_ passage: String) -> ParsedPassage {
         var result = ParsedPassage()
-        var comps = passage.componentsSeparatedByCharactersInSet(NSCharacterSet(charactersInString: " :-"))
+        var comps = passage.components(separatedBy: CharacterSet(charactersIn: " :-"))
         var book: String!
 
         if containsTripleTokenName(passage) {
             book = convertToSlug("\(comps[0]) \(comps[1]) \(comps[2])")
-            comps.removeAtIndex(0); comps.removeAtIndex(0); comps.removeAtIndex(0)
+            comps.remove(at: 0); comps.remove(at: 0); comps.remove(at: 0)
         } else if containsTwoTokenName(passage) {
             book = convertToSlug("\(comps[0]) \(comps[1])")
-            comps.removeAtIndex(0); comps.removeAtIndex(0)
+            comps.remove(at: 0); comps.remove(at: 0)
         } else if containsSingleTokenName(passage) {
             book = convertToSlug(comps[0])
-            comps.removeAtIndex(0)
+            comps.remove(at: 0)
         } else {
             return result
         }
@@ -65,9 +65,9 @@ class PassageParser {
         for i in comps {
             let x: Int? = Int(i)
             if x == nil {
-                comps.removeAtIndex(index)
+                comps.remove(at: index)
             }
-            ++index
+            index += 1
         }
 
         if !comps.isEmpty {
@@ -94,15 +94,15 @@ class PassageParser {
         return result
     }
     
-    func convertToSlug(bookName: String) -> String {
+    func convertToSlug(_ bookName: String) -> String {
         for (abbrev, slug) in conventionalAbbrevs {
-            if abbrev == bookName.lowercaseString { return slug }
+            if abbrev == bookName.lowercased() { return slug }
         }
         
         var wildcardBookName = ""
-        let bookNameComps = bookName.componentsSeparatedByCharactersInSet(NSCharacterSet(charactersInString: " "))
+        let bookNameComps = bookName.components(separatedBy: CharacterSet(charactersIn: " "))
         
-        for char in bookNameComps.joinWithSeparator("-").characters {
+        for char in bookNameComps.joined(separator: "-").characters {
             wildcardBookName.append(Character(".")); wildcardBookName.append(Character("?"))
             wildcardBookName.append(char)
         }
@@ -112,7 +112,7 @@ class PassageParser {
         
         var possibleSlugs: Array<String> = []
         for i in slugs {
-            if i == bookName.lowercaseString { return i }
+            if i == bookName.lowercased() { return i }
 
             if reg.test(i) {
                 possibleSlugs += [i]
@@ -126,31 +126,31 @@ class PassageParser {
         }
     }
     
-    func containsChapterRange(passage: String) -> Bool {
+    func containsChapterRange(_ passage: String) -> Bool {
         return Regex("^\\d?[^\\d]+ \\d+-\\d+$").test(passage)
     }
     
-    func containsChapterOnly(passage: String) -> Bool {
+    func containsChapterOnly(_ passage: String) -> Bool {
         return Regex("^\\d?[^\\d]+ \\d+$").test(passage)
     }
     
-    func containsVerseRange(passage: String) -> Bool {
+    func containsVerseRange(_ passage: String) -> Bool {
         return Regex("^\\d?[^\\d]+ \\d+:\\d+-\\d+$").test(passage)
     }
     
-    func containsSingleVerse(passage: String) -> Bool {
+    func containsSingleVerse(_ passage: String) -> Bool {
         return Regex("^\\d?[^\\d]+ \\d+:\\d+$").test(passage)
     }
     
-    func containsSingleTokenName(passage: String) -> Bool {
+    func containsSingleTokenName(_ passage: String) -> Bool {
         return Regex("^[\\w]+ ?(\\d{1,3})?(:\\d+)?(-\\d+)?$").test(passage)
     }
     
-    func containsTwoTokenName(passage: String) -> Bool {
+    func containsTwoTokenName(_ passage: String) -> Bool {
         return Regex("^[\\d\\w]+ [A-Za-z]+ ?(\\d{1,3})?(:\\d+)?(-\\d+)?$").test(passage)
     }
     
-    func containsTripleTokenName(passage: String) -> Bool {
+    func containsTripleTokenName(_ passage: String) -> Bool {
         return Regex("^[A-Za-z]+ [A-Za-z]+ [A-Za-z]+ ?(\\d{1,3})?(:\\d+)?(-\\d+)?$").test(passage)
     }
 }

@@ -12,26 +12,26 @@ import CoreData
 
 class VersesIndexController: UITableViewController {
     var passages = [UserPassage]()
-    var deletePassageIndexPath: NSIndexPath!
-    var selectPassageIndexPath: NSIndexPath!
+    var deletePassageIndexPath: IndexPath!
+    var selectPassageIndexPath: IndexPath!
     var selectedPassage: UserPassage!
-    let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+    let appDelegate = UIApplication.shared.delegate as! AppDelegate
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("practiceAgain"), name: "practiceAgain", object: nil)
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("continueToNextPassage"), name: "continueToNextPassage", object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(VersesIndexController.practiceAgain), name: NSNotification.Name(rawValue: "practiceAgain"), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(VersesIndexController.continueToNextPassage), name: NSNotification.Name(rawValue: "continueToNextPassage"), object: nil)
     }
     
-    override func viewWillAppear(animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
 
         let moc = appDelegate.managedObjectContext
-        let fetchRequest = NSFetchRequest(entityName: "UserPassage")
+        let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "UserPassage")
 
         do {
-            let results = try moc.executeFetchRequest(fetchRequest)
+            let results = try moc.fetch(fetchRequest)
             passages = results as! [UserPassage]
         } catch let error as NSError {
             print("Could not fetch \(error), \(error.userInfo)")
@@ -40,12 +40,12 @@ class VersesIndexController: UITableViewController {
         self.tableView.reloadData()
     }
     
-    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return passages.count
     }
     
-    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("passageCell") as! PassageCell
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "passageCell") as! PassageCell
         let passage = passages[indexPath.row]
         cell.titleLabel.text = passage.reference
 
@@ -56,10 +56,10 @@ class VersesIndexController: UITableViewController {
         }
 
         if passage.selectedVerses?.count == 0 {
-            cell.selectionLabel.hidden = true
+            cell.selectionLabel.isHidden = true
             cell.distanceFromFlagToTitle.constant = 10
         } else {
-            cell.selectionLabel.hidden = false
+            cell.selectionLabel.isHidden = false
             cell.distanceFromFlagToTitle.constant = 40
         }
 
@@ -67,13 +67,13 @@ class VersesIndexController: UITableViewController {
     }
     
 
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "passagePracticeSegue" {
-            let destinationViewController = segue.destinationViewController as! VersePracticeController
-            var ip: NSIndexPath = NSIndexPath()
+            let destinationViewController = segue.destination as! VersePracticeController
+            var ip: IndexPath = IndexPath()
             
             if selectPassageIndexPath == nil {
-                ip = self.tableView.indexPathForCell(sender as! UITableViewCell)!
+                ip = self.tableView.indexPath(for: sender as! UITableViewCell)!
             } else {
                 ip = selectPassageIndexPath
             }
@@ -96,31 +96,31 @@ class VersesIndexController: UITableViewController {
 
             destinationViewController.hidesBottomBarWhenPushed = true
         } else if segue.identifier == "verseSelectSegue" {
-            let destinationNavController = segue.destinationViewController as! UINavigationController
+            let destinationNavController = segue.destination as! UINavigationController
             let destinationViewController = destinationNavController.topViewController as! VerseSelectController
             let passage: UserPassage = self.passages[selectPassageIndexPath.row]
             destinationViewController.passage = passage
         }
     }
     
-    override func tableView(tableView: UITableView, editActionsForRowAtIndexPath indexPath: NSIndexPath) -> [UITableViewRowAction]? {
-        let cell = tableView.cellForRowAtIndexPath(indexPath) as! PassageCell
+    override func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
+        let cell = tableView.cellForRow(at: indexPath) as! PassageCell
         let passage = self.passages[indexPath.row]
         
-        let moreAction = UITableViewRowAction(style: .Normal, title: "More", handler: { (action: UITableViewRowAction!, indexPath: NSIndexPath!) in
+        let moreAction = UITableViewRowAction(style: .normal, title: "More", handler: { (action: UITableViewRowAction!, indexPath: IndexPath!) in
             self.displayMoreOptions(indexPath)
         })
         
         var memorizeAction: UITableViewRowAction!
         if passage.memorized!.boolValue {
-            memorizeAction = UITableViewRowAction(style: .Normal, title: "⚐", handler: { (action: UITableViewRowAction!, indexPath: NSIndexPath!) in
+            memorizeAction = UITableViewRowAction(style: .normal, title: "⚐", handler: { (action: UITableViewRowAction!, indexPath: IndexPath!) in
                 passage.memorized = false
                 try! self.appDelegate.managedObjectContext.save()
                 cell.flagLabel.text = "⚐"
                 tableView.setEditing(false, animated: true)
             })
         } else {
-            memorizeAction = UITableViewRowAction(style: .Normal, title: "⚑", handler: { (action: UITableViewRowAction!, indexPath: NSIndexPath!) in
+            memorizeAction = UITableViewRowAction(style: .normal, title: "⚑", handler: { (action: UITableViewRowAction!, indexPath: IndexPath!) in
                 passage.memorized = true
                 try! self.appDelegate.managedObjectContext.save()
                 cell.flagLabel.text = "⚑"
@@ -129,7 +129,7 @@ class VersesIndexController: UITableViewController {
         }
         memorizeAction.backgroundColor = UIColor(red:0.27, green:0.83, blue:0.55, alpha:1.0)
         
-        let deleteAction = UITableViewRowAction(style: .Normal, title: "✕", handler: { (action: UITableViewRowAction!, indexPath: NSIndexPath!) in
+        let deleteAction = UITableViewRowAction(style: .normal, title: "✕", handler: { (action: UITableViewRowAction!, indexPath: IndexPath!) in
             self.deletePassageIndexPath = indexPath
             let passageToDelete = self.passages[indexPath.row]
             self.confirmDeletionOf(passageToDelete)
@@ -143,36 +143,36 @@ class VersesIndexController: UITableViewController {
         }
     }
     
-    func displayMoreOptions(indexPath: NSIndexPath) {
+    func displayMoreOptions(_ indexPath: IndexPath) {
         let passage = self.passages[indexPath.row]
 
-        let alert = UIAlertController(title: nil, message: nil, preferredStyle: .ActionSheet)
+        let alert = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
 
-        let selectAction = UIAlertAction(title: "Select Verses", style: .Default, handler: { (alertAction: UIAlertAction) in
+        let selectAction = UIAlertAction(title: "Select Verses", style: .default, handler: { (alertAction: UIAlertAction) in
             self.selectPassageIndexPath = indexPath
-            let destination = self.storyboard!.instantiateViewControllerWithIdentifier("selectVerses") as! VerseSelectController
+            let destination = self.storyboard!.instantiateViewController(withIdentifier: "selectVerses") as! VerseSelectController
             let navigationController = UINavigationController(rootViewController: destination)
             destination.passage = passage
             destination.dismissalHandler = { (verses: Array<UserVerse>) -> Void in
                 passage.selectedVerses = NSOrderedSet(array: verses)
                 try! self.appDelegate.managedObjectContext.save()
-                self.performSegueWithIdentifier("passagePracticeSegue", sender: self)
+                self.performSegue(withIdentifier: "passagePracticeSegue", sender: self)
             }
-            self.presentViewController(navigationController, animated: true, completion: nil)
+            self.present(navigationController, animated: true, completion: nil)
         })
 
-        let clearAction = UIAlertAction(title: "Clear Selection", style: .Destructive, handler: { (alertAction: UIAlertAction) in
+        let clearAction = UIAlertAction(title: "Clear Selection", style: .destructive, handler: { (alertAction: UIAlertAction) in
             self.passages[indexPath.row].selectedVerses = nil
             try! self.appDelegate.managedObjectContext.save()
             CATransaction.begin()
             CATransaction.setCompletionBlock({
-                self.tableView.reloadRowsAtIndexPaths([indexPath], withRowAnimation: .Automatic)
+                self.tableView.reloadRows(at: [indexPath], with: .automatic)
             })
             self.tableView.setEditing(false, animated: true)
             CATransaction.commit()
         })
         
-        let cancelAction = UIAlertAction(title: "Cancel", style: .Cancel, handler: { (alertAction: UIAlertAction) in
+        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: { (alertAction: UIAlertAction) in
             self.tableView.setEditing(false, animated: true)
         })
         
@@ -180,27 +180,27 @@ class VersesIndexController: UITableViewController {
         if passage.selectedVerses?.count != 0 { alert.addAction(clearAction) }
         alert.addAction(cancelAction)
         
-        self.presentViewController(alert, animated: true, completion: nil)
+        self.present(alert, animated: true, completion: nil)
     }
 
-    func confirmDeletionOf(passage: UserPassage) {
-        let alert = UIAlertController(title: "Delete Passage", message: "Are you sure you want to delete \(passage.reference!)? This will permanently destroy any practice data!", preferredStyle: .ActionSheet)
+    func confirmDeletionOf(_ passage: UserPassage) {
+        let alert = UIAlertController(title: "Delete Passage", message: "Are you sure you want to delete \(passage.reference!)? This will permanently destroy any practice data!", preferredStyle: .actionSheet)
         
-        let deleteAction = UIAlertAction(title: "Delete, and I mean it!", style: .Destructive, handler: deletePassage)
-        let cancelAction = UIAlertAction(title: "Nevermind", style: .Cancel, handler: { (alertAction: UIAlertAction) in
+        let deleteAction = UIAlertAction(title: "Delete, and I mean it!", style: .destructive, handler: deletePassage)
+        let cancelAction = UIAlertAction(title: "Nevermind", style: .cancel, handler: { (alertAction: UIAlertAction) in
             self.deletePassageIndexPath = nil
         })
         
         alert.addAction(deleteAction)
         alert.addAction(cancelAction)
         
-        self.presentViewController(alert, animated: true, completion: nil)
+        self.present(alert, animated: true, completion: nil)
     }
     
-    func deletePassage(alertAction: UIAlertAction!) {
+    func deletePassage(_ alertAction: UIAlertAction!) {
         if let ip = deletePassageIndexPath {
-            let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
-            appDelegate.managedObjectContext.deleteObject(passages[ip.row])
+            let appDelegate = UIApplication.shared.delegate as! AppDelegate
+            appDelegate.managedObjectContext.delete(passages[ip.row])
             
             do {
                 try appDelegate.managedObjectContext.save()
@@ -210,8 +210,8 @@ class VersesIndexController: UITableViewController {
 
             tableView.beginUpdates()
 
-            passages.removeAtIndex(ip.row)
-            tableView.deleteRowsAtIndexPaths([ip], withRowAnimation: .Automatic)
+            passages.remove(at: ip.row)
+            tableView.deleteRows(at: [ip], with: .automatic)
             deletePassageIndexPath = nil
 
             tableView.endUpdates()
@@ -219,15 +219,15 @@ class VersesIndexController: UITableViewController {
     }
     
     func practiceAgain() {
-        let pvc = self.storyboard!.instantiateViewControllerWithIdentifier("versePracticeController")
+        let pvc = self.storyboard!.instantiateViewController(withIdentifier: "versePracticeController")
         var controllerStack = self.navigationController!.viewControllers
-        controllerStack.insert(pvc, atIndex: 1)
+        controllerStack.insert(pvc, at: 1)
         self.navigationController!.setViewControllers(controllerStack, animated: true)
         
         for controller in self.navigationController!.viewControllers {
-            if controller.isKindOfClass(VersePracticeController) {
+            if controller.isKind(of: VersePracticeController.self) {
                 let destination = controller as! VersePracticeController
-                let index = self.passages.indexOf(self.selectedPassage)
+                let index = self.passages.index(of: self.selectedPassage)
                 let passage = self.passages[index!]
 
                 if passage.selectedVerses?.count == 0 {
@@ -249,18 +249,18 @@ class VersesIndexController: UITableViewController {
     }
     
     func continueToNextPassage() {
-        let pvc = self.storyboard!.instantiateViewControllerWithIdentifier("versePracticeController")
+        let pvc = self.storyboard!.instantiateViewController(withIdentifier: "versePracticeController")
         var controllerStack = self.navigationController!.viewControllers
-        controllerStack.insert(pvc, atIndex: 1)
+        controllerStack.insert(pvc, at: 1)
         self.navigationController!.setViewControllers(controllerStack, animated: true)
         
         for controller in self.navigationController!.viewControllers {
-            if controller.isKindOfClass(VersePracticeController) {
+            if controller.isKind(of: VersePracticeController.self) {
                 let destination = controller as! VersePracticeController
-                let index = self.passages.indexOf(self.selectedPassage)
+                let index = self.passages.index(of: self.selectedPassage)
 
                 if index! + 1 >= (self.passages.count) {
-                    self.navigationController!.popToRootViewControllerAnimated(true)
+                    self.navigationController!.popToRootViewController(animated: true)
                     break
                 }
                 

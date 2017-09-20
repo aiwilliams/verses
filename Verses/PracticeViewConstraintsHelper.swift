@@ -9,7 +9,7 @@
 import Foundation
 import UIKit
 
-public class PracticeViewConstraintsHelper {
+open class PracticeViewConstraintsHelper {
     var basicHelpLabelToBottomLayoutGuide: NSLayoutConstraint!
     var promptLabelToBottomLayoutGuide: NSLayoutConstraint!
     var verseEntryTextViewToBottomLayoutGuide: NSLayoutConstraint!
@@ -30,7 +30,7 @@ public class PracticeViewConstraintsHelper {
     }
     
     func showHelp() {
-        verseEntryTextViewToBottomLayoutGuide.constant = verseEntryTextViewToBottomLayoutGuide.constant + basicHelpLabel.intrinsicContentSize().height
+        verseEntryTextViewToBottomLayoutGuide.constant = verseEntryTextViewToBottomLayoutGuide.constant + basicHelpLabel.intrinsicContentSize.height
     }
     
     func showPrompt() {
@@ -43,7 +43,7 @@ public class PracticeViewConstraintsHelper {
         verseEntryTextViewToBottomLayoutGuide.constant = verseEntryTextViewToBottomLayoutGuide.constant - promptLabel.frame.height
     }
     
-    func keyboardWillChangeFrame(keyboardHeight: CGFloat, promptVisible: Bool, hintVisible: Bool) {
+    func keyboardWillChangeFrame(_ keyboardHeight: CGFloat, promptVisible: Bool, hintVisible: Bool) {
         verseEntryTextViewToBottomLayoutGuide.constant = 8 + keyboardHeight
         if hintVisible { verseEntryTextViewToBottomLayoutGuide.constant = verseEntryTextViewToBottomLayoutGuide.constant + basicHelpLabel.frame.height }
         if promptVisible { verseEntryTextViewToBottomLayoutGuide.constant = verseEntryTextViewToBottomLayoutGuide.constant + promptLabel.frame.height }
@@ -54,7 +54,7 @@ public class PracticeViewConstraintsHelper {
         promptLabelToBottomLayoutGuide.constant = 8 + keyboardHeight
     }
     
-    func keyboardWillHide(promptVisible: Bool, hintVisible: Bool) {
+    func keyboardWillHide(_ promptVisible: Bool, hintVisible: Bool) {
         verseEntryTextViewToBottomLayoutGuide.constant = 8
         if promptVisible { verseEntryTextViewToBottomLayoutGuide.constant = verseEntryTextViewToBottomLayoutGuide.constant + promptLabel.frame.height }
         if hintVisible { verseEntryTextViewToBottomLayoutGuide.constant = verseEntryTextViewToBottomLayoutGuide.constant + basicHelpLabel.frame.height }

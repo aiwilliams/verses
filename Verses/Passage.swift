@@ -48,12 +48,12 @@ public struct Passage {
             }
         }
         
-        let comps = parsedPassage.book.componentsSeparatedByCharactersInSet(NSCharacterSet(charactersInString: "-"))
+        let comps = parsedPassage.book.components(separatedBy: CharacterSet(charactersIn: "-"))
 
         if comps.count == 2 {
-            return "\(comps[0]) \(comps[1].capitalizedString) \(verses)"
+            return "\(comps[0]) \(comps[1].capitalized) \(verses)"
         } else {
-            return "\(comps[0].capitalizedString) \(verses)"
+            return "\(comps[0].capitalized) \(verses)"
         }
     }
 }

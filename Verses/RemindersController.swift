@@ -11,15 +11,15 @@ import UIKit
 import CoreData
 
 class RemindersController: UITableViewController {
-    var appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+    var appDelegate = UIApplication.shared.delegate as! AppDelegate
     var reminders: [NSManagedObject]!
 
-    override func viewWillAppear(animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         let moc = appDelegate.managedObjectContext
-        let fetchRequest = NSFetchRequest(entityName: "Reminder")
+        let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "Reminder")
         
         do {
-            let results = try moc.executeFetchRequest(fetchRequest)
+            let results = try moc.fetch(fetchRequest)
             reminders = results as! [NSManagedObject]
         } catch let error as NSError {
             print("Could not fetch \(error), \(error.userInfo)")
@@ -28,76 +28,76 @@ class RemindersController: UITableViewController {
         tableView.reloadData()
     }
 
-    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return reminders.count
     }
 
-    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let reminder = reminders[indexPath.row]
-        let cell = tableView.dequeueReusableCellWithIdentifier("reminderCell") as! ReminderCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: "reminderCell") as! ReminderCell
 
-        let dateFormatter = NSDateFormatter()
+        let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "hh:mm a"
-        cell.timeLabel.text = dateFormatter.stringFromDate(reminder.valueForKey("time") as! NSDate)
+        cell.timeLabel.text = dateFormatter.string(from: reminder.value(forKey: "time") as! Date)
 
         let toggleSwitch = UISwitch()
-        toggleSwitch.on = reminder.valueForKey("on") as! Bool
-        toggleSwitch.addTarget(self, action: Selector("reminderSwitchChanged:"), forControlEvents: .ValueChanged)
+        toggleSwitch.isOn = reminder.value(forKey: "on") as! Bool
+        toggleSwitch.addTarget(self, action: #selector(RemindersController.reminderSwitchChanged(_:)), for: .valueChanged)
         toggleSwitch.tag = indexPath.row
         cell.accessoryView = toggleSwitch
 
         return cell
     }
     
-    override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
-        if editingStyle == .Delete {
+    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
+        if editingStyle == .delete {
             let reminder = reminders[indexPath.row]
             let moc = appDelegate.managedObjectContext
-            moc.deleteObject(reminder)
+            moc.delete(reminder)
             try! moc.save()
             
             tableView.beginUpdates()
 
-            reminders.removeAtIndex(indexPath.row)
-            tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Automatic)
+            reminders.remove(at: indexPath.row)
+            tableView.deleteRows(at: [indexPath], with: .automatic)
             rescheduleReminders()
 
             tableView.endUpdates()
         }
     }
     
-    func reminderSwitchChanged(sender: UISwitch) {
+    func reminderSwitchChanged(_ sender: UISwitch) {
         let reminder = reminders[sender.tag]
-        reminder.setValue(sender.on, forKey: "on")
+        reminder.setValue(sender.isOn, forKey: "on")
         try! appDelegate.managedObjectContext.save()
         
         rescheduleReminders()
     }
     
     func rescheduleReminders() {
-        UIApplication.sharedApplication().cancelAllLocalNotifications()
+        UIApplication.shared.cancelAllLocalNotifications()
         for r in reminders {
-            if r.valueForKey("on") as! Bool {
+            if r.value(forKey: "on") as! Bool {
                 scheduleReminder(r)
             }
         }
     }
     
-    func scheduleReminder(reminder: NSManagedObject) {
-        guard let settings = UIApplication.sharedApplication().currentUserNotificationSettings() else { return }
+    func scheduleReminder(_ reminder: NSManagedObject) {
+        guard let settings = UIApplication.shared.currentUserNotificationSettings else { return }
         
-        if settings.types == .None {
-            let ac = UIAlertController(title: "Can't schedule", message: "We don't have permission to schedule notifications! Please allow it in your Settings.", preferredStyle: .Alert)
-            ac.addAction(UIAlertAction(title: "OK", style: .Default, handler: nil))
-            presentViewController(ac, animated: true, completion: nil)
+        if settings.types == UIUserNotificationType() {
+            let ac = UIAlertController(title: "Can't schedule", message: "We don't have permission to schedule notifications! Please allow it in your Settings.", preferredStyle: .alert)
+            ac.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+            present(ac, animated: true, completion: nil)
             return
         }
         
         let notif = UILocalNotification()
-        notif.fireDate = reminder.valueForKey("time") as? NSDate
+        notif.fireDate = reminder.value(forKey: "time") as? Date
         notif.alertBody = "It's time to memorize!"
         notif.soundName = UILocalNotificationDefaultSoundName
-        notif.repeatInterval = .Day
-        UIApplication.sharedApplication().scheduleLocalNotification(notif)
+        notif.repeatInterval = .day
+        UIApplication.shared.scheduleLocalNotification(notif)
     }
 }

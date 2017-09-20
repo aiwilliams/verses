@@ -14,46 +14,46 @@ class VerseSelectController: UITableViewController {
     var selectedVerses: Array<UserVerse> = []
     var dismissalHandler: ((Array<UserVerse>)->Void)!
 
-    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return passage.verses!.count
     }
     
-    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("verseCell") as! VerseCell
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "verseCell") as! VerseCell
         let verse = passage.verses![indexPath.row] as! UserVerse
         cell.versePassageLabel.text = verse.reference
 
         if !selectedVerses.contains(verse) {
-            cell.accessoryType = .None
+            cell.accessoryType = .none
         } else {
-            cell.accessoryType = .Checkmark
+            cell.accessoryType = .checkmark
         }
 
         return cell
     }
     
-    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        let cell = self.tableView.cellForRowAtIndexPath(indexPath)
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let cell = self.tableView.cellForRow(at: indexPath)
         let verse = passage.verses![indexPath.row] as! UserVerse
 
         if !selectedVerses.contains(verse) {
-            cell!.accessoryType = .Checkmark
+            cell!.accessoryType = .checkmark
             selectedVerses.append(verse)
         } else {
-            cell!.accessoryType = .None
-            let index = selectedVerses.indexOf(verse)
-            selectedVerses.removeAtIndex(index!)
+            cell!.accessoryType = .none
+            let index = selectedVerses.index(of: verse)
+            selectedVerses.remove(at: index!)
         }
         
-        self.tableView.deselectRowAtIndexPath(indexPath, animated: true)
+        self.tableView.deselectRow(at: indexPath, animated: true)
     }
     
-    @IBAction func cancelVerseSelect(sender: UIBarButtonItem) {
-        self.dismissViewControllerAnimated(true, completion: nil)
+    @IBAction func cancelVerseSelect(_ sender: UIBarButtonItem) {
+        self.dismiss(animated: true, completion: nil)
     }
 
-    @IBAction func continueToPractice(sender: UIBarButtonItem) {
-        self.dismissViewControllerAnimated(true, completion: {
+    @IBAction func continueToPractice(_ sender: UIBarButtonItem) {
+        self.dismiss(animated: true, completion: {
             if self.dismissalHandler != nil {
                 var practiceVerses: Array<UserVerse> = []
                 for verse in self.passage.verses! {
@@ -65,8 +65,8 @@ class VerseSelectController: UITableViewController {
         })
     }
     
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        let destinationViewController = segue.destinationViewController as! VersePracticeController
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        let destinationViewController = segue.destination as! VersePracticeController
         destinationViewController.verses = NSOrderedSet(array: self.selectedVerses)
     }
 }

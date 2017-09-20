@@ -19,15 +19,15 @@ class VerseCompletionController: UIViewController {
         super.viewDidLoad()
 
         if !nextPassageExists {
-            nextPassageButton.hidden = true
+            nextPassageButton.isHidden = true
         }
     }
     
-    @IBAction func practiceAgain(sender: UIButton) {
-        NSNotificationCenter.defaultCenter().postNotification(NSNotification(name: "practiceAgain", object: nil))
+    @IBAction func practiceAgain(_ sender: UIButton) {
+        NotificationCenter.default.post(Notification(name: Notification.Name(rawValue: "practiceAgain"), object: nil))
     }
 
-    @IBAction func continueToNextPassage(sender: UIButton) {
-        NSNotificationCenter.defaultCenter().postNotification(NSNotification(name: "continueToNextPassage", object: nil))
+    @IBAction func continueToNextPassage(_ sender: UIButton) {
+        NotificationCenter.default.post(Notification(name: Notification.Name(rawValue: "continueToNextPassage"), object: nil))
     }
 }

@@ -15,24 +15,24 @@ class VerseHelper {
         var secondCharIndexes = [1]
         for _ in text.characters {
             if index < 3 {
-                ++index
+                index += 1
                 continue
             }
-            let backTwo = text.startIndex.advancedBy(index - 2)
+            let backTwo = text.characters.index(text.startIndex, offsetBy: index - 2)
             if text.characters[backTwo] == " " {
                 secondCharIndexes.append(index)
             }
-            ++index
+            index += 1
         }
         
         var nextIndex = 1
         for i in secondCharIndexes {
             if nextIndex == secondCharIndexes.count {
-                attributed.setAttributes([NSForegroundColorAttributeName:UIColor.clearColor()], range: NSMakeRange(i, text.characters.count - i))
+                attributed.setAttributes([NSForegroundColorAttributeName:UIColor.clear], range: NSMakeRange(i, text.characters.count - i))
                 break
             }
-            attributed.setAttributes([NSForegroundColorAttributeName:UIColor.clearColor()], range: NSMakeRange(i, (secondCharIndexes[nextIndex] - 2) - i))
-            ++nextIndex
+            attributed.setAttributes([NSForegroundColorAttributeName:UIColor.clear], range: NSMakeRange(i, (secondCharIndexes[nextIndex] - 2) - i))
+            nextIndex += 1
         }
         return attributed
     }
@@ -48,50 +48,50 @@ class VerseHelper {
                 ranges.append(NSMakeRange(lastSeenSpaceIndex, index - lastSeenSpaceIndex))
                 lastSeenSpaceIndex = index
             }
-            ++index
+            index += 1
         }
         
         for _ in ranges.count / 3 {
             let randomIndex = Int(arc4random_uniform(UInt32(ranges.count)))
-            ranges.removeAtIndex(randomIndex)
+            ranges.remove(at: randomIndex)
         }
         
         for range in ranges {
-            attributed.setAttributes([NSForegroundColorAttributeName:UIColor.clearColor()], range: range)
+            attributed.setAttributes([NSForegroundColorAttributeName:UIColor.clear], range: range)
         }
         
         return attributed
     }
     
-    func roughlyMatches(userInput: String) -> Bool {
-        return normalizedString(userInput.lowercaseString) == removePunctuation(verse.text!.lowercaseString)
+    func roughlyMatches(_ userInput: String) -> Bool {
+        return normalizedString(userInput.lowercased()) == removePunctuation(verse.text!.lowercased())
     }
 
-    private func normalizedString(text: String) -> String {
+    fileprivate func normalizedString(_ text: String) -> String {
         let spelledOut = spellOutNumbers(text)
         let final = removePunctuation(spelledOut)
         return final
     }
     
-    private func removePunctuation(text: String) -> String {
-        return text.componentsSeparatedByCharactersInSet(NSCharacterSet.letterCharacterSet().invertedSet).joinWithSeparator("")
+    fileprivate func removePunctuation(_ text: String) -> String {
+        return text.components(separatedBy: CharacterSet.letters.inverted).joined(separator: "")
     }
     
-    private func spellOutNumbers(text: String) -> String {
-        var words: Array<String> = text.componentsSeparatedByString(" ")
+    fileprivate func spellOutNumbers(_ text: String) -> String {
+        var words: Array<String> = text.components(separatedBy: " ")
         var index = 0
         
         for word in words {
             if let numberWord: NSInteger = Int(word) {
-                let formatter = NSNumberFormatter()
-                formatter.numberStyle = .SpellOutStyle
-                let formattedNumber = formatter.stringFromNumber(numberWord)
-                words.removeAtIndex(index)
-                words.insert(formattedNumber!, atIndex: index)
+                let formatter = NumberFormatter()
+                formatter.numberStyle = .spellOut
+                let formattedNumber = formatter.string(from: NSNumber(numberWord))
+                words.remove(at: index)
+                words.insert(formattedNumber!, at: index)
             }
-            ++index
+            index += 1
         }
         
-        return words.joinWithSeparator(" ")
+        return words.joined(separator: " ")
     }
 }
