@@ -218,7 +218,7 @@ class VersesIndexController: UITableViewController {
         }
     }
     
-    func practiceAgain() {
+  @objc func practiceAgain() {
         let pvc = self.storyboard!.instantiateViewController(withIdentifier: "versePracticeController")
         var controllerStack = self.navigationController!.viewControllers
         controllerStack.insert(pvc, at: 1)
@@ -248,7 +248,7 @@ class VersesIndexController: UITableViewController {
         }
     }
     
-    func continueToNextPassage() {
+  @objc func continueToNextPassage() {
         let pvc = self.storyboard!.instantiateViewController(withIdentifier: "versePracticeController")
         var controllerStack = self.navigationController!.viewControllers
         controllerStack.insert(pvc, at: 1)

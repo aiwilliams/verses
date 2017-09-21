@@ -69,7 +69,7 @@ class HeartversesAPI {
         var verseJSON: AnyObject? = nil
         
         do {
-            verseJSON = try JSONSerialization.jsonObject(with: verseData!, options: JSONSerialization.ReadingOptions.allowFragments)
+            verseJSON = try JSONSerialization.jsonObject(with: verseData!, options: JSONSerialization.ReadingOptions.allowFragments) as AnyObject
         } catch _ as NSError {
             print("could not serialize verse text JSON from HeartVersesAPI")
         }
@@ -95,7 +95,7 @@ class HeartversesAPI {
         if parseData == nil { return "failure" } // they put in an out-of-bounds passage or something dumb
         
         do {
-            parseJSON = try JSONSerialization.jsonObject(with: parseData!, options: JSONSerialization.ReadingOptions.allowFragments)
+            parseJSON = try JSONSerialization.jsonObject(with: parseData!, options: JSONSerialization.ReadingOptions.allowFragments) as AnyObject
         } catch _ as NSError {
             print("could not serialize parsed passage JSON from HeartVersesAPI")
         }

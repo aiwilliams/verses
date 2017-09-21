@@ -20,10 +20,10 @@ public struct Passage {
     
     var verses = Array<Verse>()
     
-    var chapter_start: Int!
-    var chapter_end: Int!
-    var verse_start: Int!
-    var verse_end: Int!
+    var chapter_start: Int
+    var chapter_end: Int
+    var verse_start: Int
+    var verse_end: Int
 
     init(parsedPassage: ParsedPassage) {
         self.parsedPassage = parsedPassage

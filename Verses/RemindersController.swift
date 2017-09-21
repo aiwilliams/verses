@@ -66,7 +66,7 @@ class RemindersController: UITableViewController {
         }
     }
     
-    func reminderSwitchChanged(_ sender: UISwitch) {
+    @objc func reminderSwitchChanged(_ sender: UISwitch) {
         let reminder = reminders[sender.tag]
         reminder.setValue(sender.isOn, forKey: "on")
         try! appDelegate.managedObjectContext.save()

@@ -1,12 +1,6 @@
 import UIKit
 import CoreData
 
-extension Int : Sequence {
-    public func makeIterator() -> IndexingIterator<Int> {
-        return (0..<self).makeIterator()
-    }
-}
-
 class passageCompletionSegue: UIStoryboardSegue {
     override func perform() {
         let navigationController = source.navigationController!
@@ -73,7 +67,7 @@ class VersePracticeController: UIViewController, UITextViewDelegate {
         constraintsHelper = PracticeViewConstraintsHelper(helpLabel: basicHelpLabel, promptLabel: promptLabel, basicHelpLabelToBottomLayoutGuide: basicHelpLabelToBottomLayoutGuide, promptLabelToBottomLayoutGuide: promptLabelToBottomLayoutGuide, verseEntryTextViewToBottomLayoutGuide: verseEntryTextViewToBottomLayoutGuide, keyboardHeight: self.keyboardHeight)
 
         self.view.layoutIfNeeded()
-        if Int(activeVerse.views!) <= 10 {
+      if Int(truncating: activeVerse.views!) <= 10 {
             exposeFreeHelp()
         }
 
@@ -88,11 +82,11 @@ class VersePracticeController: UIViewController, UITextViewDelegate {
     }
     
     func exposeFreeHelp() {
-        if Int(activeVerse.views!) <= 2 {
+      if Int(truncating: activeVerse.views!) <= 2 {
             constraintsHelper.showHelp()
             helpButton.isEnabled = false
             advancedHelpLabel.alpha = 1
-        } else if Int(activeVerse.views!) > 2 && Int(activeVerse.views!) <= 5 {
+      } else if Int(truncating: activeVerse.views!) > 2 && Int(truncating: activeVerse.views!) <= 5 {
             constraintsHelper.showHelp()
             helpButton.isEnabled = true
             helpLevel = 2
@@ -100,7 +94,7 @@ class VersePracticeController: UIViewController, UITextViewDelegate {
             intermediateHelpLabel.attributedText = verseHelper.randomWords()
             basicHelpLabel.alpha = 1
             intermediateHelpLabel.alpha = 1
-        } else if Int(activeVerse.views!) > 5 && Int(activeVerse.views!) <= 10 {
+      } else if Int(truncating: activeVerse.views!) > 5 && Int(truncating: activeVerse.views!) <= 10 {
             constraintsHelper.showHelp()
             helpButton.isEnabled = true
             helpLevel = 1
@@ -168,7 +162,7 @@ class VersePracticeController: UIViewController, UITextViewDelegate {
         NotificationCenter.default.addObserver(self, selector: #selector(VersePracticeController.keyboardWillShow(_:)), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
     }
     
-    func keyboardWillShow(_ notification: Notification) {
+  @objc func keyboardWillShow(_ notification: Notification) {
         let info: NSDictionary = notification.userInfo! as NSDictionary
         let frame = info.object(forKey: UIKeyboardFrameEndUserInfoKey)!
         let keyboardFrame: CGRect = (frame as AnyObject).cgRectValue
@@ -177,7 +171,7 @@ class VersePracticeController: UIViewController, UITextViewDelegate {
         keyboardHeight = height
     }
     
-    func keyboardWillChangeFrame(_ notification: Notification) {
+  @objc func keyboardWillChangeFrame(_ notification: Notification) {
         let info: NSDictionary = notification.userInfo! as NSDictionary
         let frame = info.object(forKey: UIKeyboardFrameEndUserInfoKey)!
         let animationDuration = (info.object(forKey: UIKeyboardAnimationDurationUserInfoKey) as AnyObject).doubleValue
@@ -191,7 +185,7 @@ class VersePracticeController: UIViewController, UITextViewDelegate {
         })
     }
     
-    func keyboardWillHide(_ notification: Notification) {
+  @objc func keyboardWillHide(_ notification: Notification) {
         let info: NSDictionary = notification.userInfo! as NSDictionary
         let animationDuration = (info.object(forKey: UIKeyboardAnimationDurationUserInfoKey) as AnyObject).doubleValue
 
@@ -278,7 +272,7 @@ class VersePracticeController: UIViewController, UITextViewDelegate {
     }
     
     func incrementActiveVerseViewCounter() {
-        activeVerse.views = Int(activeVerse.views!) + 1 as NSNumber
+      activeVerse.views = Int(truncating: activeVerse.views!) + 1 as NSNumber
         try! appDelegate.managedObjectContext.save()
     }
     

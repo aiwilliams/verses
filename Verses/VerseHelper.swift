@@ -28,10 +28,10 @@ class VerseHelper {
         var nextIndex = 1
         for i in secondCharIndexes {
             if nextIndex == secondCharIndexes.count {
-                attributed.setAttributes([NSForegroundColorAttributeName:UIColor.clear], range: NSMakeRange(i, text.characters.count - i))
+              attributed.setAttributes([NSAttributedStringKey.foregroundColor:UIColor.clear], range: NSMakeRange(i, text.characters.count - i))
                 break
             }
-            attributed.setAttributes([NSForegroundColorAttributeName:UIColor.clear], range: NSMakeRange(i, (secondCharIndexes[nextIndex] - 2) - i))
+          attributed.setAttributes([NSAttributedStringKey.foregroundColor:UIColor.clear], range: NSMakeRange(i, (secondCharIndexes[nextIndex] - 2) - i))
             nextIndex += 1
         }
         return attributed
@@ -51,13 +51,13 @@ class VerseHelper {
             index += 1
         }
         
-        for _ in ranges.count / 3 {
+        for _ in 0..<(ranges.count / 3) {
             let randomIndex = Int(arc4random_uniform(UInt32(ranges.count)))
             ranges.remove(at: randomIndex)
         }
         
         for range in ranges {
-            attributed.setAttributes([NSForegroundColorAttributeName:UIColor.clear], range: range)
+          attributed.setAttributes([NSAttributedStringKey.foregroundColor:UIColor.clear], range: range)
         }
         
         return attributed
@@ -85,7 +85,7 @@ class VerseHelper {
             if let numberWord: NSInteger = Int(word) {
                 let formatter = NumberFormatter()
                 formatter.numberStyle = .spellOut
-                let formattedNumber = formatter.string(from: NSNumber(numberWord))
+              let formattedNumber = formatter.string(from: NSNumber(value: numberWord))
                 words.remove(at: index)
                 words.insert(formattedNumber!, at: index)
             }

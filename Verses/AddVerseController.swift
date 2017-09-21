@@ -36,12 +36,12 @@ class AddVerseController: UIViewController {
         NotificationCenter.default.addObserver(self, selector: #selector(AddVerseController.viewWillEnterForeground), name: NSNotification.Name.UIApplicationWillEnterForeground, object: nil)
     }
     
-    func viewWillEnterForeground() {
+    @objc func viewWillEnterForeground() {
         updateVersePreview()
         updateTranslationDisclosure()
     }
 
-    func updateVersePreview() {
+    @objc func updateVersePreview() {
         do {
             let passage = try self.fetchPassage()
             passagePreviewLabel.text = passage.verses.first!.text
@@ -85,7 +85,7 @@ class AddVerseController: UIViewController {
         Timer.scheduledTimer(timeInterval: 2.5, target: self, selector: #selector(AddVerseController.hideErrorLabel), userInfo: nil, repeats: false)
     }
     
-    func hideErrorLabel() {
+    @objc func hideErrorLabel() {
         UIView.animate(withDuration: 0.7, animations: { self.errorLabel.alpha = 0 })
     }
 
