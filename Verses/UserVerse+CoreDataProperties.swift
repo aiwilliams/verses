@@ -20,5 +20,6 @@ extension UserVerse {
     @NSManaged var text: String?
     @NSManaged var views: NSNumber?
     @NSManaged var passage: UserPassage?
+    @NSManaged var selected: Bool
 
 }

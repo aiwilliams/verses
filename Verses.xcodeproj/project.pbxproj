@@ -24,6 +24,7 @@
 		FD895C0C1C974C04009A2F08 /* RemindersController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD895C0B1C974C04009A2F08 /* RemindersController.swift */; };
 		FD8E97AB1C9B4DBB001A4D22 /* ReminderCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD8E97AA1C9B4DBB001A4D22 /* ReminderCell.swift */; };
 		FD8E97AE1C9B539A001A4D22 /* AddReminderController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD8E97AD1C9B539A001A4D22 /* AddReminderController.swift */; };
+		FD954A2C1F7EC9F40061C81C /* Verses.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = FD954A2A1F7EC9F30061C81C /* Verses.xcdatamodeld */; };
 		FD960EE51C17C7790007A096 /* SwiftyJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD960EE41C17C7790007A096 /* SwiftyJSON.swift */; };
 		FD960EE71C17C9790007A096 /* PassageParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD960EE61C17C9790007A096 /* PassageParser.swift */; };
 		FD960EE91C17CEFE0007A096 /* Passage.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD960EE81C17CEFE0007A096 /* Passage.swift */; };
@@ -32,14 +33,12 @@
 		FDB61B8D1BF533D800F8C61D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDB61B8C1BF533D800F8C61D /* AppDelegate.swift */; };
 		FDB61B8F1BF533D800F8C61D /* VersePracticeController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDB61B8E1BF533D800F8C61D /* VersePracticeController.swift */; };
 		FDB61B921BF533D800F8C61D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FDB61B901BF533D800F8C61D /* Main.storyboard */; };
-		FDB61B951BF533D800F8C61D /* Verses.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = FDB61B931BF533D800F8C61D /* Verses.xcdatamodeld */; };
 		FDB61B971BF533D800F8C61D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FDB61B961BF533D800F8C61D /* Assets.xcassets */; };
 		FDB61BA51BF533D800F8C61D /* VersesTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDB61BA41BF533D800F8C61D /* VersesTests.swift */; };
 		FDB61BB01BF533D800F8C61D /* VersesUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDB61BAF1BF533D800F8C61D /* VersesUITests.swift */; };
 		FDB61BBE1BF5410000F8C61D /* VersesIndexController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDB61BBD1BF5410000F8C61D /* VersesIndexController.swift */; };
 		FDB61BC01BF5457E00F8C61D /* AddVerseController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDB61BBF1BF5457E00F8C61D /* AddVerseController.swift */; };
 		FDC7AE351C1F826200C5BDAC /* Heartverses.sqlite in Resources */ = {isa = PBXBuildFile; fileRef = FDD3BC2D1C16251A00616976 /* Heartverses.sqlite */; };
-		FDCEE2121C45B3FB00792D8B /* PracticeViewConstraintsHelperTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDCEE2111C45B3FB00792D8B /* PracticeViewConstraintsHelperTests.swift */; };
 		FDD25BED1C62BFE400254082 /* VerseSelectController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDD25BEC1C62BFE400254082 /* VerseSelectController.swift */; };
 		FDD25BEF1C62C24600254082 /* VerseCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDD25BEE1C62C24600254082 /* VerseCell.swift */; };
 		FDD3BC301C16263B00616976 /* HeartversesAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDD3BC2F1C16263B00616976 /* HeartversesAPI.swift */; };
@@ -91,8 +90,8 @@
 		FD8180FD1C0A3ACD008AF2BA /* HeartversesStore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HeartversesStore.swift; sourceTree = "<group>"; };
 		FD895C0B1C974C04009A2F08 /* RemindersController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RemindersController.swift; sourceTree = "<group>"; };
 		FD8E97AA1C9B4DBB001A4D22 /* ReminderCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReminderCell.swift; sourceTree = "<group>"; };
-		FD8E97AC1C9B522A001A4D22 /* Verses 2.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "Verses 2.xcdatamodel"; sourceTree = "<group>"; };
 		FD8E97AD1C9B539A001A4D22 /* AddReminderController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddReminderController.swift; sourceTree = "<group>"; };
+		FD954A2B1F7EC9F30061C81C /* Verses 2.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "Verses 2.xcdatamodel"; sourceTree = "<group>"; };
 		FD960EE41C17C7790007A096 /* SwiftyJSON.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwiftyJSON.swift; sourceTree = "<group>"; };
 		FD960EE61C17C9790007A096 /* PassageParser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PassageParser.swift; sourceTree = "<group>"; };
 		FD960EE81C17CEFE0007A096 /* Passage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Passage.swift; sourceTree = "<group>"; };
@@ -102,7 +101,6 @@
 		FDB61B8C1BF533D800F8C61D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		FDB61B8E1BF533D800F8C61D /* VersePracticeController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VersePracticeController.swift; sourceTree = "<group>"; };
 		FDB61B911BF533D800F8C61D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		FDB61B941BF533D800F8C61D /* Verses.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Verses.xcdatamodel; sourceTree = "<group>"; };
 		FDB61B961BF533D800F8C61D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		FDB61B9B1BF533D800F8C61D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		FDB61BA01BF533D800F8C61D /* VersesTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = VersesTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -113,7 +111,6 @@
 		FDB61BB11BF533D800F8C61D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		FDB61BBD1BF5410000F8C61D /* VersesIndexController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VersesIndexController.swift; sourceTree = "<group>"; };
 		FDB61BBF1BF5457E00F8C61D /* AddVerseController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddVerseController.swift; sourceTree = "<group>"; };
-		FDCEE2111C45B3FB00792D8B /* PracticeViewConstraintsHelperTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PracticeViewConstraintsHelperTests.swift; sourceTree = "<group>"; };
 		FDD25BEC1C62BFE400254082 /* VerseSelectController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VerseSelectController.swift; sourceTree = "<group>"; };
 		FDD25BEE1C62C24600254082 /* VerseCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VerseCell.swift; sourceTree = "<group>"; };
 		FDD3BC2D1C16251A00616976 /* Heartverses.sqlite */ = {isa = PBXFileReference; lastKnownFileType = file; path = Heartverses.sqlite; sourceTree = "<group>"; };
@@ -207,7 +204,7 @@
 				FDB61B9B1BF533D800F8C61D /* Info.plist */,
 				FD8180FD1C0A3ACD008AF2BA /* HeartversesStore.swift */,
 				FD0D0F1E1C0A31BC00EAF02A /* Heartverses.xcdatamodeld */,
-				FDB61B931BF533D800F8C61D /* Verses.xcdatamodeld */,
+				FD954A2A1F7EC9F30061C81C /* Verses.xcdatamodeld */,
 				FDD3BC2F1C16263B00616976 /* HeartversesAPI.swift */,
 				FD960EE61C17C9790007A096 /* PassageParser.swift */,
 				FD960EE81C17CEFE0007A096 /* Passage.swift */,
@@ -227,7 +224,6 @@
 			children = (
 				FDB61BA41BF533D800F8C61D /* VersesTests.swift */,
 				FDB61BA61BF533D800F8C61D /* Info.plist */,
-				FDCEE2111C45B3FB00792D8B /* PracticeViewConstraintsHelperTests.swift */,
 			);
 			path = VersesTests;
 			sourceTree = "<group>";
@@ -427,10 +423,10 @@
 				FD79BAE91C1BC4B600266A5A /* UserPassage.swift in Sources */,
 				FD960EE71C17C9790007A096 /* PassageParser.swift in Sources */,
 				FDAFD8FB1C2C585A002F4FF5 /* PassageCell.swift in Sources */,
-				FDB61B951BF533D800F8C61D /* Verses.xcdatamodeld in Sources */,
 				FD0D0F201C0A31BC00EAF02A /* Heartverses.xcdatamodeld in Sources */,
 				FD8E97AB1C9B4DBB001A4D22 /* ReminderCell.swift in Sources */,
 				FDB61BBE1BF5410000F8C61D /* VersesIndexController.swift in Sources */,
+				FD954A2C1F7EC9F40061C81C /* Verses.xcdatamodeld in Sources */,
 				FDD3BC301C16263B00616976 /* HeartversesAPI.swift in Sources */,
 				FD8180FE1C0A3ACD008AF2BA /* HeartversesStore.swift in Sources */,
 				FD79BAE71C1BC45A00266A5A /* UserPassage+CoreDataProperties.swift in Sources */,
@@ -442,7 +438,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				FDCEE2121C45B3FB00792D8B /* PracticeViewConstraintsHelperTests.swift in Sources */,
 				FDB61BA51BF533D800F8C61D /* VersesTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -612,7 +607,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.heartverses.ios;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
-				SWIFT_SWIFT3_OBJC_INFERENCE = On;
+				SWIFT_SWIFT3_OBJC_INFERENCE = Off;
 				SWIFT_VERSION = 4.0;
 			};
 			name = Debug;
@@ -629,7 +624,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.heartverses.ios;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
-				SWIFT_SWIFT3_OBJC_INFERENCE = On;
+				SWIFT_SWIFT3_OBJC_INFERENCE = Off;
 				SWIFT_VERSION = 4.0;
 			};
 			name = Release;
@@ -642,7 +637,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = ws.thewilliams.VersesTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_SWIFT3_OBJC_INFERENCE = On;
+				SWIFT_SWIFT3_OBJC_INFERENCE = Off;
 				SWIFT_VERSION = 4.0;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Verses.app/Verses";
 			};
@@ -656,7 +651,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = ws.thewilliams.VersesTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_SWIFT3_OBJC_INFERENCE = On;
+				SWIFT_SWIFT3_OBJC_INFERENCE = Off;
 				SWIFT_VERSION = 4.0;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Verses.app/Verses";
 			};
@@ -669,7 +664,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = ws.thewilliams.VersesUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_SWIFT3_OBJC_INFERENCE = On;
+				SWIFT_SWIFT3_OBJC_INFERENCE = Off;
 				SWIFT_VERSION = 4.0;
 				TEST_TARGET_NAME = Verses;
 				USES_XCTRUNNER = YES;
@@ -683,7 +678,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = ws.thewilliams.VersesUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_SWIFT3_OBJC_INFERENCE = On;
+				SWIFT_SWIFT3_OBJC_INFERENCE = Off;
 				SWIFT_VERSION = 4.0;
 				TEST_TARGET_NAME = Verses;
 				USES_XCTRUNNER = YES;
@@ -751,13 +746,12 @@
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;
 		};
-		FDB61B931BF533D800F8C61D /* Verses.xcdatamodeld */ = {
+		FD954A2A1F7EC9F30061C81C /* Verses.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
-				FD8E97AC1C9B522A001A4D22 /* Verses 2.xcdatamodel */,
-				FDB61B941BF533D800F8C61D /* Verses.xcdatamodel */,
+				FD954A2B1F7EC9F30061C81C /* Verses 2.xcdatamodel */,
 			);
-			currentVersion = FD8E97AC1C9B522A001A4D22 /* Verses 2.xcdatamodel */;
+			currentVersion = FD954A2B1F7EC9F30061C81C /* Verses 2.xcdatamodel */;
 			path = Verses.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;

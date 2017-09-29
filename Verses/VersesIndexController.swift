@@ -55,7 +55,7 @@ class VersesIndexController: UITableViewController {
             cell.flagLabel.text = "⚐"
         }
 
-        if passage.selectedVerses?.count == 0 {
+        if passage.selectedVerses.count == 0 {
             cell.selectionLabel.isHidden = true
             cell.distanceFromFlagToTitle.constant = 10
         } else {
@@ -80,10 +80,10 @@ class VersesIndexController: UITableViewController {
             
             self.selectedPassage = self.passages[ip.row]
             
-            if selectedPassage.selectedVerses?.count == 0 {
+            if selectedPassage.selectedVerses.count == 0 {
                 destinationViewController.verses = self.selectedPassage.verses!
             } else {
-                destinationViewController.verses = selectedPassage.selectedVerses!
+                destinationViewController.verses = NSOrderedSet(array: selectedPassage.selectedVerses)
             }
             
             if ip.row + 1 >= (self.passages.count) {
@@ -154,7 +154,7 @@ class VersesIndexController: UITableViewController {
             let navigationController = UINavigationController(rootViewController: destination)
             destination.passage = passage
             destination.dismissalHandler = { (verses: Array<UserVerse>) -> Void in
-                passage.selectedVerses = NSOrderedSet(array: verses)
+                for verse in verses { verse.selected = true }
                 try! self.appDelegate.managedObjectContext.save()
                 self.performSegue(withIdentifier: "passagePracticeSegue", sender: self)
             }
@@ -162,7 +162,7 @@ class VersesIndexController: UITableViewController {
         })
 
         let clearAction = UIAlertAction(title: "Clear Selection", style: .destructive, handler: { (alertAction: UIAlertAction) in
-            self.passages[indexPath.row].selectedVerses = nil
+            for verse in self.passages[indexPath.row].selectedVerses { verse.selected = false }
             try! self.appDelegate.managedObjectContext.save()
             CATransaction.begin()
             CATransaction.setCompletionBlock({
@@ -177,7 +177,7 @@ class VersesIndexController: UITableViewController {
         })
         
         alert.addAction(selectAction)
-        if passage.selectedVerses?.count != 0 { alert.addAction(clearAction) }
+        if passage.selectedVerses.count != 0 { alert.addAction(clearAction) }
         alert.addAction(cancelAction)
         
         self.present(alert, animated: true, completion: nil)
@@ -230,10 +230,10 @@ class VersesIndexController: UITableViewController {
                 let index = self.passages.index(of: self.selectedPassage)
                 let passage = self.passages[index!]
 
-                if passage.selectedVerses?.count == 0 {
+                if passage.selectedVerses.count == 0 {
                     destination.verses = selectedPassage.verses!
                 } else {
-                    destination.verses = passage.selectedVerses
+                    destination.verses = NSOrderedSet(array: passage.selectedVerses)
                 }
 
                 if index! + 2 >= (self.passages.count) {

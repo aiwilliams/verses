@@ -1,11 +1,3 @@
-//
-//  AddVerseController.swift
-//  Verses
-//
-//  Created by Isaac Williams on 11/12/15.
-//  Copyright © 2015 The Williams Family. All rights reserved.
-//
-
 import Foundation
 import UIKit
 import CoreData
@@ -106,7 +98,8 @@ class AddVerseController: UIViewController {
         }
     }
     
-    func savePassage(_ passage: Passage) {  // Maybe we should have a something that handles all Core Data interactions instead of always leaving it up to the controllers
+    func savePassage(_ passage: Passage) {
+        // Maybe we should have a something that handles all Core Data interactions instead of always leaving it up to the controllers
         let entityDescription = NSEntityDescription.entity(forEntityName: "UserPassage", in: appDelegate.managedObjectContext)!
         let managedObject = UserPassage(entity: entityDescription, insertInto: appDelegate.managedObjectContext)
         let verseSet = NSMutableOrderedSet()

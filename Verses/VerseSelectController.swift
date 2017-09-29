@@ -1,18 +1,10 @@
-//
-//  VerseSelectController.swift
-//  Verses
-//
-//  Created by Isaac Williams on 2/3/16.
-//  Copyright © 2016 The Williams Family. All rights reserved.
-//
-
 import Foundation
 import UIKit
 
 class VerseSelectController: UITableViewController {
     var passage: UserPassage!
     var selectedVerses: Array<UserVerse> = []
-    var dismissalHandler: ((Array<UserVerse>)->Void)!
+    var dismissalHandler: ((Array<UserVerse>) -> Void)!
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return passage.verses!.count
