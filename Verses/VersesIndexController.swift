@@ -4,8 +4,6 @@ import CoreData
 
 class VersesIndexController: UITableViewController {
   var passages = [UserPassage]()
-  var deletePassageIndexPath: IndexPath!
-  var selectPassageIndexPath: IndexPath!
   var selectedPassage: UserPassage!
   let appDelegate = UIApplication.shared.delegate as! AppDelegate
 
@@ -58,20 +56,16 @@ class VersesIndexController: UITableViewController {
     return cell
   }
 
-
+  /**
+   When manually triggering the passagePracticeSegue or the verseSelectSegue, pass a UITableViewCell as the sender.
+   Both destination controllers require the passage associated with the sender.
+   */
   override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
     if segue.identifier == "passagePracticeSegue" {
       let destinationViewController = segue.destination as! VersePracticeController
-      var ip: IndexPath = IndexPath()
-
-      if selectPassageIndexPath == nil {
-        ip = self.tableView.indexPath(for: sender as! UITableViewCell)!
-      } else {
-        ip = selectPassageIndexPath
-      }
+      var ip = tableView.indexPath(for: sender as! UITableViewCell)!
 
       self.selectedPassage = self.passages[ip.row]
-
       if selectedPassage.selectedVerses.count == 0 {
         destinationViewController.verses = self.selectedPassage.verses!
       } else {
@@ -84,19 +78,19 @@ class VersesIndexController: UITableViewController {
         destinationViewController.nextPassageExists = true
       }
 
-      selectPassageIndexPath = nil
-
       destinationViewController.hidesBottomBarWhenPushed = true
     } else if segue.identifier == "verseSelectSegue" {
+      var ip = tableView.indexPath(for: sender as! UITableViewCell)!
+
       let destinationNavController = segue.destination as! UINavigationController
       let destinationViewController = destinationNavController.topViewController as! VerseSelectController
-      let passage: UserPassage = self.passages[selectPassageIndexPath.row]
+      let passage: UserPassage = self.passages[ip.row]
       destinationViewController.selectedVerses = passage.selectedVerses
       destinationViewController.passage = passage
       destinationViewController.dismissalHandler = { (verses) in
         for verse in verses { verse.selected = true }
         try! self.appDelegate.managedObjectContext.save()
-        self.performSegue(withIdentifier: "passagePracticeSegue", sender: self)
+        self.performSegue(withIdentifier: "passagePracticeSegue", sender: sender)
       }
     }
   }
@@ -128,9 +122,7 @@ class VersesIndexController: UITableViewController {
     memorizeAction.backgroundColor = UIColor(red:0.27, green:0.83, blue:0.55, alpha:1.0)
 
     let deleteAction = UITableViewRowAction(style: .normal, title: "✕", handler: { (action: UITableViewRowAction!, indexPath: IndexPath!) in
-      self.deletePassageIndexPath = indexPath
-      let passageToDelete = self.passages[indexPath.row]
-      self.confirmDeletionOf(passageToDelete)
+      self.confirmDeletionOf(passageAt: indexPath)
     })
     deleteAction.backgroundColor = UIColor(red:1.00, green:0.35, blue:0.31, alpha:1.0)
 
@@ -147,8 +139,7 @@ class VersesIndexController: UITableViewController {
     let alert = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
 
     let selectAction = UIAlertAction(title: "Select Verses", style: .default, handler: { (alertAction: UIAlertAction) in
-      self.selectPassageIndexPath = indexPath
-      self.performSegue(withIdentifier: "verseSelectSegue", sender: self)
+      self.performSegue(withIdentifier: "verseSelectSegue", sender: self.tableView.cellForRow(at: indexPath))
     })
 
     let clearAction = UIAlertAction(title: "Clear Selection", style: .destructive, handler: { (alertAction: UIAlertAction) in
@@ -173,24 +164,13 @@ class VersesIndexController: UITableViewController {
     self.present(alert, animated: true, completion: nil)
   }
 
-  func confirmDeletionOf(_ passage: UserPassage) {
-    let alert = UIAlertController(title: "Delete Passage", message: "Are you sure you want to delete \(passage.reference!)? This will permanently destroy any practice data!", preferredStyle: .actionSheet)
+  func confirmDeletionOf(passageAt passageIndexPath: IndexPath) {
+    let passageToDelete = passages[passageIndexPath.row]
+    let alert = UIAlertController(title: "Delete Passage", message: "Are you sure you want to delete \(passageToDelete.reference!)? This will permanently destroy any practice data!", preferredStyle: .actionSheet)
 
-    let deleteAction = UIAlertAction(title: "Delete, and I mean it!", style: .destructive, handler: deletePassage)
-    let cancelAction = UIAlertAction(title: "Nevermind", style: .cancel, handler: { (alertAction: UIAlertAction) in
-      self.deletePassageIndexPath = nil
-    })
-
-    alert.addAction(deleteAction)
-    alert.addAction(cancelAction)
-
-    self.present(alert, animated: true, completion: nil)
-  }
-
-  func deletePassage(_ alertAction: UIAlertAction!) {
-    if let ip = deletePassageIndexPath {
+    let deleteAction = UIAlertAction(title: "Delete, and I mean it!", style: .destructive, handler: { (alertAction) in
       let appDelegate = UIApplication.shared.delegate as! AppDelegate
-      appDelegate.managedObjectContext.delete(passages[ip.row])
+      appDelegate.managedObjectContext.delete(passageToDelete)
 
       do {
         try appDelegate.managedObjectContext.save()
@@ -198,14 +178,19 @@ class VersesIndexController: UITableViewController {
         print("Couldn't delete a passage. Error: \(err), \(err.userInfo)")
       }
 
-      tableView.beginUpdates()
+      self.tableView.beginUpdates()
 
-      passages.remove(at: ip.row)
-      tableView.deleteRows(at: [ip], with: .automatic)
-      deletePassageIndexPath = nil
+      self.passages.remove(at: passageIndexPath.row)
+      self.tableView.deleteRows(at: [passageIndexPath], with: .automatic)
 
-      tableView.endUpdates()
-    }
+      self.tableView.endUpdates()
+    })
+    let cancelAction = UIAlertAction(title: "Nevermind", style: .cancel, handler: nil)
+
+    alert.addAction(deleteAction)
+    alert.addAction(cancelAction)
+
+    self.present(alert, animated: true, completion: nil)
   }
 
   @objc func practiceAgain() {
