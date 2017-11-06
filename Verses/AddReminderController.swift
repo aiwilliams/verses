@@ -1,6 +1,7 @@
 import Foundation
 import UIKit
 import CoreData
+import UserNotifications
 
 class AddReminderController: UIViewController {
   @IBOutlet var reminderTimePicker: UIDatePicker!
@@ -20,8 +21,9 @@ class AddReminderController: UIViewController {
   }
 
   @IBAction func doneButtonPressed(_ sender: UIBarButtonItem) {
-    saveReminder()
-    scheduleReminder()
+    let notificationIdentifier = UUID().uuidString
+    saveReminder(withIdentifier: notificationIdentifier)
+    scheduleReminder(withIdentifier: notificationIdentifier)
     self.dismiss(animated: true, completion: nil)
   }
 
@@ -29,11 +31,12 @@ class AddReminderController: UIViewController {
     return (number % 5) >= 3 ? number - (number % 5) + 5 : number - (number % 5)
   }
 
-  private func saveReminder() {
+  private func saveReminder(withIdentifier notificationIdentifier: String) {
     let appDelegate = UIApplication.shared.delegate as! AppDelegate
     let entityDescription = NSEntityDescription.entity(forEntityName: "Reminder", in: appDelegate.managedObjectContext)!
     let managedObject = NSManagedObject(entity: entityDescription, insertInto: appDelegate.managedObjectContext)
     managedObject.setValue(reminderTimePicker.date, forKey: "time")
+    managedObject.setValue(notificationIdentifier, forKey: "notificationIdentifier")
 
     do {
       try appDelegate.managedObjectContext.save()
@@ -42,21 +45,27 @@ class AddReminderController: UIViewController {
     }
   }
 
-  private func scheduleReminder() {
-    guard let settings = UIApplication.shared.currentUserNotificationSettings else { return }
+  private func scheduleReminder(withIdentifier notificationIdentifier: String) {
+    let notificationCenter = UNUserNotificationCenter.current()
 
-    if settings.types == UIUserNotificationType() {
-      let ac = UIAlertController(title: "Can't schedule", message: "We don't have permission to schedule notifications! Please allow it in your Settings.", preferredStyle: .alert)
-      ac.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
-      present(ac, animated: true, completion: nil)
-      return
+    notificationCenter.getNotificationSettings { (settings) in
+      if settings.authorizationStatus != .authorized {
+        let ac = UIAlertController(title: "Can't schedule", message: "We don't have permission to schedule notifications! Please allow it in your Settings.", preferredStyle: .alert)
+        ac.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+        self.present(ac, animated: true, completion: nil)
+        return
+      }
     }
 
-    let notif = UILocalNotification()
-    notif.fireDate = reminderTimePicker.date
-    notif.alertBody = "It's time to memorize!"
-    notif.soundName = UILocalNotificationDefaultSoundName
-    notif.repeatInterval = .day
-    UIApplication.shared.scheduleLocalNotification(notif)
+    let content = UNMutableNotificationContent()
+    content.title = "It's time to memorize!"
+    content.sound = UNNotificationSound.default()
+    let trigger = UNCalendarNotificationTrigger(dateMatching: NSCalendar.current.dateComponents([.hour, .minute], from: reminderTimePicker.date), repeats: true)
+    let request = UNNotificationRequest(identifier: notificationIdentifier, content: content, trigger: trigger)
+    notificationCenter.add(request) { (error) in
+      if let err = error {
+        print(err.localizedDescription)
+      }
+    }
   }
 }

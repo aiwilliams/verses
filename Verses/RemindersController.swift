@@ -1,6 +1,7 @@
 import Foundation
 import UIKit
 import CoreData
+import UserNotifications
 
 class RemindersController: UITableViewController {
   var appDelegate = UIApplication.shared.delegate as! AppDelegate
@@ -44,6 +45,7 @@ class RemindersController: UITableViewController {
   override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
     if editingStyle == .delete {
       let reminder = reminders[indexPath.row]
+      removeReminderNotification(reminder)
       let moc = appDelegate.managedObjectContext
       moc.delete(reminder)
       try! moc.save()
@@ -52,7 +54,6 @@ class RemindersController: UITableViewController {
 
       reminders.remove(at: indexPath.row)
       tableView.deleteRows(at: [indexPath], with: .automatic)
-      rescheduleReminders()
 
       tableView.endUpdates()
     }
@@ -63,33 +64,19 @@ class RemindersController: UITableViewController {
     reminder.setValue(sender.isOn, forKey: "on")
     try! appDelegate.managedObjectContext.save()
 
-    rescheduleReminders()
+    if reminder.value(forKey: "on") as! Bool == false {
+      removeReminderNotification(reminder)
+    }
   }
 
-  func rescheduleReminders() {
-    UIApplication.shared.cancelAllLocalNotifications()
-    for r in reminders {
-      if r.value(forKey: "on") as! Bool {
-        scheduleReminder(r)
+  func removeReminderNotification(_ reminder: NSManagedObject) {
+    let notificationCenter = UNUserNotificationCenter.current()
+    notificationCenter.getPendingNotificationRequests { (requests) in
+      for request in requests {
+        if request.identifier == reminder.value(forKey: "notificationIdentifier") as! String {
+          notificationCenter.removePendingNotificationRequests(withIdentifiers: [request.identifier])
+        }
       }
     }
-  }
-
-  func scheduleReminder(_ reminder: NSManagedObject) {
-    guard let settings = UIApplication.shared.currentUserNotificationSettings else { return }
-
-    if settings.types == UIUserNotificationType() {
-      let ac = UIAlertController(title: "Can't schedule", message: "We don't have permission to schedule notifications! Please allow it in your Settings.", preferredStyle: .alert)
-      ac.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
-      present(ac, animated: true, completion: nil)
-      return
-    }
-
-    let notif = UILocalNotification()
-    notif.fireDate = reminder.value(forKey: "time") as? Date
-    notif.alertBody = "It's time to memorize!"
-    notif.soundName = UILocalNotificationDefaultSoundName
-    notif.repeatInterval = .day
-    UIApplication.shared.scheduleLocalNotification(notif)
   }
 }

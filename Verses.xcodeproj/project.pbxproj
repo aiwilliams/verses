@@ -325,7 +325,7 @@
 					};
 					FDB61B881BF533D800F8C61D = {
 						CreatedOnToolsVersion = 7.1.1;
-						DevelopmentTeam = C8DJ6DMT5A;
+						DevelopmentTeam = 5567LB5Y2D;
 						LastSwiftMigration = 0900;
 					};
 					FDB61B9F1BF533D800F8C61D = {
@@ -602,7 +602,9 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEVELOPMENT_TEAM = 5567LB5Y2D;
 				INFOPLIST_FILE = Verses/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.heartverses.ios;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -619,7 +621,9 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEVELOPMENT_TEAM = 5567LB5Y2D;
 				INFOPLIST_FILE = Verses/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.heartverses.ios;
 				PRODUCT_NAME = "$(TARGET_NAME)";

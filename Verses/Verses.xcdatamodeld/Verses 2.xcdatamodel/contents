@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="13240" systemVersion="" minimumToolsVersion="Xcode 7.3" sourceLanguage="Objective-C" userDefinedModelVersionIdentifier="">
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="13528" systemVersion="" minimumToolsVersion="Xcode 7.3" sourceLanguage="Objective-C" userDefinedModelVersionIdentifier="">
     <entity name="Reminder" syncable="YES">
+        <attribute name="notificationIdentifier" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="on" attributeType="Boolean" defaultValueString="YES" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="time" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
     </entity>
@@ -22,7 +23,7 @@
         <relationship name="passage" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="UserPassage" inverseName="verses" inverseEntity="UserPassage" syncable="YES"/>
     </entity>
     <elements>
-        <element name="Reminder" positionX="-54" positionY="45" width="128" height="75"/>
+        <element name="Reminder" positionX="-54" positionY="45" width="128" height="90"/>
         <element name="UserPassage" positionX="-63" positionY="-18" width="128" height="119"/>
         <element name="UserVerse" positionX="-63" positionY="0" width="128" height="150"/>
     </elements>

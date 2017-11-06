@@ -1,5 +1,6 @@
 import UIKit
 import CoreData
+import UserNotifications
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -29,8 +30,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
       self.window?.makeKeyAndVisible()
     }
 
-    let notificationSettings = UIUserNotificationSettings(types: [.alert, .sound], categories: nil)
-    UIApplication.shared.registerUserNotificationSettings(notificationSettings)
+    UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .sound]) { (granted, error) in
+      if let err = error {
+        print(err.localizedDescription)
+      }
+    }
+//    let notificationSettings = UIUserNotificationSettings(types: [.alert, .sound], categories: nil)
+//    UIApplication.shared.registerUserNotificationSettings(notificationSettings)
 
     return true
   }
