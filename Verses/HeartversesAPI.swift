@@ -1,127 +1,119 @@
-//
-//  HeartversesAPI.swift
-//  Verses
-//
-//  Created by Isaac Williams on 12/7/15.
-//  Copyright © 2015 The Williams Family. All rights reserved.
-//
-
 import Foundation
 import CoreData
 
 var APIURL: String = "http://heartversesapi.herokuapp.com/api/v1"
 
 class HeartversesAPI {
-    enum FetchError: Error {
-        case passageDoesNotExist
-        case ambiguousBookName
-        case invalidRange
-    }
-    
-    func validatePassage(_ parsedPassage: ParsedPassage) -> (valid: Bool, error: Error?) {
-        if parsedPassage.book == "ambiguous" { return (false, FetchError.ambiguousBookName) }
-        if parsedPassage.verse_start > parsedPassage.verse_end { return (false, FetchError.invalidRange) }
-        if parsedPassage.chapter_start > parsedPassage.chapter_end { return (false, FetchError.invalidRange) }
-        if parsedPassage.chapter_start < 1 { return (false, FetchError.passageDoesNotExist) }
-        if parsedPassage.verse_start < 0 { return (false, FetchError.passageDoesNotExist) }
-        
-        return (true, nil)
-    }
+  enum FetchError: Error {
+    case passageDoesNotExist
+    case ambiguousBookName
+    case invalidRange
+  }
 
-    func fetchPassage(_ parsedPassage: ParsedPassage, translation: String="kjv") throws -> Passage {
-        let (valid, error) = validatePassage(parsedPassage)
-        if !valid { throw error! }
+  func validatePassage(_ parsedPassage: ParsedPassage) -> (valid: Bool, error: Error?) {
+    if parsedPassage.book == "ambiguous" { return (false, FetchError.ambiguousBookName) }
+    if parsedPassage.verse_start > parsedPassage.verse_end { return (false, FetchError.invalidRange) }
+    if parsedPassage.chapter_start > parsedPassage.chapter_end { return (false, FetchError.invalidRange) }
+    if parsedPassage.chapter_start < 1 { return (false, FetchError.passageDoesNotExist) }
+    if parsedPassage.verse_start < 0 { return (false, FetchError.passageDoesNotExist) }
 
-        let store = HeartversesStore(sqliteURL: Bundle.main.url(forResource: "Heartverses", withExtension: "sqlite")!)
-        var passage = Passage(parsedPassage: parsedPassage)
-        
-        let fetchedVerses: [NSManagedObject] = store.findVersesInChapter(translation, bookSlug: parsedPassage.book, chapter: parsedPassage.chapter_start) as! [NSManagedObject]
-        if fetchedVerses.isEmpty { throw FetchError.passageDoesNotExist }
-        if (parsedPassage.verse_start == 1 && parsedPassage.verse_end >= fetchedVerses.count) { passage.verse_start = 0; passage.verse_end = 0 }
-        
-        if parsedPassage.verse_start == 0 {
-            for v in fetchedVerses {
-                let verse = Verse(book: parsedPassage.book, chapter: parsedPassage.chapter_start, number: v.value(forKey: "number") as! Int, text: v.value(forKey: "text") as! String)
-                passage.verses.append(verse)
-            }
-        } else {
-            for i in parsedPassage.verse_start...parsedPassage.verse_end {
-                if i > fetchedVerses.count {
-                    passage.verse_end = i - 1
-                    break
-                }
+    return (true, nil)
+  }
 
-                let verse = Verse(book: parsedPassage.book, chapter: parsedPassage.chapter_start, number: i, text: fetchedVerses[i-1].value(forKey: "text") as! String)
-                passage.verses.append(verse)
-            }
+  func fetchPassage(_ parsedPassage: ParsedPassage, translation: String="kjv") throws -> Passage {
+    let (valid, error) = validatePassage(parsedPassage)
+    if !valid { throw error! }
+
+    let store = HeartversesStore(sqliteURL: Bundle.main.url(forResource: "Heartverses", withExtension: "sqlite")!)
+    var passage = Passage(parsedPassage: parsedPassage)
+
+    let fetchedVerses: [NSManagedObject] = store.findVersesInChapter(translation, bookSlug: parsedPassage.book, chapter: parsedPassage.chapter_start) as! [NSManagedObject]
+    if fetchedVerses.isEmpty { throw FetchError.passageDoesNotExist }
+    if (parsedPassage.verse_start == 1 && parsedPassage.verse_end >= fetchedVerses.count) { passage.verse_start = 0; passage.verse_end = 0 }
+
+    if parsedPassage.verse_start == 0 {
+      for v in fetchedVerses {
+        let verse = Verse(book: parsedPassage.book, chapter: parsedPassage.chapter_start, number: v.value(forKey: "number") as! Int, text: v.value(forKey: "text") as! String)
+        passage.verses.append(verse)
+      }
+    } else {
+      for i in parsedPassage.verse_start...parsedPassage.verse_end {
+        if i > fetchedVerses.count {
+          passage.verse_end = i - 1
+          break
         }
 
-        if passage.verses.isEmpty { throw FetchError.passageDoesNotExist }
+        let verse = Verse(book: parsedPassage.book, chapter: parsedPassage.chapter_start, number: i, text: fetchedVerses[i-1].value(forKey: "text") as! String)
+        passage.verses.append(verse)
+      }
+    }
 
-        return passage
+    if passage.verses.isEmpty { throw FetchError.passageDoesNotExist }
+
+    return passage
+  }
+
+  func fetchVerseText(_ rawPassage: String) -> String {
+    let parsedPassage = parsePassage(rawPassage)
+    let passageURL = URLStringFromPassage(parsedPassage)
+    let verseURL = URL(string: APIURL + passageURL)!
+    let verseData: Data? = try? Data(contentsOf: verseURL)
+    var verseJSON: AnyObject? = nil
+
+    do {
+      verseJSON = try JSONSerialization.jsonObject(with: verseData!, options: JSONSerialization.ReadingOptions.allowFragments) as AnyObject
+    } catch _ as NSError {
+      print("could not serialize verse text JSON from HeartVersesAPI")
     }
-    
-    func fetchVerseText(_ rawPassage: String) -> String {
-        let parsedPassage = parsePassage(rawPassage)
-        let passageURL = URLStringFromPassage(parsedPassage)
-        let verseURL = URL(string: APIURL + passageURL)!
-        let verseData: Data? = try? Data(contentsOf: verseURL)
-        var verseJSON: AnyObject? = nil
-        
-        do {
-            verseJSON = try JSONSerialization.jsonObject(with: verseData!, options: JSONSerialization.ReadingOptions.allowFragments) as AnyObject
-        } catch _ as NSError {
-            print("could not serialize verse text JSON from HeartVersesAPI")
+
+    if let data = verseJSON as? NSDictionary {
+      if let verses = data["verses"] as? NSArray {
+        if let topVerse = verses[0] as? NSDictionary {
+          if let text = topVerse["text"] as? String {
+            return text
+          }
         }
-        
-        if let data = verseJSON as? NSDictionary {
-            if let verses = data["verses"] as? NSArray {
-                if let topVerse = verses[0] as? NSDictionary {
-                    if let text = topVerse["text"] as? String {
-                        return text
-                    }
-                }
-            }
-        }
-        
-        return "failure"
+      }
     }
-    
-    func parsePassage(_ passage: String) -> String {
-        let parseURL = URL(string: APIURL + "/parse/" + removeSpacesFromRawPassage(passage))
-        let parseData: Data? = try? Data(contentsOf: parseURL!)
-        var parseJSON: AnyObject? = nil
-        
-        if parseData == nil { return "failure" } // they put in an out-of-bounds passage or something dumb
-        
-        do {
-            parseJSON = try JSONSerialization.jsonObject(with: parseData!, options: JSONSerialization.ReadingOptions.allowFragments) as AnyObject
-        } catch _ as NSError {
-            print("could not serialize parsed passage JSON from HeartVersesAPI")
-        }
-        
-        if let data = parseJSON as? NSDictionary {
-            if let book = data["book"] as? String {
-                if let chapter = data["chapter"] as? Int {
-                    if let verse = data["verse"] as? Int {
-                        return "\(book) \(chapter):\(verse)"
-                    }
-                }
-            }
-        }
-        
-        return "failure"
+
+    return "failure"
+  }
+
+  func parsePassage(_ passage: String) -> String {
+    let parseURL = URL(string: APIURL + "/parse/" + removeSpacesFromRawPassage(passage))
+    let parseData: Data? = try? Data(contentsOf: parseURL!)
+    var parseJSON: AnyObject? = nil
+
+    if parseData == nil { return "failure" } // they put in an out-of-bounds passage or something dumb
+
+    do {
+      parseJSON = try JSONSerialization.jsonObject(with: parseData!, options: JSONSerialization.ReadingOptions.allowFragments) as AnyObject
+    } catch _ as NSError {
+      print("could not serialize parsed passage JSON from HeartVersesAPI")
     }
-    
-    fileprivate func URLStringFromPassage(_ passage: String) -> String {
-        let comps = passage.components(separatedBy: CharacterSet(charactersIn: " :"))
-        return "/kjv/\(comps[0])/\(comps[1])/\(comps[2])"
-    }
-    
-    fileprivate func removeSpacesFromRawPassage(_ rawPassage: String) -> String {
-        if let spacesRegex: NSRegularExpression = try? NSRegularExpression(pattern: " ", options: NSRegularExpression.Options.caseInsensitive) {
-            return spacesRegex.stringByReplacingMatches(in: rawPassage, options: NSRegularExpression.MatchingOptions.reportCompletion, range: NSMakeRange(0, rawPassage.characters.count), withTemplate: "")
+
+    if let data = parseJSON as? NSDictionary {
+      if let book = data["book"] as? String {
+        if let chapter = data["chapter"] as? Int {
+          if let verse = data["verse"] as? Int {
+            return "\(book) \(chapter):\(verse)"
+          }
         }
-        return "failure"
+      }
     }
+
+    return "failure"
+  }
+
+  fileprivate func URLStringFromPassage(_ passage: String) -> String {
+    let comps = passage.components(separatedBy: CharacterSet(charactersIn: " :"))
+    return "/kjv/\(comps[0])/\(comps[1])/\(comps[2])"
+  }
+
+  fileprivate func removeSpacesFromRawPassage(_ rawPassage: String) -> String {
+    if let spacesRegex: NSRegularExpression = try? NSRegularExpression(pattern: " ", options: NSRegularExpression.Options.caseInsensitive) {
+      return spacesRegex.stringByReplacingMatches(in: rawPassage, options: NSRegularExpression.MatchingOptions.reportCompletion, range: NSMakeRange(0, rawPassage.characters.count), withTemplate: "")
+    }
+    return "failure"
+  }
 }
