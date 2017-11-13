@@ -127,9 +127,9 @@ class VersesIndexController: UITableViewController {
     deleteAction.backgroundColor = UIColor(red:1.00, green:0.35, blue:0.31, alpha:1.0)
 
     if passage.verses!.count != 1 {
-      return [deleteAction, memorizeAction, moreAction]
+      return [memorizeAction, deleteAction, moreAction]
     } else {
-      return [deleteAction, memorizeAction]
+      return [memorizeAction, deleteAction]
     }
   }
 
