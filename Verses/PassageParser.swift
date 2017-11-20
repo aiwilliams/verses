@@ -15,7 +15,7 @@ class Regex {
   }
 
   func test(_ input: String) -> Bool {
-    let matches = self.internalExpression!.matches(in: input, options: NSRegularExpression.MatchingOptions.withTransparentBounds, range:NSMakeRange(0, input.characters.count))
+    let matches = self.internalExpression!.matches(in: input, options: NSRegularExpression.MatchingOptions.withTransparentBounds, range:NSMakeRange(0, input.count))
     return matches.count > 0
   }
 }
@@ -94,7 +94,7 @@ class PassageParser {
     var wildcardBookName = ""
     let bookNameComps = bookName.components(separatedBy: CharacterSet(charactersIn: " "))
 
-    for char in bookNameComps.joined(separator: "-").characters {
+    for char in bookNameComps.joined(separator: "-") {
       wildcardBookName.append(Character(".")); wildcardBookName.append(Character("?"))
       wildcardBookName.append(char)
     }

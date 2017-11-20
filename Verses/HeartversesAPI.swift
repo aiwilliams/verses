@@ -112,7 +112,7 @@ class HeartversesAPI {
 
   fileprivate func removeSpacesFromRawPassage(_ rawPassage: String) -> String {
     if let spacesRegex: NSRegularExpression = try? NSRegularExpression(pattern: " ", options: NSRegularExpression.Options.caseInsensitive) {
-      return spacesRegex.stringByReplacingMatches(in: rawPassage, options: NSRegularExpression.MatchingOptions.reportCompletion, range: NSMakeRange(0, rawPassage.characters.count), withTemplate: "")
+      return spacesRegex.stringByReplacingMatches(in: rawPassage, options: NSRegularExpression.MatchingOptions.reportCompletion, range: NSMakeRange(0, rawPassage.count), withTemplate: "")
     }
     return "failure"
   }

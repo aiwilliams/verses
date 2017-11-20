@@ -13,13 +13,13 @@ class VerseHelper {
     let attributed = NSMutableAttributedString(string: text)
     var index = 0
     var secondCharIndexes = [1]
-    for _ in text.characters {
+    for _ in text {
       if index < 3 {
         index += 1
         continue
       }
-      let backTwo = text.characters.index(text.startIndex, offsetBy: index - 2)
-      if text.characters[backTwo] == " " {
+      let backTwo = text.index(text.startIndex, offsetBy: index - 2)
+      if text[backTwo] == " " {
         secondCharIndexes.append(index)
       }
       index += 1
@@ -28,7 +28,7 @@ class VerseHelper {
     var nextIndex = 1
     for i in secondCharIndexes {
       if nextIndex == secondCharIndexes.count {
-        attributed.setAttributes([NSAttributedStringKey.foregroundColor:UIColor.clear], range: NSMakeRange(i, text.characters.count - i))
+        attributed.setAttributes([NSAttributedStringKey.foregroundColor:UIColor.clear], range: NSMakeRange(i, text.count - i))
         break
       }
       attributed.setAttributes([NSAttributedStringKey.foregroundColor:UIColor.clear], range: NSMakeRange(i, (secondCharIndexes[nextIndex] - 2) - i))
@@ -43,7 +43,7 @@ class VerseHelper {
     var index = 0
     var lastSeenSpaceIndex = 0
     var ranges: Array<NSRange> = Array<NSRange>()
-    for char in text.characters {
+    for char in text {
       if char == " " {
         ranges.append(NSMakeRange(lastSeenSpaceIndex, index - lastSeenSpaceIndex))
         lastSeenSpaceIndex = index
