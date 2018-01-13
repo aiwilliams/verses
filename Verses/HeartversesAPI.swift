@@ -6,30 +6,36 @@ var APIURL: String = "http://heartversesapi.herokuapp.com/api/v1"
 class HeartversesAPI {
   enum FetchError: Error {
     case passageDoesNotExist
-    case ambiguousBookName
-    case invalidRange
   }
 
-  func validatePassage(_ parsedPassage: ParsedPassage) -> (valid: Bool, error: Error?) {
-    if parsedPassage.book == "ambiguous" { return (false, FetchError.ambiguousBookName) }
-    if parsedPassage.verse_start > parsedPassage.verse_end { return (false, FetchError.invalidRange) }
-    if parsedPassage.chapter_start > parsedPassage.chapter_end { return (false, FetchError.invalidRange) }
-    if parsedPassage.chapter_start < 1 { return (false, FetchError.passageDoesNotExist) }
-    if parsedPassage.verse_start < 0 { return (false, FetchError.passageDoesNotExist) }
+  let store = HeartversesStore(sqliteURL: Bundle.main.url(forResource: "Heartverses", withExtension: "sqlite")!)
 
-    return (true, nil)
+  func fetchPassage(_ parsedPassage: ParsedPassage, translation: String = "kjv") throws -> Passage {
+    if let passage = fetchPassageFromCache(parsedPassage, translation: translation) {
+      return passage
+    } else if let passage = fetchPassageFromServer(parsedPassage, translation: translation) {
+      return passage
+    } else {
+      throw FetchError.passageDoesNotExist
+    }
   }
 
-  func fetchPassage(_ parsedPassage: ParsedPassage, translation: String="kjv") throws -> Passage {
-    let (valid, error) = validatePassage(parsedPassage)
-    if !valid { throw error! }
+  private func fetchPassageFromServer(_ parsedPassage: ParsedPassage, translation: String) -> Passage? {
+    return nil
+  }
 
-    let store = HeartversesStore(sqliteURL: Bundle.main.url(forResource: "Heartverses", withExtension: "sqlite")!)
+  private func fetchPassageFromCache(_ parsedPassage: ParsedPassage, translation: String) -> Passage? {
     var passage = Passage(parsedPassage: parsedPassage)
 
-    let fetchedVerses: [NSManagedObject] = store.findVersesInChapter(translation, bookSlug: parsedPassage.book, chapter: parsedPassage.chapter_start) as! [NSManagedObject]
-    if fetchedVerses.isEmpty { throw FetchError.passageDoesNotExist }
-    if (parsedPassage.verse_start == 1 && parsedPassage.verse_end >= fetchedVerses.count) { passage.verse_start = 0; passage.verse_end = 0 }
+    let fetchedVerses = store.findVersesInChapter(translation, bookSlug: parsedPassage.book, chapter: parsedPassage.chapter_start)
+    guard !fetchedVerses.isEmpty else { return nil }
+
+    // TODO: Make this clear!
+    // The following code is meant to determine whether the range is equivalent to a complete chapter and if so, cause the function to just return all found verses.
+    if (parsedPassage.verse_start == 1 && parsedPassage.verse_end >= fetchedVerses.count) {
+      passage.verse_start = 0
+      passage.verse_end = 0
+    }
 
     if parsedPassage.verse_start == 0 {
       for v in fetchedVerses {
@@ -48,7 +54,7 @@ class HeartversesAPI {
       }
     }
 
-    if passage.verses.isEmpty { throw FetchError.passageDoesNotExist }
+    if passage.verses.isEmpty { return nil }
 
     return passage
   }

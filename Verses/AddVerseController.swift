@@ -3,7 +3,7 @@ import UIKit
 import CoreData
 
 class AddVerseController: UIViewController {
-  @IBOutlet var verseRequest: UITextField!
+  @IBOutlet var requestedVerseTextField: UITextField!
   @IBOutlet var errorLabel: UILabel!
   @IBOutlet var passagePreviewLabel: UILabel!
   @IBOutlet var translationLabel: UILabel!
@@ -20,15 +20,18 @@ class AddVerseController: UIViewController {
     errorLabel.alpha = 0
     passagePreviewLabel.alpha = 0
 
-    verseRequest.becomeFirstResponder()
-    verseRequest.addTarget(self, action: #selector(AddVerseController.updateVersePreview), for: .editingChanged)
+    requestedVerseTextField.becomeFirstResponder()
+    requestedVerseTextField.addTarget(self, action: #selector(AddVerseController.updateVersePreview), for: .editingChanged)
 
     updateTranslationDisclosure()
 
-    NotificationCenter.default.addObserver(self, selector: #selector(AddVerseController.viewWillEnterForeground), name: NSNotification.Name.UIApplicationWillEnterForeground, object: nil)
+    NotificationCenter.default.addObserver(self, selector: #selector(AddVerseController.applicationWillEnterForeground), name: NSNotification.Name.UIApplicationWillEnterForeground, object: nil)
   }
 
-  @objc func viewWillEnterForeground() {
+  /*
+   There is a link to the Settings app for changing the translation selection. Update views to show the current translation selection when the application enters foreground and this controller is active.
+   */
+  @objc func applicationWillEnterForeground() {
     updateVersePreview()
     updateTranslationDisclosure()
   }
@@ -60,10 +63,10 @@ class AddVerseController: UIViewController {
     } catch HeartversesAPI.FetchError.passageDoesNotExist {
       errorLabel.text = "That passage does not exist."
       displayErrorLabel()
-    } catch HeartversesAPI.FetchError.ambiguousBookName {
+    } catch PassageParser.ParseError.ambiguousBookName {
       errorLabel.text = "That book name is ambiguous."
       displayErrorLabel()
-    } catch HeartversesAPI.FetchError.invalidRange {
+    } catch PassageParser.ParseError.invalidRange {
       errorLabel.text = "That range of verses is out of bounds."
       displayErrorLabel()
     } catch {
@@ -86,16 +89,10 @@ class AddVerseController: UIViewController {
   }
 
   func fetchPassage() throws -> Passage {
-    let parsedPassage = passageParser.parse(verseRequest.text!)
-    do {
-      let preferredTranslation = userDefaults.string(forKey: "preferredBibleTranslation")!
-      let passage = try API.fetchPassage(parsedPassage, translation: preferredTranslation.lowercased())
-      return passage
-    } catch HeartversesAPI.FetchError.passageDoesNotExist {
-      throw HeartversesAPI.FetchError.passageDoesNotExist
-    } catch HeartversesAPI.FetchError.invalidRange {
-      throw HeartversesAPI.FetchError.invalidRange
-    }
+    let parsedPassage = try passageParser.parse(requestedVerseTextField.text!)
+    let preferredTranslation = userDefaults.string(forKey: "preferredBibleTranslation")!
+    let passage = try API.fetchPassage(parsedPassage, translation: preferredTranslation.lowercased())
+    return passage
   }
 
   func savePassage(_ passage: Passage) {

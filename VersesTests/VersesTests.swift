@@ -1,44 +1,26 @@
-//
-//  VersesTests.swift
-//  VersesTests
-//
-//  Created by Isaac Williams on 11/12/15.
-//  Copyright © 2015 The Williams Family. All rights reserved.
-//
-
 import XCTest
 @testable import Verses
 
 class VersesTests: XCTestCase {
     
     let parser = PassageParser()
-    
-    override func setUp() {
-        super.setUp()
-        // Put setup code here. This method is called before the invocation of each test method in the class.
-    }
-    
-    override func tearDown() {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
-        super.tearDown()
-    }
-    
+        
     func testParseAlreadyCleanVerse() {
-        var result = parser.parse("John 1:1")
+        var result = try! parser.parse("John 1:1")
         XCTAssertEqual("john", result.book)
         XCTAssertEqual(1, result.chapter_start)
         XCTAssertEqual(1, result.chapter_end)
         XCTAssertEqual(1, result.verse_start)
         XCTAssertEqual(1, result.verse_end)
 
-        result = parser.parse("John 1:2")
+        result = try! parser.parse("John 1:2")
         XCTAssertEqual("john", result.book)
         XCTAssertEqual(1, result.chapter_start)
         XCTAssertEqual(1, result.chapter_end)
         XCTAssertEqual(2, result.verse_start)
         XCTAssertEqual(2, result.verse_end)
         
-        result = parser.parse("Revelation 3:12")
+        result = try! parser.parse("Revelation 3:12")
         XCTAssertEqual("revelation", result.book)
         XCTAssertEqual(3, result.chapter_start)
         XCTAssertEqual(3, result.chapter_end)
@@ -47,7 +29,7 @@ class VersesTests: XCTestCase {
     }
     
     func testParseLowercaseBookName() {
-        let result = parser.parse("genesis 1:1")
+        let result = try! parser.parse("genesis 1:1")
         XCTAssertEqual("genesis", result.book)
         XCTAssertEqual(1, result.chapter_start)
         XCTAssertEqual(1, result.chapter_end)
@@ -56,14 +38,14 @@ class VersesTests: XCTestCase {
     }
     
     func testParseRange() {
-        var result = parser.parse("genesis 1:1-4")
+        var result = try! parser.parse("genesis 1:1-4")
         XCTAssertEqual("genesis", result.book)
         XCTAssertEqual(1, result.chapter_start)
         XCTAssertEqual(1, result.chapter_end)
         XCTAssertEqual(1, result.verse_start)
         XCTAssertEqual(4, result.verse_end)
         
-        result = parser.parse("john 1:3-19")
+        result = try! parser.parse("john 1:3-19")
         XCTAssertEqual("john", result.book)
         XCTAssertEqual(1, result.chapter_start)
         XCTAssertEqual(1, result.chapter_end)
@@ -72,7 +54,7 @@ class VersesTests: XCTestCase {
     }
     
     func testParseChapterNoVerse() {
-        let result = parser.parse("psalms 1")
+        let result = try! parser.parse("psalms 1")
         XCTAssertEqual("psalms", result.book)
         XCTAssertEqual(1, result.chapter_start)
         XCTAssertEqual(1, result.chapter_end)
@@ -81,7 +63,7 @@ class VersesTests: XCTestCase {
     }
     
     func testParseChapterRange() {
-        let result = parser.parse("psalms 1-3")
+        let result = try! parser.parse("psalms 1-3")
         XCTAssertEqual("psalms", result.book)
         XCTAssertEqual(1, result.chapter_start)
         XCTAssertEqual(3, result.chapter_end)
@@ -90,7 +72,7 @@ class VersesTests: XCTestCase {
     }
     
     func testParseIntoProperSlug() {
-        let result = parser.parse("2 Samuel 1:3")
+        let result = try! parser.parse("2 Samuel 1:3")
         XCTAssertEqual("2-samuel", result.book)
         XCTAssertEqual(1, result.chapter_start)
         XCTAssertEqual(1, result.chapter_end)
@@ -99,7 +81,7 @@ class VersesTests: XCTestCase {
     }
 
     func testParseNumberedBookVerseRange() {
-        let result = parser.parse("2 Samuel 1:3-4")
+        let result = try! parser.parse("2 Samuel 1:3-4")
         XCTAssertEqual("2-samuel", result.book)
         XCTAssertEqual(1, result.chapter_start)
         XCTAssertEqual(1, result.chapter_end)
@@ -108,7 +90,7 @@ class VersesTests: XCTestCase {
     }
     
     func testParseNumberedBookChapterRange() {
-        let result = parser.parse("2 Samuel 1-4")
+        let result = try! parser.parse("2 Samuel 1-4")
         XCTAssertEqual("2-samuel", result.book)
         XCTAssertEqual(1, result.chapter_start)
         XCTAssertEqual(4, result.chapter_end)
@@ -117,7 +99,7 @@ class VersesTests: XCTestCase {
     }
     
     func testParseSlangBookTitleSingleVerse() {
-        let result = parser.parse("jam 1:1")
+        let result = try! parser.parse("jam 1:1")
         XCTAssertEqual("james", result.book)
         XCTAssertEqual(1, result.chapter_start)
         XCTAssertEqual(1, result.chapter_end)
@@ -126,7 +108,7 @@ class VersesTests: XCTestCase {
     }
     
     func testParseSlangBookTitleVerseRange() {
-        let result = parser.parse("gen 1:1-3")
+        let result = try! parser.parse("gen 1:1-3")
         XCTAssertEqual("genesis", result.book)
         XCTAssertEqual(1, result.chapter_start)
         XCTAssertEqual(1, result.chapter_end)
@@ -135,7 +117,7 @@ class VersesTests: XCTestCase {
     }
     
     func testParseSlangBookTitleChapterRange() {
-        let result = parser.parse("gen 1-3")
+        let result = try! parser.parse("gen 1-3")
         XCTAssertEqual("genesis", result.book)
         XCTAssertEqual(1, result.chapter_start)
         XCTAssertEqual(3, result.chapter_end)
@@ -144,7 +126,7 @@ class VersesTests: XCTestCase {
     }
     
     func testParseSlangNumberedBook() {
-        let result = parser.parse("2sam 3:4")
+        let result = try! parser.parse("2sam 3:4")
         XCTAssertEqual("2-samuel", result.book)
         XCTAssertEqual(3, result.chapter_start)
         XCTAssertEqual(3, result.chapter_end)
@@ -153,7 +135,7 @@ class VersesTests: XCTestCase {
     }
     
     func testParseSlangNumberedBookVariation2() {
-        let result = parser.parse("2sa 3:4")
+        let result = try! parser.parse("2sa 3:4")
         XCTAssertEqual("2-samuel", result.book)
         XCTAssertEqual(3, result.chapter_start)
         XCTAssertEqual(3, result.chapter_end)
@@ -162,7 +144,7 @@ class VersesTests: XCTestCase {
     }
     
     func testParseSlangNumberedBookVariation3() {
-        let result = parser.parse("1thes 3:4")
+        let result = try! parser.parse("1thes 3:4")
         XCTAssertEqual("1-thessalonians", result.book)
         XCTAssertEqual(3, result.chapter_start)
         XCTAssertEqual(3, result.chapter_end)
@@ -171,7 +153,7 @@ class VersesTests: XCTestCase {
     }
     
     func testParseSlangNumberedBookVariation4() {
-        let result = parser.parse("2 sam 3:4")
+        let result = try! parser.parse("2 sam 3:4")
         XCTAssertEqual("2-samuel", result.book)
         XCTAssertEqual(3, result.chapter_start)
         XCTAssertEqual(3, result.chapter_end)
@@ -180,16 +162,13 @@ class VersesTests: XCTestCase {
     }
     
     func testAmbiguousBookName() {
-        let result = parser.parse("j 3:4")
-        XCTAssertEqual("ambiguous", result.book)
-        XCTAssertEqual(3, result.chapter_start)
-        XCTAssertEqual(3, result.chapter_end)
-        XCTAssertEqual(4, result.verse_start)
-        XCTAssertEqual(4, result.verse_end)
+      XCTAssertThrowsError(try parser.parse("j 3:4"), "Ambiguous book") { (e) in
+        XCTAssertEqual(e as? PassageParser.ParseError, PassageParser.ParseError.ambiguousBookName)
+      }
     }
     
     func testSongOfSolomon() {
-        let result = parser.parse("song of solomon 4:4")
+        let result = try! parser.parse("song of solomon 4:4")
         XCTAssertEqual("song-of-solomon", result.book)
         XCTAssertEqual(4, result.chapter_start)
         XCTAssertEqual(4, result.chapter_end)
@@ -198,7 +177,7 @@ class VersesTests: XCTestCase {
     }
     
     func testSongOfSolomonSlang() {
-        let result = parser.parse("song 4:4")
+        let result = try! parser.parse("song 4:4")
         XCTAssertEqual("song-of-solomon", result.book)
         XCTAssertEqual(4, result.chapter_start)
         XCTAssertEqual(4, result.chapter_end)
@@ -207,7 +186,7 @@ class VersesTests: XCTestCase {
     }
     
     func testSongOfSolomonSlangVariation2() {
-        let result = parser.parse("sos 4:4")
+        let result = try! parser.parse("sos 4:4")
         XCTAssertEqual("song-of-solomon", result.book)
         XCTAssertEqual(4, result.chapter_start)
         XCTAssertEqual(4, result.chapter_end)
@@ -216,7 +195,7 @@ class VersesTests: XCTestCase {
     }
     
     func testSongOfSolomonSlangVariation3() {
-        let result = parser.parse("song of 4:4")
+        let result = try! parser.parse("song of 4:4")
         XCTAssertEqual("song-of-solomon", result.book)
         XCTAssertEqual(4, result.chapter_start)
         XCTAssertEqual(4, result.chapter_end)
@@ -225,7 +204,7 @@ class VersesTests: XCTestCase {
     }
     
     func testSongOfSolomonVerseRange() {
-        let result = parser.parse("song of solomon 4:4-5")
+        let result = try! parser.parse("song of solomon 4:4-5")
         XCTAssertEqual("song-of-solomon", result.book)
         XCTAssertEqual(4, result.chapter_start)
         XCTAssertEqual(4, result.chapter_end)

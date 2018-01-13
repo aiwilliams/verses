@@ -1,11 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13196" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="vDD-K9-hPG">
-    <device id="retina4_7" orientation="portrait">
-        <adaptation id="fullscreen"/>
-    </device>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="vDD-K9-hPG">
     <dependencies>
-        <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13173"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -15,25 +11,25 @@
             <objects>
                 <tableViewController id="a9H-Yp-Qkg" customClass="VersesIndexController" customModule="Verses" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="aZL-ut-Ucd">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="passageCell" id="tCs-02-W21" customClass="PassageCell" customModule="Verses" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="28" width="375" height="44"/>
+                                <rect key="frame" x="0.0" y="28" width="600" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="tCs-02-W21" id="IOC-Xd-Qd3">
-                                    <rect key="frame" x="0.0" y="0.0" width="342" height="43.5"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="562" height="43.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="⚐" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="exG-YY-Pmc">
-                                            <rect key="frame" x="21" y="4" width="26" height="35"/>
+                                            <rect key="frame" x="33" y="7" width="26" height="30"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="29"/>
                                             <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="John 1:1" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5zI-dG-4hC">
-                                            <rect key="frame" x="83" y="11" width="481" height="21"/>
+                                            <rect key="frame" x="95" y="14" width="481" height="16"/>
                                             <constraints>
                                                 <constraint firstAttribute="width" constant="481" id="NC8-IR-Akw"/>
                                             </constraints>
@@ -97,16 +93,16 @@
                         <viewControllerLayoutGuide type="bottom" id="WOe-uo-BVY"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="MFU-DV-FGZ">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Gc0-q9-h3h">
-                                <rect key="frame" x="16" y="123" width="343" height="30"/>
+                                <rect key="frame" x="20" y="123" width="560" height="30"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="In the beginning was the Word, and the Word was with God, and the Word was God." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="w8C-gT-PNW" userLabel="Passage Preview">
-                                <rect key="frame" x="16" y="153" width="343" height="74"/>
+                                <rect key="frame" x="20" y="153" width="560" height="74"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="74" id="EtO-rK-rpQ"/>
                                 </constraints>
@@ -115,14 +111,14 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Translation: KJV" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UcY-r7-gwV">
-                                <rect key="frame" x="16" y="72" width="343" height="18"/>
+                                <rect key="frame" x="20" y="72" width="560" height="18"/>
                                 <gestureRecognizers/>
                                 <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Gwq-N0-XlK">
-                                <rect key="frame" x="16" y="91" width="343" height="18"/>
+                                <rect key="frame" x="20" y="91" width="560" height="18"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="18" id="n77-Pk-Qwl"/>
                                     <constraint firstAttribute="height" constant="18" id="qd8-A7-RoX"/>
@@ -138,7 +134,7 @@
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Sorry! An error occurred while I was trying to fetch the verse. Try again?" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="C4L-vn-hkd">
-                                <rect key="frame" x="16" y="224" width="343" height="28"/>
+                                <rect key="frame" x="20" y="224" width="560" height="28"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="28" id="uH8-mN-7h4"/>
                                 </constraints>
@@ -197,8 +193,8 @@
                     <connections>
                         <outlet property="errorLabel" destination="C4L-vn-hkd" id="azv-Fm-ByS"/>
                         <outlet property="passagePreviewLabel" destination="w8C-gT-PNW" id="pyA-Uu-Xp0"/>
+                        <outlet property="requestedVerseTextField" destination="Gc0-q9-h3h" id="1Wq-kh-3EC"/>
                         <outlet property="translationLabel" destination="UcY-r7-gwV" id="f4n-R2-xGX"/>
-                        <outlet property="verseRequest" destination="Gc0-q9-h3h" id="1Wq-kh-3EC"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="wpT-4U-eOh" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -214,11 +210,11 @@
                         <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" horizontalCompressionResistancePriority="1000" verticalCompressionResistancePriority="1000" bounces="NO" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="4tE-Md-p5j">
-                                <rect key="frame" x="16" y="72" width="343" height="538"/>
+                                <rect key="frame" x="20" y="72" width="560" height="471"/>
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences" autocorrectionType="yes" spellCheckingType="no"/>
@@ -236,7 +232,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" alpha="0.0" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mOy-O3-OK1" userLabel="Prompt Label">
-                                <rect key="frame" x="16" y="580" width="343" height="30"/>
+                                <rect key="frame" x="20" y="513" width="560" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="30" id="nOw-Vj-GWc"/>
                                 </constraints>
@@ -251,7 +247,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" progressViewStyle="bar" translatesAutoresizingMaskIntoConstraints="NO" id="mVz-c2-GaJ">
-                                <rect key="frame" x="-4" y="64" width="383" height="2.5"/>
+                                <rect key="frame" x="0.0" y="64" width="600" height="2.5"/>
                             </progressView>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -310,15 +306,15 @@
             <objects>
                 <tableViewController storyboardIdentifier="selectVerses" id="CJk-OQ-4xL" customClass="VerseSelectController" customModule="Verses" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="Bjc-Cu-dLB">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="verseCell" id="U2k-8g-KR7" customClass="VerseCell" customModule="Verses" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="28" width="375" height="44"/>
+                                <rect key="frame" x="0.0" y="28" width="600" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="U2k-8g-KR7" id="86C-h6-45o">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="600" height="43.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="James 1:1" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gX1-Ch-OFx">
@@ -366,17 +362,17 @@
                         <viewControllerLayoutGuide type="bottom" id="reV-3b-K96"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="fk7-Nd-YOE">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Congratulations! You have completed this passage." textAlignment="center" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hf3-BU-V1U">
-                                <rect key="frame" x="26" y="323" width="323" height="21"/>
+                                <rect key="frame" x="30" y="289.5" width="540" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fQo-Mg-Gx8">
-                                <rect key="frame" x="128" y="379" width="119" height="30"/>
+                                <rect key="frame" x="240.5" y="345.5" width="119" height="30"/>
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="119" id="rbf-t1-DjY"/>
@@ -389,7 +385,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lhu-fl-1aK">
-                                <rect key="frame" x="128" y="417" width="119" height="30"/>
+                                <rect key="frame" x="240.5" y="383.5" width="119" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="119" id="mqf-fE-NcW"/>
                                 </constraints>
@@ -466,11 +462,11 @@
                         <viewControllerLayoutGuide type="bottom" id="H66-YQ-cxq"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="XbN-UA-u9J">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="What's your favorite translation?" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1ui-Sz-jU4">
-                                <rect key="frame" x="16" y="190" width="343" height="88"/>
+                                <rect key="frame" x="20" y="123" width="560" height="88"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="88" id="1QG-b3-BGj"/>
                                 </constraints>
@@ -479,10 +475,10 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <pickerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="32v-9D-Q4q">
-                                <rect key="frame" x="-4" y="286" width="383" height="216"/>
+                                <rect key="frame" x="0.0" y="219" width="600" height="216"/>
                             </pickerView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="561-Le-JzG">
-                                <rect key="frame" x="44" y="617" width="287" height="30"/>
+                                <rect key="frame" x="156.5" y="550" width="287" height="30"/>
                                 <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="287" id="q1U-Id-UML"/>
@@ -521,15 +517,15 @@
             <objects>
                 <tableViewController id="P8y-rB-6jq" customClass="RemindersController" customModule="Verses" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" allowsSelection="NO" rowHeight="81" sectionHeaderHeight="28" sectionFooterHeight="28" id="iZ4-qr-b0Z">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="reminderCell" rowHeight="81" id="WLK-0e-gYn" customClass="ReminderCell" customModule="Verses" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="28" width="375" height="81"/>
+                                <rect key="frame" x="0.0" y="28" width="600" height="81"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="WLK-0e-gYn" id="bWJ-KA-zQL">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="80.5"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="600" height="80.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="4:00 PM" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cAC-Sz-caJ">
@@ -572,11 +568,11 @@
                         <viewControllerLayoutGuide type="bottom" id="LBB-bC-BOb"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="fHQ-oq-Ttm">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <datePicker contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="time" minuteInterval="5" translatesAutoresizingMaskIntoConstraints="NO" id="pvY-1A-rGh">
-                                <rect key="frame" x="-4" y="72" width="383" height="216"/>
+                                <rect key="frame" x="0.0" y="72" width="600" height="216"/>
                                 <date key="date" timeIntervalSinceReferenceDate="479941470.82082599">
                                     <!--2016-03-17 21:04:30 +0000-->
                                 </date>

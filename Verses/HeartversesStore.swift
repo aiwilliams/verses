@@ -32,27 +32,28 @@ class HeartversesStore {
     return book
   }
 
-  func findVersesInChapter(_ translation: String, bookSlug: String, chapter: Int) -> [AnyObject] {
+  func findVersesInChapter(_ translation: String, bookSlug: String, chapter: Int) -> [NSManagedObject] {
     let book = findBook(translation, slug: bookSlug)
-    let entity = NSEntityDescription.entity(forEntityName: "Verse", in: self.managedObjectContext)!
+
+    let entity = NSEntityDescription.entity(forEntityName: "Verse", in: managedObjectContext)!
     let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: entity.name!)
     fetchRequest.predicate = NSPredicate(format: "book == %@ and chapter == %@", argumentArray: [book, chapter])
+
     do {
-      let verses = try self.managedObjectContext.fetch(fetchRequest)
-      if !verses.isEmpty {
-        return verses as [AnyObject]
+      if let verses = try managedObjectContext.fetch(fetchRequest) as? [NSManagedObject] {
+        return verses
+      } else {
+        return []
       }
     } catch let error as NSError {
       print("Could not find chapter. Error: \(error), \(error.userInfo)")
+      return []
     }
-    return []
   }
 
   func findVerse(_ translation: String, bookSlug: String, chapter: Int, number: Int) -> NSManagedObject {
     let book = findBook(translation, slug: bookSlug)
-
-    let verse = findObject("Verse", format: "book == %@ and chapter == %@ and number == %@", book, chapter as AnyObject, number as AnyObject)
-    return verse
+    return findObject("Verse", format: "book == %@ and chapter == %@ and number == %@", book, chapter as AnyObject, number as AnyObject)
   }
 
   func newObject(_ entity: NSEntityDescription) -> NSManagedObject {
