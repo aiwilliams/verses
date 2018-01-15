@@ -6,17 +6,17 @@ import CoreData
 // don't! See issue https://github.com/aiwilliams/verses/issues/21 and commit
 // https://github.com/aiwilliams/verses/commit/8be61a83e13c81a14e6f3d20283a967fbd093eed
 
-let documentsDirectory = NSFileManager.defaultManager().URLsForDirectory(.DocumentDirectory, inDomains: .UserDomainMask).last!
-let store = HeartversesStore(sqliteURL: documentsDirectory.URLByAppendingPathComponent("Heartverses.sqlite"))
+let documentsDirectory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).last!
+let store = HeartversesStore(sqliteURL: documentsDirectory.appendingPathComponent("Heartverses.sqlite"))
 
 func convertToSlug(bookName: String) -> String {
-    let comps = bookName.componentsSeparatedByCharactersInSet(NSCharacterSet(charactersInString: " "))
+    let comps = bookName.components(separatedBy: " ")
     if comps.count == 1 {
-        return comps[0].lowercaseString
+        return comps[0].lowercased()
     } else if comps.count == 2 {
-        return "\(comps[0])-\(comps[1].lowercaseString)"
+        return "\(comps[0])-\(comps[1].lowercased())"
     } else {
-        return "\(comps[0].lowercaseString)-\(comps[1].lowercaseString)-\(comps[2].lowercaseString)"
+        return "\(comps[0].lowercased())-\(comps[1].lowercased())-\(comps[2].lowercased())"
     }
 }
 
@@ -24,9 +24,9 @@ func importKJV(sourcePath: String) {
     var json: JSON!
     
     do {
-        let jsonData = try NSData(contentsOfURL: NSURL(fileURLWithPath: sourcePath), options: NSDataReadingOptions.DataReadingMappedIfSafe)
-        json = JSON(data: jsonData)
-    } catch let error as NSError {
+        let jsonData = try Data(contentsOf: URL(fileURLWithPath: sourcePath), options: .mappedIfSafe)
+        json = try JSON(data: jsonData)
+    } catch let error {
         print(error.localizedDescription)
     }
 
@@ -55,16 +55,16 @@ func importNKJV(sourcePath: String) {
     var json: JSON!
     
     do {
-        let jsonData = try NSData(contentsOfURL: NSURL(fileURLWithPath: sourcePath), options: NSDataReadingOptions.DataReadingMappedIfSafe)
-        json = JSON(data: jsonData)
-    } catch let error as NSError {
+        let jsonData = try Data(contentsOf: URL(fileURLWithPath: sourcePath), options: .mappedIfSafe)
+        json = try JSON(data: jsonData)
+    } catch let error {
         print(error.localizedDescription)
     }
 
     let translation = "nkjv"
 
     for (_, bookObject):(String, JSON) in json {
-        let bookSlug = convertToSlug(bookObject["name"].stringValue)
+        let bookSlug = convertToSlug(bookName: bookObject["name"].stringValue)
         let book = store.findBook(translation, slug: bookSlug)
         for (_, chapterObject):(String, JSON) in bookObject["chapters"] {
             let chapter = chapterObject["num"].intValue
@@ -75,5 +75,5 @@ func importNKJV(sourcePath: String) {
     }
 }
 
-importKJV("/Users/isaacjw/Desktop/kjv_bible.json")
-importNKJV("/Users/isaacjw/Desktop/nkjv_bible.json")
+importKJV(sourcePath: "/Users/isaacjw/Desktop/kjv_bible.json")
+importNKJV(sourcePath: "/Users/isaacjw/Desktop/nkjv_bible.json")

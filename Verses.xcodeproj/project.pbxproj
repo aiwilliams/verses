@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		5FD62ACCFE6259A72589CCFE /* SwiftyJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FD62534E517E070AADFC2A7 /* SwiftyJSON.swift */; };
 		FD0D0F201C0A31BC00EAF02A /* Heartverses.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = FD0D0F1E1C0A31BC00EAF02A /* Heartverses.xcdatamodeld */; };
 		FD0D0F311C0A387400EAF02A /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD0D0F301C0A387400EAF02A /* main.swift */; };
 		FD0EFD891C52E21C00BC83A6 /* Heartverses.sqlite-shm in Resources */ = {isa = PBXBuildFile; fileRef = FD0EFD871C52E21C00BC83A6 /* Heartverses.sqlite-shm */; };
@@ -25,7 +26,6 @@
 		FD8E97AB1C9B4DBB001A4D22 /* ReminderCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD8E97AA1C9B4DBB001A4D22 /* ReminderCell.swift */; };
 		FD8E97AE1C9B539A001A4D22 /* AddReminderController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD8E97AD1C9B539A001A4D22 /* AddReminderController.swift */; };
 		FD954A2C1F7EC9F40061C81C /* Verses.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = FD954A2A1F7EC9F30061C81C /* Verses.xcdatamodeld */; };
-		FD960EE51C17C7790007A096 /* SwiftyJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD960EE41C17C7790007A096 /* SwiftyJSON.swift */; };
 		FD960EE71C17C9790007A096 /* PassageParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD960EE61C17C9790007A096 /* PassageParser.swift */; };
 		FD960EE91C17CEFE0007A096 /* Passage.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD960EE81C17CEFE0007A096 /* Passage.swift */; };
 		FDAFD8FB1C2C585A002F4FF5 /* PassageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDAFD8FA1C2C585A002F4FF5 /* PassageCell.swift */; };
@@ -75,6 +75,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		5FD62534E517E070AADFC2A7 /* SwiftyJSON.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwiftyJSON.swift; sourceTree = "<group>"; };
 		FD0D0F1F1C0A31BC00EAF02A /* Heartverses.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Heartverses.xcdatamodel; sourceTree = "<group>"; };
 		FD0D0F2E1C0A387400EAF02A /* VersesSeed */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = VersesSeed; sourceTree = BUILT_PRODUCTS_DIR; };
 		FD0D0F301C0A387400EAF02A /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
@@ -92,7 +93,6 @@
 		FD8E97AA1C9B4DBB001A4D22 /* ReminderCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReminderCell.swift; sourceTree = "<group>"; };
 		FD8E97AD1C9B539A001A4D22 /* AddReminderController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddReminderController.swift; sourceTree = "<group>"; };
 		FD954A2B1F7EC9F30061C81C /* Verses 2.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "Verses 2.xcdatamodel"; sourceTree = "<group>"; };
-		FD960EE41C17C7790007A096 /* SwiftyJSON.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwiftyJSON.swift; sourceTree = "<group>"; };
 		FD960EE61C17C9790007A096 /* PassageParser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PassageParser.swift; sourceTree = "<group>"; };
 		FD960EE81C17CEFE0007A096 /* Passage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Passage.swift; sourceTree = "<group>"; };
 		FDAFD8FA1C2C585A002F4FF5 /* PassageCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PassageCell.swift; sourceTree = "<group>"; };
@@ -153,8 +153,8 @@
 		FD0D0F2F1C0A387400EAF02A /* VersesSeed */ = {
 			isa = PBXGroup;
 			children = (
-				FD960EE41C17C7790007A096 /* SwiftyJSON.swift */,
 				FD0D0F301C0A387400EAF02A /* main.swift */,
+				5FD62534E517E070AADFC2A7 /* SwiftyJSON.swift */,
 			);
 			path = VersesSeed;
 			sourceTree = "<group>";
@@ -399,7 +399,7 @@
 				FD8181001C0A3D43008AF2BA /* Heartverses.xcdatamodeld in Sources */,
 				FD8180FF1C0A3ACD008AF2BA /* HeartversesStore.swift in Sources */,
 				FD0D0F311C0A387400EAF02A /* main.swift in Sources */,
-				FD960EE51C17C7790007A096 /* SwiftyJSON.swift in Sources */,
+				5FD62ACCFE6259A72589CCFE /* SwiftyJSON.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
