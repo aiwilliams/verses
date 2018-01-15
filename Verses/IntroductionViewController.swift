@@ -5,7 +5,7 @@ class IntroductionViewController: UIViewController, UIPickerViewDelegate, UIPick
   @IBOutlet var translationPicker: UIPickerView!
   @IBOutlet var completionButton: UIButton!
 
-  var translationChoices: [String] = ["KJV", "NKJV"]
+  var translationChoices: [String] = ["KJV", "NKJV", "ESV"]
 
   override func viewDidLoad() {
     super.viewDidLoad()

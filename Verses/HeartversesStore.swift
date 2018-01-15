@@ -13,6 +13,15 @@ class HeartversesStore {
     url = sqliteURL
   }
 
+  func addBook(_ translation: String, name: String) -> NSManagedObject {
+    let entity = NSEntityDescription.entity(forEntityName: "Book", in: managedObjectContext)!
+    let book = newObject(entity)
+    book.setValue(name, forKey: "name")
+    book.setValue(translation, forKey: "translation")
+    saveContext()
+    return book
+  }
+
   func addVerse(_ book: NSManagedObject, chapter: Int, number: Int, text: String) {
     let verse = newObject("Verse")
     verse.setValue(book, forKey: "book")
@@ -22,18 +31,20 @@ class HeartversesStore {
     self.saveContext()
   }
 
-  func findBook(_ translation: String, slug: String) -> NSManagedObject {
-    let book = findObject("Book", format: "name == %@ and translation == %@", slug as AnyObject, translation as AnyObject)
-    if book.objectID.isTemporaryID {
-      book.setValue(slug, forKey: "name")
-      book.setValue(translation, forKey: "translation")
-      saveContext()
+  func findBook(_ translation: String, slug: String) -> NSManagedObject? {
+    return findObject("Book", format: "name == %@ and translation == %@", slug as AnyObject, translation as AnyObject)
+  }
+
+  func findOrCreateBook(_ translation: String, name: String) -> NSManagedObject {
+    if let existingBook = findBook(translation, slug: name) {
+      return existingBook
+    } else {
+      return addBook(translation, name: name)
     }
-    return book
   }
 
   func findVersesInChapter(_ translation: String, bookSlug: String, chapter: Int) -> [NSManagedObject] {
-    let book = findBook(translation, slug: bookSlug)
+    guard let book = findBook(translation, slug: bookSlug) else { return [] }
 
     let entity = NSEntityDescription.entity(forEntityName: "Verse", in: managedObjectContext)!
     let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: entity.name!)
@@ -51,8 +62,8 @@ class HeartversesStore {
     }
   }
 
-  func findVerse(_ translation: String, bookSlug: String, chapter: Int, number: Int) -> NSManagedObject {
-    let book = findBook(translation, slug: bookSlug)
+  func findVerse(_ translation: String, bookSlug: String, chapter: Int, number: Int) -> NSManagedObject? {
+    guard let book = findBook(translation, slug: bookSlug) else { return nil }
     return findObject("Verse", format: "book == %@ and chapter == %@ and number == %@", book, chapter as AnyObject, number as AnyObject)
   }
 
@@ -65,19 +76,21 @@ class HeartversesStore {
     return newObject(entity)
   }
 
-  func findObject(_ entityName: String, format: String, _ arguments: AnyObject...) -> NSManagedObject {
+  func findObject(_ entityName: String, format: String, _ arguments: AnyObject...) -> NSManagedObject? {
     let entity = NSEntityDescription.entity(forEntityName: entityName, in: self.managedObjectContext)!
     let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: entity.name!)
     fetchRequest.predicate = NSPredicate(format: format, argumentArray: arguments)
     do {
       let results = try self.managedObjectContext.fetch(fetchRequest)
-      if !results.isEmpty {
-        return results.first as! NSManagedObject
+      if results.isEmpty {
+        return nil
+      } else {
+        return results.first as? NSManagedObject
       }
     } catch let error as NSError {
       print("Could not find book \(error), \(error.userInfo)")
+      return nil
     }
-    return newObject(entity)
   }
 
   lazy var managedObjectModel: NSManagedObjectModel = {

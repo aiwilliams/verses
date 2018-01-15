@@ -17,11 +17,13 @@
 			<array>
 				<string>KJV</string>
 				<string>NKJV</string>
+				<string>ESV</string>
 			</array>
 			<key>Values</key>
 			<array>
 				<string>KJV</string>
 				<string>NKJV</string>
+				<string>ESV</string>
 			</array>
 		</dict>
 	</array>

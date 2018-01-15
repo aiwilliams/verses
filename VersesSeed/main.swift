@@ -22,23 +22,23 @@ func convertToSlug(bookName: String) -> String {
 
 func importKJV(sourcePath: String) {
   var json: JSON!
-  
+
   do {
     let jsonData = try Data(contentsOf: URL(fileURLWithPath: sourcePath), options: .mappedIfSafe)
     json = try JSON(data: jsonData)
   } catch let error {
     print(error.localizedDescription)
   }
-  
+
   let translation = "kjv"
   var books = [Int:NSManagedObject]()
   var chapters = [Int:Array<Int>]()
-  
+
   for (_,object):(String, JSON) in json {
     switch object["model"] {
     case "bible.book":
       let bookSlug = object["fields"]["slug"].stringValue
-      books[object["pk"].intValue] = store.findBook(translation, slug: bookSlug)
+      books[object["pk"].intValue] = store.findOrCreateBook(translation, name: bookSlug)
     case "bible.chapter":
       chapters[object["pk"].intValue] = [object["fields"]["book"].intValue, object["fields"]["number"].intValue]
     case "bible.verse":
@@ -53,19 +53,19 @@ func importKJV(sourcePath: String) {
 
 func importNKJV(sourcePath: String) {
   var json: JSON!
-  
+
   do {
     let jsonData = try Data(contentsOf: URL(fileURLWithPath: sourcePath), options: .mappedIfSafe)
     json = try JSON(data: jsonData)
   } catch let error {
     print(error.localizedDescription)
   }
-  
+
   let translation = "nkjv"
-  
+
   for (_, bookObject):(String, JSON) in json {
     let bookSlug = convertToSlug(bookName: bookObject["name"].stringValue)
-    let book = store.findBook(translation, slug: bookSlug)
+    let book = store.findOrCreateBook(translation, name: bookSlug)
     for (_, chapterObject):(String, JSON) in bookObject["chapters"] {
       let chapter = chapterObject["num"].intValue
       for (_, verseObject):(String, JSON) in chapterObject["verses"] {

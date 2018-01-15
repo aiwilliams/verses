@@ -46,6 +46,13 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		B743DEBA200D51E40095B403 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = FDB61B811BF533D800F8C61D /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = FDB61B881BF533D800F8C61D;
+			remoteInfo = Verses;
+		};
 		FDB61BA11BF533D800F8C61D /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = FDB61B811BF533D800F8C61D /* Project object */;
@@ -251,6 +258,7 @@
 			buildRules = (
 			);
 			dependencies = (
+				B743DEBB200D51E40095B403 /* PBXTargetDependency */,
 			);
 			name = VersesSeed;
 			productName = "verses-seed";
@@ -453,6 +461,11 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		B743DEBB200D51E40095B403 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = FDB61B881BF533D800F8C61D /* Verses */;
+			targetProxy = B743DEBA200D51E40095B403 /* PBXContainerItemProxy */;
+		};
 		FDB61BA21BF533D800F8C61D /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = FDB61B881BF533D800F8C61D /* Verses */;

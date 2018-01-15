@@ -1,7 +1,7 @@
 import Foundation
 import CoreData
 
-var APIURL: String = "http://heartversesapi.herokuapp.com/api/v1"
+var APIURL: String = "http://localhost/v1/passage"
 
 class HeartversesAPI {
   enum FetchError: Error {
@@ -21,6 +21,15 @@ class HeartversesAPI {
   }
 
   private func fetchPassageFromServer(_ parsedPassage: ParsedPassage, translation: String) -> Passage? {
+    let session = URLSession(configuration: URLSessionConfiguration.default)
+    let task = session.dataTask(with: URL(string: APIURL)!) { (data, response, error) in
+      if let d = data {
+        print(d)
+      } else {
+        print("no data")
+      }
+    }
+    task.resume()
     return nil
   }
 
