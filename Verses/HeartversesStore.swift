@@ -22,10 +22,10 @@ class HeartversesStore {
     return book
   }
 
-  func addVerse(book: NSManagedObject, chapter: Int, number: Int, text: String) {
+  func addVerse(book: NSManagedObject, chapterNumber: Int, number: Int, text: String) {
     let verse = newObject("Verse")
     verse.setValue(book, forKey: "book")
-    verse.setValue(chapter, forKey: "chapter")
+    verse.setValue(chapterNumber, forKey: "chapter")
     verse.setValue(number, forKey: "number")
     verse.setValue(text, forKey: "text")
     self.saveContext()

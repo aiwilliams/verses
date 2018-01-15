@@ -1,0 +1,54 @@
+[
+  {
+    "name": "Psalms",
+    "chapters": [
+      {
+        "number": 139,
+        "verses": [
+          {
+            "number": 1,
+            "text": "O Lord, you have searched me and known me!"
+          },
+          {
+            "number": 2,
+            "text": "You know when I sit down and when I rise up; you discern my thoughts from afar."
+          },
+          {
+            "number": 3,
+            "text": "You search out my path and my lying down and are acquainted with all my ways."
+          },
+          {
+            "number": 4,
+            "text": "Even before a word is on my tongue, behold, O Lord, you know it altogether."
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "Romans",
+    "chapters": [
+      {
+        "number": 11,
+        "verses": [
+          {
+            "number": 33,
+            "text": "Oh, the depth of the riches and wisdom and knowledge of God! How unsearchable are his judgements and how inscrutable his ways!"
+          },
+          {
+            "number": 34,
+            "text": "For who has known the mind of the Lord, or who has been his counselor?"
+          },
+          {
+            "number": 35,
+            "text": "Or who has given a gift to him that he might be repaid?"
+          },
+          {
+            "number": 36,
+            "text": "For from him and through him and to him are all things. To him be glory forever. Amen."
+          }
+        ]
+      }
+    ]
+  }
+]

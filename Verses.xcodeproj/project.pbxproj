@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		5FD62ACCFE6259A72589CCFE /* SwiftyJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FD62534E517E070AADFC2A7 /* SwiftyJSON.swift */; };
+		6A483461200D62620068FF08 /* esv_bible.json in CopyFiles */ = {isa = PBXBuildFile; fileRef = 5FD626A099B4DC17EB0666AE /* esv_bible.json */; };
 		FD0D0F201C0A31BC00EAF02A /* Heartverses.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = FD0D0F1E1C0A31BC00EAF02A /* Heartverses.xcdatamodeld */; };
 		FD0D0F311C0A387400EAF02A /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD0D0F301C0A387400EAF02A /* main.swift */; };
 		FD0EFD891C52E21C00BC83A6 /* Heartverses.sqlite-shm in Resources */ = {isa = PBXBuildFile; fileRef = FD0EFD871C52E21C00BC83A6 /* Heartverses.sqlite-shm */; };
@@ -72,17 +73,19 @@
 /* Begin PBXCopyFilesBuildPhase section */
 		FD0D0F2C1C0A387400EAF02A /* CopyFiles */ = {
 			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
-			dstPath = usr/share/man/man1;
-			dstSubfolderSpec = 16;
+			buildActionMask = 12;
+			dstPath = "";
+			dstSubfolderSpec = 7;
 			files = (
+				6A483461200D62620068FF08 /* esv_bible.json in CopyFiles */,
 			);
-			runOnlyForDeploymentPostprocessing = 1;
+			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		5FD62534E517E070AADFC2A7 /* SwiftyJSON.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwiftyJSON.swift; sourceTree = "<group>"; };
+		5FD626A099B4DC17EB0666AE /* esv_bible.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = esv_bible.json; sourceTree = "<group>"; };
 		FD0D0F1F1C0A31BC00EAF02A /* Heartverses.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Heartverses.xcdatamodel; sourceTree = "<group>"; };
 		FD0D0F2E1C0A387400EAF02A /* VersesSeed */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = VersesSeed; sourceTree = BUILT_PRODUCTS_DIR; };
 		FD0D0F301C0A387400EAF02A /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
@@ -162,6 +165,7 @@
 			children = (
 				FD0D0F301C0A387400EAF02A /* main.swift */,
 				5FD62534E517E070AADFC2A7 /* SwiftyJSON.swift */,
+				5FD626A099B4DC17EB0666AE /* esv_bible.json */,
 			);
 			path = VersesSeed;
 			sourceTree = "<group>";
@@ -333,7 +337,6 @@
 					};
 					FDB61B881BF533D800F8C61D = {
 						CreatedOnToolsVersion = 7.1.1;
-						DevelopmentTeam = C8DJ6DMT5A;
 						LastSwiftMigration = 0900;
 					};
 					FDB61B9F1BF533D800F8C61D = {
@@ -617,7 +620,7 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				DEVELOPMENT_TEAM = C8DJ6DMT5A;
+				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = Verses/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.heartverses.ios;
@@ -635,7 +638,7 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				DEVELOPMENT_TEAM = C8DJ6DMT5A;
+				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = Verses/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.heartverses.ios;
