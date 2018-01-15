@@ -36,7 +36,7 @@ class HeartversesAPI {
   private func fetchPassageFromCache(_ parsedPassage: ParsedPassage, translation: String) -> Passage? {
     var passage = Passage(parsedPassage: parsedPassage)
 
-    let fetchedVerses = store.findVersesInChapter(translation, bookSlug: parsedPassage.book, chapter: parsedPassage.chapter_start)
+    let fetchedVerses = store.findVerses(bookName: parsedPassage.book, chapter: parsedPassage.chapter_start, translation: translation)
     guard !fetchedVerses.isEmpty else { return nil }
 
     // TODO: Make this clear!

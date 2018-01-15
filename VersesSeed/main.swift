@@ -9,7 +9,7 @@ import CoreData
 let documentsDirectory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).last!
 let store = HeartversesStore(sqliteURL: documentsDirectory.appendingPathComponent("Heartverses.sqlite"))
 
-func convertToSlug(bookName: String) -> String {
+func normalizeBookName(_ bookName: String) -> String {
   let comps = bookName.components(separatedBy: " ")
   if comps.count == 1 {
     return comps[0].lowercased()
@@ -37,14 +37,14 @@ func importKJV(sourcePath: String) {
   for (_,object):(String, JSON) in json {
     switch object["model"] {
     case "bible.book":
-      let bookSlug = object["fields"]["slug"].stringValue
-      books[object["pk"].intValue] = store.findOrCreateBook(translation, name: bookSlug)
+      let bookName = object["fields"]["slug"].stringValue
+      books[object["pk"].intValue] = store.findOrCreateBook(name: bookName, translation: translation)
     case "bible.chapter":
       chapters[object["pk"].intValue] = [object["fields"]["book"].intValue, object["fields"]["number"].intValue]
     case "bible.verse":
       let chapter = chapters[object["fields"]["chapter"].intValue]!
       let book = books[chapter[0]]!
-      store.addVerse(book, chapter: chapter[1], number: object["fields"]["number"].intValue, text: object["fields"]["text"].stringValue)
+      store.addVerse(book: book, chapter: chapter[1], number: object["fields"]["number"].intValue, text: object["fields"]["text"].stringValue)
     default:
       print(object)
     }
@@ -64,12 +64,12 @@ func importNKJV(sourcePath: String) {
   let translation = "nkjv"
 
   for (_, bookObject):(String, JSON) in json {
-    let bookSlug = convertToSlug(bookName: bookObject["name"].stringValue)
-    let book = store.findOrCreateBook(translation, name: bookSlug)
+    let bookName = normalizeBookName(bookObject["name"].stringValue)
+    let book = store.findOrCreateBook(name: bookName, translation: translation)
     for (_, chapterObject):(String, JSON) in bookObject["chapters"] {
       let chapter = chapterObject["num"].intValue
       for (_, verseObject):(String, JSON) in chapterObject["verses"] {
-        store.addVerse(book, chapter: chapter, number: verseObject["num"].intValue, text: verseObject["text"].stringValue)
+        store.addVerse(book: book, chapter: chapter, number: verseObject["num"].intValue, text: verseObject["text"].stringValue)
       }
     }
   }
