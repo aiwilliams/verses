@@ -88,7 +88,7 @@ func importESV(sourceURL: URL) {
     for (_, chapterObject):(String, JSON) in bookObject["chapters"] {
       let chapterNumber = chapterObject["number"].intValue
       for (_, verseObject):(String, JSON) in chapterObject["verses"] {
-        store.addVerse(book: book, chapterNumber: chapterNumber, number: verseObject["number"].intValue, text: verseObject["text"].stringValue)
+        _ = store.findOrCreateVerse(bookName: book.value(forKey: "name") as! String, chapter: chapterNumber, number: verseObject["number"].intValue, text: verseObject["text"].stringValue, translation: translation)
       }
     }
   }

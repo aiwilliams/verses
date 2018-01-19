@@ -13,26 +13,17 @@ class HeartversesStore {
     url = sqliteURL
   }
 
-  func addBook(name: String, translation: String) -> NSManagedObject {
+  func findBook(name: String, translation: String) -> NSManagedObject? {
+    return findObject("Book", format: "name == %@ and translation == %@", name as AnyObject, translation as AnyObject)
+  }
+
+  @discardableResult func addBook(name: String, translation: String) -> NSManagedObject {
     let entity = NSEntityDescription.entity(forEntityName: "Book", in: managedObjectContext)!
     let book = newObject(entity)
     book.setValue(name, forKey: "name")
     book.setValue(translation, forKey: "translation")
     saveContext()
     return book
-  }
-
-  func addVerse(book: NSManagedObject, chapterNumber: Int, number: Int, text: String) {
-    let verse = newObject("Verse")
-    verse.setValue(book, forKey: "book")
-    verse.setValue(chapterNumber, forKey: "chapter")
-    verse.setValue(number, forKey: "number")
-    verse.setValue(text, forKey: "text")
-    self.saveContext()
-  }
-
-  func findBook(name: String, translation: String) -> NSManagedObject? {
-    return findObject("Book", format: "name == %@ and translation == %@", name as AnyObject, translation as AnyObject)
   }
 
   func findOrCreateBook(name: String, translation: String) -> NSManagedObject {
@@ -65,6 +56,24 @@ class HeartversesStore {
   func findVerse(bookName: String, translation: String, chapter: Int, number: Int) -> NSManagedObject? {
     guard let book = findBook(name: bookName, translation: translation) else { return nil }
     return findObject("Verse", format: "book == %@ and chapter == %@ and number == %@", book, chapter as AnyObject, number as AnyObject)
+  }
+
+  @discardableResult func addVerse(book: NSManagedObject, chapterNumber: Int, number: Int, text: String) -> NSManagedObject {
+    let verse = newObject("Verse")
+    verse.setValue(book, forKey: "book")
+    verse.setValue(chapterNumber, forKey: "chapter")
+    verse.setValue(number, forKey: "number")
+    verse.setValue(text, forKey: "text")
+    saveContext()
+    return verse
+  }
+
+  func findOrCreateVerse(bookName: String, chapter: Int, number: Int, text: String, translation: String) -> NSManagedObject {
+    if let existingVerse = findVerse(bookName: bookName, translation: translation, chapter: chapter, number: number) {
+      return existingVerse
+    } else {
+      return addVerse(book: findBook(name: bookName, translation: translation)!, chapterNumber: chapter, number: number, text: text)
+    }
   }
 
   func newObject(_ entity: NSEntityDescription) -> NSManagedObject {
